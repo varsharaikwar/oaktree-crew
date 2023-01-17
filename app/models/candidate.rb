@@ -1,0 +1,11 @@
+class Candidate < ApplicationRecord
+    GENDER_LIST = ["Male", "Female", "Other"]
+    MARITAL_LIST = ["Married", "Unmarried"]
+    NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]
+    CATEGORY_LIST = ["UX/UI Designer", "Web Developer", "Web Designer", "Software Developer", "SEO"]
+    LEVEL_OF_EDUCATION_LIST = ["Massachusetts", "Maryland", "Colorado", "Vermont", "Virginia", "Washington"]
+    DEGREE_LIST = ["SEE", "M.A.", "Enginery of CSE", "Master", "Associate", "Graduate"]
+    RESULT_LIST = ["First Class", "Second Class", "Third Class"]
+    YEAR_OF_PASSING_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
+    EMPLOYMENT_PERIOD_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
+end

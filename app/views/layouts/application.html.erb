@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OaktreeCrew</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= stylesheet_link_tag "application", media: 'all' %>
+    <%= javascript_importmap_tags %>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/animate.min.css">
+    <link rel="stylesheet" href="./style/boxicons.min.css">
+    <link rel="stylesheet" href="./style/date-picker.min.css">
+    <link rel="stylesheet" href="./style/flaticon.css">
+    <link rel="stylesheet" href="./style/magnific-popup.min.css">
+    <link rel="stylesheet" href="./style/meanmenu.min.css">
+    <link rel="stylesheet" href="./style/nice-select.min.css">
+    <link rel="stylesheet" href="./style/odometer.min.css">
+    <link rel="stylesheet" href="./style/owl.carousel.min.css">
+    <link rel="stylesheet" href="./style/owl.theme.default.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <%= csp_meta_tag %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
+

@@ -1,0 +1,65 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  date_of_birth: MyString
+  gender: MyString
+  marital_status: MyString
+  nationality: MyString
+  address: MyString
+  notes: MyString
+  present_salary: MyString
+  expected_salary: MyString
+  category: MyString
+  job_level: MyString
+  job_nature: MyString
+  level_of_education: MyString
+  degree: MyString
+  group: MyString
+  institute_name: MyString
+  result: MyString
+  marks: 1
+  year_of_passing: 1
+  duration: 1
+  company_name: MyString
+  company_business: MyString
+  designation: MyString
+  department: MyString
+  responsiblities: MyString
+  company_location: MyString
+  employment_period: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  date_of_birth: MyString
+  gender: MyString
+  marital_status: MyString
+  nationality: MyString
+  address: MyString
+  notes: MyString
+  present_salary: MyString
+  expected_salary: MyString
+  category: MyString
+  job_level: MyString
+  job_nature: MyString
+  level_of_education: MyString
+  degree: MyString
+  group: MyString
+  institute_name: MyString
+  result: MyString
+  marks: 1
+  year_of_passing: 1
+  duration: 1
+  company_name: MyString
+  company_business: MyString
+  designation: MyString
+  department: MyString
+  responsiblities: MyString
+  company_location: MyString
+  employment_period: MyString
