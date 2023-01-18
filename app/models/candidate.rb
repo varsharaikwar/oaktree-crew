@@ -1,4 +1,8 @@
 class Candidate < ApplicationRecord
+    extend FriendlyId
+    friendly_id :first_name, use: :slugged
+    has_one_attached :image
+    mount_uploader :file, FileUploader
     GENDER_LIST = ["Male", "Female", "Other"]
     MARITAL_LIST = ["Married", "Unmarried"]
     NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]

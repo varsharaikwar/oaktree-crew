@@ -5,7 +5,7 @@ class CreateCandidates < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.string :email
       t.string :phone
-      t.string :date_of_birth
+      t.date   :date_of_birth
       t.string :gender
       t.string :marital_status
       t.string :nationality

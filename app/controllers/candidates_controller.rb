@@ -1,6 +1,10 @@
 class CandidatesController < ApplicationController
     def index
     end
+    
+    def show
+      @candidate = Candidate.friendly.find(params[:id])
+    end
 
     def new
         @candidate = Candidate.new
@@ -14,10 +18,10 @@ class CandidatesController < ApplicationController
         else
           render :new, status: :unprocessable_entity
         end
-      end
+    end
 
     private
         def candidate_params
-            params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :file_upload)
+            params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file)
         end
 end

@@ -1,0 +1,381 @@
+<%= stylesheet_link_tag "candidate" %>
+<%= javascript_include_tag "jquery", "jquery_ujs", "jquery.validate", "jquery.validate.additional-methods", "social-share-button" %> 
+    <!-- Start Header Area -->
+    <header class="header-area">
+        <!-- Start Navbar Area -->
+        <div class="navbar-area">
+            <div class="mobile-nav">
+                <div class="container">
+                    <div class="mobile-menu">
+                        <div class="logo">
+                            <a href="#">
+                                <%= image_tag "logo.png", alt: "logo" %>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desktop-nav">
+                <div class="container">
+                    <nav class="navbar navbar-expand-md navbar-light">
+                        <a class="navbar-brand" href="#">
+                            <%= image_tag "logo.png", alt: "logo" %>
+                        </a>
+
+                        <div class="collapse navbar-collapse mean-menu" style="display: block;">
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link active">
+                                        Home
+                                        <i class="bx bx-chevron-down"></i>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        How it works
+                                        <i class="bx bx-chevron-down"></i>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Candidates
+                                        <i class="bx bx-chevron-down"></i>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Employers
+                                        <i class="bx bx-chevron-down"></i>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Contact us
+                                        <i class="bx bx-chevron-down"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                            <div class="others-option">
+                                <div class="get-quote">
+                                    <a href="#" class="default-btn">
+                                        Post a Job
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="others-option-for-responsive">
+                <div class="container">
+                    <div class="dot-menu">
+                        <div class="inner">
+                            <div class="circle circle-one"></div>
+                            <div class="circle circle-two"></div>
+                            <div class="circle circle-three"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="container">
+                        <div class="option-inner">
+                            <div class="others-option justify-content-center d-flex align-items-center">
+                                <div class="get-quote">
+                                    <a href="#" class="default-btn">
+                                        Post a Job
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar Area -->
+    </header>
+    <!-- End Header Area -->
+
+		<!-- Start Page Title Area -->
+		<div class="page-title-area">
+			<div class="container">
+				<div class="page-title-content">
+					<h2>Candidates Details</h2>
+					<ul>
+						<li>
+							<a href="#">
+								Home 
+							</a>
+						</li>
+						<li class="active">Candidates Details</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Page Title Area -->
+
+		<!-- Start Candidates Details Area -->
+		<section class="candidates-details-area ptb-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="candidates-cv">
+							<div class="row align-items-center">
+								<div class="col-lg-2">
+									<div class="hot-jobs-img">
+                                        <%= image_tag @candidate.image if @candidate.image.attached? %>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="candidates-cv-content">
+										<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
+										<span class="sub-title"><%= @candidate.category %></span>
+										<ul>
+											<li><span>Location: </span><%= @candidate.address %></li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="col-lg-4">
+									<%= link_to 'Download Resume', @candidate.file.url, download: @candidate.file.url, target: "_blank",  class: "default-btn" %>
+								</div>
+							</div>
+						</div>
+
+						<div class="candidates-details-content">
+							<h3>About Me</h3>
+							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur</p>
+
+							<h3>Education</h3>
+							
+							<ul>
+								<li class="arts">Masters in Fine Arts</li>
+								<li class="university">Walters University (2015-2016)</li>
+								<li class="summary">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</li>
+							</ul>
+
+							<ul>
+								<li class="arts">Bachlors in Fine Arts</li>
+								<li class="university">University of California (2010-2014)</li>
+								<li class="summary">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</li>
+							</ul>
+
+							<ul>
+								<li class="arts">Diploma in Fine Arts</li>
+								<li class="university">Berkeley Institute of Art Direction (2006-2010)</li>
+								<li class="summary">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</li>
+							</ul>
+
+							<h3>Work Experience</h3>
+							
+							<ul>
+								<li class="arts">Sr. UX/UI Designer</li>
+								<li class="university">Xpart Solutions (2018-2020)</li>
+								<li class="summary">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</li>
+							</ul>
+
+							<ul>
+								<li class="arts">Product Designer</li>
+								<li class="university">Design house (2016-2017)</li>
+								<li class="summary">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</li>
+							</ul>
+
+							<h4>Personal Skills</h4>
+
+							<div class="all-skill-bar">
+								<div class="skill-bar" data-percentage="100%">
+									<h4 class="progress-title-holder">
+										<span class="progress-title">Photoshop</span>
+										<span class="progress-number-wrapper">
+											<span class="progress-number-mark" style="left: 100%;">
+												<span class="percent">100%</span>
+												<span class="down-arrow"></span>
+											</span>
+										</span>
+									</h4>
+		
+									<div class="progress-content-outter">
+										<div class="progress-content" style="width: 100%;"></div>
+									</div>
+								</div>
+		
+								<div class="skill-bar" data-percentage="90%">
+									<h4 class="progress-title-holder clearfix">
+										<span class="progress-title">After Effects</span>
+										<span class="progress-number-wrapper">
+											<span class="progress-number-mark" style="left: 90%;">
+												<span class="percent">90%</span>
+												<span class="down-arrow"></span>
+											</span>
+										</span>
+									</h4>
+		
+									<div class="progress-content-outter">
+										<div class="progress-content" style="width: 90%;"></div>
+									</div>
+								</div>
+		
+								<div class="skill-bar" data-percentage="85%">
+									<h4 class="progress-title-holder clearfix">
+										<span class="progress-title">Indesign</span>
+										<span class="progress-number-wrapper">
+											<span class="progress-number-mark" style="left: 85%;">
+												<span class="percent">85%</span>
+												<span class="down-arrow"></span>
+											</span>
+										</span>
+									</h4>
+		
+									<div class="progress-content-outter">
+										<div class="progress-content" style="width: 85%;"></div>
+									</div>
+								</div> 
+		
+								<div class="skill-bar mb-0" data-percentage="60%">
+									<h4 class="progress-title-holder clearfix">
+										<span class="progress-title">HTML &amp; CSS</span>
+										<span class="progress-number-wrapper">
+											<span class="progress-number-mark" style="left: 60%;">
+												<span class="percent">60%</span>
+												<span class="down-arrow"></span>
+											</span>
+										</span>
+									</h4>
+		
+									<div class="progress-content-outter">
+										<div class="progress-content" style="width: 60%;"></div>
+									</div>
+								</div> 
+							</div> 
+						</div>
+					</div>
+
+					<div class="col-lg-4">
+						<div class="candidates-details-sidebar">
+							<div class="candidates-widget">
+								<h3>Share This Job</h3>
+
+								<ul class="social-icon">
+									<li>
+										<%= social_share_button_tag %>
+									</li>
+									
+								</ul>
+							</div>
+
+							<div class="candidates-widget">
+								<h3>Contact Information</h3>
+								
+								<ul class="overview">
+									
+									<li>
+										Email
+										:<%= @candidate.email %>
+									</li>
+									<li>
+										Phone
+										:<%= @candidate.phone %>
+									</li>
+									<li>
+										Location
+										:<%= @candidate.address %>
+									</li>
+								</ul>
+							</div>
+
+							<div class="candidates-widget">
+								<h3>Job Overview</h3>
+								
+								<ul class="overview">
+									<li>
+										Categories
+										<span>:<%= @candidate.category %></span>
+									</li>
+									<li>
+										Vacancy
+										<span>:<%= @candidate.category %></span>
+									</li>
+									<li>
+										Job Type
+										<span>:<%= @candidate.job_nature %></span>
+									</li>
+									<li>
+										Experience
+										<span>: 3 year(s)</span>
+									</li>
+									<li>
+										Offered Salary
+										<span>:<%= @candidate.present_salary %></span>
+									</li>
+									<li>
+										Languages:
+										<span>: English</span>
+									</li>
+									<li>
+										Gender
+										<span>:<%= @candidate.gender %></span>
+									</li>
+									<li>
+										Application Deu
+										<span>:<%= @candidate.employment_period %></span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="candidates-widget">
+								<h3>Download Resume</h3>
+								
+								<ul class="overview download ">
+									
+									<li>
+										<i class="flaticon-pdf"></i>
+										<a href="#">PDF Formate CV</a>
+									</li>
+									<li>
+										<i class="flaticon-pdf"></i>
+										<a href="#">DOC Formate CV</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Candidates Details Area -->
+
+		<!-- Start Subscribe Area -->
+		<section class="subscribe-area subscribe-area-about-page">
+			<div class="container">
+				<div class="subscribe-bg">
+					<div class="row align-items-center">
+						<div class="col-lg-6">
+							<div class="subscribe-content">
+								<h2>Find Your Next Great Job Opportunity!</h2>
+							</div>
+						</div>
+	
+						<div class="col-lg-6">
+							<form class="newsletter-form" data-toggle="validator" novalidate="true">
+								<input type="email" class="form-control" placeholder="Enter email address" name="EMAIL" required="" autocomplete="off">
+	
+								<button class="default-btn disabled" type="submit" style="pointer-events: all; cursor: pointer;">
+									<span>Subscribe</span>
+								</button>
+	
+								<div id="validator-newsletter" class="form-result"></div>
+								<p>Join The Newsletter 10,000 Users Already!</p>
+							</form>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Subscribe Area -->
+
+   
