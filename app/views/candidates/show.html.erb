@@ -26,10 +26,8 @@
                         <div class="collapse navbar-collapse mean-menu" style="display: block;">
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        Home
-                                        <i class="bx bx-chevron-down"></i>
-                                    </a>
+                                   
+										<%= link_to 'Home',new_candidate_path,  class: "nav-link active" %>
                                 </li>
 
                                 <li class="nav-item">
@@ -108,9 +106,8 @@
 					<h2>Candidates Details</h2>
 					<ul>
 						<li>
-							<a href="#">
-								Home 
-							</a>
+						<%= link_to 'Home',new_candidate_path,  class: "nav-link active" %>
+
 						</li>
 						<li class="active">Candidates Details</li>
 					</ul>
@@ -378,4 +375,3 @@
 		</section>
 		<!-- End Subscribe Area -->
 
-   

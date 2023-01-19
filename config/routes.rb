@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root "candidates#new"
-
+  root "homes#index"
   resources :candidates
+  get 'logout/candidates', to: 'candidates#logout'
 end

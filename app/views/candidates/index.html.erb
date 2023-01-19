@@ -1,5 +1,115 @@
-<%= button_to(
-        "Log Out",
-        destroy_user_session_path,
-        method: :delete
-      ) %>
+<%= render 'layouts/header' %>
+<!-- Start Page Title Area -->
+<div class="page-title-area">
+    <div class="container-fluid">
+        <div class="page-title-content">
+            <div class="row">
+                <div class="col-md-7">
+                    <h2>Freelancers</h2>                    
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-4">
+                                <%= link_to 'Create New',new_candidate_path,  class: "default-btn" %>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <form class="search-form">
+                                <input class="form-control search-box-input" name="search" placeholder="Search..." type="text">
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="default-btn filter-button" href="#" role="button"  data-toggle="modal" data-target="#freelancermorefilter"><i class='bx bx-dots-vertical-rounded'></i></a>
+                        </div>
+                    </div>                            
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Freelancers List Area -->
+<section class="mt-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="">
+                    <ul class="nav nav-tabs nav-justified freelancers-list-tabs" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true"><span class="tabs-counter-value">1200</span> All Freelancers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-draft-tab" data-toggle="pill" href="#pills-draft" role="tab" aria-controls="pills-draft" aria-selected="false"><span class="tabs-counter-value">820</span> Draft</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-scheduling-tab" data-toggle="pill" href="#pills-scheduling" role="tab" aria-controls="pills-scheduling" aria-selected="false"><span class="tabs-counter-value">420</span> Scheduling</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Interview-tab" data-toggle="pill" href="#pills-Interview" role="tab" aria-controls="pills-Interview" aria-selected="false"><span class="tabs-counter-value">0</span> Interview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Assessment-tab" data-toggle="pill" href="#pills-Assessment" role="tab" aria-controls="pills-Assessment" aria-selected="false"><span class="tabs-counter-value">0</span> Assessment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-References-tab" data-toggle="pill" href="#pills-References" role="tab" aria-controls="pills-References" aria-selected="false"><span class="tabs-counter-value">0</span> References</a>
+                        </li>     
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Decision-tab" data-toggle="pill" href="#pills-Decision" role="tab" aria-controls="pills-Decision" aria-selected="false"><span class="tabs-counter-value">0</span> Decision</a>
+                        </li>    
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Job-offer-and-contract-tab" data-toggle="pill" href="#pills-Job-offer-and-contract" role="tab" aria-controls="pills-Job-offer-and-contract" aria-selected="false"><span class="tabs-counter-value">0</span> Job offer & contract</a>
+                        </li>                                                                                                             
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                            <div class="table-responsive">
+                                <table class="freelancers-list-table table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <div class="checkboxs">
+                                                <input type="checkbox" id="chb2">
+                                            </div>
+                                        </th>
+                                        <th scope="col">APPLICATION # <i class='bx bx-sort'></i></th>
+                                        <th scope="col">APPLICANT <i class='bx bx-sort'></i></th>
+                                        <th scope="col">STATUS <i class='bx bx-sort'></i></th>
+                                        <th scope="col">PROGRESS <i class='bx bx-sort'></i></th>
+                                        <th scope="col">Date <i class='bx bx-sort'></i></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <% @candidates.each_with_index do |candidate, i| %>
+                                    <tr>
+                                        <td>
+                                            <div class="checkboxs">
+                                                <input type="checkbox" id="chb2">
+                                            </div>
+                                          </td>
+                                          <td><%= candidate.id %></td>
+                                      <td><%= candidate.first_name+ " " +candidate.last_name %></td>
+                                    </tr>
+                                    <% end %>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="text-center"><h6>No Data Found</h6></div>
+                                        </td>
+                                    </tr>                                                                                                                  
+                                    </tbody>                                                                                              
+                                    </tbody>
+                                </table>
+                            </div>  
+                        </div>                                                                                                                                    
+                    </div> 
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start Freelancers List Area -->
+<%= render 'layouts/footer' %>

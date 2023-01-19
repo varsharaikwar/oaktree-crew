@@ -12,4 +12,12 @@ class Candidate < ApplicationRecord
     RESULT_LIST = ["First Class", "Second Class", "Third Class"]
     YEAR_OF_PASSING_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
     EMPLOYMENT_PERIOD_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
+    CANDIDATE_STATUS = {
+        draft: "Draft",
+        in_scheduling: "In Scheduling"
+    }
+    validates :first_name, presence: true#, acceptance: {message: "Please enter a valid name."}
+    validates :last_name, presence: true
+    validates :email, presence: true, format: { with: Devise.email_regexp }
+    belongs_to :user
 end
