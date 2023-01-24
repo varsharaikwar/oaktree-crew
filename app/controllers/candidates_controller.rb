@@ -1,40 +1,52 @@
 class CandidatesController < ApplicationController
-  load_and_authorize_resource :candidate, class: Candidate
+  load_and_authorize_resource :candidate, class: Candidate, except: [:show, :edit, :destroy, :update]
 
     def index
       @candidates = Candidate.all
+      # authorize! :index, @candidates
     end
     
     def show
       @candidate = Candidate.friendly.find(params[:id])
+      authorize! :show, @candidate
     end
 
     def new
         @candidate = Candidate.new
+        # authorize! :new, @candidate
     end
 
     def create
         @candidate = Candidate.new(candidate_params)
+        @candidate.status = "Draft"
     
         if @candidate.save
           redirect_to @candidate
         else
           render :new, status: :unprocessable_entity
         end
+        # authorize! :create, @candidate
     end
 
     def edit
       @candidate = Candidate.friendly.find(params[:id])
+      authorize! :edit, @candidate
     end
   
     def update
       @candidate = Candidate.friendly.find(params[:id])
-  
-      if @candidate.update(candidate_params)
-        redirect_to @candidate
+      if params[:status]
+          if @candidate.update(status: params[:status])
+            respond_to do |format|
+              format.js
+            end
+          end
+      elsif @candidate.update(candidate_params)
+          redirect_to @candidate
       else
-        render :edit, status: :unprocessable_entity
+          render :update, status: :unprocessable_entity
       end
+      authorize! :edit, @candidate 
     end
 
     def destroy
@@ -42,6 +54,7 @@ class CandidatesController < ApplicationController
       @candidate.destroy
   
       redirect_to root_path, status: :see_other
+      authorize! :destroy, @candidate
     end
 
     def logout

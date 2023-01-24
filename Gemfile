@@ -51,7 +51,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem 'devise'
 gem "rolify"
-gem "cancan"
+gem "cancancan"
 gem 'friendly_id', '~> 5.4.0'
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 gem 'social-share-button'

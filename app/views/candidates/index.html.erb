@@ -1,115 +1,606 @@
-<%= render 'layouts/header' %>
-<!-- Start Page Title Area -->
-<div class="page-title-area">
-    <div class="container-fluid">
-        <div class="page-title-content">
+ <!-- Start Header Area -->
+    <header class="header-area">
+        
+        <!-- Start Navbar Area -->
+        <div class="navbar-area">
+            <div class="mobile-nav">
+                <div class="container">
+                    <div class="mobile-menu">
+                        <div class="logo">
+                            <a href="#">
+                                <%= image_tag "logo.png", alt: "logo" %>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desktop-nav">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-md navbar-light">
+                        <a class="navbar-brand" href="#">
+                            <%= image_tag "logo.png", alt: "logo" %>
+                        </a>
+
+                        <div class="collapse navbar-collapse mean-menu" style="display: block;">
+                            
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item">
+                                    <%= link_to 'Dashboard', root_path, class: "nav-link" %>          
+                                </li>
+
+                                <li class="nav-item">
+                                    <%= link_to 'Freelancers', candidates_path, class: "nav-link active" %>          
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Clients
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Message
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Settings
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                            <div class="others-option">
+                                <div class="get-quote">
+                                    <%= button_to "Log Out", destroy_user_session_path, :method => :delete, class: "default-btn" %>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="others-option-for-responsive">
+                <div class="container-fluid">
+                    <div class="dot-menu">
+                        <div class="inner">
+                            <div class="circle circle-one"></div>
+                            <div class="circle circle-two"></div>
+                            <div class="circle circle-three"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar Area -->
+    </header>
+    <!-- End Header Area -->
+
+    <!-- Start Page Title Area -->
+    <div class="page-title-area">
+        <div class="container-fluid">
+            <div class="page-title-content">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2>Freelancers</h2>                    
+                    </div>                          
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Title Area -->
+
+    <!-- Start Freelancers List Area -->
+    <section class="mt-5">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-7">
-                    <h2>Freelancers</h2>                    
+                <div class="col-lg-12">
+                    <div class="">
+                        <ul class="nav nav-tabs nav-justified freelancers-list-tabs" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true"><span class="tabs-counter-value"><%= @candidates.count %></span> All Freelancers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-draft-tab" data-toggle="pill" href="#pills-draft" role="tab" aria-controls="pills-draft" aria-selected="false"><span class="tabs-counter-value">820</span> Draft</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-scheduling-tab" data-toggle="pill" href="#pills-scheduling" role="tab" aria-controls="pills-scheduling" aria-selected="false"><span class="tabs-counter-value">420</span> Scheduling</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-Interview-tab" data-toggle="pill" href="#pills-Interview" role="tab" aria-controls="pills-Interview" aria-selected="false"><span class="tabs-counter-value">0</span> Interview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-Assessment-tab" data-toggle="pill" href="#pills-Assessment" role="tab" aria-controls="pills-Assessment" aria-selected="false"><span class="tabs-counter-value">0</span> Assessment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-References-tab" data-toggle="pill" href="#pills-References" role="tab" aria-controls="pills-References" aria-selected="false"><span class="tabs-counter-value">0</span> References</a>
+                            </li>     
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-Decision-tab" data-toggle="pill" href="#pills-Decision" role="tab" aria-controls="pills-Decision" aria-selected="false"><span class="tabs-counter-value">0</span> Decision</a>
+                            </li>    
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-Job-offer-and-contract-tab" data-toggle="pill" href="#pills-Job-offer-and-contract" role="tab" aria-controls="pills-Job-offer-and-contract" aria-selected="false"><span class="tabs-counter-value">0</span> Job offer & contract</a>
+                            </li>                                                                                                             
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                                <div class="table-responsive">
+                                    <table class="freelancers-list-table table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <div class="checkboxs">
+                                                    <input type="checkbox" id="chb2">
+                                                </div>
+                                            </th>
+                                            <th scope="col">APPLICATION # <i class='bx bx-sort'></i></th>
+                                            <th scope="col">APPLICANT <i class='bx bx-sort'></i></th>
+                                            <th scope="col">STATUS <i class='bx bx-sort'></i></th>
+                                            <th scope="col">PROGRESS <i class='bx bx-sort'></i></th>
+                                            <th scope="col">Date <i class='bx bx-sort'></i></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <% @candidates.each_with_index do |candidate, i| %>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkboxs">
+                                                        <input type="checkbox" id="chb2">
+                                                    </div>
+                                                </td>
+                                                <td><%= candidate.id %></td>
+                                                <td><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.first_name) %></td>
+                                                <td id="check<%=candidate.id%>"><%= candidate.status %><%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id) %></td>                                                
+                                                <td><div class="checkboxs"><%= candidate.status %><input type="checkbox" id="chb2"></div></td>      
+                                                <td class="bi bi-calendar"><%= candidate.created_at.strftime("%B %d")%></td>   
+                                                <td>
+                                                    <div class="dropout">
+                                                        <button class="more">
+                                                        <span></span>
+                                                        <span></span>
+                                                        <span></span>
+                                                        </button>
+                                                        <ul>
+                                                        <li>
+                                                            <%= link_to 'Edit', edit_candidate_path(candidate) %>          
+                                                        </li>
+                                                        <li>
+                                                            <%= link_to "Destroy", candidate_path(candidate), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                                                        </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% end  %>                                                                                                                
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                                                                                                                                           
+                        </div> 
+                    </div>
+
                 </div>
-                <div class="col-md-5">
-                    <div class="row">
-                        <div class="col-md-4">
-                                <%= link_to 'Create New',new_candidate_path,  class: "default-btn" %>
-
-                        </div>
-
-                        <div class="col-md-6">
-                            <form class="search-form">
-                                <input class="form-control search-box-input" name="search" placeholder="Search..." type="text">
-                            </form>
-                        </div>
-                        <div class="col-md-2">
-                            <a class="default-btn filter-button" href="#" role="button"  data-toggle="modal" data-target="#freelancermorefilter"><i class='bx bx-dots-vertical-rounded'></i></a>
-                        </div>
-                    </div>                            
-                </div>                    
             </div>
         </div>
-    </div>
-</div>
-<!-- End Page Title Area -->
+    </section>
+    <!-- Start Freelancers List Area -->
 
-<!-- Start Freelancers List Area -->
-<section class="mt-5">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="">
-                    <ul class="nav nav-tabs nav-justified freelancers-list-tabs" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true"><span class="tabs-counter-value">1200</span> All Freelancers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-draft-tab" data-toggle="pill" href="#pills-draft" role="tab" aria-controls="pills-draft" aria-selected="false"><span class="tabs-counter-value">820</span> Draft</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-scheduling-tab" data-toggle="pill" href="#pills-scheduling" role="tab" aria-controls="pills-scheduling" aria-selected="false"><span class="tabs-counter-value">420</span> Scheduling</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-Interview-tab" data-toggle="pill" href="#pills-Interview" role="tab" aria-controls="pills-Interview" aria-selected="false"><span class="tabs-counter-value">0</span> Interview</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-Assessment-tab" data-toggle="pill" href="#pills-Assessment" role="tab" aria-controls="pills-Assessment" aria-selected="false"><span class="tabs-counter-value">0</span> Assessment</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-References-tab" data-toggle="pill" href="#pills-References" role="tab" aria-controls="pills-References" aria-selected="false"><span class="tabs-counter-value">0</span> References</a>
-                        </li>     
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-Decision-tab" data-toggle="pill" href="#pills-Decision" role="tab" aria-controls="pills-Decision" aria-selected="false"><span class="tabs-counter-value">0</span> Decision</a>
-                        </li>    
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-Job-offer-and-contract-tab" data-toggle="pill" href="#pills-Job-offer-and-contract" role="tab" aria-controls="pills-Job-offer-and-contract" aria-selected="false"><span class="tabs-counter-value">0</span> Job offer & contract</a>
-                        </li>                                                                                                             
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
-                            <div class="table-responsive">
-                                <table class="freelancers-list-table table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">
-                                            <div class="checkboxs">
-                                                <input type="checkbox" id="chb2">
-                                            </div>
-                                        </th>
-                                        <th scope="col">APPLICATION # <i class='bx bx-sort'></i></th>
-                                        <th scope="col">APPLICANT <i class='bx bx-sort'></i></th>
-                                        <th scope="col">STATUS <i class='bx bx-sort'></i></th>
-                                        <th scope="col">PROGRESS <i class='bx bx-sort'></i></th>
-                                        <th scope="col">Date <i class='bx bx-sort'></i></th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <% @candidates.each_with_index do |candidate, i| %>
-                                    <tr>
-                                        <td>
-                                            <div class="checkboxs">
-                                                <input type="checkbox" id="chb2">
-                                            </div>
-                                          </td>
-                                          <td><%= candidate.id %></td>
-                                      <td><%= candidate.first_name+ " " +candidate.last_name %></td>
-                                    </tr>
-                                    <% end %>
-                                    <tbody>
-                                    <tr>
-                                        <td colspan="7">
-                                            <div class="text-center"><h6>No Data Found</h6></div>
-                                        </td>
-                                    </tr>                                                                                                                  
-                                    </tbody>                                                                                              
-                                    </tbody>
-                                </table>
-                            </div>  
-                        </div>                                                                                                                                    
-                    </div> 
+
+    <!-- Start Footer Area -->
+    <footer class="footer-area pt-100 pb-70">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-footer-widget single-bg">
+                        <a href="#" class="logo">
+                            <%= image_tag "logo.png", alt: "logo" %>
+                        </a>
+
+                        <p>OakTreeCrew is a software development firm known for developing business solutions for small to large scale businesses. Headquartered in India, four enthusiastic and young minds have started it in 2016 from Indore. We are serving clients globally</p>
+
+                        <ul class="social-icon">
+                            <li>
+                                <a href="#">
+                                    <i class="bx bxl-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="bx bxl-instagram"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="bx bxl-linkedin-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="bx bxl-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-footer-widget">
+                        <h3>Contact</h3>
+
+                        <ul class="address">
+                            <li>
+                                <i class="bx bx-phone-call"></i>
+                                <span>Phone:</span>
+                                <a href="tel:+1-(514)-7939-357">+91 0731 499 1873</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-envelope"></i>
+                                <span>Email:</span>
+                                <a href="mailto:hello@oaktreecrew.com">info@oaktreescrew.com</a>
+                            </li>
+                            <li class="location">
+                                <i class="bx bx-location-plus"></i>
+                                <span>Address:</span>
+                                Shekhar central, 8th, floor, 802, Palasia Square, Manorama Ganj, Indore, Madhya Pradesh 452001
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-footer-widget">
+                        <h3>Helpful Resources</h3>
+
+                        <ul class="import-link">
+                            <li>
+                                <a href="#">Create Account</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="#">Site Map</a>
+                            </li>
+                            <li>
+                                <a href="#">Terms of Use</a>
+                            </li>
+                            <li>
+                                <a href="#">Privacy Centre</a>
+                            </li>
+                            <li>
+                                <a href="#">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-footer-widget">
+                        <h3>Job Seekers</h3>
+
+                        <ul class="import-link">
+                            <li>
+                                <a href="#">Create Account</a>
+                            </li>
+                            <li>
+                                <a href="#">Browse Jobs</a>
+                            </li>
+                            <li>
+                                <a href="#">Upload CV</a>
+                            </li>
+                            <li>
+                                <a href="#">Company Profile</a>
+                            </li>
+                            <li>
+                                <a href="#">International Jobs</a>
+                            </li>
+                            <li>
+                                <a href="#">FAQ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+    </footer>
+    <!-- End Footer Area -->
+
+    <!-- Start Copy Right Area -->
+    <div class="copy-right-area">
+        <div class="container">
+            <p>
+                © 2020 Oak Tree Crew. All Rights Reserved.
+            </p>
+        </div>
     </div>
-</section>
-<!-- Start Freelancers List Area -->
-<%= render 'layouts/footer' %>
+    <!-- End Copy Right Area -->
+    
+    <!-- Start Go Top Area -->
+    <div class="go-top active">
+        <i class="bx bx-chevrons-up"></i>
+        <i class="bx bx-chevrons-up"></i>
+    </div>
+    <!-- End Go Top Area -->
+    
+
+    <!-- Start Modal For Filter -->
+    <div class="modal fade" id="freelancermorefilter" tabindex="-1" role="dialog" aria-labelledby="freelancermorefilterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title text-center" id="freelancermorefilterTitle">More Filters</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <!-- Start Container -->
+                <div class="container-fluid">
+                    <form class="resume-info">
+                        <!-- Start Row -->
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-md-6">
+                                <h6>Category</h6>
+                                <div class="form-group">
+                                    <select>
+                                        <option value="1">UX/UI Designer</option>
+                                        <option value="2">Web Developer</option>
+                                        <option value="3">Web Designer</option>
+                                        <option value="4">Software Developer</option>
+                                        <option value="5">SEO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <h6>Qualifications</h6>
+                                <div class="form-group">
+                                    <select>
+                                        <option value="1">Certificate</option>
+                                        <option value="2">Diploma</option>
+                                        <option value="3">Bachelor Degree</option>
+                                        <option value="4">Master’s Degree</option>
+                                        <option value="5">Associate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Row -->
+                        <!-- Start Row -->
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-md-6">
+                                <h6>Marital status</h6>
+                                <div class="form-group">
+                                    <select class="height">
+                                        <option value="1">Married</option>
+                                        <option value="2">Unmarried</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <h6>Gender</h6>
+                                <div class="form-group">
+                                    <select>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Row -->                        
+                        <!-- Start Row -->
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-md-6">
+                                <h6>Experience</h6>
+                                <div class="form-group">
+                                    <select>
+                                        <option value="1">1 Year</option>
+                                        <option value="2">2 Years</option>
+                                        <option value="3">3 Years</option>
+                                        <option value="4">4 Years</option>
+                                        <option value="5">5 Years</option>
+                                        <option value="6">6 Years</option>
+                                        <option value="7">7 Years</option>
+                                        <option value="8">8 Years</option>
+                                        <option value="9">9 Years</option>
+                                        <option value="10">10 Years</option>
+                                        <option value="11">11 Years</option>
+                                        <option value="12">12 Years</option>
+                                        <option value="13">13 Years</option>
+                                        <option value="14">14 Years</option>
+                                        <option value="15">15 Years</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <h6>Nationality</h6>
+                                <div class="form-group">
+                                    <select>
+                                        <option value="1">United Kingdom</option>
+                                        <option value="2">Austria</option>
+                                        <option value="3">Bahrain</option>
+                                        <option value="4">Canada</option>
+                                        <option value="5">Denmark</option>
+                                        <option value="6">Germany</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Row -->                    
+                        <!-- Start Row -->
+                        <h6>Job Level</h6>                         
+                        <div class="row mb-4">
+                            <div class="col-lg-4 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Entry Level
+                                    <input type="radio" checked="checked" name="radio-1">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Mid Level
+                                    <input type="radio" name="radio-1">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Top Level
+                                    <input type="radio" name="radio-1">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- End Row -->
+                        <!-- Start Row -->
+                        <h6>Job Nature</h6>      
+                        <div class="row mb-4">
+                            <div class="col-lg-2 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Full Time 
+                                    <input type="radio" checked="checked" name="radio-2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Part Time   
+                                    <input type="radio" name="radio-2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Contract
+                                    <input type="radio" name="radio-2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Internship
+                                    <input type="radio" name="radio-2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Freelance
+                                    <input type="radio" name="radio-2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-md-3">
+                                <label class="single-check">
+                                    Office
+                                    <input type="radio" name="radio-2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- End Row -->
+                        <!-- Start Row -->
+                        <h6>Salary Range</h6>                        
+                        <div class="row mb-4">
+                            <div class="col-lg-12 col-md-12">
+                                <form class="price-range-content">
+                                    <div class="price-range-bar" id="range-slider"></div>
+                                    <div class="price-range-filter">
+                                        <div class="price-range-filter-item">
+                                            <input type="text" id="price-amount" readonly>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Row -->
+                    </form>
+                </div>
+                <!-- End Container -->
+            </div>
+            <!-- End Body -->
+        </div>
+        </div>
+    </div>
+    <!-- End Modal For Filter -->
+
+
+<script>
+    document.querySelector('table').onclick = ({
+    target
+    }) => {
+    if (!target.classList.contains('more')) return
+    document.querySelectorAll('.dropout.active').forEach(
+        (d) => d !== target.parentElement && d.classList.remove('active')
+    )
+    target.parentElement.classList.toggle('active')
+    }
+</script>
+
+<style>
+    .more {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    }
+
+    .more span {
+    display: block;
+    width: .25rem;
+    height: .25rem;
+    background: #363636;
+    border-radius: 50%;
+    pointer-events: none;
+    }
+
+    .more span:not(:last-child) {
+    margin-bottom: .125rem;
+    }
+
+    .dropout {
+    z-index: 9001;
+    width: fit-content;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .dropout ul {
+    position: absolute;
+    top: -1.1rem;
+    right: 1.5rem;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.12s ease;
+    }
+
+    .dropout.active ul {
+    transform: scaleX(1);
+    }
+</style>
+<script type="text/javascript"> 
+$(document).ready(function(){
+  $(".candidate-check").click(function(){
+
+  });
+  $(":checkbox").click(function(e){
+        var code = "";
+    if (e.delegateTarget.checked == true){
+
+        code = "Active";
+    }else if (e.delegateTarget.checked == false){
+        code = "Draft";}
+    $.ajax({
+        url: '/candidates/' + this.value + '/',
+        type: 'PUT',
+        data: {"status": code}
+        });
+  });
+});
+</script>

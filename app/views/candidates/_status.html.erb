@@ -1,0 +1,22 @@
+<%= candidate.status %> 
+<%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id) %>
+<script type="text/javascript"> 
+$(document).ready(function(){
+  $(".candidate-check").click(function(){
+
+  });
+  $(":checkbox").click(function(e){
+        var code = "";
+    if (e.delegateTarget.checked == true){
+
+        code = "Active";
+    }else if (e.delegateTarget.checked == false){
+        code = "Draft";}
+    $.ajax({
+        url: '/candidates/' + this.value + '/',
+        type: 'PUT',
+        data: {"status": code}
+        });
+  });
+});
+</script>
