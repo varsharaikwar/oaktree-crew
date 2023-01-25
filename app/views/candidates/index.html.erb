@@ -86,13 +86,21 @@
                 <div class="row">
                     <div class="col-md-7">
                         <h2>Freelancers</h2>                    
-                    </div>                          
+                    </div>         
+                        <%= form_with(url: candidates_url, method: :get) do |f| %>
+                            
+                            <%= text_field_tag(:query) %>
+                            <%= submit_tag("Search", class: "btn btn-primary") %>
+                        <% end %>
+                                
+                        
                     </div>                    
                 </div>
             </div>
         </div>
     </div>
     <!-- End Page Title Area -->
+    
 
     <!-- Start Freelancers List Area -->
     <section class="mt-5">
@@ -140,7 +148,6 @@
                                             <th scope="col">APPLICATION # <i class='bx bx-sort'></i></th>
                                             <th scope="col">APPLICANT <i class='bx bx-sort'></i></th>
                                             <th scope="col">STATUS <i class='bx bx-sort'></i></th>
-                                            <th scope="col">PROGRESS <i class='bx bx-sort'></i></th>
                                             <th scope="col">Date <i class='bx bx-sort'></i></th>
                                             <th scope="col"></th>
                                         </tr>
@@ -155,8 +162,11 @@
                                                 </td>
                                                 <td><%= candidate.id %></td>
                                                 <td><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.first_name) %></td>
-                                                <td id="check<%=candidate.id%>"><%= candidate.status %><%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id) %></td>                                                
-                                                <td><div class="checkboxs"><%= candidate.status %><input type="checkbox" id="chb2"></div></td>      
+                                                <% if current_user.has_role? :senior_hr %>
+                                                    <td id="check<%=candidate.id%>"><%= candidate.status %><%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id) %></td>       
+                                                <% else %>
+                                                    <td><%= candidate.status %></td>
+                                                <% end %>                                         
                                                 <td class="bi bi-calendar"><%= candidate.created_at.strftime("%B %d")%></td>   
                                                 <td>
                                                     <div class="dropout">
@@ -603,4 +613,8 @@ $(document).ready(function(){
         });
   });
 });
+
+
+
 </script>
+
