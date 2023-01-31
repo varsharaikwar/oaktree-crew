@@ -75,8 +75,8 @@
                                         </button>
                                     <% end %>
                                 </div>
-                        </div> 
-                    <% end %>          
+                        </div>     
+                    <% end %>    
                     </div>                    
                 </div>
             </div>
@@ -109,23 +109,27 @@
                                     <table class="freelancers-list-table table table-striped">
                                         <thead>
                                         <tr>                                           
-                                            <th scope="col">APPLICATION # <i class='bx bx-sort'></i></th>
-                                            <th scope="col">APPLICANT <i class='bx bx-sort'></i></th>
-                                            <th scope="col">STATUS <i class='bx bx-sort'></i></th>
-                                            <th scope="col">Date <i class='bx bx-sort'></i></th>
-                                            <th scope="col"></th>
+                                            <th scope="col">APPLICATION</th>
+                                            <th scope="col">APPLICANT </th>
+                                            <th scope="col">STATUS</th>
+                                            <th scope="col">Date</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <% @candidates.each_with_index do |candidate, i| %>
                                             <tr>
                                                 <td><%= candidate.id %></td>
-                                                <td><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.first_name) %></td>
+                                                <td><%= image_tag candidate.image, class: "abc" %><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.first_name) %></td>
                                                 <% if current_user.has_role? :senior_hr %>
-                                                    <td id="check<%=candidate.id%>"><%= candidate.status %><%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id) %></td>       
+                                                    <td id="check<%=candidate.id%>" class="form-check form-switch">
+                                                        <%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id), class: "form-check-input", role: "switch", id: "flexSwitchCheckChecked"%>
+                                                            
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked" ><%= candidate.status %></label>
+                                                    </td> 
                                                 <% else %>
                                                     <td><%= candidate.status %></td>
-                                                <% end %>                                         
+                                                <% end %>    
+                                                    
                                                 <td class="bi bi-calendar"><%= candidate.created_at.strftime("%B %d")%></td>   
                                                 <td>
                                                     <div class="dropout">
@@ -373,6 +377,12 @@
 
         .dropdown:hover .dropbtn {
             background-color: #3e8e41;
+        }
+        
+        .abc{
+            width:40px;
+            border-radius: 100%;
+            margin-right: 10px;
         }
     </style>
 

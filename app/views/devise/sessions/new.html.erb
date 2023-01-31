@@ -1,4 +1,5 @@
 <%= render 'login_header' %>
+<%= stylesheet_link_tag "style.css", "data-turbo-track": "reload" %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <section class="user-area ptb-100">
       <div class="container">

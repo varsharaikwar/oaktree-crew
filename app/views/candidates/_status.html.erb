@@ -1,5 +1,5 @@
-<%= candidate.status %> 
-<%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id) %>
+<%= check_box_tag "status#{candidate.id}",candidate.id, checked = check(candidate.id), class: "form-check-input" %>
+<label class="form-check-label"  ><%= candidate.status %></label> 
 <script type="text/javascript"> 
     $(document).ready(function(){
     $(".candidate-check").click(function(){
