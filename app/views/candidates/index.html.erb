@@ -1,4 +1,5 @@
- <!-- Start Header Area -->
+<%= stylesheet_link_tag "style.css", "data-turbo-track": "reload" %>
+<!-- Start Header Area -->
     <header class="header-area">       
         <div class="navbar-area">
             <div class="desktop-nav">
@@ -112,25 +113,24 @@
                                             <th scope="col">APPLICATION</th>
                                             <th scope="col">APPLICANT </th>
                                             <th scope="col">STATUS</th>
-                                            <th scope="col">Date</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <% @candidates.each_with_index do |candidate, i| %>
                                             <tr>
                                                 <td><%= candidate.id %></td>
-                                                <td><%= image_tag candidate.image, class: "abc" %><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.first_name) %></td>
+                                                    <td><% if candidate.image.attached? %><%= image_tag candidate.image, class: "abc" %><% end %><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.first_name) %></td>
                                                 <% if current_user.has_role? :senior_hr %>
-                                                    <td id="check<%=candidate.id%>" class="form-check form-switch">
-                                                        <%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id), class: "form-check-input", role: "switch", id: "flexSwitchCheckChecked"%>
-                                                            
-                                                        <label class="form-check-label" for="flexSwitchCheckChecked" ><%= candidate.status %></label>
+                                                    <td id="check<%=candidate.id%>">
+                                                    <div class="custom-control custom-switch">
+                                                        <%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id), class: "custom-control-input", id: "customSwitch#{candidate.id}"%>   
+                                                        <label class="custom-control-label" for="customSwitch<%=candidate.id%>" ><%= candidate.status %></label>
+                                                    </div>
                                                     </td> 
                                                 <% else %>
                                                     <td><%= candidate.status %></td>
                                                 <% end %>    
-                                                    
-                                                <td class="bi bi-calendar"><%= candidate.created_at.strftime("%B %d")%></td>   
+                                                <% if current_user.has_role? :senior_hr %>
                                                 <td>
                                                     <div class="dropout">
                                                         <button class="more">
@@ -149,6 +149,7 @@
                                                         </ul>
                                                     </div>
                                                 </td>
+                                                <% end %>
                                             </tr>
                                         <% end  %>                                                                                                                
                                         </tbody>

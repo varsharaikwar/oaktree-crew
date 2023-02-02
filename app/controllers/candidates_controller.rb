@@ -1,4 +1,5 @@
 class CandidatesController < ApplicationController
+  before_action :authenticate_user!
   load_and_authorize_resource :candidate, class: Candidate, except: [:show, :edit, :destroy, :update]
 
     def index
@@ -71,6 +72,6 @@ class CandidatesController < ApplicationController
   
     private
       def candidate_params
-        params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file)
+        params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file, :skills => [])
       end
 end

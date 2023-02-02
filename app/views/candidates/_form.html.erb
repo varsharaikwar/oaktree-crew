@@ -1,12 +1,11 @@
 <%= render 'layouts/header' %>
-<%= form_with model: @candidate do |f| %>
     <section class="candidates-resume-area ptb-100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="candidates-resume-content">
-                        <form class="resume-info">
-                            <h3>Personal Details</h3>
+                    <%= form_with model: @candidate, class: "resume-info" do |f| %>
+                        <h3>Personal Details</h3>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
@@ -51,7 +50,6 @@
                                         <div class="input-group date" id="datetimepicker">
                                             <%= f.date_field :date_of_birth, start_year: (Date.today - 100.years).year, end_year: Date.today.year, class: "form-control", order: [:month, :day, :year] %>
                                             <span class="input-group-addon"></span>
-                                            <i class="bx bx-calendar"></i>
                                         </div>	
                                     </div>
                                 </div>
@@ -348,16 +346,32 @@
                                     </div>
                                 </div>
 
-
+                                <div class="col-md-6">
+                                    <div class="row staff-sub-checkbox">
+                                        <div class="col-md-12">
+                                            <span class="access_label">Skills:</span>
+                                            <div class="custom_checkbox mt-15">
+                                                <% %i[Java Ruby HTML Jquery Bootstrap 4 Bootstrap 3 CSS Javascript Angular Python Hybris SQL NOSQL NodeJS].each do |item| %>
+                                                    <label class="custom_checkbox_label">
+                                                        <%= f.check_box :skills, { multiple: true }, item, nil%>
+                                                        <span><%=f.label item%></span>
+                                                    </label>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-lg-12">
                                     <%= f.submit "Save", class: "default-btn" %>
                                 </div>
                             </div>
-                        </form>
+                        <% end %>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<% end %>
+
+
 <%= render 'layouts/footer' %>

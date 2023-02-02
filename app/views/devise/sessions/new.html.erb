@@ -1,6 +1,5 @@
 <%= render 'login_header' %>
 <%= stylesheet_link_tag "style.css", "data-turbo-track": "reload" %>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <section class="user-area ptb-100">
       <div class="container">
         <div class="row">
@@ -9,7 +8,8 @@
           <div class="col-lg-6">
             <div class="user-form-content log-in-50 pt-4">
               <h3>Log In to Your Account</h3>
-              <form class="user-form">
+			      <div class="user-form">
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -25,20 +25,15 @@
                     </div>
                   </div>
 
-                    <% if devise_mapping.rememberable? %>
-                      <div class="col-12">
-                        <div class="login-action">
-                          <span class="log-rem">
-                            <%= f.check_box :remember_me, id: "remember-2" %>
-                              <label>Keep me logged in</label>
-                          </span>
-                        </div>
-                      </div>
-                    <% end %>
-
-                    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                      <div class="col-12">
-                        <div class="login-action">
+				  <% if devise_mapping.rememberable? %>
+					<div class="col-12">
+						<div class="login-action">
+							<span class="log-rem">
+								<%= f.check_box :remember_me, id: "remember-2" %>
+									<label>Keep me logged in</label>
+							</span>
+					<% end %>                    
+					<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
                           <span class="forgot-login">
                             <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
                           </span>
@@ -50,7 +45,8 @@
                       <%= f.submit "Log in" , class: "default-btn" %>
                     </div>
                 </div>
-              </form>
+				<% end %>
+              </div>
             </div>
           </div>
 
@@ -60,6 +56,5 @@
         </div>
       </div>
     </section>
-    <% end %>
       <%= render 'layouts/footer' %>
 

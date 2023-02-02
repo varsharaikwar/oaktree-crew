@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   root "homes#index"
+  # root :to => redirect("/users/sign_in")
+  # get 'index/homes', to: 'homes#index'
+
   resources :candidates
   get 'logout/candidates', to: 'candidates#logout'
 end

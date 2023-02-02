@@ -4,7 +4,16 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-:root {
+ @import "flaticon";
+ @import "animate.min";
+ @import "common.css";
+ @import "date-picker.min";
+ @import "magnific-popup.min";
+ @import "nice-select.min";
+ @import "owl.carousel.min";
+ @import "owl.theme.default.min.css";
+ 
+ :root {
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -16755,12 +16764,12 @@ textarea.form-control {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  border: 1px solid #454545;
-  color: #454545;
   border-radius: 4px;
   font-size: 20px;
   -webkit-transition: all ease 0.5s;
   transition: all ease 0.5s;
+  background-color: #ffe8e0;
+  color: #ff672c;
 }
 
 .candidates-details-area .candidates-details-sidebar .candidates-widget .social-icon li a:hover i {
@@ -18133,6 +18142,86 @@ textarea.form-control {
   border-color: #00b074;
   background-color: #00b074;
 }
+.row {
+  margin: 0 !important;
+}
+
+.content-area {
+  background-color: #f7f9fe;
+  padding: 12px;
+}
+
+.sidebar {
+  padding: 30px 20px;
+}
+
+.sidebar .nav-item {
+  margin-bottom: 15px;
+}
+
+.sidebar .nav-item.active {
+  background-color: #f7f8fc;
+}
+
+.sidebar img {
+  margin-right: 10px;
+}
+
+.badge-list li {
+  background-color: #eef1f6;
+  padding: 2px 8px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.widget-box {
+  padding: 30px;
+  border-radius: 30px;
+  -webkit-box-shadow: 0px 5px 20px 3px #e6e9f9e6;
+          box-shadow: 0px 5px 20px 3px #e6e9f9e6;
+  height: 100%;
+}
+
+.widget-box .bxs-file-pdf {
+  background-color: #ffe8e0;
+  color: #ff672c;
+  padding: 8px 15px;
+  font-size: 26px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.widget-box .grey-text {
+  color: #a3b6d1;
+  font-weight: 500;
+}
+
+.widget-box .bxs-cloud-download {
+  font-size: 30px;
+  color: #a3b6d1;
+}
+
+.avatar-list ul {
+  background-image: url("");
+}
+
+.social-list li {
+  margin-right: 10px;
+}
+
+.social-list a i {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 20px;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  background-color: #ffe8e0;
+  color: #ff672c;
+}
+
 .status-indicator {
   height: 10px;
   width: 10px;
@@ -20588,3 +20677,54 @@ Continuer Custom Width Area Style*/
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+.avatar-list{
+  ul{
+    .emoji-container{
+        width: 50px;
+        height: 50px;
+        min-width: 60px;
+        min-height: 60px;
+        border-radius: 10px;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        padding: 6px;
+        background-color: rgb(255, 232, 224);
+    }
+  }
+}
+.card-box{
+  .emoji-container{
+      width: 100px;
+      height: 100px;
+      min-width: 100px;
+      min-height: 100px;
+      max-width: 100px;
+      max-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      border-radius: 50%;
+      padding: 18px;
+  }
+  .emoji1{
+      background-color: aquamarine;
+  }
+  .emoji2{
+      background-color: aqua;
+  }
+  .emoji3{
+      background-color: bisque;
+  }
+}
+
+.grey-text{
+  color: rgb(163, 182, 209);
+  font-weight: 500;
+  font-size: 16px;
+}
+
