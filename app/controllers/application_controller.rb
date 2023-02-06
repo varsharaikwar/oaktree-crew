@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
          redirect_to "/"
     end
     def after_sign_in_path_for(resource)
-      new_candidate_path# your path
+      candidates_path# your path
     end
 end

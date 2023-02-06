@@ -1,6 +1,6 @@
 class Candidate < ApplicationRecord
     include PgSearch::Model
-    pg_search_scope :global_search, against: [:first_name, :last_name], using: { tsearch: { prefix: true } }
+    pg_search_scope :global_search, against: [:first_name, :last_name, :designation], using: { tsearch: { prefix: true } }
     extend FriendlyId
     friendly_id :first_name
     has_one_attached :image

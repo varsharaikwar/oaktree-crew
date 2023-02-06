@@ -6,6 +6,7 @@ class Ability
       can :create, Candidate
       can :show, Candidate
       can :index, Candidate
+      can :edit, Candidate
     elsif user.has_role? :senior_hr
       can :index, Candidate
       can :show, Candidate

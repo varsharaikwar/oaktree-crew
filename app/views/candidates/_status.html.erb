@@ -1,7 +1,6 @@
-<div class="custom-control custom-switch">
     <%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id), class: "custom-control-input", id: "customSwitch#{candidate.id}"%>   
     <label class="custom-control-label" for="customSwitch<%=candidate.id%>" ><%= candidate.status %></label>
-</div>
+
 <script type="text/javascript"> 
     $(document).ready(function(){
     $(".candidate-check").click(function(){
