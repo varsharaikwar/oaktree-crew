@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_01_064540) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_10_110549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,7 +78,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_064540) do
     t.date "date_of_birth"
     t.string "file"
     t.string "status"
-    t.string "skills", default: [], array: true
+    t.text "current_location"
+    t.string "primary_skill", default: [], array: true
+    t.string "secondary_skill", default: [], array: true
+    t.datetime "available_time_zone"
+    t.string "industry"
+    t.datetime "available_time"
     t.index ["slug"], name: "index_candidates_on_slug", unique: true
   end
 

@@ -81,6 +81,24 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Current Location</label>
+                                        <div id="location">
+                                            <%= f.select :current_location, Candidate::LOCATION_LIST, {include_blank: 'select'}, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Time Zone</label>
+                                        <div id="available_time_zone">
+                                            <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'select'}, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Address Details</label>
@@ -342,18 +360,18 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="choose-img">
                                         <p>Select image</p>
-                                        <%= f.file_field :image, id: "img", accept: "image" %>
+                                            <%= f.file_field :image, id: "img", accept: "image" %>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="row staff-sub-checkbox">
                                         <div class="col-md-12">
-                                            <span class="access_label">Skills:</span>
+                                            <span class="access_label">Primary Skills:</span>
                                             <div class="custom_checkbox mt-15">
                                                 <% %i[Java Ruby HTML Jquery Bootstrap4 Bootstrap3 CSS Javascript Angular Python Hybris SQL NOSQL NodeJS].each do |item| %>
                                                     <label class="custom_checkbox_label">
-                                                        <%= f.check_box :skills, { multiple: true }, item, nil%>
+                                                        <%= f.check_box :primary_skill, { multiple: true }, item, nil%>
                                                         <span><%=f.label item%></span>
                                                     </label>
                                                 <% end %>
@@ -361,6 +379,22 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                <div class="row staff-sub-checkbox">
+                                    <div class="col-md-12">
+                                        <span class="access_label">Secondary Skills:</span>
+                                        <div class="custom_checkbox mt-15">
+                                            <% %i[Java Ruby HTML Jquery Bootstrap4 Bootstrap3 CSS Javascript Angular Python Hybris SQL NOSQL NodeJS].each do |item| %>
+                                                <label class="custom_checkbox_label">
+                                                    <%= f.check_box :secondary_skill, { multiple: true }, item, nil%>
+                                                    <span><%=f.label item%></span>
+                                                </label>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                 
                                 <div class="col-lg-12">
                                     <%= f.submit "Save", class: "default-btn" %>

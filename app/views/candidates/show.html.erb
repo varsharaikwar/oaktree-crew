@@ -108,9 +108,17 @@
 								</div>
 
 								<div class="mt-5">
-									<h3>Skills</h3>
+									<h3>Primary Skills</h3>
 									<ul class="d-flex flex-wrap badge-list mb-0">
-									<% @candidate.skills.each do |candidate| %>
+									<% @candidate.primary_skill.each do |candidate| %>
+										<span class="sub-title"><%= candidate %></span>
+										<% end %>
+									</ul>
+								</div>
+								<div class="mt-5">
+									<h3>Secondary Skills</h3>
+									<ul class="d-flex flex-wrap badge-list mb-0">
+									<% @candidate.secondary_skill.each do |candidate| %>
 										<span class="sub-title"><%= candidate %></span>
 										<% end %>
 									</ul>
