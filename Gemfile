@@ -84,3 +84,10 @@ group :test do
   gem "webdrivers"
 end
 
+group :development do
+  gem 'capistrano', '~> 3.11.0',        require: false
+  gem 'capistrano-rvm', '~> 0.1.2',     require: false
+  gem 'capistrano-rails', '~> 1.4.0',   require: false
+  gem 'capistrano-bundler', '~> 1.3.0', require: false
+  gem 'capistrano3-puma',   require: false
+end
