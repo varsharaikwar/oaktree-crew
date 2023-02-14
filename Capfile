@@ -30,9 +30,9 @@ require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/rvm'
 require 'capistrano/puma'
-install_plugin Capistrano::Puma, load_hooks: false  # Default puma tasks without hooks
-install_plugin Capistrano::Puma::Monit, load_hooks: false  # Monit tasks without hooks
-# require "capistrano/rails/migrations"
+install_plugin Capistrano::Puma
+install_plugin Capistrano::Puma::Systemd
+require "capistrano/rails/migrations"
 # require "capistrano/passenger"
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
