@@ -162,8 +162,8 @@
 		var timeLeft = endTime - now;
 		var days = Math.floor(timeLeft / 86400); 
 		var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
-		var minutes = Math.floor((timeLeft - (days  86400) - (hours  3600 )) / 60);
-		var seconds = Math.floor((timeLeft - (days  86400) - (hours  3600) - (minutes * 60)));
+		var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+		var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
 		if (hours < "10") { hours = "0" + hours; }
 		if (minutes < "10") { minutes = "0" + minutes; }
 		if (seconds < "10") { seconds = "0" + seconds; }
@@ -277,59 +277,8 @@
 
 	// MixItUp Shorting JS
 	$('.shorting').mixItUp();
+	
 
-	// Date Picker
-	$('#datetimepicker').datepicker({
-		weekStart: 0,
-		todayBtn: "linked",
-		language: "es",
-		orientation: "bottom auto",
-		keyboardNavigation: false,
-		autoclose: true
-	});
-
-	// Gender
-	$('#gender').gender({
-		orientation: "bottom auto"
-	});
-
-	//Marital status
-	$('#marital').marital({
-		orientation: "bottom auto"
-	});
-
-	// Nationality
-	$('#nationality').nationality({
-		orientation: "bottom auto"
-	});
-
-	// Category
-	$('#category').category({
-		orientation: "bottom auto"
-	});
-
-	// Level of Education
-	$('#level_of_education').level_of_education({
-		orientation: "bottom auto"
-	});
-
-	// Degree 
-	$('#degree').degree({
-		orientation: "bottom auto"
-	});
-
-	// Result 
-	$('#result').result({
-		orientation: "bottom auto"
-	});
-	 //year
-	 $('#year').result({
-		orientation: "bottom auto"
-	});
-	//period
-	$('#period').result({
-		orientation: "bottom auto"
-	});
 	// Range Slider JS
     $( "#range-slider").slider({
         range: true,

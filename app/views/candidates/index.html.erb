@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
  <!-- Start Header Area -->
-  <%=  render "layouts/header"%>
+  <%=  render "layouts/header" %>
     <!-- End Header Area -->
     
 <div class="row">
@@ -66,7 +66,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <%= link_to 'View', candidate_path(candidate.first_name) , class: "dropdown-item"  %>
-                            <%= link_to 'Edit', edit_candidate_path(candidate), class: "dropdown-item" %>                                 </div>
+                            <%= link_to 'Edit', edit_candidate_path(candidate), class: "dropdown-item" %>                                 
+                            </div>
                         </div>
                         <%if candidate.image.present? %>
                                 <span class="emoji-container emoji1">
@@ -90,7 +91,7 @@
                             <% end %>
                         <% end %>
                         <p class="m-0"><b><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.first_name) %></b></p>
-                        <p><%= candidate.designation %></p>
+                        <p><%= candidate.category %></p>
                         <% if current_user.has_role? :senior_hr %>
                             <td id="check<%=candidate.id%>">
                                 <div class="custom-control custom-switch", id="check<%=candidate.id%>">
@@ -456,8 +457,9 @@
     }
     
     .abc{
-        width:100%;
+        width:40px;
         border-radius: 100%;
+        margin-right: 10px;
     }
 </style>
 
@@ -482,3 +484,29 @@
         });
     });
 </script>
+
+
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <%= javascript_import_module_tag "js/bootstrap" %>
+  <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
+  <%= javascript_import_module_tag "js/vendor/ajaxchimp.min" %>
+  <%= javascript_import_module_tag "js/vendor/appear.min" %>
+  <%= javascript_import_module_tag "js/vendor/bootstrap-datepicker.min" %>
+
+
+  <%= javascript_import_module_tag "js/vendor/form-validator.min" %>
+  <%= javascript_import_module_tag "js/vendor/jquery.mixitup.min" %>
+  <%= javascript_import_module_tag "js/vendor/nice-select.min" %>
+  <%= javascript_import_module_tag "js/vendor/magnific-popup.min" %>
+  <%= javascript_import_module_tag "js/vendor/odometer.min" %>
+
+  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
+  <%= javascript_import_module_tag "js/vendor/range-slider.min" %>
+  <%= javascript_import_module_tag "js/vendor/custom" %>
+
+  <%= javascript_import_module_tag "js/popper" %>
+  <%= javascript_import_module_tag "js/vendor/custom" %>

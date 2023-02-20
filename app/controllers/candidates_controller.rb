@@ -23,6 +23,8 @@ class CandidatesController < ApplicationController
     end
 
     def new
+        @primary_skill = SkillSet.where(skill_type: "primary")
+        @secondary_skill = SkillSet.where(skill_type: "secondary")
         @candidate = Candidate.new
         # authorize! :new, @candidate
     end
@@ -72,6 +74,6 @@ class CandidatesController < ApplicationController
   
     private
       def candidate_params
-        params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file, :current_location, :available_time_zone, :primary_skill => [], :secondary_skill => [])
+        params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file, :current_location, :available_time_zone,:start_time, :end_time, :primary_skill => [], :secondary_skill => [])
       end
 end

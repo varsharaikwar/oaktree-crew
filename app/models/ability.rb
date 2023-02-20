@@ -11,6 +11,11 @@ class Ability
       can :index, Candidate
       can :show, Candidate
       can :edit, Candidate
+    elsif user.has_role? :bde
+      can :index, Candidate
+      can :show, Candidate
+    elsif user.has_role? :admin
+      can :manage, :all
     end
     #
     # The first argument to `can` is the action you are giving the user 

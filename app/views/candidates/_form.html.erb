@@ -93,11 +93,29 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Time Zone</label>
-                                        <div id="available_time_zone">
                                             <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'select'}, class: "form-control" %>
                                         </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Available Time <br> From </label>
+                                            <%= f.text_field :start_time, class: "form-control", id:"timepicker" %>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label> <br> To </label>
+                                            <%= f.text_field :end_time, class: "form-control", id:"timepicker1" %>
+                                    </div>
+                                </div>
+
+                                
+
+                                
+                               
+
                                 
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -367,13 +385,14 @@
                                 <div class="col-md-6">
                                     <div class="row staff-sub-checkbox">
                                         <div class="col-md-12">
+                                        
                                             <span class="access_label">Primary Skills:</span>
                                             <div class="custom_checkbox mt-15">
-                                                <% %i[Java Ruby HTML Jquery Bootstrap4 Bootstrap3 CSS Javascript Angular Python Hybris SQL NOSQL NodeJS].each do |item| %>
-                                                    <label class="custom_checkbox_label">
-                                                        <%= f.check_box :primary_skill, { multiple: true }, item, nil%>
-                                                        <span><%=f.label item%></span>
-                                                    </label>
+                                               <% @primary_skill.each do |item| %>
+                                                <label class="custom_checkbox_label">
+                                                <%= f.check_box :primary_skill, { multiple: true }, item.name, nil%>
+                                                  <span> <%= item.name %></span>
+                                                </label>
                                                 <% end %>
                                             </div>
                                         </div>
@@ -385,12 +404,12 @@
                                     <div class="col-md-12">
                                         <span class="access_label">Secondary Skills:</span>
                                         <div class="custom_checkbox mt-15">
-                                            <% %i[Java Ruby HTML Jquery Bootstrap4 Bootstrap3 CSS Javascript Angular Python Hybris SQL NOSQL NodeJS].each do |item| %>
+                                            <% @secondary_skill.each do |item| %>
                                                 <label class="custom_checkbox_label">
-                                                    <%= f.check_box :secondary_skill, { multiple: true }, item, nil%>
-                                                    <span><%=f.label item%></span>
+                                                <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
+                                                  <span> <%= item.name %></span>
                                                 </label>
-                                            <% end %>
+                                                <% end %>
                                         </div>
                                     </div>
                                 </div>
@@ -409,3 +428,44 @@
 
 
 <%= render 'layouts/footer' %>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <%= javascript_import_module_tag "js/bootstrap" %>
+  <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
+  <%= javascript_import_module_tag "js/vendor/ajaxchimp.min" %>
+  <%= javascript_import_module_tag "js/vendor/appear.min" %>
+  <%= javascript_import_module_tag "js/vendor/bootstrap-datepicker.min" %>
+
+
+  <%= javascript_import_module_tag "js/vendor/form-validator.min" %>
+  <%= javascript_import_module_tag "js/vendor/jquery.mixitup.min" %>
+  <%= javascript_import_module_tag "js/vendor/nice-select.min" %>
+  <%= javascript_import_module_tag "js/vendor/magnific-popup.min" %>
+  <%= javascript_import_module_tag "js/vendor/odometer.min" %>
+
+  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
+  <%= javascript_import_module_tag "js/vendor/range-slider.min" %>
+  <%= javascript_import_module_tag "js/vendor/custom" %>
+
+  <%= javascript_import_module_tag "js/popper" %>
+  <%= javascript_import_module_tag "js/vendor/custom" %>
+
+    <!-- Date Time Picker Links -->
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Date Time Picker From Script -->
+    <script>
+        $('#timepicker').timepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
+
+    <!-- Date Time Picker To Script -->
+    <script>
+        $('#timepicker1').timepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>

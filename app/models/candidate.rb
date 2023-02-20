@@ -7,6 +7,7 @@ class Candidate < ApplicationRecord
     mount_uploader :file, FileUploader
     GENDER_LIST = ["Male", "Female", "Other"]
     MARITAL_LIST = ["Married", "Unmarried"]
+    LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
     NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]
     CATEGORY_LIST = ["UX/UI Designer", "Web Developer", "Web Designer", "Software Developer", "SEO"]
     LEVEL_OF_EDUCATION_LIST = ["Massachusetts", "Maryland", "Colorado", "Vermont", "Virginia", "Washington"]
@@ -15,7 +16,6 @@ class Candidate < ApplicationRecord
     YEAR_OF_PASSING_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
     EMPLOYMENT_PERIOD_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
     CANDIDATE_STATUS = ["Draft", "Active"]
-    LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
     TIME_ZONE_LIST = ["AST", "EST", "CST", "MST", "PST", "AKST", "HST", "UTC-11", "UTC+10"]
     validates :first_name, presence: true#, acceptance: {message: "Please enter a valid name."}
     validates :last_name, presence: true
