@@ -1,5 +1,5 @@
 # Change these
-server '13.233.150.82', port: 22, roles: [:web, :app, :db], primary: true
+server '65.2.112.74', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,'git@github.com:varsharaikwar/oaktree-crew.git'
 set :application,     'oaktreecrew'

@@ -42,11 +42,15 @@ class CandidatesController < ApplicationController
     end
 
     def edit
+      @primary_skill = SkillSet.where(skill_type: "primary")
+      @secondary_skill = SkillSet.where(skill_type: "secondary")
       @candidate = Candidate.friendly.find(params[:id])
       authorize! :edit, @candidate
     end
   
     def update
+      @primary_skill = SkillSet.where(skill_type: "primary")
+      @secondary_skill = SkillSet.where(skill_type: "secondary")
       @candidate = Candidate.friendly.find(params[:id])
       if params[:status]
           if @candidate.update(status: params[:status])
