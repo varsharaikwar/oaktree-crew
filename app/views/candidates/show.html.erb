@@ -38,7 +38,13 @@
 			<div class="page-title-area">
 				<div class="col-lg-8">
 					<div class="page-title-content">
-						<h2>Candidates Details<span><button class="default-btn float-right">Invite to Job</button></span></h2>
+						<h2>Candidates Details<span>
+						<% if current_user.has_role? :bde %>
+						<button class="default-btn float-right"> Invite a Job </button>
+                        <% else %>
+						<%= link_to 'Edit Profile', edit_candidate_path, class:"default-btn float-right" %>
+						</span></h2>
+						<% end %>
 						<ul>
 							<li>
 								<%= link_to 'Home', candidates_path %>
@@ -495,3 +501,27 @@
 		}
 		
 	</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <%= javascript_import_module_tag "js/bootstrap" %>
+  <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
+  <%= javascript_import_module_tag "js/vendor/ajaxchimp.min" %>
+  <%= javascript_import_module_tag "js/vendor/appear.min" %>
+  <%= javascript_import_module_tag "js/vendor/bootstrap-datepicker.min" %>
+
+
+  <%= javascript_import_module_tag "js/vendor/form-validator.min" %>
+  <%= javascript_import_module_tag "js/vendor/jquery.mixitup.min" %>
+  <%= javascript_import_module_tag "js/vendor/nice-select.min" %>
+  <%= javascript_import_module_tag "js/vendor/magnific-popup.min" %>
+  <%= javascript_import_module_tag "js/vendor/odometer.min" %>
+
+  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
+  <%= javascript_import_module_tag "js/vendor/range-slider.min" %>
+  <%= javascript_import_module_tag "js/vendor/custom" %>
+
+  <%= javascript_import_module_tag "js/popper" %>
+  <%= javascript_import_module_tag "js/vendor/custom" %>
