@@ -1,4 +1,10 @@
 ActiveAdmin.setup do |config|
+
+  def ensure_admin!
+    raise ActionController::RoutingError.new('Not Found') unless current_user.has_role? :admin 
+  end
+  config.before_action :ensure_admin!      
+  
   # == Site Title
   #
   # Set the title that is displayed on the main layout
