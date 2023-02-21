@@ -65,7 +65,7 @@
 								<div class="row align-items-center">
 									<div class="col-lg-2">
 										<div class="hot-jobs-img">
-                                        	<%= image_tag @candidate.image if @candidate.image.attached? %>
+                                        	<%= image_tag @candidate.image.url %>
 										</div>
 									</div>
 
@@ -283,14 +283,13 @@
 							<div class="candidates-widget widget-box h-auto mb-4">
 								<ul class="nav">
 									<li class="nav-item d-flex align-items-center flex-fill">
-									<% if @candidate.image.attached? %>
-										<%= image_tag @candidate.image  , style: "width: 80px; border-radius: 10px; margin-right: 10px" %>
+									
+										<%= image_tag @candidate.image.url  , style: "width: 80px; border-radius: 10px; margin-right: 10px" %>
 
 												<div>
 													<h4><%= @candidate.first_name+ " " +@candidate.last_name %></h4>
 													<p class="grey-text"><%= @candidate.category %></p>
 												</div>
-									<% end %>
 									</li>
 								</ul>
 								<p class="pt-3 text-muted"></p>
