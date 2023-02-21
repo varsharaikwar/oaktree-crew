@@ -39,17 +39,23 @@
 				<div class="col-lg-8">
 					<div class="page-title-content">
 						<h2>Candidates Details<span>
-						<% if current_user.has_role? :bde %>
 						<button class="default-btn float-right"> Invite a Job </button>
-                        <% else %>
-						<%= link_to 'Edit Profile', edit_candidate_path, class:"default-btn float-right" %>
-						</span></h2>
-						<% end %>
 						<ul>
+
+						<% if current_user.has_role? :bde %>
+						    <li>
+								<%= link_to 'Home', candidates_path %>
+							</li>
+							<li class="active">Candidates Details</li>
+						<% else %>
 							<li>
 								<%= link_to 'Home', candidates_path %>
 							</li>
 							<li class="active">Candidates Details</li>
+							<li>
+							<%= link_to 'Edit Profile', edit_candidate_path %>
+							</li>
+					    <% end %>
 						</ul>
 					</div>
 				</div>
@@ -524,3 +530,13 @@
 
   <%= javascript_import_module_tag "js/popper" %>
   <%= javascript_import_module_tag "js/vendor/custom" %>
+
+
+
+  <script>
+function sendEmail() 
+{
+    window.location = "mailto:krishna.sahu@oaktreecloud.com";
+}
+</script>
+<div onclick="sendEmail();">Send e-mail</div>
