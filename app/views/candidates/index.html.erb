@@ -94,9 +94,9 @@
                             <%= link_to 'Edit', edit_candidate_path(candidate), class: "dropdown-item" %>                                 
                             </div>
                         </div>
-                        <%if candidate.image.present? %>
+                        <%if candidate.image.url.present? %>
                                 <span class="emoji-container emoji1">
-                                    <% if candidate.image.attached? %><%= image_tag candidate.image, class: "abc" %><% end %>
+                                    <%= image_tag candidate.image.url, class: "abc" %>
                                 </span>
                         <% else %>
                             <% if candidate.gender == "Male" %>

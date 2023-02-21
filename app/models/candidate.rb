@@ -3,8 +3,9 @@ class Candidate < ApplicationRecord
     pg_search_scope :global_search, against: [:first_name, :last_name, :designation], using: { tsearch: { prefix: true } }
     extend FriendlyId
     friendly_id :first_name
-    has_one_attached :image
+    # has_one_attached :image
     mount_uploader :file, FileUploader
+    mount_uploader :image, ImageUploader
     GENDER_LIST = ["Male", "Female", "Other"]
     MARITAL_LIST = ["Married", "Unmarried"]
     LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
