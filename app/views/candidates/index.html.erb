@@ -82,7 +82,7 @@
                 <div class="col-lg-12 pt-4">
                     <h3><%= @candidates.count %> Candidates</h3>
                 </div>
-                <% @candidates.each_with_index do |candidate, i| %>
+                <% @candidates.each do |candidate| %>
                 <div class="col-lg-3 text-center card-box mb-4">
                     <div class="widget-box">
                         <div class="dropdown float-right">
@@ -99,7 +99,7 @@
                             <% end %>                                
                             </div>
                         </div>
-                        <%if candidate.image.present? %>
+                        <% if candidate.image.present? %>
                                 <span class="emoji-container emoji1">
                                     <%= image_tag candidate.image.url, class: "abc" %>
                                 </span>
