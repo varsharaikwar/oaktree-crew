@@ -18,7 +18,7 @@ class CandidatesController < ApplicationController
     end
     
     def show
-      @candidate = Candidate.friendly.find(params[:id])
+      @candidate = Candidate.find(params[:id])
       authorize! :show, @candidate
     end
 
@@ -30,9 +30,10 @@ class CandidatesController < ApplicationController
     end
 
     def create
+      @primary_skill = SkillSet.where(skill_type: "primary")
+      @secondary_skill = SkillSet.where(skill_type: "secondary")
       @candidate = Candidate.new(candidate_params)
       @candidate.status = "Draft"
-    
         if @candidate.save
           redirect_to @candidate
         else
@@ -44,14 +45,14 @@ class CandidatesController < ApplicationController
     def edit
       @primary_skill = SkillSet.where(skill_type: "primary")
       @secondary_skill = SkillSet.where(skill_type: "secondary")
-      @candidate = Candidate.friendly.find(params[:id])
+      @candidate = Candidate.find(params[:id])
       authorize! :edit, @candidate
     end
   
     def update
       @primary_skill = SkillSet.where(skill_type: "primary")
       @secondary_skill = SkillSet.where(skill_type: "secondary")
-      @candidate = Candidate.friendly.find(params[:id])
+      @candidate = Candidate.find(params[:id])
       if params[:status]
           if @candidate.update(status: params[:status])
             respond_to do |format|
@@ -61,13 +62,13 @@ class CandidatesController < ApplicationController
       elsif @candidate.update(candidate_params)
           redirect_to @candidate
       else
-          render :update, status: :unprocessable_entity
+          render :edit, status: :unprocessable_entity
       end
       authorize! :edit, @candidate 
     end
 
     def destroy
-      @candidate = Candidate.friendly.find(params[:id])
+      @candidate = Candidate.find(params[:id])
       @candidate.destroy
       redirect_to root_path, status: :see_other
       authorize! :destroy, @candidate

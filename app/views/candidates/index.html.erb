@@ -1,3 +1,4 @@
+<%=  render "layouts/header" %>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
  <!-- Start Header Area -->
     <!-- End Header Area -->
@@ -91,14 +92,14 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <% if current_user.has_role? :bde %>
-                            <%= link_to 'View', candidate_path(candidate.first_name) , class: "dropdown-item"  %>                            
+                            <%= link_to 'View', candidate_path(candidate) , class: "dropdown-item"  %>                            
                             <% else %>
-                            <%= link_to 'View', candidate_path(candidate.first_name) , class: "dropdown-item"  %>
+                            <%= link_to 'View', candidate_path(candidate) , class: "dropdown-item"  %>
                             <%= link_to 'Edit', edit_candidate_path(candidate), class: "dropdown-item" %> 
                             <% end %>                                
                             </div>
                         </div>
-                        <%if candidate.image.url.present? %>
+                        <%if candidate.image.present? %>
                                 <span class="emoji-container emoji1">
                                     <%= image_tag candidate.image.url, class: "abc" %>
                                 </span>

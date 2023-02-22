@@ -1,3 +1,4 @@
+<%=  render "layouts/header" %>
 <%= stylesheet_link_tag "candidate" %>
 <%= javascript_include_tag "jquery", "jquery_ujs", "jquery.validate", "jquery.validate.additional-methods", "social-share-button" %> 
 <%= stylesheet_link_tag "style.css", "data-turbo-track": "reload" %>
@@ -39,7 +40,8 @@
 				<div class="col-lg-8">
 					<div class="page-title-content">
 						<h2>Candidates Details<span>
-						<button class="default-btn float-right"> Invite a Job </button>
+						<button class="default-btn float-right">Send Email</button>
+
 						<ul>
 
 						<% if current_user.has_role? :bde %>
@@ -70,8 +72,28 @@
 							<div class="candidates-cv">
 								<div class="row align-items-center">
 									<div class="col-lg-2">
-										<div class="hot-jobs-img">
-                                        	<%= image_tag @candidate.image.url %>
+									<div class="hot-jobs-img">
+									<%if @candidate.image.present? %>
+										<span class="emoji-container emoji1">
+											<%= image_tag @candidate.image.url, class: "abc" %>
+										</span>
+									<% else %>
+									<% if @candidate.gender == "Male" %>
+										<span class="emoji-container emoji3">
+											<img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
+												alt="">
+										</span>
+									<% elsif @candidate.gender == "Female" %>
+										<span class="emoji-container emoji2">
+											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
+												alt="">
+										</span>
+									<% else %>
+										<span class="emoji-container emoji1">
+											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png" alt="">
+										</span>
+									<% end %>
+								<% end %>
 										</div>
 									</div>
 
@@ -289,8 +311,25 @@
 							<div class="candidates-widget widget-box h-auto mb-4">
 								<ul class="nav">
 									<li class="nav-item d-flex align-items-center flex-fill">
-									
+									<%if @candidate.image.present? %>
 										<%= image_tag @candidate.image.url  , style: "width: 80px; border-radius: 10px; margin-right: 10px" %>
+										<% else %>
+									<% if @candidate.gender == "Male" %>
+										<span class="emoji-container emoji3">
+											<img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
+												alt="">
+										</span>
+									<% elsif @candidate.gender == "Female" %>
+										<span class="emoji-container emoji2">
+											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
+												alt="">
+										</span>
+									<% else %>
+										<span class="emoji-container emoji1">
+											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png" alt="">
+										</span>
+									<% end %>
+								<% end %>
 
 												<div>
 													<h4><%= @candidate.first_name+ " " +@candidate.last_name %></h4>
@@ -533,10 +572,4 @@
 
 
 
-  <script>
-function sendEmail() 
-{
-    window.location = "mailto:krishna.sahu@oaktreecloud.com";
-}
-</script>
-<div onclick="sendEmail();">Send e-mail</div>
+ 

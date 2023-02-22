@@ -1,3 +1,4 @@
+<%=  render "layouts/header" %>
 <section class="candidates-resume-area ptb-100">
 <div class="container">
     <div class="row">
@@ -15,7 +16,8 @@
                                 <% end %>
                             </div>
                         </div>
-                    
+
+            
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <label>Last Name</label>
@@ -148,8 +150,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <h4>Job Level</h4>
                     
                     <div class="row mb-30">
                         <div class="col-lg-6 col-md-6">
@@ -172,6 +172,8 @@
 
                     </div>
 
+                <h4>Job Level</h4>
+                 
                     <div class="row mb-30">
                         <div class="col-lg-4 col-sm-6 col-md-3">
                             <label class="single-check">
@@ -197,7 +199,7 @@
                         </div>
                     </div>
 
-                <h4>Job Nature</h4>
+                <br><h4>Job Nature</h4>
 
                     <div class="row mb-30">
                         <div class="col-lg-2 col-sm-6 col-md-3">
@@ -244,7 +246,7 @@
                         </div>
                     </div>
 
-                    <h3>Education</h3>
+                <br><h4>Education</h4>
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
@@ -385,7 +387,7 @@
                             <div class="row staff-sub-checkbox">
                                 <div class="col-md-12">
                                 
-                                    <span class="access_label">Primary Skills:</span>
+                                    <h6><span class="access_label">Primary Skills:</span></h6>
                                     <div class="custom_checkbox mt-15">
                                        <% @primary_skill.each do |item| %>
                                         <label class="custom_checkbox_label">
@@ -401,7 +403,7 @@
                         <div class="col-md-6">
                         <div class="row staff-sub-checkbox">
                             <div class="col-md-12">
-                                <span class="access_label">Secondary Skills:</span>
+                                <h6><span class="access_label">Secondary Skills:</span></h6>
                                 <div class="custom_checkbox mt-15">
                                     <% @secondary_skill.each do |item| %>
                                         <label class="custom_checkbox_label">
@@ -413,6 +415,8 @@
                             </div>
                         </div>
                     </div>
+
+                    
                         
                         <div class="col-lg-12">
                             <%= f.submit "Save", class: "default-btn" %>
