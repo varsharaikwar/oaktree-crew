@@ -23,6 +23,11 @@
                       <label>Password</label>
                       <%= f.password_field :password, autocomplete: "current-password" , class: "form-control" %>
                     </div>
+                      <% if flash.alert %>
+                      <div id="error_explanation">
+                      <%= flash.alert %>
+                      </div>
+                      <% end %>
                   </div>
 
 				  <% if devise_mapping.rememberable? %>
@@ -57,3 +62,9 @@
       </div>
     </section>
 
+
+    <style>
+    #error_explanation{
+      color: red;
+    }
+    </style>
