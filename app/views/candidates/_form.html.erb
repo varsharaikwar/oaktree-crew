@@ -47,7 +47,7 @@
 
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label>Date Of Barth</label>
+                                <label>Date Of Birth</label>
                                 <div class="input-group date" id="datetimepicker">
                                     <%= f.date_field :date_of_birth, start_year: (Date.today - 100.years).year, end_year: Date.today.year, class: "form-control", order: [:month, :day, :year] %>
                                     <span class="input-group-addon"></span>
@@ -100,7 +100,7 @@
 
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label>Available Time <br> From </label>
+                                <label>Availability <br> From </label>
                                     <%= f.text_field :start_time, class: "form-control", id:"timepicker" %>
                             </div>
                         </div>
