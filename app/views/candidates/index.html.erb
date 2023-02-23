@@ -21,9 +21,11 @@
 						</ul> -->
 				</div>
 				<ul class="nav flex-column">
-				<li class="nav-item active">
-					<a class="nav-link active" href="http://localhost:3000/candidates"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAG9JREFUSEtjZKAxYKSx+Qx0t+AAAwODPQ5fgeQcoXLEqsPwwX8CQQbzMbHqRi3AGaDwxIOeiogNW2LV0T8O8CW/gwwMDA5EJFNkdfTPaFQvOdAjmdgcSqw6+kcyscmPWHWjPhiERcVoTsaIFJpX+gBlrSgZlyR/CgAAAABJRU5ErkJggg==" alt="" />Dashboard</a>
-				</li>
+
+                <li class="nav-item active">
+                <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
+                </li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAARxJREFUSEvtleFtwjAQhb9MABtAJ2i7AWwAEwATtBtQNoAJ6AaFDdoJ2g2gG3QD0JPOkZ3YkQyJ+FEsRUp87+69u/M5BR2vouP4NBFMgBdgBOyAFfBjgp6AJSDMJ7AxTE1vikCOHxX0HzAGjsAB6Ffs0xhJikBKH031GtAzM7W/9v5lGbxaNvpWtsFKEZwM5exSK+U9z/vB9rRVxZewFIHKoWDPXt3fTKmc96Ze7+rHN6DMhk0ZKL1tDJR50pTpwsoZnCIZBpnBUnDFUgkDgmQdvSjZGL8H2c4J+UEcn8A1to0qlQ33CdTk9xb6oODzWJOd8qZSZdtic5AdxJRF/e4E/on7RyW6ZuBqN2rsFF06cMGAuebc9Kffxp3EGV38RxlRFzPlAAAAAElFTkSuQmCC" alt="" />Offers</a>
 				</li>
@@ -82,7 +84,7 @@
                 <div class="col-lg-12 pt-4">
                     <h3><%= @candidates.count %> Candidates</h3>
                 </div>
-                <% @candidates.each do |candidate| %>
+                <% @candidates.each_with_index do |candidate, i| %>
                 <div class="col-lg-3 text-center card-box mb-4">
                     <div class="widget-box">
                         <div class="dropdown float-right">
