@@ -21,9 +21,11 @@
 				<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 			
 				<ul class="nav flex-column">
+				
 				<li class="nav-item active">
-					<a class="nav-link active" href="http://localhost:3000/candidates"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAG9JREFUSEtjZKAxYKSx+Qx0t+AAAwODPQ5fgeQcoXLEqsPwwX8CQQbzMbHqRi3AGaDwxIOeiogNW2LV0T8O8CW/gwwMDA5EJFNkdfTPaFQvOdAjmdgcSqw6+kcyscmPWHWjPhiERcVoTsaIFJpX+gBlrSgZlyR/CgAAAABJRU5ErkJggg==" alt="" />Dashboard</a>
-				</li>
+                <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
+                </li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAARxJREFUSEvtleFtwjAQhb9MABtAJ2i7AWwAEwATtBtQNoAJ6AaFDdoJ2g2gG3QD0JPOkZ3YkQyJ+FEsRUp87+69u/M5BR2vouP4NBFMgBdgBOyAFfBjgp6AJSDMJ7AxTE1vikCOHxX0HzAGjsAB6Ffs0xhJikBKH031GtAzM7W/9v5lGbxaNvpWtsFKEZwM5exSK+U9z/vB9rRVxZewFIHKoWDPXt3fTKmc96Ze7+rHN6DMhk0ZKL1tDJR50pTpwsoZnCIZBpnBUnDFUgkDgmQdvSjZGL8H2c4J+UEcn8A1to0qlQ33CdTk9xb6oODzWJOd8qZSZdtic5AdxJRF/e4E/on7RyW6ZuBqN2rsFF06cMGAuebc9Kffxp3EGV38RxlRFzPlAAAAAElFTkSuQmCC" alt="" />Offers</a>
 				</li>
@@ -85,12 +87,13 @@
 										</span>
 									<% elsif @candidate.gender == "Female" %>
 										<span class="emoji-container emoji2">
-											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
+											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
 												alt="">
 										</span>
 									<% else %>
 										<span class="emoji-container emoji1">
-											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png" alt="">
+											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="">
+											
 										</span>
 									<% end %>
 								<% end %>
@@ -102,7 +105,7 @@
 											<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
 											<span class="sub-title"><%= @candidate.category %></span>
 											<ul>
-												<li><span>Location: </span><%= @candidate.address %></li>
+												<li><span>Location: </span><%= @candidate.current_location+ " " +@candidate.nationality %></li>
 											</ul>
 										</div>
 									</div>
@@ -308,55 +311,29 @@
 						</div>
 
 						<div class="col-lg-4">
-							<div class="candidates-widget widget-box h-auto mb-4">
-								<ul class="nav">
-									<li class="nav-item d-flex align-items-center flex-fill">
-									<%if @candidate.image.present? %>
-										<%= image_tag @candidate.image.url  , style: "width: 80px; border-radius: 10px; margin-right: 10px" %>
-										<% else %>
-									<% if @candidate.gender == "Male" %>
-										<span class="emoji-container emoji3">
-											<img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
-												alt="">
-										</span>
-									<% elsif @candidate.gender == "Female" %>
-										<span class="emoji-container emoji2">
-											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
-												alt="">
-										</span>
-									<% else %>
-										<span class="emoji-container emoji1">
-											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png" alt="">
-										</span>
-									<% end %>
-								<% end %>
-
-												<div>
-													<h4><%= @candidate.first_name+ " " +@candidate.last_name %></h4>
-													<p class="grey-text"><%= @candidate.category %></p>
-												</div>
-									</li>
-								</ul>
-								<p class="pt-3 text-muted"></p>
-								<ul class="social-icon nav social-list">
-										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(facebook)) %>
 		
+							<div class="candidates-details-sidebar">
+								<div class="candidates-widget">
+									<h3>Contact Information</h3>
+									
+									<ul class="overview">
+										
+										<li>
+											Email :
+											<span><%= @candidate.email %></span>
 										</li>
 										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(twitter)) %>
-
+											Phone :
+											<span><%= @candidate.phone %></span>
 										</li>
 										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(linkedin)) %>
-
-										</li>
-										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(whatsapp_web)) %>
-
+											Location :
+											<span><%= @candidate.address %></span>
 										</li>
 									</ul>
+								</div>
 							</div>
+
 							<div class="candidates-widget widget-box h-auto mb-4">
 								<h3 class="mb-4">Experience</h3>
 								<div class="mb-4">
@@ -369,7 +346,9 @@
 								</div>
 							
 							</div>
+
 							<div class="candidates-details-sidebar">
+								
 								<div class="candidates-widget">
 									<h3>Share This Job</h3>
 
@@ -393,61 +372,41 @@
 								</div>
 
 								<div class="candidates-widget">
-									<h3>Contact Information</h3>
-									
-									<ul class="overview">
-										
-										<li>
-											Email
-											<span>:<%= @candidate.email %></span>
-										</li>
-										<li>
-											Phone
-											<span>:<%= @candidate.phone %></span>
-										</li>
-										<li>
-											Location
-											<span>:<%= @candidate.address %></span>
-										</li>
-									</ul>
-								</div>
-
-								<div class="candidates-widget">
 									<h3>Job Overview</h3>
 									
 									<ul class="overview">
 										<li>
-											Categories
-											<span>:<%= @candidate.category %></span>
+											Categories :
+											<span><%= @candidate.category %></span>
 										</li>
 										<li>
-											Vacancy
-											<span>: 01</span>
+											Vacancy :
+											<span>01</span>
 										</li>
 										<li>
-											Job Type
-											<span>:<%= @candidate.job_nature %></span>
+											Job Type :
+											<span><%= @candidate.job_nature %></span>
 										</li>
 										<li>
 										
-											Experience
-											<span>: <%= Time.current.year - @candidate.employment_period.to_i %> year(s) </span>
+											Experience :
+											<span><%= @candidate.experience%> year(s) </span>
 										</li>
 										<li>
-											Present Salary
-											<span>:<%= @candidate.present_salary %></span>
+											Present Salary :
+											<span><%= @candidate.present_salary %></span>
 										</li>
 										<li>
-											Expected Salary
-											<span>:<%= @candidate.expected_salary %></span>
+											Expected Salary :
+											<span><%= @candidate.expected_salary %></span>
 										</li>
 										<li>
-											Languages:
-											<span>: English</span>
+											Languages :
+											<span> English</span>
 										</li>
 										<li>
-											Gender
-											<span>:<%= @candidate.gender%></span>
+											Gender :
+											<span><%= @candidate.gender%></span>
 										</li>
 										
 									</ul>
@@ -468,6 +427,7 @@
 										</li>
 									</ul>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -511,7 +471,7 @@
     <div class="copy-right-area">
         <div class="container">
             <p>
-                © 2020 Oak Tree Crew. All Rights Reserved.
+                © <%= Time.now().year%> Oak Tree Crew. All Rights Reserved.
             </p>
         </div>
     </div>
