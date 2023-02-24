@@ -116,6 +116,11 @@
                         <% end %>
 											<ul>
 												<li><span>Location: </span><%= @candidate.current_location+ " , " +@candidate.nationality %></li>
+											<p>
+												<a href="<%= @candidate.link %>" target="_blank">
+												<%= image_tag("linkedin.png")%>
+												</a>
+											</p>
 											</ul>
 										</div>
 									</div>
@@ -333,7 +338,8 @@
 										</li>
 										<li>
 											Location :
-											<span><%= @candidate.address %></span>
+											<span><%= @candidate.address %>
+											</span>
 										</li>
 									</ul>
 								</div>
@@ -533,6 +539,8 @@
         });
     });
 </script>
+
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
