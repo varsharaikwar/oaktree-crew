@@ -1,5 +1,13 @@
 ActiveAdmin.register SkillSet do
 
+  form do |f|
+    f.inputs do
+    f.input :name
+    f.input :skill_type , :as => :select,  collection: (['primary','secondary']), include_blank: 'select'
+
+    end
+    actions 
+  end
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

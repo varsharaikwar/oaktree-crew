@@ -1,11 +1,11 @@
 class Candidate < ApplicationRecord
     include PgSearch::Model
-    pg_search_scope :global_search, against: [:first_name, :last_name, :designation], using: { tsearch: { prefix: true } }
+    pg_search_scope :global_search, against: [:first_name, :last_name, :category], using: { tsearch: { prefix: true } }
     # extend FriendlyId
     # friendly_id :first_name
     # has_one_attached :image
-    belongs_to :user
-    has_many :comments, through: :users
+    # belongs_to :user
+    # has_many :comments, through: :users
     mount_uploader :file, FileUploader
     mount_uploader :image, ImageUploader
     GENDER_LIST = ["Male", "Female", "Other"]
@@ -24,4 +24,5 @@ class Candidate < ApplicationRecord
     validates :first_name, presence: true#, acceptance: {message: "Please enter a valid name."}
     validates :last_name, presence: true
     validates :email, presence: true, format: { with: Devise.email_regexp }
+
 end
