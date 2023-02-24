@@ -10,12 +10,12 @@
               <h3>Forgot your password?</h3>
 			      <div class="user-form">
               <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-                <%= render "devise/shared/error_messages", resource: resource %>
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
                       <label>Email</label>
                       <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control" %>
+                      <%= render "devise/shared/error_messages", resource: resource %>
                     </div>
                   </div>
 
@@ -66,3 +66,10 @@
 
   <%= javascript_import_module_tag "js/popper" %>
   <%= javascript_import_module_tag "js/vendor/custom" %>
+
+
+  <style>
+#error_explanation h2 {
+  display: none;
+}
+  </style>

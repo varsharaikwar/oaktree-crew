@@ -104,8 +104,18 @@
 										<div class="candidates-cv-content">
 											<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
 											<span class="sub-title"><%= @candidate.category %></span>
+											<% if current_user.has_role? :senior_hr %>
+                            <td id="check<%=@candidate.id%>">
+                                <div class="custom-control custom-switch", id="check<%=@candidate.id%>">
+                                    <%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>   
+                                    <label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
+                                </div>
+                            </td> 
+                        <% else %>
+                            <span><%= @candidate.status %></span>
+                        <% end %>
 											<ul>
-												<li><span>Location: </span><%= @candidate.current_location+ " " +@candidate.nationality %></li>
+												<li><span>Location: </span><%= @candidate.current_location+ " , " +@candidate.nationality %></li>
 											</ul>
 										</div>
 									</div>
@@ -117,21 +127,8 @@
 							</div>
 
 							<div class="candidates-details-content mb-4">
-								<h3>Portfolio<a href="#" class="float-right link" style="font-size: 18px;color: #00b074;">View all<span><i class="bx bx-arrow-to-right" style="margin-left: 5px;"></i></span></a></h3>
-								<div class="row">
-									<div class="col">
-										<img src="https://img.freepik.com/free-vector/customer-relationship-management-banner_107791-8648.jpg?w=1380&t=st=1674114433~exp=1674115033~hmac=8b22edef1171d3febb90d1469a0d80d5d464c85a9facbaf61e50bf599eb08d4b" alt="" />
-										<p class="mt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</b></p>
-									</div>
-									<div class="col">
-										<img src="https://img.freepik.com/free-vector/customer-relationship-management-banner_107791-8648.jpg?w=1380&t=st=1674114433~exp=1674115033~hmac=8b22edef1171d3febb90d1469a0d80d5d464c85a9facbaf61e50bf599eb08d4b" alt="" />
-										<p class="mt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</b></p>
-									</div>
-									<div class="col">
-										<img src="https://img.freepik.com/free-vector/customer-relationship-management-banner_107791-8648.jpg?w=1380&t=st=1674114433~exp=1674115033~hmac=8b22edef1171d3febb90d1469a0d80d5d464c85a9facbaf61e50bf599eb08d4b" alt="" />
-										<p class="mt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</b></p>
-									</div>
-								</div>
+								
+								
 
 								<div class="mt-5">
 									<h3>Primary Skills</h3>
@@ -225,10 +222,13 @@
 								<p><%= @candidate.notes %></p>
 
 								<h3>Education</h3>
+
+
+								<h6><%= @candidate.institute_name %></h6>
+								<span> Passout Year - <%= @candidate.year_of_passing%></span>
 								
 								<ul>
-									<li class="arts"><%= @candidate.degree %></li>
-									<li class="university"><%= @candidate.institute_name %>(<%= @candidate.year_of_passing %>)</li>
+									<li class="university"><%= @candidate.degree %>(<%= @candidate.duration%> yrs)</li>
 								</ul>
 
 								
@@ -237,8 +237,13 @@
 								
 								<ul>
 									<li class="arts"><%= @candidate.designation %></li>
-									<li class="university"><%= @candidate.company_name %>(<%= @candidate.employment_period %>)</li>
+									<li><%= @candidate.company_name %>-<%= @candidate.job_nature %></li>
+									<li><%= @candidate.employment_period %>-<%= @candidate.experience %> yrs</li>
+									<li><%= @candidate.company_location %></li>
 								</ul>
+
+								
+
 
 								<h4>Personal Skills</h4>
 
@@ -505,6 +510,29 @@
 		}
 		
 	</style>
+
+
+	<script type="text/javascript"> 
+    
+    $(document).ready(function(){
+        $(".candidate-check").click(function(){
+
+        });
+        $(":checkbox").click(function(e){
+                var code = "";
+            if (e.delegateTarget.checked == true){
+
+                code = "Active";
+            }else if (e.delegateTarget.checked == false){
+                code = "Draft";}
+            $.ajax({
+                url: '/candidates/' + this.value + '/',
+                type: 'PUT',
+                data: {"status": code}
+                });
+        });
+    });
+</script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

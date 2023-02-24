@@ -1,143 +1,152 @@
 <%=  render "layouts/header" %>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">    
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+ <!-- Start Header Area -->
+    <!-- End Header Area -->
+    
 <div class="row">
     <div class="col-lg-2">
-	    <div class="nav-side-menu sidebar">
-			<h2>HRM</h2>
-			<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-			<div class="menu-list">
-                <!-- <ul id="menu-content" class="menu-content nav">
-                    <li class="nav-item">
-                    <a href="#">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAEVJREFUSEtjZKAxYKSx+QyjFhAM4eEfRP/RwgDmY1ziGEFGKIhGLRgBGW00kglGMs2DiGBhRkgBoZxMSD9B+VELRkAQAQCGCxAZP+Br3wAAAABJRU5ErkJggg=="/> Dashboard
-                    </a>
-                    </li>
+			<div class="nav-side-menu sidebar">
+				<h2>HRM</h2>
+				<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+			
+					<div class="menu-list">
+			<!-- collapse out -->
+						<!-- <ul id="menu-content" class="menu-content nav">
+							<li class="nav-item">
+							<a href="#">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAEVJREFUSEtjZKAxYKSx+QyjFhAM4eEfRP/RwgDmY1ziGEFGKIhGLRgBGW00kglGMs2DiGBhRkgBoZxMSD9B+VELRkAQAQCGCxAZP+Br3wAAAABJRU5ErkJggg=="/> Dashboard
+							</a>
+							</li>
 
-                </ul> -->
-            </div>
-			<ul class="nav flex-column">
+						</ul> -->
+				</div>
+				<ul class="nav flex-column">
+
                 <li class="nav-item active">
-                    <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
+                <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAARxJREFUSEvtleFtwjAQhb9MABtAJ2i7AWwAEwATtBtQNoAJ6AaFDdoJ2g2gG3QD0JPOkZ3YkQyJ+FEsRUp87+69u/M5BR2vouP4NBFMgBdgBOyAFfBjgp6AJSDMJ7AxTE1vikCOHxX0HzAGjsAB6Ffs0xhJikBKH031GtAzM7W/9v5lGbxaNvpWtsFKEZwM5exSK+U9z/vB9rRVxZewFIHKoWDPXt3fTKmc96Ze7+rHN6DMhk0ZKL1tDJR50pTpwsoZnCIZBpnBUnDFUgkDgmQdvSjZGL8H2c4J+UEcn8A1to0qlQ33CdTk9xb6oODzWJOd8qZSZdtic5AdxJRF/e4E/on7RyW6ZuBqN2rsFF06cMGAuebc9Kffxp3EGV38RxlRFzPlAAAAAElFTkSuQmCC" alt="" />Offers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWZJREFUSEvVlI0tBUEUhb/XgRKogBKoABWgAlSAClABKkAHVEAHlEAH8snc5O68NbMreQk32Wz2Z86555w7s2DFtVgxPn+WYB3YBLaAd+C53JcM+Y2CE+AMWKvQfH9dM8wlOC/g4gj2BGwDxwX4FLjKJHMJ7FpQQW4T0B5wX543sl1zCVpDJ6lK9oGH+HEKgYHuJs8fgdcRplBxAWjld/UIsucZ0271O5eWHcxREAsEuSu+qkYQK3d6CNwAn2l0mwoy+FEVqLOvAi35AAJcwElT5Dxflm5cbGBOj1MiQPY/g6vS50HVGWjBSwHcKSPpgpyF6ty9KlFFWLgEPhZyTIKbSCV1sLGh8vvB1PQURKeDWU6Lctf6r32q+bFqi8LTMQUtnMkEZvBW/q5VSK5FZmP3k2pso+VAHUfPHrOJEJue9zKI72M72E3k+8Fp2ZPROiq0y1C9nH2vZqBjZL2zqNdg9/v/J/gC9s1KGVFKxBEAAAAASUVORK5CYII="/>Link</a>
-                </li>
-			</ul>
+
+				<li class="nav-item">
+					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAARxJREFUSEvtleFtwjAQhb9MABtAJ2i7AWwAEwATtBtQNoAJ6AaFDdoJ2g2gG3QD0JPOkZ3YkQyJ+FEsRUp87+69u/M5BR2vouP4NBFMgBdgBOyAFfBjgp6AJSDMJ7AxTE1vikCOHxX0HzAGjsAB6Ffs0xhJikBKH031GtAzM7W/9v5lGbxaNvpWtsFKEZwM5exSK+U9z/vB9rRVxZewFIHKoWDPXt3fTKmc96Ze7+rHN6DMhk0ZKL1tDJR50pTpwsoZnCIZBpnBUnDFUgkDgmQdvSjZGL8H2c4J+UEcn8A1to0qlQ33CdTk9xb6oODzWJOd8qZSZdtic5AdxJRF/e4E/on7RyW6ZuBqN2rsFF06cMGAuebc9Kffxp3EGV38RxlRFzPlAAAAAElFTkSuQmCC" alt="" />Offers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWZJREFUSEvVlI0tBUEUhb/XgRKogBKoABWgAlSAClABKkAHVEAHlEAH8snc5O68NbMreQk32Wz2Z86555w7s2DFtVgxPn+WYB3YBLaAd+C53JcM+Y2CE+AMWKvQfH9dM8wlOC/g4gj2BGwDxwX4FLjKJHMJ7FpQQW4T0B5wX543sl1zCVpDJ6lK9oGH+HEKgYHuJs8fgdcRplBxAWjld/UIsucZ0271O5eWHcxREAsEuSu+qkYQK3d6CNwAn2l0mwoy+FEVqLOvAi35AAJcwElT5Dxflm5cbGBOj1MiQPY/g6vS50HVGWjBSwHcKSPpgpyF6ty9KlFFWLgEPhZyTIKbSCV1sLGh8vvB1PQURKeDWU6Lctf6r32q+bFqi8LTMQUtnMkEZvBW/q5VSK5FZmP3k2pso+VAHUfPHrOJEJue9zKI72M72E3k+8Fp2ZPROiq0y1C9nH2vZqBjZL2zqNdg9/v/J/gC9s1KGVFKxBEAAAAASUVORK5CYII="/>Link</a>
+				</li>
+				</ul>
+			</div>
 		</div>
-	</div>
     <div class="col-lg-10">
+    <!-- Start Page Title Area -->
         <div class="page-title-area ">
             <div class="container-fluid">
                 <div class="page-title-content">
                     <div class="row">
                         <div class="col-md-12">
-                            <%= form_with(url: candidates_url, method: :get, class: "search-form") do |f| %>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <%= f.text_field :query, class: "form-control search-box-input", placeholder: "Search..." %>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <%= submit_tag("Search", class: "btn btn-success") %>
-                                        <%= link_to 'Clear', candidates_path, class: "btn btn-success" %> 
-                                        <div class="dropdown">
-                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Position
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <%= link_to "UX/UI Designer", candidates_path(query: "UX/UI Designer"), class:"dropdown-item"%>
+                                <%= form_with(url: candidates_url, method: :get, class: "search-form") do |f| %>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <%= f.text_field :query, class: "form-control search-box-input", placeholder: "Search..." %>
+                                </div>
+                                <div class="col-md-6">
+                                    <%= submit_tag("Search", class: "btn btn-success") %>
+                                    <%= link_to 'Clear', candidates_path, class: "btn btn-success" %> 
+                                    <div class="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true">
+                                        Position
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                 <%= link_to "UX/UI Designer", candidates_path(query: "UX/UI Designer"), class:"dropdown-item"%>
                                                 <%= link_to "Web Developer", candidates_path(query: "Web Developer"), class:"dropdown-item"%>
                                                 <%= link_to "Web Designer", candidates_path(query: "Web Designer"), class:"dropdown-item"%>
                                                 <%= link_to "Software Developer", candidates_path(query: "Software Developer"), class:"dropdown-item"%>
                                                 <%= link_to "SEO", candidates_path(query: "SEO"), class:"dropdown-item"%>
-
-
-                                            </div>
-                                        </div> 
-                                        
-                                        <% if current_user.has_role? :junior_hr %>
-                                            <%= link_to 'Add New Candidate', new_candidate_path, class: "btn btn-success" %> 
-                                        <% else %>
-                                        <% end %>
-                                    </div>
+                                        </div>
+                                    </div> 
+                                    <% if current_user.has_role? :junior_hr %>
+                                        <%= link_to 'Add New Candidate', new_candidate_path, class: "btn btn-success" %> 
+                                    <% else %>
+                                    <% end %>
                                 </div>
+            
+                            </div>
                             <% end %> 
                         </div>
                     </div> 
                 </div>
             </div>
         </div>
+        
+        
+        <!-- Start Freelancers List Area -->
+
         <section>
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 pt-4">
-                        <h3><%= @candidates.count %> Candidates</h3>
-                    </div>
-                    <% @candidates.each_with_index do |candidate, i| %>
-                        <div class="col-lg-3 text-center card-box mb-4">
-                            <div class="widget-box">
-                                <div class="dropdown float-right">
-                                    <a href="javascript:void" class="float-right" id="dropdownMenuButton" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical float-right"></i>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <% if current_user.has_role? :bde %>
-                                            <%= link_to 'View', candidate_path(candidate) , class: "dropdown-item"  %>                            
-                                        <% else %>
-                                            <%= link_to 'View', candidate_path(candidate) , class: "dropdown-item"  %>
-                                            <%= link_to 'Edit', edit_candidate_path(candidate), class: "dropdown-item" %> 
-                                        <% end %>                                
-                                    </div>
-                                </div>
-                                <% if candidate.image.present? %>
-                                        <span class="emoji-container emoji1">
-                                            <%= image_tag candidate.image.url, class: "abc" %>
-                                        </span>
-                                <% else %>
-                                    <% if candidate.gender == "Male" %>
-                                        <span class="emoji-container emoji3">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
-                                                alt="">
-                                        </span>
-                                    <% elsif candidate.gender == "Female" %>
-                                        <span class="emoji-container emoji2">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
-                                                alt="">
-                                        </span>
-                                    <% else %>
-                                        <span class="emoji-container emoji1">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png" alt="">
-                                        </span>
-                                    <% end %>
-                                <% end %>
-                                <p class="m-0"><b><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.id) %></b></p>
-                                <p><%= candidate.category %></p>
-                                <% if current_user.has_role? :senior_hr %>
-                                    <td id="check<%=candidate.id%>">
-                                        <div class="custom-control custom-switch", id="check<%=candidate.id%>">
-                                            <%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id), class: "custom-control-input", id: "customSwitch#{candidate.id}"%>   
-                                            <label class="custom-control-label" for="customSwitch<%=candidate.id%>" ><%= candidate.status %></label>
-                                        </div>
-                                    </td> 
-                                <% else %>
-                                    <td><%= candidate.status %></td>
-                                <% end %> 
+            <!-- card starts here -->
+            <div class="row">
+                <div class="col-lg-12 pt-4">
+                    <h3><%= @candidates.count %> Candidates</h3>
+                </div>
+                <% @candidates.each_with_index do |candidate, i| %>
+                <div class="col-lg-3 text-center card-box mb-4">
+                    <div class="widget-box">
+                        <div class="dropdown float-right">
+                            <a href="javascript:void" class="float-right" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="bx bx-dots-vertical float-right"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <% if current_user.has_role? :bde %>
+                            <%= link_to 'View', candidate_path(candidate) , class: "dropdown-item"  %>                            
+                            <% else %>
+                            <%= link_to 'View', candidate_path(candidate) , class: "dropdown-item"  %>
+                            <%= link_to 'Edit', edit_candidate_path(candidate), class: "dropdown-item" %> 
+                            <% end %>                                
                             </div>
                         </div>
-                    <% end %>
+                        <% if candidate.image.present? %>
+                                <span class="emoji-container emoji1">
+                                    <%= image_tag candidate.image.url %>
+                                </span>
+                        <% else %>
+                            <% if candidate.gender == "Male" %>
+                                <span class="emoji-container emoji3">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
+                                        alt="">
+                                </span>
+                            <% elsif candidate.gender == "Female" %>
+                                <span class="emoji-container emoji2">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
+                                        alt="">
+                                </span>
+                            <% else %>
+                                <span class="emoji-container emoji1">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png" alt="">
+                                </span>
+                            <% end %>
+                        <% end %>
+                        <p class="m-0"><b><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.id) %></b></p>
+                        <p><%= candidate.category %></p>
+                        <p><%= candidate.status %></p> 
+                    </div>
                 </div>
+                <% end %>
             </div>
+            <!-- card ends here -->
+            </div>
+            
         </section>
     </div>
+
+   
+        <!-- End Page Title Area -->
 </div>
 
+    <!-- Start Go Top Area -->
 <div class="go-top active">
     <i class="bx bx-chevrons-up"></i>
     <i class="bx bx-chevrons-up"></i>
 </div>
+    <!-- End Go Top Area --> 
 
     
 <style>
@@ -223,36 +232,16 @@
         background-color: #3e8e41;
     }
     
-    .abc{
-        
-        border-radius: 100%;
-        
+    .btn-success{
+        background-color: #00b074
+    }
+
+    .btn-success:hover{
+        background-color: #212529;
     }
 </style>
 
-<script type="text/javascript"> 
-    
-    $(document).ready(function(){
-        $(".candidate-check").click(function(){
-
-        });
-        $(":checkbox").click(function(e){
-                var code = "";
-            if (e.delegateTarget.checked == true){
-
-                code = "Active";
-            }else if (e.delegateTarget.checked == false){
-                code = "Draft";}
-            $.ajax({
-                url: '/candidates/' + this.value + '/',
-                type: 'PUT',
-                data: {"status": code}
-                });
-        });
-    });
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <%= javascript_import_module_tag "js/bootstrap" %>
   <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -274,5 +263,3 @@
 
   <%= javascript_import_module_tag "js/popper" %>
   <%= javascript_import_module_tag "js/vendor/custom" %>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
