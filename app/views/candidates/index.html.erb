@@ -10,29 +10,21 @@
 				<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 			
 					<div class="menu-list">
-			<!-- collapse out -->
-						<!-- <ul id="menu-content" class="menu-content nav">
-							<li class="nav-item">
-							<a href="#">
-							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAEVJREFUSEtjZKAxYKSx+QyjFhAM4eEfRP/RwgDmY1ziGEFGKIhGLRgBGW00kglGMs2DiGBhRkgBoZxMSD9B+VELRkAQAQCGCxAZP+Br3wAAAABJRU5ErkJggg=="/> Dashboard
-							</a>
-							</li>
-
-						</ul> -->
 				</div>
 				<ul class="nav flex-column">
 
                 <li class="nav-item active">
-                <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
+                    <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
                 </li>
 
-				<li class="nav-item">
-					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAARxJREFUSEvtleFtwjAQhb9MABtAJ2i7AWwAEwATtBtQNoAJ6AaFDdoJ2g2gG3QD0JPOkZ3YkQyJ+FEsRUp87+69u/M5BR2vouP4NBFMgBdgBOyAFfBjgp6AJSDMJ7AxTE1vikCOHxX0HzAGjsAB6Ffs0xhJikBKH031GtAzM7W/9v5lGbxaNvpWtsFKEZwM5exSK+U9z/vB9rRVxZewFIHKoWDPXt3fTKmc96Ze7+rHN6DMhk0ZKL1tDJR50pTpwsoZnCIZBpnBUnDFUgkDgmQdvSjZGL8H2c4J+UEcn8A1to0qlQ33CdTk9xb6oODzWJOd8qZSZdtic5AdxJRF/e4E/on7RyW6ZuBqN2rsFF06cMGAuebc9Kffxp3EGV38RxlRFzPlAAAAAElFTkSuQmCC" alt="" />Offers</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWZJREFUSEvVlI0tBUEUhb/XgRKogBKoABWgAlSAClABKkAHVEAHlEAH8snc5O68NbMreQk32Wz2Z86555w7s2DFtVgxPn+WYB3YBLaAd+C53JcM+Y2CE+AMWKvQfH9dM8wlOC/g4gj2BGwDxwX4FLjKJHMJ7FpQQW4T0B5wX543sl1zCVpDJ6lK9oGH+HEKgYHuJs8fgdcRplBxAWjld/UIsucZ0271O5eWHcxREAsEuSu+qkYQK3d6CNwAn2l0mwoy+FEVqLOvAi35AAJcwElT5Dxflm5cbGBOj1MiQPY/g6vS50HVGWjBSwHcKSPpgpyF6ty9KlFFWLgEPhZyTIKbSCV1sLGh8vvB1PQURKeDWU6Lctf6r32q+bFqi8LTMQUtnMkEZvBW/q5VSK5FZmP3k2pso+VAHUfPHrOJEJue9zKI72M72E3k+8Fp2ZPROiq0y1C9nH2vZqBjZL2zqNdg9/v/J/gC9s1KGVFKxBEAAAAASUVORK5CYII="/>Link</a>
-				</li>
-				</ul>
+                <li class="nav-item">
+                    <%= link_to image_tag("gift.png") + 'Offers', candidates_path, class: "nav-link" %> 
+                </li>
+                
+                <li class="nav-item">
+                    <%= link_to image_tag("link.png") + 'Link', candidates_path, class: "nav-link" %> 
+                </li>
+                </ul>
 			</div>
 		</div>
     <div class="col-lg-10">
@@ -48,7 +40,7 @@
                                     <%= f.text_field :query, class: "form-control search-box-input", placeholder: "Search..." %>
                                 </div>
                                 <div class="col-md-6">
-                                    <%= submit_tag("Search", class: "btn btn-success") %>
+                                    <%= submit_tag("Search", class: "btn btn-success search-btn") %>
                                     <%= link_to 'Clear', candidates_path, class: "btn btn-success" %> 
                                     <div class="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true">
@@ -263,3 +255,13 @@
 
   <%= javascript_import_module_tag "js/popper" %>
   <%= javascript_import_module_tag "js/vendor/custom" %>
+
+  <script>
+    var base = document.querySelector('.search-btn');
+    base.addEventListener('click', function(event) {
+        var search = document.querySelector('.search-box-input').value
+        if(search.length === 0){event.preventDefault()}
+    })
+
+  </script>
+  
