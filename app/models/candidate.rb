@@ -9,6 +9,7 @@ class Candidate < ApplicationRecord
     mount_uploader :file, FileUploader
     mount_uploader :image, ImageUploader
     GENDER_LIST = ["Male", "Female", "Other"]
+    LANGUAGE_LIST = ["Basic", "Medium", "Fluent", "Native"]
     MARITAL_LIST = ["Married", "Unmarried"]
     LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
     NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]
