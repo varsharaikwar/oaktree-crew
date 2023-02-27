@@ -10,11 +10,15 @@
                             <div class="col-lg-5 mb-4 file-upload_area">
                                 <h6>Upload profile image</h6>
                                 <div class="inner-area">
-                                    <i class="fa fa-user" id="fa"></i>
-                                    <%= f.file_field :image, accept: "image",id:"img_tag", onchange: "readURL(this);" %>  
+                                <i class="fa fa-user" id="fa"></i>
+                                <% if @candidate.image.present? %>
+                                    <%= image_tag @candidate.image.url, class: "edit_image" %>
+                                <% end %>
+                                    <%= f.file_field :image, accept: "image",id:"img_tag", onchange: "readURL(this);" %> 
                                     <img id="blah">  
                                 </div>
                             </div>
+
                             <div class="col-lg-2"></div>
 
                             <div class="col-lg-6 col-md-6">
@@ -162,24 +166,42 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="choose-img">
-                                    <p>Upload (Resume)</p>
-                                    <!-- <label for="img">Select image:</label> -->
-                                    <%= f.file_field :file, id: "img" %>
+                            
+                             <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <div id="link">
+                                        <label>Linkdien URL</label>
+                                        <%= f.text_field :link, class: "form-control"%>
+                                    </div>
                                 </div>
                             </div>
-
-
+                            <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label>Language</label>
+                                <div id="language">
+                                    <%= f.select :language, Candidate::LANGUAGE_LIST, {include_blank: 'Select'}, class: "form-control" %>
+                                </div>	
+                            </div>
+                        </div> 
+                            <div class="col-lg-6 col-md-6">
+                                <div class="choose-img">
+                                    <p>Upload (Resume)</p> 
+                                    <% if @candidate.file.present? %>
+                                        <%= @candidate.file.identifier %>
+                                    <% end %>                                    
+                                    <%= f.file_field :file, id: "img" %>                                   
+                                </div>
+                            </div>
                         </div>
 
-                         <h4>Job Level</h4>
+                       
+
+
+                        <br><h4>Job Level</h4>
                         <div class="row mb-30">
                             <div class="col-lg-4 col-sm-6 col-md-3">
                                 <label class="single-check">
                                     Entry Level
-
                                     <%= f.radio_button :job_level, "entery level" %>
                                     <span class="checkmark"></span>
                                 </label>
@@ -270,7 +292,6 @@
                                 <div class="form-group">
                                     <label>Major/Group</label>
                                     <%= f.text_field :group, class: "form-control" %>
-
                                 </div>
                             </div>
 
@@ -278,7 +299,6 @@
                                 <div class="form-group">
                                     <label>Institute Name</label>
                                     <%= f.text_field :institute_name, class: "form-control" %>
-
                                 </div>
                             </div>
 
@@ -311,7 +331,6 @@
                                 <div class="form-group">
                                     <label>Duration (Years)</label>
                                     <%= f.text_field :duration, class: "form-control" %>
-
                                 </div>
                             </div>
                         </div>
@@ -322,7 +341,6 @@
                                 <div class="form-group">
                                     <label>Company Name</label>
                                     <%= f.text_field :company_name, class: "form-control" %>
-
                                 </div>
                             </div>
 
@@ -330,7 +348,6 @@
                                 <div class="form-group">
                                     <label>Company Business </label>
                                     <%= f.text_field :company_business, class: "form-control" %>
-
                                 </div>
                             </div>
 
@@ -338,7 +355,6 @@
                                 <div class="form-group">
                                     <label>Designation</label>
                                     <%= f.text_field :designation, class: "form-control" %>
-
                                 </div>
                             </div>
 
@@ -346,7 +362,6 @@
                                 <div class="form-group">
                                     <label>Department</label>
                                     <%= f.text_field :department, class: "form-control" %>
-
                                 </div>
                             </div>
 
@@ -361,7 +376,6 @@
                                 <div class="form-group">
                                     <label>Company Location</label>
                                     <%= f.text_field :company_location, class: "form-control" %>
-
                                 </div>
                             </div>
 
@@ -385,8 +399,7 @@
 
                             <div class="col-md-6">
                                 <div class="row staff-sub-checkbox">
-                                    <div class="col-md-12">
-                                    
+                                    <div class="col-md-12">    
                                         <h6><span class="access_label">Primary Skills:</span></h6>
                                         <div class="custom_checkbox mt-15">
                                         <% @primary_skill.each do |item| %>
@@ -394,7 +407,7 @@
                                             <%= f.check_box :primary_skill, { multiple: true }, item.name, nil%>
                                             <span> <%= item.name %></span>
                                             </label>
-                                            <% end %>
+                                        <% end %>
                                         </div>
                                     </div>
                                 </div>
@@ -410,14 +423,14 @@
                                             <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
                                             <span> <%= item.name %></span>
                                             </label>
-                                            <% end %>
+                                        <% end %>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-12">
                             <%= f.submit "Save", class: "default-btn" %>
-                        </div>
                         </div>
                      <% end %>
                 </div>
@@ -426,7 +439,7 @@
     </div>
 </section>
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <%= javascript_import_module_tag "js/bootstrap" %>
   <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -434,18 +447,14 @@
   <%= javascript_import_module_tag "js/vendor/ajaxchimp.min" %>
   <%= javascript_import_module_tag "js/vendor/appear.min" %>
   <%= javascript_import_module_tag "js/vendor/bootstrap-datepicker.min" %>
-
-
   <%= javascript_import_module_tag "js/vendor/form-validator.min" %>
   <%= javascript_import_module_tag "js/vendor/jquery.mixitup.min" %>
   <%= javascript_import_module_tag "js/vendor/nice-select.min" %>
   <%= javascript_import_module_tag "js/vendor/magnific-popup.min" %>
   <%= javascript_import_module_tag "js/vendor/odometer.min" %>
-
   <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
   <%= javascript_import_module_tag "js/vendor/range-slider.min" %>
   <%= javascript_import_module_tag "js/vendor/custom" %>
-
   <%= javascript_import_module_tag "js/popper" %>
   <%= javascript_import_module_tag "js/vendor/custom" %>
 
@@ -483,6 +492,7 @@
         }
         document.getElementById("img_tag").style.display = "none";
         document.getElementById("fa").style.display = "none";
+        document.getElementById("blah").style.display = "block";
         }
 
         $(document).ready(function(){
@@ -526,6 +536,21 @@
         color: #fff;
         font-size: 20px;
     }
+
+    .edit_image{
+        position: absolute;
+        top: 30px;
+        left: 14px;
+        width: 80px;
+        background-color: #00b074;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 20px;
+    }
     .file-upload_area .inner-area{
         display: flex;
         align-items: center;
@@ -535,7 +560,9 @@
     #blah{
         border-radius: 50%;
         border: 3px dashed #00b074;
+        display: none;
     }
+
     
 </style>
 

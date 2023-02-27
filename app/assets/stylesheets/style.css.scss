@@ -16797,6 +16797,9 @@ textarea.form-control {
   font-size: 18px;
   color: #1a1a1a;
   margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .candidates-details-area .candidates-details-sidebar .candidates-widget .overview li:last-child {
@@ -16806,9 +16809,12 @@ textarea.form-control {
 .candidates-details-area .candidates-details-sidebar .candidates-widget .overview li span {
   font-weight: normal;
   font-size: 16px;
-  display: inline-block;
-  float: right;
-  width: 165px;
+  display: unset;
+  float: unset;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 8px;
 }
 
 .candidates-details-area .candidates-details-sidebar .candidates-widget .overview.download li i {
@@ -20693,7 +20699,17 @@ Continuer Custom Width Area Style*/
         align-items: center;
         padding: 6px;
         background-color: rgb(255, 232, 224);
-    }
+      img{
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+        min-height: 100px;
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 50%;
+        background-color: #dee1e1;
+      }
+  }
   }
 }
 .card-box{
@@ -20709,6 +20725,16 @@ Continuer Custom Width Area Style*/
       justify-content: center;
       margin: auto;
       border-radius: 50%;
+  img{
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+    background-color: #dee1e1;
+  }
   }
   .emoji1{
       background-color: aquamarine;

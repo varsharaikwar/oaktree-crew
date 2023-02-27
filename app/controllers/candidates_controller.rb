@@ -25,14 +25,14 @@ class CandidatesController < ApplicationController
     def new
         @primary_skill = SkillSet.where(skill_type: "primary")
         @secondary_skill = SkillSet.where(skill_type: "secondary")
-        @candidate = current_user.candidates.new
+        @candidate = Candidate.new
         # authorize! :new, @candidate
     end
 
     def create
       @primary_skill = SkillSet.where(skill_type: "primary")
       @secondary_skill = SkillSet.where(skill_type: "secondary")
-      @candidate = current_user.candidates.create(candidate_params)
+      @candidate = Candidate.create(candidate_params)
       @candidate.status = "Draft"
         if @candidate.save
           redirect_to @candidate
@@ -76,9 +76,8 @@ class CandidatesController < ApplicationController
 
     def logout
     end
-  
     private
       def candidate_params
-        params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file, :current_location, :experience, :available_time_zone,:start_time, :end_time, :primary_skill => [], :secondary_skill => [])
+        params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file,:link, :current_location, :experience, :available_time_zone, :language, :start_time, :end_time, :primary_skill => [], :secondary_skill => [])
       end
 end

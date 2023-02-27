@@ -27,14 +27,15 @@
                 </li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAARxJREFUSEvtleFtwjAQhb9MABtAJ2i7AWwAEwATtBtQNoAJ6AaFDdoJ2g2gG3QD0JPOkZ3YkQyJ+FEsRUp87+69u/M5BR2vouP4NBFMgBdgBOyAFfBjgp6AJSDMJ7AxTE1vikCOHxX0HzAGjsAB6Ffs0xhJikBKH031GtAzM7W/9v5lGbxaNvpWtsFKEZwM5exSK+U9z/vB9rRVxZewFIHKoWDPXt3fTKmc96Ze7+rHN6DMhk0ZKL1tDJR50pTpwsoZnCIZBpnBUnDFUgkDgmQdvSjZGL8H2c4J+UEcn8A1to0qlQ33CdTk9xb6oODzWJOd8qZSZdtic5AdxJRF/e4E/on7RyW6ZuBqN2rsFF06cMGAuebc9Kffxp3EGV38RxlRFzPlAAAAAElFTkSuQmCC" alt="" />Offers</a>
+					<%= link_to image_tag("gift.png") + 'Offers', candidates_path, class: "nav-link" %> 
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWZJREFUSEvVlI0tBUEUhb/XgRKogBKoABWgAlSAClABKkAHVEAHlEAH8snc5O68NbMreQk32Wz2Z86555w7s2DFtVgxPn+WYB3YBLaAd+C53JcM+Y2CE+AMWKvQfH9dM8wlOC/g4gj2BGwDxwX4FLjKJHMJ7FpQQW4T0B5wX543sl1zCVpDJ6lK9oGH+HEKgYHuJs8fgdcRplBxAWjld/UIsucZ0271O5eWHcxREAsEuSu+qkYQK3d6CNwAn2l0mwoy+FEVqLOvAi35AAJcwElT5Dxflm5cbGBOj1MiQPY/g6vS50HVGWjBSwHcKSPpgpyF6ty9KlFFWLgEPhZyTIKbSCV1sLGh8vvB1PQURKeDWU6Lctf6r32q+bFqi8LTMQUtnMkEZvBW/q5VSK5FZmP3k2pso+VAHUfPHrOJEJue9zKI72M72E3k+8Fp2ZPROiq0y1C9nH2vZqBjZL2zqNdg9/v/J/gC9s1KGVFKxBEAAAAASUVORK5CYII="/>Link</a>
+					<%= link_to image_tag("link.png") + 'Link', candidates_path, class: "nav-link" %> 
 				</li>
 				</ul>
 			</div>
 		</div>
+
 		<div class="col-lg-10">
 			<div class="content-area">
 			<!-- Start Page Title Area -->
@@ -47,18 +48,17 @@
 						<ul>
 
 						<% if current_user.has_role? :bde %>
-						    <li>
-								<%= link_to 'Home', candidates_path %>
-							</li>
+
+						    <li> <%= link_to 'Home', candidates_path %> </li>
 							<li class="active">Candidates Details</li>
+						
 						<% else %>
-							<li>
-								<%= link_to 'Home', candidates_path %>
-							</li>
+						
+							<li> <%= link_to 'Home', candidates_path %> </li>
 							<li class="active">Candidates Details</li>
-							<li>
-							<%= link_to 'Edit Profile', edit_candidate_path %>
+							<li> <%= link_to 'Edit Profile', edit_candidate_path %>
 							</li>
+
 					    <% end %>
 						</ul>
 					</div>
@@ -100,12 +100,27 @@
 										</div>
 									</div>
 
-									<div class="col-lg-6">
-										<div class="candidates-cv-content">
-											<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
+								<div class="col-lg-6">
+									<div class="candidates-cv-content">
+										<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
 											<span class="sub-title"><%= @candidate.category %></span>
+									<% if current_user.has_role? :senior_hr %>
+                                        <td id="check<%=@candidate.id%>">
+                                    <div class="custom-control custom-switch", id="check<%=@candidate.id%>">
+                                    <%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>   
+                                    <label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
+                                   </div>
+                                      </td> 
+                                    <% else %>
+                                         <span><%= @candidate.status %></span>
+                                    <% end %>
 											<ul>
-												<li><span>Location: </span><%= @candidate.current_location+ " " +@candidate.nationality %></li>
+												<li><span>Location: </span><%= @candidate.current_location+ " , " +@candidate.nationality %></li>
+											<p>
+												<a href="<%= @candidate.link %>" target="_blank">
+												<%= image_tag("linkedin.png")%>
+												</a>
+											</p>
 											</ul>
 										</div>
 									</div>
@@ -117,22 +132,7 @@
 							</div>
 
 							<div class="candidates-details-content mb-4">
-								<h3>Portfolio<a href="#" class="float-right link" style="font-size: 18px;color: #00b074;">View all<span><i class="bx bx-arrow-to-right" style="margin-left: 5px;"></i></span></a></h3>
-								<div class="row">
-									<div class="col">
-										<img src="https://img.freepik.com/free-vector/customer-relationship-management-banner_107791-8648.jpg?w=1380&t=st=1674114433~exp=1674115033~hmac=8b22edef1171d3febb90d1469a0d80d5d464c85a9facbaf61e50bf599eb08d4b" alt="" />
-										<p class="mt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</b></p>
-									</div>
-									<div class="col">
-										<img src="https://img.freepik.com/free-vector/customer-relationship-management-banner_107791-8648.jpg?w=1380&t=st=1674114433~exp=1674115033~hmac=8b22edef1171d3febb90d1469a0d80d5d464c85a9facbaf61e50bf599eb08d4b" alt="" />
-										<p class="mt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</b></p>
-									</div>
-									<div class="col">
-										<img src="https://img.freepik.com/free-vector/customer-relationship-management-banner_107791-8648.jpg?w=1380&t=st=1674114433~exp=1674115033~hmac=8b22edef1171d3febb90d1469a0d80d5d464c85a9facbaf61e50bf599eb08d4b" alt="" />
-										<p class="mt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</b></p>
-									</div>
-								</div>
-
+								
 								<div class="mt-5">
 									<h3>Primary Skills</h3>
 									<ul class="d-flex flex-wrap badge-list mb-0">
@@ -141,6 +141,7 @@
 										<% end %>
 									</ul>
 								</div>
+								
 								<div class="mt-5">
 									<h3>Secondary Skills</h3>
 									<ul class="d-flex flex-wrap badge-list mb-0">
@@ -225,10 +226,13 @@
 								<p><%= @candidate.notes %></p>
 
 								<h3>Education</h3>
+
+
+								<h6><%= @candidate.institute_name %></h6>
+								<span> Passout Year - <%= @candidate.year_of_passing%></span>
 								
 								<ul>
-									<li class="arts"><%= @candidate.degree %></li>
-									<li class="university"><%= @candidate.institute_name %>(<%= @candidate.year_of_passing %>)</li>
+									<li class="university"><%= @candidate.degree %>(<%= @candidate.duration%> yrs)</li>
 								</ul>
 
 								
@@ -237,8 +241,13 @@
 								
 								<ul>
 									<li class="arts"><%= @candidate.designation %></li>
-									<li class="university"><%= @candidate.company_name %>(<%= @candidate.employment_period %>)</li>
+									<li><%= @candidate.company_name %>-<%= @candidate.job_nature %></li>
+									<li><%= @candidate.employment_period %>-<%= @candidate.experience %> yrs</li>
+									<li><%= @candidate.company_location %></li>
 								</ul>
+
+								
+
 
 								<h4>Personal Skills</h4>
 
@@ -328,7 +337,8 @@
 										</li>
 										<li>
 											Location :
-											<span><%= @candidate.address %></span>
+											<span><%= @candidate.address %>
+											</span>
 										</li>
 									</ul>
 								</div>
@@ -505,6 +515,31 @@
 		}
 		
 	</style>
+
+
+	<script type="text/javascript"> 
+    
+    $(document).ready(function(){
+        $(".candidate-check").click(function(){
+
+        });
+        $(":checkbox").click(function(e){
+                var code = "";
+            if (e.delegateTarget.checked == true){
+
+                code = "Active";
+            }else if (e.delegateTarget.checked == false){
+                code = "Draft";}
+            $.ajax({
+                url: '/candidates/' + this.value + '/',
+                type: 'PUT',
+                data: {"status": code}
+                });
+        });
+    });
+</script>
+
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
