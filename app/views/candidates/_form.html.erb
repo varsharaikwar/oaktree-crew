@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <section class="candidates-resume-area ptb-100">
     <div class="container">
         <div class="row">
@@ -8,7 +7,7 @@
                         <h3>Personal Details</h3>
                         <div class="row">
                             <div class="col-lg-5 mb-4 file-upload_area">
-                                <h6>Upload profile image</h6>
+                                <h6>Upload Profile Image</h6>
                                 <div class="inner-area">
                                 <i class="fa fa-user" id="fa"></i>
                                 <% if @candidate.image.present? %>
@@ -18,7 +17,6 @@
                                     <img id="blah">  
                                 </div>
                             </div>
-
                             <div class="col-lg-2"></div>
 
                             <div class="col-lg-6 col-md-6">
@@ -90,7 +88,7 @@
                                 <div class="form-group">
                                     <label>Nationality</label>
                                     <div id="nationality">
-                                        <%= f.select :nationality, Candidate::NATIONALITY_LIST, {include_blank: 'select'}, class: "form-control" %>
+                                        <%= f.select :nationality, Candidate::NATIONALITY_LIST , {include_blank: 'select'}, class: "form-control" %>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +97,7 @@
                                 <div class="form-group">
                                     <label>Current Location</label>
                                     <div id="location">
-                                        <%= f.select :current_location, Candidate::LOCATION_LIST, {include_blank: 'select'}, class: "form-control" %>
+                                    <%= f.select :current_location, Candidate::LOCATION_LIST, {include_blank: 'select'}, class: "form-control" %>
                                     </div>
                                 </div>
                             </div>
@@ -183,21 +181,19 @@
                                 </div>	
                             </div>
                         </div> 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="choose-img">
-                                    <p>Upload (Resume)</p> 
-                                    <% if @candidate.file.present? %>
-                                        <%= @candidate.file.identifier %>
-                                    <% end %>                                    
-                                    <%= f.file_field :file, id: "img" %>                                   
-                                </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="choose-img">
+                                <p>Upload (Resume)</p> 
+                                <% if @candidate.file.present? %>
+                                    <%= link_to @candidate.file.identifier, @candidate.file.url, class: "form-control border-0" %>
+                                <% end %>                                    
+                                <%= f.file_field :file, id: "img" %>                                   
                             </div>
                         </div>
+                        </div>
 
-                       
-
-
-                        <br><h4>Job Level</h4>
+                       <br><h4>Job Level</h4>
                         <div class="row mb-30">
                             <div class="col-lg-4 col-sm-6 col-md-3">
                                 <label class="single-check">
@@ -432,139 +428,50 @@
                         <div class="col-lg-12">
                             <%= f.submit "Save", class: "default-btn" %>
                         </div>
-                     <% end %>
+                    <% end %>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <%= javascript_import_module_tag "js/bootstrap" %>
-  <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
-  <%= javascript_import_module_tag "js/vendor/ajaxchimp.min" %>
-  <%= javascript_import_module_tag "js/vendor/appear.min" %>
-  <%= javascript_import_module_tag "js/vendor/bootstrap-datepicker.min" %>
-  <%= javascript_import_module_tag "js/vendor/form-validator.min" %>
-  <%= javascript_import_module_tag "js/vendor/jquery.mixitup.min" %>
-  <%= javascript_import_module_tag "js/vendor/nice-select.min" %>
-  <%= javascript_import_module_tag "js/vendor/magnific-popup.min" %>
-  <%= javascript_import_module_tag "js/vendor/odometer.min" %>
-  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
-  <%= javascript_import_module_tag "js/vendor/range-slider.min" %>
-  <%= javascript_import_module_tag "js/vendor/custom" %>
-  <%= javascript_import_module_tag "js/popper" %>
-  <%= javascript_import_module_tag "js/vendor/custom" %>
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Date Time Picker Links -->
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script>
+    $('#timepicker').timepicker({
+        uiLibrary: 'bootstrap4'
+    });
 
-    <!-- Date Time Picker From Script -->
-    <script>
-        $('#timepicker').timepicker({
-            uiLibrary: 'bootstrap4'
+    $('#timepicker1').timepicker({
+        uiLibrary: 'bootstrap4'
+    });
+    $(document).ready(function(){
+
+    })
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+    a = $('#blah').attr('src', e.target.result).width(100).height(100);
+    };
+    reader.readAsDataURL(input.files[0]);
+    }
+    document.getElementById("img_tag").style.display = "none";
+    document.getElementById("fa").style.display = "none";
+    document.getElementById("blah").style.display = "block";
+    }
+
+    $(document).ready(function(){
+        $("#blah").click(function(){
+        $("#img_tag").click();
         });
-    </script>
+    });
 
-    <!-- Date Time Picker To Script -->
-    <script>
-        $('#timepicker1').timepicker({
-            uiLibrary: 'bootstrap4'
-        });
-    </script>
-    <script>
-        $(document).ready(function(){
+</script>
 
-        })
-    </script>
-    <script>
 
-        function readURL(input) {
-        if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-        a = $('#blah').attr('src', e.target.result).width(100).height(100);
-        };
-        reader.readAsDataURL(input.files[0]);
-        }
-        document.getElementById("img_tag").style.display = "none";
-        document.getElementById("fa").style.display = "none";
-        document.getElementById("blah").style.display = "block";
-        }
-
-        $(document).ready(function(){
-            $("#blah").click(function(){
-            $("#img_tag").click();
-            });
-        });
-
-    </script>
-<style>
-    .nice-select .list {
-        height: auto;
-    }
-    .required:after {
-        content:"*";
-        color: red;
-    }
-    .file-upload_area input::-webkit-file-upload-button{
-        visibility: hidden;
-    }
-    /* .file-upload_area input::before{
-        content: "\f0ee";
-    } */
-    .file-upload_area input{
-        position: relative;
-        height: 80px;
-        cursor: pointer;
-        display: flex;
-    }
-    .file-upload_area .fa{
-        position: absolute;
-        top: 30px;
-        left: 15px;
-        width: 80px;
-        background-color: #00b074;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80px;
-        border-radius: 50%;
-        color: #fff;
-        font-size: 20px;
-    }
-
-    .edit_image{
-        position: absolute;
-        top: 30px;
-        left: 14px;
-        width: 80px;
-        background-color: #00b074;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80px;
-        border-radius: 50%;
-        color: #fff;
-        font-size: 20px;
-    }
-    .file-upload_area .inner-area{
-        display: flex;
-        align-items: center;
-        height: 100%;
-    }
-
-    #blah{
-        border-radius: 50%;
-        border: 3px dashed #00b074;
-        display: none;
-    }
-
-    
-</style>
 
 
 

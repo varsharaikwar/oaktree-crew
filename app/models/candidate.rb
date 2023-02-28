@@ -1,5 +1,4 @@
 class Candidate < ActiveRecord::Base
-    paginates_per 12
     include PgSearch::Model
     pg_search_scope :global_search, against: [:first_name, :last_name, :category], using: { tsearch: { prefix: true } }
     # extend FriendlyId
@@ -10,7 +9,7 @@ class Candidate < ActiveRecord::Base
     mount_uploader :file, FileUploader
     mount_uploader :image, ImageUploader
     GENDER_LIST = ["Male", "Female", "Other"]
-    LANGUAGE_LIST = ["Basic", "Medium", "Fluent", "Native"]
+    LANGUAGE_LIST = ["Basic English", "Medium English", "Fluent English", "Native English"]
     MARITAL_LIST = ["Married", "Unmarried"]
     LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
     NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]
@@ -26,5 +25,5 @@ class Candidate < ActiveRecord::Base
     validates :first_name, presence: true#, acceptance: {message: "Please enter a valid name."}
     validates :last_name, presence: true
     validates :email, presence: true, format: { with: Devise.email_regexp }
-
+    paginates_per 12
 end

@@ -1,93 +1,62 @@
 <%=  render "login_header" %>
-<%= stylesheet_link_tag "style.css", "data-turbo-track": "reload" %>
-    <section class="user-area ptb-100">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-          </div>
-          <div class="col-lg-6">
-            <div class="user-form-content log-in-50 pt-4">
-              <h3>Log In to Your Account</h3>
-			      <div class="user-form">
-              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label>Email</label>
-                      <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control" %>
-                    </div>
+<section class="user-area ptb-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-6">
+        <div class="user-form-content log-in-50 pt-4">
+          <h3>Log In to Your Account</h3>
+          <div class="user-form">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control" %>
                   </div>
-
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label>Password</label>
-                      <%= f.password_field :password, autocomplete: "current-password" , class: "form-control" %>
-                    </div>
-                      <% if flash.alert %>
-                      <div id="error_explanation">
-                      <%= flash.alert %>
-                      </div>
-                      <% end %>
-                  </div>
-
-				  <% if devise_mapping.rememberable? %>
-					<div class="col-12">
-						<div class="login-action">
-							<span class="log-rem">
-								<%= f.check_box :remember_me, id: "remember-2" %>
-									<label>Keep me logged in</label>
-							</span>
-					<% end %>                    
-					<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                          <span class="forgot-login">
-                            <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-                          </span>
-                        </div>
-                      </div>
-                    <% end %>
-
-                    <div class="col-12">
-                      <%= f.submit "Log in" , class: "btn default-btn" %>
-                    </div>
                 </div>
-				<% end %>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Password</label>
+                    <%= f.password_field :password, autocomplete: "current-password" , class: "form-control" %>
+                  </div>
+                  <% if flash.alert %>
+                    <div id="error_explanation">
+                      <%= flash.alert %>
+                    </div>
+                  <% end %>
+                </div>
+                <% if devise_mapping.rememberable? %>
+                  <div class="col-12">
+                    <div class="login-action">
+                      <span class="log-rem">
+                        <%= f.check_box :remember_me, id: "remember-2" %>
+                          <label>Keep me logged in</label>
+                      </span>
+                <% end %> 
+                <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                  <span class="forgot-login">
+                    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                  </span>
+                  </div>
+                  </div>
+                <% end %>
+                <div class="col-12">
+                  <%= f.submit "Log in" , class: "btn default-btn" %>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
-
-          <div class="col-lg-3">
-          </div>
-
         </div>
       </div>
-    </section>
-
-
-    <style>
-    #error_explanation{
-      color: red;
-    }
-    </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <%= javascript_import_module_tag "js/bootstrap" %>
-  <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
-  <%= javascript_import_module_tag "js/vendor/ajaxchimp.min" %>
-  <%= javascript_import_module_tag "js/vendor/appear.min" %>
-  <%= javascript_import_module_tag "js/vendor/bootstrap-datepicker.min" %>
-
-
-  <%= javascript_import_module_tag "js/vendor/form-validator.min" %>
-  <%= javascript_import_module_tag "js/vendor/jquery.mixitup.min" %>
-  <%= javascript_import_module_tag "js/vendor/nice-select.min" %>
-  <%= javascript_import_module_tag "js/vendor/magnific-popup.min" %>
-  <%= javascript_import_module_tag "js/vendor/odometer.min" %>
-
-  <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
-  <%= javascript_import_module_tag "js/vendor/range-slider.min" %>
-  <%= javascript_import_module_tag "js/vendor/custom" %>
-
-  <%= javascript_import_module_tag "js/popper" %>
-  <%= javascript_import_module_tag "js/vendor/custom" %>
+      <div class="col-lg-3">
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  #error_explanation{
+    color: red;
+  }
+</style>
