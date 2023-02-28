@@ -7,6 +7,9 @@
 //= link jquery.validate.js
 //= link jquery.validate.additional-methods.js
 //= link social-share-button.js
+//= link country_state_select.js
+//= link candidate.css
+
 
 
 

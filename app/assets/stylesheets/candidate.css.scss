@@ -8,3 +8,24 @@
   line-height: 15px;
   margin: 5px 0 0;
 }
+
+/* starts candidate show page css*/
+.social-share-button .ssb-facebook, .social-share-button .ssb-twitter, .social-share-button .ssb-linkedin, .social-share-button .ssb-whatsapp_app, .social-share-button .ssb-whatsapp_web{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 20px;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  background-color: #ffe8e0;
+  color: #ff672c;
+  }
+  .sub-title{
+  background-color: #eef1f6;
+  padding: 2px 8px;
+  margin-right: 10px;
+  border-radius: 5px;
+  }
+  /* ends candidate show page css*/

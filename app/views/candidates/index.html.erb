@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <%= submit_tag("Search", class: "btn btn-success search-btn") %>
-                                    <%= link_to 'Clear', candidates_path, class: "btn btn-success" %> 
+                                    <%= link_to 'Clear', candidates_path, class: "btn btn-success clear-btn" %> 
                                     <div class="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true">
                                         Position
@@ -116,7 +116,7 @@
                                 </span>
                             <% end %>
                         <% end %>
-                        <p class="m-0"><b><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.id) %></b></p>
+                        <p><b><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.id) %></b></p>
                         <p><%= candidate.category %></p>
                         <p><%= candidate.status %></p> 
                     </div>
@@ -125,7 +125,8 @@
             </div>
             <!-- card ends here -->
             </div>
-            
+            <%= paginate @candidates %>
+
         </section>
     </div>
 
@@ -231,6 +232,16 @@
     .btn-success:hover{
         background-color: #212529;
     }
+    .pagination{
+        margin-left: 458px;
+    }
+    .page-item.active .page-link{
+        background-color: #00b074;
+        border-color: #00b074;
+    }
+    .page-link{
+        color: #00b074;
+    }
 </style>
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -260,7 +271,23 @@
     var base = document.querySelector('.search-btn');
     base.addEventListener('click', function(event) {
         var search = document.querySelector('.search-box-input').value
-        if(search.length === 0){event.preventDefault()}
+        localStorage.setItem("search",search)
+        if(search.length === 0){event.preventDefault();
+        }
+    })
+
+    document.querySelector('.search-box-input').value = localStorage.getItem('search')
+
+    var clearbtn = document.querySelector('.clear-btn')
+
+    clearbtn.addEventListener('click', function(event){
+        localStorage.setItem('search',"")
+    })
+
+    var logoutBtn = document.querySelector('#logout-button')
+
+    logoutBtn.addEventListener('click', function(event){
+        localStorage.setItem('search',"")
     })
 
   </script>

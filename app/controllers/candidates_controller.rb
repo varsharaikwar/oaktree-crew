@@ -15,6 +15,7 @@ class CandidatesController < ApplicationController
       @active_status = @active.where(status: "Active")
       @final_active_status = @active_status.count
       # authorize! :index, @candidates
+      @candidates = Candidate.order(:first_name).page params[:page]
     end
     
     def show

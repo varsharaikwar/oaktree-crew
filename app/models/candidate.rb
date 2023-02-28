@@ -1,4 +1,5 @@
-class Candidate < ApplicationRecord
+class Candidate < ActiveRecord::Base
+    paginates_per 12
     include PgSearch::Model
     pg_search_scope :global_search, against: [:first_name, :last_name, :category], using: { tsearch: { prefix: true } }
     # extend FriendlyId

@@ -2,548 +2,477 @@
 <%= stylesheet_link_tag "candidate" %>
 <%= javascript_include_tag "jquery", "jquery_ujs", "jquery.validate", "jquery.validate.additional-methods", "social-share-button" %> 
 <%= stylesheet_link_tag "style.css", "data-turbo-track": "reload" %>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- Start Preloader Area -->
-    <div class="preloader preloader-deactivate">
-        <div class="lds-ripple">
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <!-- End Preloader Area -->
-
 	<div class="row">
 		<div class="col-lg-2">
 			<div class="nav-side-menu sidebar">
 				<h2>HRM</h2>
-				<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-			
+				<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content">
+				</i>
 				<ul class="nav flex-column">
-				
-				<li class="nav-item active">
-                <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
-                </li>
+					
+					<li class="nav-item active">
+						<%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
+					</li>
 
-				<li class="nav-item">
-					<%= link_to image_tag("gift.png") + 'Offers', candidates_path, class: "nav-link" %> 
-				</li>
-				<li class="nav-item">
-					<%= link_to image_tag("link.png") + 'Link', candidates_path, class: "nav-link" %> 
-				</li>
+					<li class="nav-item">
+						<%= link_to image_tag("gift.png") + 'Offers', candidates_path, class: "nav-link" %> 
+					</li>
+
+					<li class="nav-item">
+						<%= link_to image_tag("link.png") + 'Link', candidates_path, class: "nav-link" %> 
+					</li>
+
 				</ul>
 			</div>
 		</div>
 
 		<div class="col-lg-10">
 			<div class="content-area">
-			<!-- Start Page Title Area -->
-			<div class="page-title-area">
-				<div class="col-lg-8">
-					<div class="page-title-content">
-						<h2>Candidates Details<span>
-						<button class="default-btn float-right">Send Email</button>
-
-						<ul>
-
-						<% if current_user.has_role? :bde %>
-
-						    <li> <%= link_to 'Home', candidates_path %> </li>
-							<li class="active">Candidates Details</li>
-						
-						<% else %>
-						
-							<li> <%= link_to 'Home', candidates_path %> </li>
-							<li class="active">Candidates Details</li>
-							<li> <%= link_to 'Edit Profile', edit_candidate_path %>
-							</li>
-
-					    <% end %>
-						</ul>
+				<div class="page-title-area">
+					<div class="col-lg-8">
+						<div class="page-title-content">
+							<h2>Candidates Details<span>
+							<button class="default-btn float-right">Send Email</button>
+							<ul>
+								<% if current_user.has_role? :bde %>
+									<li> <%= link_to 'Home', candidates_path %> </li>
+									<li class="active">Candidates Details</li>
+								<% else %>
+									<li> <%= link_to 'Home', candidates_path %> </li>
+									<li class="active">Candidates Details</li>
+									<li> <%= link_to 'Edit Profile', edit_candidate_path %></li>
+								<% end %>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!-- End Page Title Area -->
-
-			<!-- Start Candidates Details Area -->
-			<section class="candidates-details-area pt-2">
-				<div class="">
-					<div class="row">
-						<div class="col-lg-8">
-							<div class="candidates-cv">
-								<div class="row align-items-center">
-									<div class="col-lg-2">
-									<div class="hot-jobs-img">
-									<%if @candidate.image.present? %>
-										<span class="emoji-container emoji1">
-											<%= image_tag @candidate.image.url, class: "abc" %>
-										</span>
-									<% else %>
-									<% if @candidate.gender == "Male" %>
-										<span class="emoji-container emoji3">
-											<img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
-												alt="">
-										</span>
-									<% elsif @candidate.gender == "Female" %>
-										<span class="emoji-container emoji2">
-											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
-												alt="">
-										</span>
-									<% else %>
-										<span class="emoji-container emoji1">
-											<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="">
-											
-										</span>
-									<% end %>
-								<% end %>
+				<section class="candidates-details-area pt-2">
+					<div class="">
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="candidates-cv">
+									<div class="row align-items-center">
+										<div class="col-lg-2">
+											<div class="hot-jobs-img">
+												<%if @candidate.image.present? %>
+													<span class="emoji-container emoji1">
+														<%= image_tag @candidate.image.url, class: "abc" %>
+													</span>
+												<% else %>
+													<% if @candidate.gender == "Male" %>
+														<span class="emoji-container emoji3">
+															<img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
+																alt="">
+														</span>
+													<% elsif @candidate.gender == "Female" %>
+														<span class="emoji-container emoji2">
+															<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
+																alt="">
+														</span>
+													<% else %>
+														<span class="emoji-container emoji1">
+															<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="">
+															
+														</span>
+													<% end %>
+												<% end %>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="candidates-cv-content">
+												<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
+												<span class="sub-title"><%= @candidate.category %></span>
+												<% if current_user.has_role? :senior_hr %>
+													<td id="check<%=@candidate.id%>">
+														<div class="custom-control custom-switch", id="check<%=@candidate.id%>">
+															<%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>   
+															<label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
+														</div>
+													</td> 
+												<% else %>
+													<span><%= @candidate.status %></span>
+												<% end %>
+													<ul>
+														<li><span>Location: </span><%= @candidate.current_location+ " , " +@candidate.nationality %></li>
+														
+													</ul>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<%= link_to 'Download CV', @candidate.file.url, download: @candidate.file.url, target: "_blank",  class: "default-btn" %>
 										</div>
 									</div>
-
-								<div class="col-lg-6">
-									<div class="candidates-cv-content">
-										<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
-											<span class="sub-title"><%= @candidate.category %></span>
-									<% if current_user.has_role? :senior_hr %>
-                                        <td id="check<%=@candidate.id%>">
-                                    <div class="custom-control custom-switch", id="check<%=@candidate.id%>">
-                                    <%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>   
-                                    <label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
-                                   </div>
-                                      </td> 
-                                    <% else %>
-                                         <span><%= @candidate.status %></span>
-                                    <% end %>
-											<ul>
-												<li><span>Location: </span><%= @candidate.current_location+ " , " +@candidate.nationality %></li>
-											<p>
-												<a href="<%= @candidate.link %>" target="_blank">
-												<%= image_tag("linkedin.png")%>
-												</a>
-											</p>
-											</ul>
-										</div>
+								</div>
+								<div class="candidates-details-content mb-4">
+									<div class="mt-5">
+										<h3>Primary Skills</h3>
+										<ul class="d-flex flex-wrap badge-list mb-0">
+											<% @candidate.primary_skill.each do |candidate| %>
+												<span class="sub-title"><%= candidate %></span>
+											<% end %>
+										</ul>
 									</div>
-
-									<div class="col-lg-4">
-										<%= link_to 'Download CV', @candidate.file.url, download: @candidate.file.url, target: "_blank",  class: "default-btn" %>
+									
+									<div class="mt-5">
+										<h3>Secondary Skills</h3>
+										<ul class="d-flex flex-wrap badge-list mb-0">
+											<% @candidate.secondary_skill.each do |candidate| %>
+												<span class="sub-title"><%= candidate %></span>
+											<% end %>
+										</ul>
 									</div>
 								</div>
-							</div>
 
-							<div class="candidates-details-content mb-4">
-								
-								<div class="mt-5">
-									<h3>Primary Skills</h3>
-									<ul class="d-flex flex-wrap badge-list mb-0">
-									<% @candidate.primary_skill.each do |candidate| %>
-										<span class="sub-title"><%= candidate %></span>
-										<% end %>
-									</ul>
-								</div>
-								
-								<div class="mt-5">
-									<h3>Secondary Skills</h3>
-									<ul class="d-flex flex-wrap badge-list mb-0">
-									<% @candidate.secondary_skill.each do |candidate| %>
-										<span class="sub-title"><%= candidate %></span>
-										<% end %>
-									</ul>
-								</div>
-							</div>
-
-							<div class="row">
+								<div class="row">
 									<div class="col-lg-6 mb-4">
 										<div class="candidates-widget widget-box avatar-list">
 											<h3>Recommendations</h3>
-											<ul class="overview download nav align-items-center mb-3 mt-3">
-												<li class="nav-item d-flex align-items-center flex-fill">
-													<span class="emoji-container">
-														<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
-															alt="">
-													</span>
-													<a href="#" class="nav-link"><b>Leon, Ward, CEO</b><br /> <span
+												<ul class="overview download nav align-items-center mb-3 mt-3">
+													<li class="nav-item d-flex align-items-center flex-fill">
+														<span class="emoji-container">
+															<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
+																alt="">
+														</span>
+														<a href="#" class="nav-link"><b>Leon, Ward, CEO</b><br /> <span
 															class="grey-text">Lorem Ipsum is simply dummy text of the
 															printing and typesetting industry. </span><i
-															class="fi fi-ss-cloud-download-alt"></i></a>
-												</li>
-											</ul>
-											<ul class="overview download nav align-items-center mb-3">
-												<li class="nav-item d-flex align-items-center flex-fill">
-													<span class="emoji-container">
-														<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
-															alt="">
-													</span>
-													<a href="#" class="nav-link"><b>Keith Scott, Project
-															Manager</b><br /> <span class="grey-text">Lorem Ipsum is
-															simply dummy text of the printing and typesetting industry.
-														</span><i class="fi fi-ss-cloud-download-alt"></i></a>
-												</li>
-											</ul>
-											<div>
-												<a href="#" class="float-right link"
-													style="font-size: 18px;color: #00b074;font-weight: 600;">View all<i
-														class="bx bx-arrow-to-right" style="margin-left: 5px;"></i></a>
-											</div>
+															class="fi fi-ss-cloud-download-alt"></i>
+														</a>
+													</li>
+												</ul>
+												<ul class="overview download nav align-items-center mb-3">
+													<li class="nav-item d-flex align-items-center flex-fill">
+														<span class="emoji-container">
+															<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
+																alt="">
+														</span>
+														<a href="#" class="nav-link"><b>Keith Scott, Project
+																Manager</b><br /> <span class="grey-text">Lorem Ipsum is
+																simply dummy text of the printing and typesetting industry.
+															</span><i class="fi fi-ss-cloud-download-alt"></i>
+														</a>
+													</li>
+												</ul>
+												<div>
+													<a href="#" class="float-right link"
+														style="font-size: 18px;color: #00b074;font-weight: 600;">View all<i
+															class="bx bx-arrow-to-right" style="margin-left: 5px;"></i></a>
+												</div>
 										</div>
 									</div>
 									<div class="col-lg-6 mb-4">
-									<div class="candidates-widget widget-box">
-										<h3>Documents</h3>
-										<ul class="overview download nav align-items-center mb-3 mt-3">
-											<li class="nav-item d-flex align-items-center flex-fill">
-												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b>Resume.pdf</b><br /> <span
-														class="grey-text">1.26 MB</span><i
-														class="fi fi-ss-cloud-download-alt"></i></a>
-											</li>
-											<li><i class='bx bxs-cloud-download'></i></li>
-										</ul>
-										<ul class="overview download nav align-items-center mb-3">
-											<li class="nav-item d-flex align-items-center flex-fill">
-												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b>Cover letter.pdf</b><br /> <span
-														class="grey-text">1.26 MB</span><i
-														class="fi fi-ss-cloud-download-alt"></i></a>
-											</li>
-											<li><i class='bx bxs-cloud-download'></i></li>
-										</ul>
-										<ul class="overview download nav align-items-center">
-											<li class="nav-item d-flex align-items-center flex-fill">
-												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b>Bio.pdf</b><br /> <span
-														class="grey-text">1.26 MB</span><i
-														class="fi fi-ss-cloud-download-alt"></i></a>
-											</li>
-											<li><i class='bx bxs-cloud-download'></i></li>
-										</ul>
+										<div class="candidates-widget widget-box">
+											<h3>Documents</h3>
+											<ul class="overview download nav align-items-center mb-3 mt-3">
+												<li class="nav-item d-flex align-items-center flex-fill">
+													<i class="bx bxs-file-pdf"></i>
+													<a href="#" class="nav-link"><b>Resume.pdf</b><br /> <span
+															class="grey-text">1.26 MB</span><i
+															class="fi fi-ss-cloud-download-alt"></i>
+													</a>
+												</li>
+												<li><i class='bx bxs-cloud-download'></i></li>
+											</ul>
+											<ul class="overview download nav align-items-center mb-3">
+												<li class="nav-item d-flex align-items-center flex-fill">
+													<i class="bx bxs-file-pdf"></i>
+													<a href="#" class="nav-link"><b>Cover letter.pdf</b><br /> <span
+															class="grey-text">1.26 MB</span><i
+															class="fi fi-ss-cloud-download-alt"></i>
+													</a>
+												</li>
+												<li><i class='bx bxs-cloud-download'></i></li>
+											</ul>
+											<ul class="overview download nav align-items-center">
+												<li class="nav-item d-flex align-items-center flex-fill">
+													<i class="bx bxs-file-pdf"></i>
+													<a href="#" class="nav-link"><b>Bio.pdf</b><br /> <span
+															class="grey-text">1.26 MB</span><i
+															class="fi fi-ss-cloud-download-alt"></i>
+													</a>
+												</li>
+												<li><i class='bx bxs-cloud-download'></i></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-								</div>
 
-							<div class="candidates-details-content">
-								<h3>About Me</h3>
-								<p><%= @candidate.notes %></p>
+								<div class="candidates-details-content">
+									<h3>About Me</h3>
+									<p><%= @candidate.notes %></p>
+									<h3>Education</h3>
+									<h6><%= @candidate.institute_name %></h6>
+									<span> Passout Year - <%= @candidate.year_of_passing%></span>
+									<ul>
+										<li class="university"><%= @candidate.degree %>(<%= @candidate.duration%> yrs)</li>
+									</ul>
+									<h3>Work Experience</h3>
+									<ul>
+										<li class="arts"><%= @candidate.designation %></li>
+										<li><%= @candidate.company_name %>-<%= @candidate.job_nature %></li>
+										<li><%= @candidate.employment_period %>-<%= @candidate.experience %> yrs</li>
+										<li><%= @candidate.company_location %></li>
+									</ul>
 
-								<h3>Education</h3>
+									<h4>Personal Skills</h4>
 
-
-								<h6><%= @candidate.institute_name %></h6>
-								<span> Passout Year - <%= @candidate.year_of_passing%></span>
-								
-								<ul>
-									<li class="university"><%= @candidate.degree %>(<%= @candidate.duration%> yrs)</li>
-								</ul>
-
-								
-
-								<h3>Work Experience</h3>
-								
-								<ul>
-									<li class="arts"><%= @candidate.designation %></li>
-									<li><%= @candidate.company_name %>-<%= @candidate.job_nature %></li>
-									<li><%= @candidate.employment_period %>-<%= @candidate.experience %> yrs</li>
-									<li><%= @candidate.company_location %></li>
-								</ul>
-
-								
-
-
-								<h4>Personal Skills</h4>
-
-								<div class="all-skill-bar">
-									<div class="skill-bar" data-percentage="100%">
-										<h4 class="progress-title-holder">
-											<span class="progress-title">Photoshop</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 100%;">
-													<span class="percent">100%</span>
-													<span class="down-arrow"></span>
+									<div class="all-skill-bar">
+										<div class="skill-bar" data-percentage="100%">
+											<h4 class="progress-title-holder">
+												<span class="progress-title">Photoshop</span>
+												<span class="progress-number-wrapper">
+													<span class="progress-number-mark" style="left: 100%;">
+														<span class="percent">100%</span>
+														<span class="down-arrow"></span>
+													</span>
 												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 100%;"></div>
+											</h4>
+				
+											<div class="progress-content-outter">
+												<div class="progress-content" style="width: 100%;"></div>
+											</div>
 										</div>
-									</div>
-			
-									<div class="skill-bar" data-percentage="90%">
-										<h4 class="progress-title-holder clearfix">
-											<span class="progress-title">After Effects</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 90%;">
-													<span class="percent">90%</span>
-													<span class="down-arrow"></span>
+				
+										<div class="skill-bar" data-percentage="90%">
+											<h4 class="progress-title-holder clearfix">
+												<span class="progress-title">After Effects</span>
+												<span class="progress-number-wrapper">
+													<span class="progress-number-mark" style="left: 90%;">
+														<span class="percent">90%</span>
+														<span class="down-arrow"></span>
+													</span>
 												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 90%;"></div>
+											</h4>
+				
+											<div class="progress-content-outter">
+												<div class="progress-content" style="width: 90%;"></div>
+											</div>
 										</div>
-									</div>
-			
-									<div class="skill-bar" data-percentage="85%">
-										<h4 class="progress-title-holder clearfix">
-											<span class="progress-title">Indesign</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 85%;">
-													<span class="percent">85%</span>
-													<span class="down-arrow"></span>
+				
+										<div class="skill-bar" data-percentage="85%">
+											<h4 class="progress-title-holder clearfix">
+												<span class="progress-title">Indesign</span>
+												<span class="progress-number-wrapper">
+													<span class="progress-number-mark" style="left: 85%;">
+														<span class="percent">85%</span>
+														<span class="down-arrow"></span>
+													</span>
 												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 85%;"></div>
-										</div>
+											</h4>
+				
+											<div class="progress-content-outter">
+												<div class="progress-content" style="width: 85%;"></div>
+											</div>
+										</div> 
+				
+										<div class="skill-bar mb-0" data-percentage="60%">
+											<h4 class="progress-title-holder clearfix">
+												<span class="progress-title">HTML &amp; CSS</span>
+												<span class="progress-number-wrapper">
+													<span class="progress-number-mark" style="left: 60%;">
+														<span class="percent">60%</span>
+														<span class="down-arrow"></span>
+													</span>
+												</span>
+											</h4>
+				
+											<div class="progress-content-outter">
+												<div class="progress-content" style="width: 60%;"></div>
+											</div>
+										</div> 
 									</div> 
-			
-									<div class="skill-bar mb-0" data-percentage="60%">
-										<h4 class="progress-title-holder clearfix">
-											<span class="progress-title">HTML &amp; CSS</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 60%;">
-													<span class="percent">60%</span>
-													<span class="down-arrow"></span>
+								</div>
+							</div>
+
+							<div class="col-lg-4">
+								<div class="candidates-details-sidebar">
+									<div class="candidates-widget">
+										<h3>Contact Information</h3>
+										<ul class="overview">
+											<li>
+												Email :
+												<span><%= @candidate.email %></span>
+											</li>
+											<li>
+												Phone :
+												<span><%= @candidate.phone %></span>
+											</li>
+											<li>
+												Location :
+												<span><%= @candidate.address %></span>
+											</li>
+											<li>Linkedin Profile :
+												<span>
+													<a href="<%= @candidate.link %>" target="_blank">
+													<%= image_tag("linkedin.png")%>
+													</a>
 												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 60%;"></div>
-										</div>
-									</div> 
-								</div> 
-							</div>
-						</div>
-
-						<div class="col-lg-4">
-		
-							<div class="candidates-details-sidebar">
-								<div class="candidates-widget">
-									<h3>Contact Information</h3>
-									
-									<ul class="overview">
-										
-										<li>
-											Email :
-											<span><%= @candidate.email %></span>
-										</li>
-										<li>
-											Phone :
-											<span><%= @candidate.phone %></span>
-										</li>
-										<li>
-											Location :
-											<span><%= @candidate.address %>
-											</span>
-										</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="candidates-widget widget-box h-auto mb-4">
-								<h3 class="mb-4">Experience</h3>
-								<div class="mb-4">
-									<p class="m-0 d-flex align-items-center"><i class="bx bxl-google-plus-circle mr-2" style="font-size: 30px;"></i><b><%= @candidate.company_name %></b></p>
-									<div class="">
-										<p class="grey-text"><%= @candidate.employment_period %> - Present<span class="float-right"><%= @candidate.company_location %></span></p>
+											</li>
+										</ul>
 									</div>
-									<p class="pt-3 mb-0"><b><%= @candidate.designation %></b></p>
-									<p class="text-muted"><%= @candidate.responsiblities %></p>
-								</div>
-							
-							</div>
-
-							<div class="candidates-details-sidebar">
-								
-								<div class="candidates-widget">
-									<h3>Share This Job</h3>
-
-									<ul class="social-icon">
-										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(facebook)) %>
-										</li>
-										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(twitter)) %>
-
-										</li>
-										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(linkedin)) %>
-
-										</li>
-										<li>
-											<%= social_share_button_tag(@candidate, allow_sites: %w(whatsapp_web)) %>
-
-										</li>
-									</ul>
 								</div>
 
-								<div class="candidates-widget">
-									<h3>Job Overview</h3>
-									
-									<ul class="overview">
-										<li>
-											Categories :
-											<span><%= @candidate.category %></span>
-										</li>
-										<li>
-											Vacancy :
-											<span>01</span>
-										</li>
-										<li>
-											Job Type :
-											<span><%= @candidate.job_nature %></span>
-										</li>
-										<li>
+								<div class="candidates-widget widget-box h-auto mb-4">
+									<h3 class="mb-4">Experience</h3>
+									<div class="mb-4">
+										<p class="m-0 d-flex align-items-center"><i class="bx bxl-google-plus-circle mr-2" style="font-size: 30px;"></i><b><%= @candidate.company_name %></b></p>
+										<div class="">
+											<p class="grey-text"><%= @candidate.employment_period %> - Present<span class="float-right"><%= @candidate.company_location %></span></p>
+										</div>
+										<p class="pt-3 mb-0"><b><%= @candidate.designation %></b></p>
+										<p class="text-muted"><%= @candidate.responsiblities %></p>
+									</div>
+								</div>
+
+								<div class="candidates-details-sidebar">
+									<div class="candidates-widget">
+										<h3>Share This Job</h3>
+
+										<ul class="social-icon">
+											<li>
+												<%= social_share_button_tag(@candidate, allow_sites: %w(facebook)) %>
+											</li>
+											<li>
+												<%= social_share_button_tag(@candidate, allow_sites: %w(twitter)) %>
+
+											</li>
+											<li>
+												<%= social_share_button_tag(@candidate, allow_sites: %w(linkedin)) %>
+
+											</li>
+											<li>
+												<%= social_share_button_tag(@candidate, allow_sites: %w(whatsapp_web)) %>
+
+											</li>
+										</ul>
+									</div>
+
+									<div class="candidates-widget">
+										<h3>Job Overview</h3>
 										
-											Experience :
-											<span><%= @candidate.experience%> year(s) </span>
-										</li>
-										<li>
-											Present Salary :
-											<span><%= @candidate.present_salary %></span>
-										</li>
-										<li>
-											Expected Salary :
-											<span><%= @candidate.expected_salary %></span>
-										</li>
-										<li>
-											Languages :
-											<span> English</span>
-										</li>
-										<li>
-											Gender :
-											<span><%= @candidate.gender%></span>
-										</li>
-										
-									</ul>
-								</div>
+										<ul class="overview">
+											<li>
+												Categories :
+												<span><%= @candidate.category %></span>
+											</li>
+											<li>
+												Vacancy :
+												<span>01</span>
+											</li>
+											<li>
+												Job Type :
+												<span><%= @candidate.job_nature %></span>
+											</li>
+											<li>
+											
+												Experience :
+												<span><%= @candidate.experience%> year(s) </span>
+											</li>
+											<li>
+												Present Salary :
+												<span><%= @candidate.present_salary %></span>
+											</li>
+											<li>
+												Expected Salary :
+												<span><%= @candidate.expected_salary %></span>
+											</li>
+											<li>
+												Languages :
+												<span> English</span>
+											</li>
+											<li>
+												Gender :
+												<span><%= @candidate.gender%></span>
+											</li>
+											
+										</ul>
+									</div>
 
-								<div class="candidates-widget">
-									<h3>Download Resume</h3>
-									
-									<ul class="overview download ">
+									<div class="candidates-widget">
+										<h3>Download Resume</h3>
 										
-										<li>
-											<i class="bx bxs-file-pdf"></i>
-											<%= link_to 'PDF Formate CV', @candidate.file.url, download: @candidate.file.url, target: "_blank" %>
-										</li>
-										<li>
-											<i class="bx bxs-file-pdf"></i>
-											<%= link_to 'DOC Formate CV', @candidate.file.url, download: @candidate.file.url, target: "_blank" %>
-										</li>
-									</ul>
+										<ul class="overview download ">
+											
+											<li>
+												<i class="bx bxs-file-pdf"></i>
+												<%= link_to 'PDF Formate CV', @candidate.file.url, download: @candidate.file.url, target: "_blank" %>
+											</li>
+											<li>
+												<i class="bx bxs-file-pdf"></i>
+												<%= link_to 'DOC Formate CV', @candidate.file.url, download: @candidate.file.url, target: "_blank" %>
+											</li>
+										</ul>
+									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-			<!-- End Candidates Details Area -->
-
-			<!-- Start Subscribe Area -->
-			<section class="subscribe-area subscribe-area-about-page">
-				<div class="col-lg-12">
-					<div class="subscribe-bg">
-						<div class="row align-items-center">
-							<div class="col-lg-6">
-								<div class="subscribe-content">
-									<h2>Find Your Next Great Job Opportunity!</h2>
+				</section>
+				<section class="subscribe-area subscribe-area-about-page">
+					<div class="col-lg-12">
+						<div class="subscribe-bg">
+							<div class="row align-items-center">
+								<div class="col-lg-6">
+									<div class="subscribe-content">
+										<h2>Find Your Next Great Job Opportunity!</h2>
+									</div>
 								</div>
-							</div>
-		
-							<div class="col-lg-6">
-								<form class="newsletter-form" data-toggle="validator" novalidate="true">
-									<input type="email" class="form-control" placeholder="Enter email address" name="EMAIL" required="" autocomplete="off">
-		
-									<button class="default-btn disabled" type="submit" style="pointer-events: all; cursor: pointer;">
-										<span>Subscribe</span>
-									</button>
-		
-									<div id="validator-newsletter" class="form-result"></div>
-									<p>Join The Newsletter 10,000 Users Already!</p>
-								</form>	
+			
+								<div class="col-lg-6">
+									<form class="newsletter-form" data-toggle="validator" novalidate="true">
+										<input type="email" class="form-control" placeholder="Enter email address" name="EMAIL" required="" autocomplete="off">
+			
+										<button class="default-btn disabled" type="submit" style="pointer-events: all; cursor: pointer;">
+											<span>Subscribe</span>
+										</button>
+			
+										<div id="validator-newsletter" class="form-result"></div>
+										<p>Join The Newsletter 10,000 Users Already!</p>
+									</form>	
+								</div>
 							</div>
 						</div>
 					</div>
+				</section>
 				</div>
-			</section>
-			<!-- End Subscribe Area -->
 			</div>
 		</div>
-	</div>
 
-    <!-- Start Copy Right Area -->
-    <div class="copy-right-area">
-        <div class="container">
-            <p>
-                © <%= Time.now().year%> Oak Tree Crew. All Rights Reserved.
-            </p>
-        </div>
-    </div>
-    <!-- End Copy Right Area -->
-    
-    <!-- Start Go Top Area -->
-    <div class="go-top active">
-        <i class="bx bx-chevrons-up"></i>
-        <i class="bx bx-chevrons-up"></i>
-    </div>
-    <!-- End Go Top Area -->
-    
-	<style>
-		.social-share-button .ssb-facebook, .social-share-button .ssb-twitter, .social-share-button .ssb-linkedin, .social-share-button .ssb-whatsapp_app, .social-share-button .ssb-whatsapp_web{
-			width: 40px;
-			height: 40px;
-			line-height: 40px;
-			text-align: center;
-			border-radius: 4px;
-			font-size: 20px;
-			-webkit-transition: all ease 0.5s;
-			transition: all ease 0.5s;
-			background-color: #ffe8e0;
-			color: #ff672c;
-		}
-		.sub-title{
-			background-color: #eef1f6;
-			padding: 2px 8px;
-			margin-right: 10px;
-			border-radius: 5px;
-		}
+		<div class="copy-right-area">
+			<div class="container">
+				<p>
+					© <%= Time.now().year%> Oak Tree Crew. All Rights Reserved.
+				</p>
+			</div>
+		</div>
 		
-	</style>
-
-
+		<div class="go-top active">
+			<i class="bx bx-chevrons-up"></i>
+			<i class="bx bx-chevrons-up"></i>
+		</div>
+	</div>
 	<script type="text/javascript"> 
-    
-    $(document).ready(function(){
-        $(".candidate-check").click(function(){
+		$(document).ready(function(){
+			$(".candidate-check").click(function(){
 
-        });
-        $(":checkbox").click(function(e){
-                var code = "";
-            if (e.delegateTarget.checked == true){
+			});
+			$(":checkbox").click(function(e){
+					var code = "";
+				if (e.delegateTarget.checked == true){
 
-                code = "Active";
-            }else if (e.delegateTarget.checked == false){
-                code = "Draft";}
-            $.ajax({
-                url: '/candidates/' + this.value + '/',
-                type: 'PUT',
-                data: {"status": code}
-                });
-        });
-    });
-</script>
+					code = "Active";
+				}else if (e.delegateTarget.checked == false){
+					code = "Draft";}
+				$.ajax({
+					url: '/candidates/' + this.value + '/',
+					type: 'PUT',
+					data: {"status": code}
+					});
+			});
+		});	
+	</script>
 
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <%= javascript_import_module_tag "js/bootstrap" %>
+	<%= javascript_import_module_tag "js/bootstrap" %>
   <%= javascript_import_module_tag "js/vendor/meanmenu.min" %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <%= javascript_import_module_tag "js/vendor/owl.carousel.min" %>
