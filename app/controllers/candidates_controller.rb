@@ -15,7 +15,7 @@ class CandidatesController < ApplicationController
       @active_status = @active.where(status: "Active")
       @final_active_status = @active_status.count
       # authorize! :index, @candidates
-      # @candidates = Candidate.order(:first_name).page params[:page]
+      @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)      
     end
     
     def show
