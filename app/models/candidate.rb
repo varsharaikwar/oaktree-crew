@@ -1,7 +1,7 @@
 class Candidate < ActiveRecord::Base
     paginates_per 12
     include PgSearch::Model
-    pg_search_scope :global_search, against: [:first_name, :last_name, :category], using: { tsearch: { prefix: true } }
+    pg_search_scope :global_search, against: [:first_name, :last_name, :category, :current_location, :address, :primary_skill, :secondary_skill], using: { tsearch: { prefix: true } }
     # extend FriendlyId
     # friendly_id :first_name
     # has_one_attached :image
