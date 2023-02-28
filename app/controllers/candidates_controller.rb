@@ -15,6 +15,7 @@ class CandidatesController < ApplicationController
       @active_status = @active.where(status: "Active")
       @final_active_status = @active_status.count
       # authorize! :index, @candidates
+      @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)      
     end
     
     def show
@@ -77,7 +78,7 @@ class CandidatesController < ApplicationController
     def logout
     end
     private
-      def candidate_params
-        params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file,:link, :current_location, :experience, :available_time_zone, :language, :start_time, :end_time, :primary_skill => [], :secondary_skill => [])
-      end
+    def candidate_params
+      params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :employment_period, :image, :file,:link, :current_location, :experience, :available_time_zone, :language, :start_time, :end_time, :primary_skill => [], :secondary_skill => [])
+    end
 end

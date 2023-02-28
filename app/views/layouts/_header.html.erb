@@ -27,29 +27,29 @@
                             
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item">
-                                    <%= link_to "Dashboard",  candidates_path, :method => :delete, class: "nav-link active" %>    
+                                    <%= link_to "Dashboard",  candidates_path,  class: "nav-link active" %>    
                                 </li>
 
                                 <li class="nav-item">
-                                    <%= link_to "Freelancers", new_candidate_path, :method => :delete, class: "nav-link" %>    
+                                    <%= link_to "Freelancers", new_candidate_path, class: "nav-link" %>    
                                 </li>
 
                                 <li class="nav-item">
-                                    <%= link_to "Clients", new_candidate_path, :method => :delete, class: "nav-link" %>    
+                                    <%= link_to "Clients", new_candidate_path, class: "nav-link" %>    
                                 </li>
 
                                 <li class="nav-item">
-                                    <%= link_to "Message", new_candidate_path, :method => :delete, class: "nav-link" %>    
+                                    <%= link_to "Message", new_candidate_path, class: "nav-link" %>    
                                 </li>
 
                                 <li class="nav-item">
-                                    <%= link_to "Settings", new_candidate_path, :method => :delete, class: "nav-link" %>    
+                                    <%= link_to "Settings", new_candidate_path, class: "nav-link" %>    
                                 </li>
                             </ul>
                             
                             <div class="others-option">
                                 <div class="get-quote">
-                                    <%= button_to "Log Out", destroy_user_session_path, :method => :delete, class: "default-btn" %>
+                                    <%= button_to "Log Out", destroy_user_session_path, :method => :delete, class: "default-btn", id: "logout-button" %>
                                 </div>
                             </div>
                             

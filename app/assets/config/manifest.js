@@ -7,6 +7,8 @@
 //= link jquery.validate.js
 //= link jquery.validate.additional-methods.js
 //= link social-share-button.js
+//= link candidate.css
+
 
 
 
