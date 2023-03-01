@@ -63,6 +63,7 @@ gem 'pg_search'
 gem 'activeadmin'
 gem 'mini_magick'
 gem 'fog-aws'
+gem 'city-state'
 gem 'sass-rails'
 gem 'will_paginate-bootstrap4'
 

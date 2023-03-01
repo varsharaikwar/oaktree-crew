@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # root :to => redirect("/users/sign_in")
   # get 'index/homes', to: 'homes#index'
 
-  resources :candidates
+  resources :candidates 
+  get 'show/cities', to: "candidates#show_cities", as: 'show_cities'
   get 'logout/candidates', to: 'candidates#logout'
 end

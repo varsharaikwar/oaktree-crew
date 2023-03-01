@@ -41,11 +41,18 @@
                                                 Position
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <%= link_to "Backend Developer", candidates_path(query: "Backend Developer"), class:"dropdown-item"%>
+                                                <%= link_to "Cloud Computing", candidates_path(query: "Cloud Computing"), class:"dropdown-item"%>
+                                                <%= link_to "DevOps Engineer", candidates_path(query: "DevOps Engineer"), class:"dropdown-item"%>
+                                                <%= link_to "Desktop Developer", candidates_path(query: "Desktop Developer"), class:"dropdown-item"%>
+                                                <%= link_to "Database Developer", candidates_path(query: "Database Developer"), class:"dropdown-item"%>
+                                                <%= link_to "Frontend Developer", candidates_path(query: "Frontend Developer"), class:"dropdown-item"%>
+                                                <%= link_to "Full-Stack Developer", candidates_path(query: "Full-Stack Developer"), class:"dropdown-item"%>
+                                                <%= link_to "Mobile Developer", candidates_path(query: "Mobile Developer"), class:"dropdown-item"%>
+                                                <%= link_to "Security Engineer", candidates_path(query: "Security Engineer"), class:"dropdown-item"%>
+                                                <%= link_to "SEO", candidates_path(query: "SEO"), class:"dropdown-item"%>
                                                 <%= link_to "UX/UI Designer", candidates_path(query: "UX/UI Designer"), class:"dropdown-item"%>
                                                 <%= link_to "Web Developer", candidates_path(query: "Web Developer"), class:"dropdown-item"%>
-                                                <%= link_to "Web Designer", candidates_path(query: "Web Designer"), class:"dropdown-item"%>
-                                                <%= link_to "Software Developer", candidates_path(query: "Software Developer"), class:"dropdown-item"%>
-                                                <%= link_to "SEO", candidates_path(query: "SEO"), class:"dropdown-item"%>
                                             </div>
                                         </div> 
                                         <% if current_user.has_role? :junior_hr %>

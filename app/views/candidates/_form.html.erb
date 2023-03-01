@@ -51,82 +51,111 @@
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Phone</label>
+                                    <label class="required">Phone</label>
                                     <%= f.text_field :phone, class: "form-control" %>
+                                    <% if error_helper(:phone) != []%>
+                                        <span class="error-message">Phone <%= error_helper(:phone).first %></span>
+                                    <% end %>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Date Of Birth</label>
-                                    <div class="input-group date" id="datetimepicker">
-                                        <%= f.date_field :date_of_birth, min: Date.today - 100.years, max: Date.today, class: "form-control", order: [:month, :day, :year] %>
-                                    <span class="input-group-addon"></span>
+                                    <label class="required">Date Of Birth</label>
+                                    <div id="datetimepicker">
+                                        <%= f.date_field :date_of_birth, min: Date.today - 100.years, max: Date.today, class: "form-control", order: [:day, :month, :year] %>
+                                        <span class="input-group-addon"></span>
+                                        <% if error_helper(:date_of_birth) != []%>
+                                        <span class="error-message"> DOB <%= error_helper(:date_of_birth).first %></span>
+                                    <% end %>
                                     </div>	
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Gender</label>
+                                    <label class="required">Gender</label>
                                     <div id="gender">
                                         <%= f.select :gender, Candidate::GENDER_LIST, {include_blank: 'Select'}, class: "form-control" %>
+                                    <% if error_helper(:gender) != []%>
+                                        <span class="error-message">Gender <%= error_helper(:gender).first %></span>
+                                    <% end %>
                                     </div>	
                                 </div>
                             </div> 
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Marital status</label>
+                                    <label class="required">Martial Status</label>
                                     <div id="marital">
-                                    <%= f.select :marital_status, Candidate::MARITAL_LIST, {include_blank: 'select'}, class: "form-control" %>
-                                    </div>
+                                        <%= f.select :marital_status, Candidate::MARITAL_LIST, {include_blank: 'Select'}, class: "form-control" %>
+                                    <% if error_helper(:marital_status) != []%>
+                                        <span class="error-message">Martial Status <%= error_helper(:marital_status).first %></span>
+                                    <% end %>
+                                    </div>	
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Nationality</label>
+                                    <label class="required">Nationality</label>
                                     <div id="nationality">
-                                        <%= f.select :nationality, Candidate::NATIONALITY_LIST , {include_blank: 'select'}, class: "form-control" %>
-                                    </div>
+                                    <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'select'},  class: "form-control"%>                                    
+                                    <% if error_helper(:nationality) != []%>
+                                        <span class="error-message">Nationality <%= error_helper(:nationality).first %></span>
+                                    <% end %>
+                                    </div>	
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Current Location</label>
-                                    <div id="location">
-                                    <%= f.select :current_location, Candidate::LOCATION_LIST, {include_blank: 'select'}, class: "form-control" %>
-                                    </div>
+                                    <label class="required">Location</label>
+                                    <div id="current_location">
+                                    <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "form-control"%>
+                                    </div>	
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Time Zone</label>
-                                    <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'select'}, class: "form-control" %>
+                                    <label class="required">Available Time Zone</label>
+                                    <div id="available_time_zone">
+                                        <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'Select'}, class: "form-control" %>
+                                    <% if error_helper(:available_time_zone) != []%>
+                                        <span class="error-message">Available Time Zone <%= error_helper(:available_time_zone).first %></span>
+                                    <% end %>
+                                    </div>	
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Availability <br> From </label>
+                                    <label class="required">Availability <br> From </label>
                                     <%= f.text_field :start_time, class: "form-control", id:"timepicker" %>
+                                <% if error_helper(:start_time) != []%>
+                                        <span class="error-message">From <%= error_helper(:start_time).first %></span>
+                                <% end %>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label> <br> To </label>
-                                        <%= f.text_field :end_time, class: "form-control", id:"timepicker1" %>
+                                    <label class="required">Availability <br> To </label>
+                                    <%= f.text_field :end_time, class: "form-control", id:"timepicker1" %>
+                                <% if error_helper(:end_time) != []%>
+                                        <span class="error-message">To <%= error_helper(:end_time).first %></span>
+                                <% end %>
                                 </div>
                             </div>
                         
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Address Details</label>
+                                    <label class="required">Address Details</label>
                                     <%= f.text_area :address, class: "form-control", rows: "4" %>
+                                <% if error_helper(:address) != []%>
+                                        <span class="error-message">Address <%= error_helper(:address).first %></span>
+                                <% end %>
                                 </div>
                             </div>
                         </div>
@@ -188,9 +217,24 @@
                                 <% if @candidate.file.present? %>
                                     <%= link_to @candidate.file.identifier, @candidate.file.url, class: "form-control border-0" %>
                                 <% end %>                                    
-                                <%= f.file_field :file, id: "img" %>                                   
+                                <%= f.file_field :file, id: "img" %>
+                                <% if error_helper(:file) != []%>
+                                        <span class="error-message">Resume <%= error_helper(:file).first %></span>
+                                <% end %>  
                             </div>
                         </div>
+
+                        <div class="col-lg-6 col-md-6">
+                        <div class="choose-img">
+                            <p>Upload_Updated (Resume)</p> 
+                            <% if @candidate.updated_file.present? %>
+                                <%= link_to @candidate.updated_file.identifier, @candidate.updated_file.url, class: "form-control border-0" %>
+                            <% end %>                                    
+                            <%= f.file_field :updated_file, id: "img" %>                                   
+                        </div>
+                    </div>
+
+
                         </div>
 
                        <br><h4>Job Level</h4>
@@ -469,9 +513,18 @@
         });
     });
 
+    $(document).ready(function(){
+        $("#nationality").change(function(){
+            var country = $('#nationality option:selected').text();
+             $.ajax({
+             type: "GET", 
+             url: "/show/cities",
+             data: {'select': country},
+             })
+         });
+         
+     });
+     
 </script>
-
-
-
 
 

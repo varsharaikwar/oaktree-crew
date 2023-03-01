@@ -1,6 +1,22 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'mailto:krishna.sahu@oaktreecloud.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["GMAIL_USERNAME"],
+    password:ENV["GMAIL_PASSWORD"]
+  }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -20,7 +36,7 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
-    config.action_controller.perform_caching = true
+    config.action_controller.perform_caching = false
     config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
@@ -56,8 +72,7 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-  # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  # Suppress logger output for asset requests
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
@@ -68,4 +83,5 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
 end
