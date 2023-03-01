@@ -12,7 +12,6 @@
  @import "nice-select.min";
  @import "owl.carousel.min";
  @import "owl.theme.default.min.css";
- 
  :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -18094,7 +18093,8 @@ textarea.form-control {
 .nice-select .list {
   width: 100%;
   border-radius: 0;
-  height: 200px;
+  height: auto; 
+  max-height: 200px;
   overflow-y: scroll;
 }
 
