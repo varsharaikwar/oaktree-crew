@@ -8,11 +8,11 @@
             <div class="user-form-content log-in-50 pt-4">
               <h3>Change Your Password </h3>
               <div class="user-form">
-                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-                  <%= render "devise/shared/error_messages", resource: resource %>
-                  <%= f.hidden_field :reset_password_token %>
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
                 <div class="row">
                   <div class="col-12">
+                   <%= render "devise/shared/error_messages", resource: resource %>
+                  <%= f.hidden_field :reset_password_token %>
                     <div class="form-group">
                       <label>New Password</label>
                         <% if @minimum_password_length %>

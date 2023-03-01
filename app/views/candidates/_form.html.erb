@@ -121,7 +121,7 @@
                                 <div class="form-group">
                                     <label class="required">Available Time Zone</label>
                                     <div id="available_time_zone">
-                                        <%= f.select :available_time_zone, Candidate::MARITAL_LIST, {include_blank: 'Select'}, class: "form-control" %>
+                                        <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'Select'}, class: "form-control" %>
                                     <% if error_helper(:available_time_zone) != []%>
                                         <span class="error-message">Available Time Zone <%= error_helper(:available_time_zone).first %></span>
                                     <% end %>
