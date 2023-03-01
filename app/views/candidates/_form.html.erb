@@ -98,8 +98,8 @@
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="required"> Nationality </label>
-                                    <div id="nationality scroll">
+                                    <label class="required">Nationality</label>
+                                    <div id="nationality">
                                     <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'select'},  class: "form-control"%>                                    
                                     <% if error_helper(:nationality) != []%>
                                         <span class="error-message">Nationality <%= error_helper(:nationality).first %></span>
