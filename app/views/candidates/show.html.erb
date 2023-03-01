@@ -391,11 +391,11 @@
 										
 										<li>
 											<i class="bx bxs-file-pdf"></i>
-											<%= link_to 'PDF Formate CV', @candidate.file.url, download: @candidate.file.url, target: "_blank" %>
+											<%= link_to 'Download Original Resume', @candidate.file.url, download: @candidate.file.url, target: "_blank" %>
 										</li>
 										<li>
 											<i class="bx bxs-file-pdf"></i>
-											<%= link_to 'DOC Formate CV', @candidate.file.url, download: @candidate.file.url, target: "_blank" %>
+											<%= link_to 'Download Updated Resume', @candidate.updated_file.url, download: @candidate.updated_file.url, target: "_blank" %>
 										</li>
 									</ul>
 								</div>

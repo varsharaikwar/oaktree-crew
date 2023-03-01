@@ -8,14 +8,15 @@ class Candidate < ActiveRecord::Base
     # belongs_to :user
     # has_many :comments, through: :users
     mount_uploader :file, FileUploader
+    mount_uploader :updated_file, UpdatedFileUploader
     mount_uploader :image, ImageUploader
     GENDER_LIST = ["Male", "Female", "Other"]
     LANGUAGE_LIST = ["Basic English", "Medium English", "Fluent English", "Native English"]
     MARITAL_LIST = ["Married", "Unmarried"]
     LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
     NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]
-    CATEGORY_LIST = ["UX/UI Designer", "Web Developer", "Web Designer", "Software Developer", "SEO"]
-    LEVEL_OF_EDUCATION_LIST = ["Massachusetts", "Maryland", "Colorado", "Vermont", "Virginia", "Washington"]
+    CATEGORY_LIST = ["Backend Developer", "Cloud Computing", "DevOps Engineer", "Desktop Developer", "Database Developer", "Frontend Developer", "Full-Stack Developer", "Mobile Developer", "Security Engineer", "SEO", "UX/UI Designer", "Web Developer"]
+    LEVEL_OF_EDUCATION_LIST = ["Primary Education", "Higher Secondary Education", "Under-Graduate", "Post-Graduate", "Doctoral studies", "Washington"]
     DEGREE_LIST = ["SEE", "M.A.", "Enginery of CSE", "Master", "Associate", "Graduate"]
     RESULT_LIST = ["First Class", "Second Class", "Third Class"]
     YEAR_OF_PASSING_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
@@ -23,7 +24,7 @@ class Candidate < ActiveRecord::Base
     CANDIDATE_STATUS = ["Draft", "Active"]
     TIME_ZONE_LIST = ["AST", "EST", "CST", "MST", "PST", "AKST", "HST", "UTC-11", "UTC+10"]
     EXPERIENCE_LIST = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
-    validates :first_name, presence: true#, acceptance: {message: "Please enter a valid name."}
-    validates :last_name, presence: true
+    validates :first_name,:last_name, :phone, :date_of_birth, :gender, :marital_status, :nationality, :current_location, :available_time_zone, :start_time, :end_time, :address, :file, presence: true
     validates :email, presence: true, format: { with: Devise.email_regexp }
+
 end
