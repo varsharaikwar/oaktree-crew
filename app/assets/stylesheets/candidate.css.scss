@@ -32,7 +32,7 @@
 
 /* starts candidate form page css*/
   .nice-select .list {
-    height: auto;
+    height: auto !important;
   }
 .required:after {
     content:"*";
@@ -184,7 +184,8 @@
       background-color: #212529;
   }
   .pagination{
-      margin-left: 458px;
+      margin-left: auto !important;
+      margin: auto;
   }
   .page-item.active .page-link{
       background-color: #00b074;

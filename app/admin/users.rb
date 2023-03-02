@@ -1,6 +1,10 @@
 ActiveAdmin.register User do
   permit_params [:email, :password, :password_confirmation,  role_ids: []] 
 
+  action_item :view, only: :show do
+    link_to "New User", new_admin_user_path
+  end
+
   form do |f|
     f.inputs "User Details" do
       f.input :email
@@ -10,6 +14,7 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+  
   controller do
     def update
       if params[:user][:password].blank?
