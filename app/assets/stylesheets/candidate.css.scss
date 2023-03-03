@@ -204,7 +204,8 @@
 .access_label{
     font-weight: 400;
 }
-.dropdown-toggle::after{
+
+.dropdown-list-after::after{
     position: absolute;
     border-left: 0.3em solid transparent;
     right: 16px;

@@ -55,8 +55,10 @@
                                                 <%= link_to "Web Developer", candidates_path(query: "Web Developer"), class:"dropdown-item"%>
                                             </div>
                                         </div> 
-                                        <% if current_user.has_role? :junior_hr %>
+                                        <% if current_user.has_role? :junior_hr  %>
                                             <%= link_to 'Add New Candidate', new_candidate_path, class: "btn btn-success" %> 
+                                        <% elsif current_user.has_role? :admin  %>
+                                            <%= link_to 'Add New Candidate', new_candidate_path, class: "btn btn-success" %>
                                         <% end %>
                                     </div>
                                 </div>
