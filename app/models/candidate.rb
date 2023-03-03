@@ -7,7 +7,6 @@ class Candidate < ActiveRecord::Base
     # has_one_attached :image
     # belongs_to :user
     # has_many :comments, through: :users
-    has_rich_text :content
     mount_uploader :file, FileUploader
     mount_uploader :updated_file, UpdatedFileUploader
     mount_uploader :image, ImageUploader
