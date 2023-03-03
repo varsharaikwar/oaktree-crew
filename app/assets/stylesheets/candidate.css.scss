@@ -195,3 +195,23 @@
       color: #00b074;
   }
   /* ends candidate index page css*/
+/* starts candidate form skill*/
+  .btn-primary{
+    margin-left: 151px;
+    margin-top: -52px;
+}
+
+.access_label{
+    font-weight: 400;
+}
+.dropdown-toggle::after{
+    position: absolute;
+    border-left: 0.3em solid transparent;
+    right: 16px;
+    top: 22px;
+}
+.custom-scroller{
+    height: 200px;
+    overflow: auto;
+}
+/* ends candidate form skill*/

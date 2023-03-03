@@ -22,9 +22,9 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label class="required">First Name</label>
-                                    <%= f.text_field :first_name, class: "form-control" %>
+                                    <%= f.text_field :first_name, class: "form-control" , id:"fname"%>
                                     <% if error_helper(:first_name) != []%>
-                                        <span class="error-message">First Name <%= error_helper(:first_name).first %></span>
+                                        <span class="error-message", id="msg">First Name <%= error_helper(:first_name).first %></span>
                                     <% end %>
                                 </div>
                             </div>
@@ -32,9 +32,9 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label class="required">Last Name</label>
-                                    <%= f.text_field :last_name, class: "form-control" %>   
+                                    <%= f.text_field :last_name, class: "form-control", id: "lname" %>   
                                     <% if error_helper(:last_name) != []%>
-                                        <span class="error-message">Last Name <%= error_helper(:last_name).first %></span>
+                                        <span class="error-message", id="msg1">Last Name <%= error_helper(:last_name).first %></span>
                                     <% end %>
                                 </div>
                             </div>
@@ -42,9 +42,9 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label class="required">Email</label>
-                                    <%= f.text_field :email, class: "form-control" %>
+                                    <%= f.text_field :email, class: "form-control", id: "email" %>
                                     <% if error_helper(:email) != []%>
-                                        <span class="error-message">Email <%= error_helper(:email).first %></span>
+                                        <span class="error-message", id="msg2">Email <%= error_helper(:email).first %></span>
                                     <% end %>
                                 </div>
                             </div>
@@ -52,9 +52,9 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label class="required">Phone</label>
-                                    <%= f.text_field :phone, class: "form-control" %>
+                                    <%= f.text_field :phone, class: "form-control", id: "phone" %>
                                     <% if error_helper(:phone) != []%>
-                                        <span class="error-message">Phone <%= error_helper(:phone).first %></span>
+                                        <span class="error-message", id="msg3">Phone <%= error_helper(:phone).first %></span>
                                     <% end %>
                                 </div>
                             </div>
@@ -63,10 +63,10 @@
                                 <div class="form-group">
                                     <label class="required">Date Of Birth</label>
                                     <div id="datetimepicker">
-                                        <%= f.date_field :date_of_birth, min: Date.today - 100.years, max: Date.today, class: "form-control", order: [:day, :month, :year] %>
+                                        <%= f.date_field :date_of_birth, min: Date.today - 100.years, max: Date.today, class: "form-control", order: [:day, :month, :year], id: "date" %>
                                         <span class="input-group-addon"></span>
                                         <% if error_helper(:date_of_birth) != []%>
-                                        <span class="error-message"> DOB <%= error_helper(:date_of_birth).first %></span>
+                                        <span class="error-message", id="msg4"> DOB <%= error_helper(:date_of_birth).first %></span>
                                     <% end %>
                                     </div>	
                                 </div>
@@ -78,7 +78,7 @@
                                     <div id="gender">
                                         <%= f.select :gender, Candidate::GENDER_LIST, {include_blank: 'Select'}, class: "form-control" %>
                                     <% if error_helper(:gender) != []%>
-                                        <span class="error-message">Gender <%= error_helper(:gender).first %></span>
+                                        <span class="error-message", id="msg5">Gender <%= error_helper(:gender).first %></span>
                                     <% end %>
                                     </div>	
                                 </div>
@@ -87,10 +87,10 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label class="required">Martial Status</label>
-                                    <div id="marital">
-                                        <%= f.select :marital_status, Candidate::MARITAL_LIST, {include_blank: 'Select'}, class: "form-control" %>
+                                    <div  id="status">
+                                        <%= f.select :marital_status, Candidate::MARITAL_LIST, {include_blank: 'Select'}, class: "form-control"  %>
                                     <% if error_helper(:marital_status) != []%>
-                                        <span class="error-message">Martial Status <%= error_helper(:marital_status).first %></span>
+                                        <span class="error-message", id="msg6">Martial Status <%= error_helper(:marital_status).first %></span>
                                     <% end %>
                                     </div>	
                                 </div>
@@ -100,9 +100,9 @@
                                 <div class="form-group">
                                     <label class="required">Nationality</label>
                                     <div id="nationality">
-                                    <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'select'},  class: "form-control"%>                                    
+                                    <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'},  class: "form-control" %>                                    
                                     <% if error_helper(:nationality) != []%>
-                                        <span class="error-message">Nationality <%= error_helper(:nationality).first %></span>
+                                        <span class="error-message", id="msg7">Nationality <%= error_helper(:nationality).first %></span>
                                     <% end %>
                                     </div>	
                                 </div>
@@ -120,10 +120,10 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label class="required">Available Time Zone</label>
-                                    <div id="available_time_zone">
+                                    <div id="time">
                                         <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'Select'}, class: "form-control" %>
                                     <% if error_helper(:available_time_zone) != []%>
-                                        <span class="error-message">Available Time Zone <%= error_helper(:available_time_zone).first %></span>
+                                        <span class="error-message", id="msg8">Available Time Zone <%= error_helper(:available_time_zone).first %></span>
                                     <% end %>
                                     </div>	
                                 </div>
@@ -132,7 +132,7 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label class="required">Availability <br> From </label>
-                                    <%= f.text_field :start_time, class: "form-control", id:"timepicker" %>
+                                    <%= f.text_field :start_time, class: "form-control", id: "timepicker" %>
                                 <% if error_helper(:start_time) != []%>
                                         <span class="error-message">From <%= error_helper(:start_time).first %></span>
                                 <% end %>
@@ -152,9 +152,9 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="required">Address Details</label>
-                                    <%= f.text_area :address, class: "form-control", rows: "4" %>
+                                    <%= f.text_area :address, class: "form-control", rows: "4", id: "address" %>
                                 <% if error_helper(:address) != []%>
-                                        <span class="error-message">Address <%= error_helper(:address).first %></span>
+                                        <span class="error-message", id="msg11">Address <%= error_helper(:address).first %></span>
                                 <% end %>
                                 </div>
                             </div>
@@ -438,36 +438,48 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="row staff-sub-checkbox">
-                                    <div class="col-md-12">    
-                                        <h6><span class="access_label">Primary Skills:</span></h6>
-                                        <div class="custom_checkbox mt-15">
-                                        <% @primary_skill.each do |item| %>
-                                            <label class="custom_checkbox_label">
-                                            <%= f.check_box :primary_skill, { multiple: true }, item.name, nil%>
-                                            <span> <%= item.name %></span>
-                                            </label>
-                                        <% end %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                            <div class="row staff-sub-checkbox">
-                                <div class="col-md-12">
-                                    <h6><span class="access_label">Secondary Skills:</span></h6>
+                                <div class="staff-sub-checkbox">
+                                <div>    
+                                    <h6><span class="access_label">Primary Skills:</span></h6>
                                     <div class="custom_checkbox mt-15">
-                                        <% @secondary_skill.each do |item| %>
-                                            <label class="custom_checkbox_label">
-                                            <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
-                                            <span> <%= item.name %></span>
-                                            </label>
-                                        <% end %>
+                                    <div class="dropdown w-100">
+                                    <button class="form-control dropdown-toggle btn-design text-left" id="s1" type="button" data-toggle="dropdown">Select
+                                    </button>
+                                    <ul class="dropdown-menu w-100 custom-scroller" id="u1">
+                                    <% @primary_skill.each do |item| %>
+                                        <label class="custom_checkbox_label d-block p-2">
+                                        <%= f.check_box :primary_skill, { multiple: true }, item.name, nil%>
+                                        <span> <%= item.name %></span>
+                                        </label>
+                                    <% end %>
+                                    </ul>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                        <div class="staff-sub-checkbox">
+                            <div>
+                                <h6><span class="access_label">Secondary Skills:</span></h6>
+                                <div class="custom_checkbox mt-15">
+                                <div class="dropdown w-100">
+                                    <button class="form-control dropdown-toggle btn-design text-left" id="s2" type="button" data-toggle="dropdown">Select
+                                    </button>
+                                    <ul class="dropdown-menu w-100 custom-scroller" id="u2">
+                                    <% @secondary_skill.each do |item| %>
+                                        <label class="custom_checkbox_label d-block p-2">
+                                        <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
+                                        <span> <%= item.name %></span>
+                                        </label>
+                                    <% end %>
+                                    </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                         <div class="col-lg-12">
                             <%= f.submit "Save", class: "default-btn" %>
@@ -514,6 +526,29 @@
     });
 
     $(document).ready(function(){
+
+    })
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+    a = $('#blah').attr('src', e.target.result).width(100).height(100);
+    };
+    reader.readAsDataURL(input.files[0]);
+    }
+    document.getElementById("img_tag").style.display = "none";
+    document.getElementById("fa").style.display = "none";
+    document.getElementById("blah").style.display = "block";
+    }
+
+    $(document).ready(function(){
+        $("#blah").click(function(){
+        $("#img_tag").click();
+        });
+    });
+
+    $(document).ready(function(){
         $("#nationality").change(function(){
             var country = $('#nationality option:selected').text();
              $.ajax({
@@ -522,9 +557,140 @@
              data: {'select': country},
              })
          });
-         
-     });
-     
+
+        $("#fname").on('focusout', function(){
+            if ($("#fname").val() == ''){
+                 document.getElementById("msg").style.display = "block";
+            }
+            else{
+                 document.getElementById("msg").style.display = "none";
+            }
+        });
+
+        $("#lname").on('focusout', function(){
+            if ($("#lname").val() == ''){
+                 document.getElementById("msg1").style.display = "block";
+            }
+            else{
+                 document.getElementById("msg1").style.display = "none";
+            }
+        });
+
+        $("#email").on('focusout', function(){
+            if ($("#email").val() == ''){
+                 document.getElementById("msg2").style.display = "block";
+            }
+            else{
+                 document.getElementById("msg2").style.display = "none";
+            }
+        });
+
+        $("#phone").on('focusout', function(){
+            if ($("#phone").val() == ''){
+                 document.getElementById("msg3").style.display = "block";
+            }
+            else{
+                 document.getElementById("msg3").style.display = "none";
+            }
+        });
+
+        $("#date").on('focusout', function(){
+            if ($("#date").val() == ''){
+                 document.getElementById("msg4").style.display = "block";
+            }
+            else{
+                 document.getElementById("msg4").style.display = "none";
+            }
+        });
+
+        $("#gender").change(function(){
+            if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                 document.getElementById("msg5").style.display = "none";
+            }
+            else{
+                 document.getElementById("msg5").style.display = "block";
+            }
+        });
+        
+        $("#status").change(function(){
+            if ($("#status")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                 document.getElementById("msg6").style.display = "none";
+            }
+            else{
+                 document.getElementById("msg6").style.display = "block";
+            }
+        });
+
+        $("#nationality").change(function(){
+            if ($("#nationality")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                 document.getElementById("msg7").style.display = "none";
+            }
+            else{
+                 document.getElementById("msg7").style.display = "block";
+            }
+        });
+        
+        $("#time").change(function(){
+            if ($("#time")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                 document.getElementById("msg8").style.display = "none";
+            }
+            else{
+                 document.getElementById("msg8").style.display = "block";
+            }
+        });
+
+        $("#address").on('focusout', function(){
+            if ($("#address").val() == ''){
+                 document.getElementById("msg11").style.display = "block";
+            }
+            else{
+                 document.getElementById("msg11").style.display = "none";
+            }
+        });
+
+        $('#u1 input').on('click', function(){
+            const check_array = []
+            nodes = $("#u1")[0].childNodes
+            $('#s1')[0].innerText = ""
+            for (var i in nodes){
+                
+              if(nodes[i].localName == 'label'){
+                    if(nodes[i].childNodes[1].checked == true){
+                        $('#s1')[0].innerText += " " + nodes[i].childNodes[1].defaultValue
+                    }
+                }
+            }
+
+            
+        });
+        $('#u2 input').on('click', function(){
+            const check_array = []
+            nodes = $("#u2")[0].childNodes
+            $('#s2')[0].innerText = ""
+            for (var i in nodes){
+                
+              if(nodes[i].localName == 'label'){
+                    if(nodes[i].childNodes[1].checked == true){
+                        $('#s2')[0].innerText += " " + nodes[i].childNodes[1].defaultValue
+                    }
+                }
+            }
+
+            
+        });
+    });
+    
 </script>
-
-
+<style>
+.btn-design{
+    width: 100%;
+    height: 50px;
+    border-radius: 0;
+    -webkit-box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
+    box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
+    border: 1px solid #ebebeb;
+    padding-left: 20px px;
+    padding-right: 20px;
+    margin-bottom: 30px;
+}
+</style>
