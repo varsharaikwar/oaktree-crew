@@ -12,6 +12,14 @@ Rails.application.routes.draw do
   # get 'index/homes', to: 'homes#index'
 
   resources :candidates 
+  get 'show/states', to: "candidates#show_states", as: 'show_states'
   get 'show/cities', to: "candidates#show_cities", as: 'show_cities'
   get 'logout/candidates', to: 'candidates#logout'
+
+  resources :candidates do 
+    member do 
+      resources :comments
+    end
+  end
 end
+

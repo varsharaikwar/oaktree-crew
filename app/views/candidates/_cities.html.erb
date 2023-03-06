@@ -1,0 +1,2 @@
+<%= select_tag :city, options_for_select(CS.cities( CS.states(CS.countries.key(country)).key(state), CS.countries.key(country))), prompt: "Select something", class: "form-control"%>
+<script> $('select').niceSelect();</script>

@@ -61,13 +61,10 @@
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="required">Date Of Birth</label>
+                                    <label>Date Of Birth</label>
                                     <div id="datetimepicker">
                                         <%= f.date_field :date_of_birth, min: Date.today - 100.years, max: Date.today, class: "form-control", order: [:day, :month, :year], id: "date" %>
                                         <span class="input-group-addon"></span>
-                                        <% if error_helper(:date_of_birth) != []%>
-                                        <span class="error-message", id="msg4"> DOB <%= error_helper(:date_of_birth).first %></span>
-                                    <% end %>
                                     </div>	
                                 </div>
                             </div>
@@ -86,12 +83,9 @@
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="required">Martial Status</label>
+                                    <label>Martial Status</label>
                                     <div  id="status">
                                         <%= f.select :marital_status, Candidate::MARITAL_LIST, {include_blank: 'Select'}, class: "form-control"  %>
-                                    <% if error_helper(:marital_status) != []%>
-                                        <span class="error-message", id="msg6">Martial Status <%= error_helper(:marital_status).first %></span>
-                                    <% end %>
                                     </div>	
                                 </div>
                             </div>
@@ -116,36 +110,34 @@
                                     </div>	
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="required">Available Time Zone</label>
+                                    <label class="required">City</label>
+                                    <div id="state_select">
+                                        <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "form-control"%>
+                                    </div>	
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Available Time Zone</label>
                                     <div id="time">
                                         <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'Select'}, class: "form-control" %>
-                                    <% if error_helper(:available_time_zone) != []%>
-                                        <span class="error-message", id="msg8">Available Time Zone <%= error_helper(:available_time_zone).first %></span>
-                                    <% end %>
                                     </div>	
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="required">Availability <br> From </label>
+                                    <label>Availability <br> From </label>
                                     <%= f.text_field :start_time, class: "form-control", id: "timepicker" %>
-                                <% if error_helper(:start_time) != []%>
-                                        <span class="error-message">From <%= error_helper(:start_time).first %></span>
-                                <% end %>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="required">Availability <br> To </label>
+                                    <label>Availability <br> To </label>
                                     <%= f.text_field :end_time, class: "form-control", id:"timepicker1" %>
-                                <% if error_helper(:end_time) != []%>
-                                        <span class="error-message">To <%= error_helper(:end_time).first %></span>
-                                <% end %>
                                 </div>
                             </div>
                         
@@ -448,7 +440,7 @@
                                     <ul class="dropdown-menu w-100 custom-scroller" id="u1">
                                     <% @primary_skill.each do |item| %>
                                         <label class="custom_checkbox_label d-block p-2">
-                                        <%= f.check_box :primary_skill, { multiple: true }, item.name, nil%>
+                                        <%= f.check_box :primary_skill, { multiple: true }, item.name, nil %>
                                         <span> <%= item.name %></span>
                                         </label>
                                     <% end %>
@@ -553,10 +545,20 @@
             var country = $('#nationality option:selected').text();
              $.ajax({
              type: "GET", 
-             url: "/show/cities",
-             data: {'select': country},
+             url: "/show/states",
+             data: {'country': country},
              })
          });
+
+        $("#current_location").change(function(){
+            var state = $('#current_location option:selected').text();
+            var country = $('#nationality option:selected').text();
+            $.ajax({
+            type: "GET", 
+            url: "/show/cities",
+            data: {'country': country, 'state': state},
+            })
+        });
 
         $("#fname").on('focusout', function(){
             if ($("#fname").val() == ''){
@@ -618,15 +620,6 @@
             }
             else{
                  document.getElementById("msg6").style.display = "block";
-            }
-        });
-
-        $("#nationality").change(function(){
-            if ($("#nationality")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-                 document.getElementById("msg7").style.display = "none";
-            }
-            else{
-                 document.getElementById("msg7").style.display = "block";
             }
         });
         

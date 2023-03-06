@@ -8,6 +8,9 @@ class Ability
       can :index, Candidate
       can :edit, Candidate
       can :show_cities, Candidate
+      can :create, Comment
+      can :show_states, Candidate
+      can :create, Comment
 
     elsif user.has_role? :senior_hr
       can :index, Candidate
