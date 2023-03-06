@@ -435,7 +435,7 @@
                                     <h6><span class="access_label">Primary Skills:</span></h6>
                                     <div class="custom_checkbox mt-15">
                                     <div class="dropdown w-100">
-                                    <button class="form-control dropdown-toggle btn-design text-left" id="s1" type="button" data-toggle="dropdown">Select
+                                    <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left" id="s1" type="button" data-toggle="dropdown">Select
                                     </button>
                                     <ul class="dropdown-menu w-100 custom-scroller" id="u1">
                                     <% @primary_skill.each do |item| %>
@@ -457,7 +457,7 @@
                                 <h6><span class="access_label">Secondary Skills:</span></h6>
                                 <div class="custom_checkbox mt-15">
                                 <div class="dropdown w-100">
-                                    <button class="form-control dropdown-toggle btn-design text-left" id="s2" type="button" data-toggle="dropdown">Select
+                                    <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left" id="s2" type="button" data-toggle="dropdown">Select
                                     </button>
                                     <ul class="dropdown-menu w-100 custom-scroller" id="u2">
                                     <% @secondary_skill.each do |item| %>
@@ -494,32 +494,6 @@
     $('#timepicker1').timepicker({
         uiLibrary: 'bootstrap4'
     });
-    $(document).ready(function(){
-
-    })
-
-    function readURL(input) {
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-    a = $('#blah').attr('src', e.target.result).width(100).height(100);
-    };
-    reader.readAsDataURL(input.files[0]);
-    }
-    document.getElementById("img_tag").style.display = "none";
-    document.getElementById("fa").style.display = "none";
-    document.getElementById("blah").style.display = "block";
-    }
-
-    $(document).ready(function(){
-        $("#blah").click(function(){
-        $("#img_tag").click();
-        });
-    });
-
-    $(document).ready(function(){
-
-    })
 
     function readURL(input) {
     if (input.files && input.files[0]) {
@@ -653,9 +627,8 @@
                     }
                 }
             }
-
-            
         });
+
         $('#u2 input').on('click', function(){
             const check_array = []
             nodes = $("#u2")[0].childNodes
@@ -667,13 +640,11 @@
                         $('#s2')[0].innerText += " " + nodes[i].childNodes[1].defaultValue
                     }
                 }
-            }
-
-            
+            }       
         });
-    });
-    
+    });  
 </script>
+
 <style>
 .btn-design{
     width: 100%;
@@ -685,5 +656,8 @@
     padding-left: 20px px;
     padding-right: 20px;
     margin-bottom: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 </style>
