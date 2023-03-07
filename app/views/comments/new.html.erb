@@ -1,0 +1,13 @@
+<div class="field">
+<%= form_for :comment do |f| %>
+  
+   <div class="actions">
+  <%= f.label :content %><br>
+  <%= f.rich_text_area :content %>
+</div>
+  <div class="actions"><br>
+    <%= f.submit %>
+  </div>
+  <% end %>
+
+</div>
