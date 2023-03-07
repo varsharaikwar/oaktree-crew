@@ -598,6 +598,15 @@
             }
         });
         
+        $("#nationality").change(function(){
+            if ($("#nationality")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                 document.getElementById("msg7").style.display = "none";
+            }
+            else{
+                 document.getElementById("msg7").style.display = "block";
+            }
+        });
+
         $("#time").change(function(){
             if ($("#time")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
                  document.getElementById("msg8").style.display = "none";

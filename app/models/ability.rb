@@ -16,10 +16,12 @@ class Ability
       can :index, Candidate
       can :show, Candidate
       can :edit, Candidate
+      can :create, Comment
 
     elsif user.has_role? :bde
       can :index, Candidate
       can :show, Candidate
+      can :create, Comment
 
     elsif user.has_role? :admin
       can :manage, :all
