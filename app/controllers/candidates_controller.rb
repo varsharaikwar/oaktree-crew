@@ -31,7 +31,7 @@ class CandidatesController < ApplicationController
     def create
       @primary_skill = SkillSet.where(skill_type: "primary")
       @secondary_skill = SkillSet.where(skill_type: "secondary")
-      @candidate = current_user.candidates.create(candidate_params.merge(current_location: params[:current_location].to_s))    
+      @candidate = current_user.candidates.create(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))    
       @candidate.status = "Draft"
         if @candidate.save
           redirect_to @candidate
@@ -57,7 +57,7 @@ class CandidatesController < ApplicationController
               format.js
             end
           end
-      elsif @candidate.update(candidate_params)
+      elsif @candidate.update(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))
           redirect_to @candidate
       else
           render :edit, status: :unprocessable_entity
