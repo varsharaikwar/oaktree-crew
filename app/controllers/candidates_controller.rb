@@ -14,7 +14,6 @@ class CandidatesController < ApplicationController
       @active = Candidate.all
       @active_status = @active.where(status: "Active")
       @final_active_status = @active_status.count
-      # authorize! :index, @candidates
       @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)      
     end
     
@@ -27,7 +26,6 @@ class CandidatesController < ApplicationController
         @primary_skill = SkillSet.where(skill_type: "primary")
         @secondary_skill = SkillSet.where(skill_type: "secondary")
         @candidate = Candidate.new
-        # authorize! :new, @candidate
     end
 
     def create
@@ -40,7 +38,6 @@ class CandidatesController < ApplicationController
         else
           render :new, status: :unprocessable_entity
         end
-        # authorize! :create, @candidate
     end
 
     def edit
@@ -85,6 +82,22 @@ class CandidatesController < ApplicationController
     def show_cities
       @country = params[:country]
       @state = params[:state]
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def filter
+      if params[:level_array].present? && params[:nature_array].present?
+        @candidates = Candidate.all.where(job_level: params[:level_array], job_nature: params[:nature_array])
+      elsif params[:level_array].present?
+        @candidates = Candidate.all.where(job_level: params[:level_array])
+      elsif params[:nature_array].present?
+        @candidates = Candidate.all.where(job_nature: params[:nature_array])
+      else
+        @candidates = Candidate.all
+      end
+      @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)  
       respond_to do |format|
         format.js
       end

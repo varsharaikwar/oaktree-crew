@@ -76,6 +76,29 @@
 		},
 	});
 
+	// Search Button & Clear Button 
+	var base = document.querySelector('.search-btn');
+    base.addEventListener('click', function(event) {
+        var search = document.querySelector('.search-box-input').value
+        localStorage.setItem("search",search)
+        if(search.length === 0){event.preventDefault();
+        }
+    })
+
+    document.querySelector('.search-box-input').value = localStorage.getItem('search')
+
+    var clearbtn = document.querySelector('.clear-btn')
+
+    clearbtn.addEventListener('click', function(event){
+        localStorage.setItem('search',"")
+    })
+
+    var logoutBtn = document.querySelector('#logout-button')
+
+    logoutBtn.addEventListener('click', function(event){
+        localStorage.setItem('search',"")
+    })
+
 	// Hiring List Slider JS
 	$('.hiring-list-slider').owlCarousel({
 		items:1,
@@ -190,6 +213,7 @@
 			event.preventDefault();
 		}
 	});
+	
 	function callbackFunction (resp) {
 		if (resp.result === "success") {
 			formSuccessSub();
