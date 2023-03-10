@@ -40,10 +40,11 @@
                                                     <%= f.text_field :query, class: "form-control search-box-input border-0 h-auto", placeholder: "Search Candidates..." %>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-3">
-                                                <%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Candidate', new_candidate_path %> 
-                                            </div>
+											<% if current_user.has_role? :junior_hr %>
+                                                <div class="col-md-3">
+                                                    <%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Candidate', new_candidate_path %> 
+                                                </div>
+                                            <% end %>
 
                                             <div class="col-md-3">
                                                 <div class="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
