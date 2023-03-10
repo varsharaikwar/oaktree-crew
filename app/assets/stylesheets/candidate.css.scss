@@ -67,8 +67,8 @@
 
 .edit_image{
     position: absolute;
-    top: 30px;
-    left: 14px;
+    top: 0px;
+    left: 0px;
     width: 80px;
     background-color: #00b074;
     display: flex;
@@ -194,10 +194,9 @@
   .page-link{
       color: #00b074;
   }
-/* ends candidate index page css*/
-
+  /* ends candidate index page css*/
 /* starts candidate form skill*/
- .btn-primary{
+  .btn-primary{
     margin-left: 151px;
     margin-top: -52px;
 }
@@ -218,7 +217,8 @@
 }
 /* ends candidate form skill*/
 
-/* starts index page search*/
+
+/* satrt index page search*/
   .search-area{
     background-color: #fff;
     align-items: center;

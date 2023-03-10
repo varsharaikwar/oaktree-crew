@@ -14,6 +14,7 @@ class CandidatesController < ApplicationController
       @active = Candidate.all
       @active_status = @active.where(status: "Active")
       @final_active_status = @active_status.count
+      # authorize! :index, @candidates
       @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)      
     end
     
@@ -26,6 +27,7 @@ class CandidatesController < ApplicationController
         @primary_skill = SkillSet.where(skill_type: "primary")
         @secondary_skill = SkillSet.where(skill_type: "secondary")
         @candidate = Candidate.new
+        # authorize! :new, @candidate
     end
 
     def create
@@ -38,6 +40,7 @@ class CandidatesController < ApplicationController
         else
           render :new, status: :unprocessable_entity
         end
+        # authorize! :create, @candidate
     end
 
     def edit
@@ -57,10 +60,13 @@ class CandidatesController < ApplicationController
               format.js
             end
           end
-      elsif @candidate.update(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))
-          redirect_to @candidate
+      elsif params[:current_location].present? 
+        @candidate.update(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))
+        redirect_to @candidate
+      elsif @candidate.update(candidate_params)
+      redirect_to @candidate
       else
-          render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_entity
       end
       authorize! :edit, @candidate 
     end
@@ -102,6 +108,7 @@ class CandidatesController < ApplicationController
         format.js
       end
     end
+    
 
     private
     def candidate_params
