@@ -1,679 +1,689 @@
-<section class="candidates-resume-area ptb-100">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="candidates-resume-content">
-                    <%= form_with model: @candidate,  :html => {:multipart => true}, class: "resume-info" do |f| %>
-                        <h3>Personal Details</h3>
+    <section class="candidates-resume-area ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="candidates-resume-content">
+                        <%= form_with model: @candidate,  :html => {:multipart => true}, class: "resume-info" do |f| %>
+                            <h3>Personal Details</h3>
 
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="col-lg-5 mb-4 file-upload_area">
+                                <div class="col-lg-5 mb-4 file-upload_area">
 
-                                <h6>Upload Profile Image</h6>
+                                    <h6>Upload Profile Image</h6>
+                                    
+                                    <div class="inner-area">
+                                    <i class="fa fa-user" id="fa">
+                                    <% if @candidate.image.present? %>
+                                        <%= image_tag @candidate.image.url, class: "edit_image" %>
+                                    <% end %>
+                                    </i>
+                                        <%= f.file_field :image, accept: "image",id:"img_tag", onchange: "readURL(this);" %> 
+                                        <img id="blah">  
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2"></div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="required">First Name</label>
+                                        <%= f.text_field :first_name, class: "form-control" , id:"fname"%>
+                                        <% if error_helper(:first_name) != []%>
+                                            <span class="error-message", id="msg">First Name <%= error_helper(:first_name).first %></span>
+                                        <% end %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="required">Last Name</label>
+                                        <%= f.text_field :last_name, class: "form-control", id: "lname" %>   
+                                        <% if error_helper(:last_name) != []%>
+                                            <span class="error-message", id="msg1">Last Name <%= error_helper(:last_name).first %></span>
+                                        <% end %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="required">Email</label>
+                                        <%= f.text_field :email, class: "form-control", id: "email" %>
+                                        <% if error_helper(:email) != []%>
+                                            <span class="error-message", id="msg2">Email <%= error_helper(:email).first %></span>
+                                        <% end %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="required">Phone</label>
+                                        <%= f.text_field :phone, class: "form-control", id: "phone" %>
+                                        <% if error_helper(:phone) != []%>
+                                            <span class="error-message", id="msg3">Phone <%= error_helper(:phone).first %></span>
+                                        <% end %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Date Of Birth</label>
+                                        <div id="datetimepicker">
+                                            <%= f.date_field :date_of_birth, min: Date.today - 100.years, max: Date.today, class: "form-control", order: [:day, :month, :year], id: "date" %>
+                                            <span class="input-group-addon"></span>
+                                        </div>	
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="required">Gender</label>
+                                        <div id="gender">
+                                            <%= f.select :gender, Candidate::GENDER_LIST, {include_blank: 'Select'}, class: "form-control select1" %>
+                                        <% if error_helper(:gender) != []%>
+                                            <span class="error-message", id="msg5">Gender <%= error_helper(:gender).first %></span>
+                                        <% end %>
+                                        </div>	
+                                    </div>
+                                </div> 
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Martial Status</label>
+                                        <div  id="status">
+                                            <%= f.select :marital_status, Candidate::MARITAL_LIST, {include_blank: 'Select'}, class: "form-control select1"  %>
+                                        </div>	
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Nationality</label>
+                                        <div id="nationality">
+                                         <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'}, class: "js-example-basic-single form-control" %>
+                                        </div>	
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="required">Location</label>
+                                        <div id="current_location">
+                                        <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control"%>
+                                        </div>	
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="required">City</label>
+                                        <div id="state_select">
+                                            <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control" %>
+                                        </div>	
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Availability From </label>
+                                        <%= f.text_field :start_time, class: "form-control", id: "timepicker" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Availability To </label>
+                                        <%= f.text_field :end_time, class: "form-control", id:"timepicker1" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Available Time Zone</label>
+                                        <div id="time">
+                                            <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'Select'}, class: "form-control select1" %>
+                                        </div>	
+                                    </div>
+                                </div>
                                 
-                                <div class="inner-area">
-                                <i class="fa fa-user" id="fa">
-                                <% if @candidate.image.present? %>
-                                    <%= image_tag @candidate.image.url, class: "edit_image" %>
-                                <% end %>
-                                </i>
-                                    <%= f.file_field :image, accept: "image",id:"img_tag", onchange: "readURL(this);" %> 
-                                    <img id="blah">  
-                                </div>
-                            </div>
-
-                            <div class="col-lg-2"></div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">First Name</label>
-                                    <%= f.text_field :first_name, class: "form-control" , id:"fname"%>
-                                    <% if error_helper(:first_name) != []%>
-                                        <span class="error-message", id="msg">First Name <%= error_helper(:first_name).first %></span>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="required">Address Details</label>
+                                        <%= f.text_area :address, class: "form-control", rows: "4", id: "address" %>
+                                    <% if error_helper(:address) != []%>
+                                            <span class="error-message", id="msg11">Address <%= error_helper(:address).first %></span>
                                     <% end %>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">Last Name</label>
-                                    <%= f.text_field :last_name, class: "form-control", id: "lname" %>   
-                                    <% if error_helper(:last_name) != []%>
-                                        <span class="error-message", id="msg1">Last Name <%= error_helper(:last_name).first %></span>
-                                    <% end %>
+                            <h3>Career And Application Information</h3>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Notes</label>
+                                        <%= f.text_area :notes, class: "form-control", rows: "4" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Present Salary</label>
+                                        <%= f.text_field :present_salary, class: "form-control" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Expected Salary</label>
+                                        <%= f.text_field :expected_salary, class: "form-control" %>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">Email</label>
-                                    <%= f.text_field :email, class: "form-control", id: "email" %>
-                                    <% if error_helper(:email) != []%>
-                                        <span class="error-message", id="msg2">Email <%= error_helper(:email).first %></span>
-                                    <% end %>
+                        
+                            <div class="row mb-30">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <div id="category">
+                                            <label>Category</label>
+                                            <%= f.select :category, Candidate::CATEGORY_LIST, {include_blank: 'select'}, class: "form-control select1"%>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">Phone</label>
-                                    <%= f.text_field :phone, class: "form-control", id: "phone" %>
-                                    <% if error_helper(:phone) != []%>
-                                        <span class="error-message", id="msg3">Phone <%= error_helper(:phone).first %></span>
-                                    <% end %>
+                                
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <div id="link">
+                                            <label>Linkdien URL</label>
+                                            <%= f.text_field :link, class: "form-control"%>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
+                                <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Date Of Birth</label>
-                                    <div id="datetimepicker">
-                                        <%= f.date_field :date_of_birth, min: Date.today - 100.years, max: Date.today, class: "form-control", order: [:day, :month, :year], id: "date" %>
-                                        <span class="input-group-addon"></span>
-                                    </div>	
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">Gender</label>
-                                    <div id="gender">
-                                        <%= f.select :gender, Candidate::GENDER_LIST, {include_blank: 'Select'}, class: "form-control" %>
-                                    <% if error_helper(:gender) != []%>
-                                        <span class="error-message", id="msg5">Gender <%= error_helper(:gender).first %></span>
-                                    <% end %>
+                                    <label>Language</label>
+                                    <div id="language">
+                                        <%= f.select :language, Candidate::LANGUAGE_LIST, {include_blank: 'Select'}, class: "form-control select1" %>
                                     </div>	
                                 </div>
                             </div> 
 
                             <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Martial Status</label>
-                                    <div  id="status">
-                                        <%= f.select :marital_status, Candidate::MARITAL_LIST, {include_blank: 'Select'}, class: "form-control"  %>
-                                    </div>	
+                                <div class="choose-img">
+                                    <p>Upload (Resume)</p> 
+                                    <% if @candidate.file.present? %>
+                                        <%= link_to @candidate.file.identifier, @candidate.file.url, class: "form-control border-0" %>
+                                    <% end %>                                    
+                                    <%= f.file_field :file, id: "img" %>
+                                    <% if error_helper(:file) != []%>
+                                            <span class="error-message">Resume <%= error_helper(:file).first %></span>
+                                    <% end %>  
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">Nationality</label>
-                                    <div id="nationality">
-                                    <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'},  class: "form-control" %>                                    
-                                    <% if error_helper(:nationality) != []%>
-                                        <span class="error-message", id="msg7">Nationality <%= error_helper(:nationality).first %></span>
-                                    <% end %>
-                                    </div>	
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">Location</label>
-                                    <div id="current_location">
-                                    <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "form-control"%>
-                                    </div>	
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="required">City</label>
-                                    <div id="state_select">
-                                        <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "form-control"%>
-                                    </div>	
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Availability From </label>
-                                    <%= f.text_field :start_time, class: "form-control", id: "timepicker" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Availability To </label>
-                                    <%= f.text_field :end_time, class: "form-control", id:"timepicker1" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Available Time Zone</label>
-                                    <div id="time">
-                                        <%= f.select :available_time_zone, Candidate::TIME_ZONE_LIST, {include_blank: 'Select'}, class: "form-control" %>
-                                    </div>	
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label class="required">Address Details</label>
-                                    <%= f.text_area :address, class: "form-control", rows: "4", id: "address" %>
-                                <% if error_helper(:address) != []%>
-                                        <span class="error-message", id="msg11">Address <%= error_helper(:address).first %></span>
-                                <% end %>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h3>Career And Application Information</h3>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Notes</label>
-                                    <%= f.text_area :notes, class: "form-control", rows: "4" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Present Salary</label>
-                                    <%= f.text_field :present_salary, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Expected Salary</label>
-                                    <%= f.text_field :expected_salary, class: "form-control" %>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="row mb-30">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <div id="category">
-                                        <label>Category</label>
-                                        <%= f.select :category, Candidate::CATEGORY_LIST, {include_blank: 'select'}, class: "form-control"%>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                             <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <div id="link">
-                                        <label>Linkdien URL</label>
-                                        <%= f.text_field :link, class: "form-control"%>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <label>Language</label>
-                                <div id="language">
-                                    <%= f.select :language, Candidate::LANGUAGE_LIST, {include_blank: 'Select'}, class: "form-control" %>
-                                </div>	
-                            </div>
-                        </div> 
-
-                        <div class="col-lg-6 col-md-6">
                             <div class="choose-img">
-                                <p>Upload (Resume)</p> 
-                                <% if @candidate.file.present? %>
-                                    <%= link_to @candidate.file.identifier, @candidate.file.url, class: "form-control border-0" %>
+                                <p>Upload_Updated (Resume)</p> 
+                                <% if @candidate.updated_file.present? %>
+                                    <%= link_to @candidate.updated_file.identifier, @candidate.updated_file.url, class: "form-control border-0" %>
                                 <% end %>                                    
-                                <%= f.file_field :file, id: "img" %>
-                                <% if error_helper(:file) != []%>
-                                        <span class="error-message">Resume <%= error_helper(:file).first %></span>
-                                <% end %>  
+                                <%= f.file_field :updated_file, id: "img" %>                                   
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
-                        <div class="choose-img">
-                            <p>Upload_Updated (Resume)</p> 
-                            <% if @candidate.updated_file.present? %>
-                                <%= link_to @candidate.updated_file.identifier, @candidate.updated_file.url, class: "form-control border-0" %>
-                            <% end %>                                    
-                            <%= f.file_field :updated_file, id: "img" %>                                   
-                        </div>
-                    </div>
 
+                            </div>
 
-                        </div>
+                        <br><h4>Job Level</h4>
+                            <div class="row mb-30">
+                                <div class="col-lg-4 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Entry Level
+                                        <%= f.radio_button :job_level, "entery level" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Mid Level
+                                        <%= f.radio_button :job_level, "mid level" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Top Level
+                                        <%= f.radio_button :job_level, "top level" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
 
-                       <br><h4>Job Level</h4>
-                        <div class="row mb-30">
-                            <div class="col-lg-4 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Entry Level
-                                    <%= f.radio_button :job_level, "entery level" %>
-                                    <span class="checkmark"></span>
-                                </label>
+                            <br><h4>Job Nature</h4>
+                            <div class="row mb-30">
+                                <div class="col-lg-2 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Full Time 
+                                        <%= f.radio_button :job_nature, "full time" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-2 col-sm-6 col-md-3">nationa
+                                    <label class="single-check">
+                                        Part Time   
+                                        <%= f.radio_button :job_nature, "part time" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-2 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Contract
+                                        <%= f.radio_button :job_nature, "contract" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-2 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Internship
+                                        <%= f.radio_button :job_nature, "internship" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-2 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Freelance
+                                        <%= f.radio_button :job_nature, "freelance" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-2 col-sm-6 col-md-3">
+                                    <label class="single-check">
+                                        Office
+                                        <%= f.radio_button :job_nature, "office" %>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Mid Level
-                                    <%= f.radio_button :job_level, "mid level" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="col-lg-4 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Top Level
-                                    <%= f.radio_button :job_level, "top level" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
 
-                        <br><h4>Job Nature</h4>
-                        <div class="row mb-30">
-                            <div class="col-lg-2 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Full Time 
-                                    <%= f.radio_button :job_nature, "full time" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Part Time   
-                                    <%= f.radio_button :job_nature, "part time" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Contract
-                                    <%= f.radio_button :job_nature, "contract" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Internship
-                                    <%= f.radio_button :job_nature, "internship" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Freelance
-                                    <%= f.radio_button :job_nature, "freelance" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-3">
-                                <label class="single-check">
-                                    Office
-                                    <%= f.radio_button :job_nature, "office" %>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
+                            <br><h4>Education</h4>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Level of Education</label>
+                                        <div id="level_of_education">
+                                        <%= f.select :level_of_education, Candidate::LEVEL_OF_EDUCATION_LIST, {include_blank: 'select'}, class: "form-control select1"%>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <br><h4>Education</h4>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Level of Education</label>
-                                    <div id="level_of_education">
-                                    <%= f.select :level_of_education, Candidate::LEVEL_OF_EDUCATION_LIST, {include_blank: 'select'}, class: "form-control"%>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Exam / Degree Title</label>
+                                        <div id="degree">
+                                        <%= f.select :degree, Candidate::DEGREE_LIST, {include_blank: 'select'}, class: "form-control select1"%>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Major/Group</label>
+                                        <%= f.text_field :group, class: "form-control" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Institute Name</label>
+                                        <%= f.text_field :institute_name, class: "form-control" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Result</label>
+                                        <div id="result">
+                                            <%= f.select :result, Candidate::RESULT_LIST, {include_blank: 'select'}, class: "form-control select1"%>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Marks(%)</label>
+                                        <%= f.text_field :marks, class: "form-control" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Year of Passing</label>
+                                        <div id="year">
+                                            <%= f.select :year_of_passing, Candidate::YEAR_OF_PASSING_LIST, {include_blank: 'select'}, class: "form-control select1"%>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Duration (Years)</label>
+                                        <%= f.text_field :duration, class: "form-control" %>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Exam / Degree Title</label>
-                                    <div id="degree">
-                                    <%= f.select :degree, Candidate::DEGREE_LIST, {include_blank: 'select'}, class: "form-control"%>
+                            <h3>Experience</h3>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Company Name</label>
+                                        <%= f.text_field :company_name, class: "form-control" %>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Major/Group</label>
-                                    <%= f.text_field :group, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Institute Name</label>
-                                    <%= f.text_field :institute_name, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Result</label>
-                                    <div id="result">
-                                        <%= f.select :result, Candidate::RESULT_LIST, {include_blank: 'select'}, class: "form-control"%>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Company Business </label>
+                                        <%= f.text_field :company_business, class: "form-control" %>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Marks(%)</label>
-                                    <%= f.text_field :marks, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Year of Passing</label>
-                                    <div id="year">
-                                        <%= f.select :year_of_passing, Candidate::YEAR_OF_PASSING_LIST, {include_blank: 'select'}, class: "form-control"%>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Designation</label>
+                                        <%= f.text_field :designation, class: "form-control" %>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Duration (Years)</label>
-                                    <%= f.text_field :duration, class: "form-control" %>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h3>Experience</h3>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Company Name</label>
-                                    <%= f.text_field :company_name, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Company Business </label>
-                                    <%= f.text_field :company_business, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Designation</label>
-                                    <%= f.text_field :designation, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Department</label>
-                                    <%= f.text_field :department, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Responsibilities</label>
-                                    <%= f.text_field :responsiblities, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Company Location</label>
-                                    <%= f.text_field :company_location, class: "form-control" %>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Employment Period</label>
-                                    <div id="period">
-                                        <%= f.select :employment_period, Candidate::EMPLOYMENT_PERIOD_LIST, {include_blank: 'select'}, class: "form-control"%>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Department</label>
+                                        <%= f.text_field :department, class: "form-control" %>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Experience</label>
-                                    <div>
-                                    <%= f.select :experience, Candidate::EXPERIENCE_LIST, {include_blank: 'select'}, class: "form-control"%> 
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Responsibilities</label>
+                                        <%= f.text_field :responsiblities, class: "form-control" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Company Location</label>
+                                        <%= f.text_field :company_location, class: "form-control" %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Employment Period</label>
+                                        <div id="period">
+                                            <%= f.select :employment_period, Candidate::EMPLOYMENT_PERIOD_LIST, {include_blank: 'select'}, class: "form-control select1"%>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Experience</label>
+                                        <div>
+                                        <%= f.select :experience, Candidate::EXPERIENCE_LIST, {include_blank: 'select'}, class: "form-control select1"%> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="staff-sub-checkbox">
+                                    <div>    
+                                        <h6><span class="access_label">Primary Skills:</span></h6>
+                                        <div class="custom_checkbox mt-15">
+                                        <div class="dropdown w-100">
+                                        <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left " id="s1" type="button" data-toggle="dropdown">Select
+                                        </button>
+                                        <ul class="dropdown-menu w-100 custom-scroller" id="u1">
+                                        <% @primary_skill.each do |item| %>
+                                            <label class="custom_checkbox_label d-block p-2">
+                                            <%= f.check_box :primary_skill, { multiple: true }, item.name, nil %>
+                                            <span> <%= item.name %></span>
+                                            </label>
+                                        <% end %>
+                                        </ul>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="staff-sub-checkbox">
-                                <div>    
-                                    <h6><span class="access_label">Primary Skills:</span></h6>
+                            <div class="staff-sub-checkbox">
+                                <div>
+                                    <h6><span class="access_label">Secondary Skills:</span></h6>
                                     <div class="custom_checkbox mt-15">
                                     <div class="dropdown w-100">
-                                    <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left" id="s1" type="button" data-toggle="dropdown">Select
-                                    </button>
-                                    <ul class="dropdown-menu w-100 custom-scroller" id="u1">
-                                    <% @primary_skill.each do |item| %>
-                                        <label class="custom_checkbox_label d-block p-2">
-                                        <%= f.check_box :primary_skill, { multiple: true }, item.name, nil %>
-                                        <span> <%= item.name %></span>
-                                        </label>
-                                    <% end %>
-                                    </ul>
-                                    </div>
+                                        <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left" id="s2" type="button" data-toggle="dropdown">Select
+                                        </button>
+                                        <ul class="dropdown-menu w-100 custom-scroller" id="u2">
+                                        <% @secondary_skill.each do |item| %>
+                                            <label class="custom_checkbox_label d-block p-2">
+                                            <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
+                                            <span> <%= item.name %></span>
+                                            </label>
+                                        <% end %>
+                                        </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                        <div class="staff-sub-checkbox">
-                            <div>
-                                <h6><span class="access_label">Secondary Skills:</span></h6>
-                                <div class="custom_checkbox mt-15">
-                                <div class="dropdown w-100">
-                                    <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left" id="s2" type="button" data-toggle="dropdown">Select
-                                    </button>
-                                    <ul class="dropdown-menu w-100 custom-scroller" id="u2">
-                                    <% @secondary_skill.each do |item| %>
-                                        <label class="custom_checkbox_label d-block p-2">
-                                        <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
-                                        <span> <%= item.name %></span>
-                                        </label>
-                                    <% end %>
-                                    </ul>
-                                    </div>
-                                </div>
+                            <div class="col-lg-12">
+                                <%= f.submit "Save", class: " btn default-btn" %>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
-
-                        <div class="col-lg-12">
-                            <%= f.submit "Save", class: "default-btn" %>
-                        </div>
-                    <% end %>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    <script>
+        $('#timepicker').timepicker({
+            uiLibrary: 'bootstrap4'
+        });
+
+        $('#timepicker1').timepicker({
+            uiLibrary: 'bootstrap4'
+        });
+
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        a = $('#blah').attr('src', e.target.result).width(100).height(100);
+        };
+        reader.readAsDataURL(input.files[0]);
+        }
+        document.getElementById("img_tag").style.display = "none";
+        document.getElementById("fa").style.display = "none";
+        document.getElementById("blah").style.display = "block";
+        }
+
+        $(document).ready(function(){
+            $("#blah").click(function(){
+            $("#img_tag").click();
+            });
+        });
+
+        $(document).ready(function(){
+            $("#nationality").change(function(){
+                var country = $('#nationality option:selected').text();
+                $.ajax({
+                type: "GET", 
+                url: "/show/states",
+                data: {'country': country},
+                })
+            });
+
+            $("#current_location").change(function(){
+                var state = $('#current_location option:selected').text();
+                var country = $('#nationality option:selected').text();
+                $.ajax({
+                type: "GET", 
+                url: "/show/cities",
+                data: {'country': country, 'state': state},
+                })
+            });
+
+            $("#fname").on('focusout', function(){
+                if ($("#fname").val() == ''){
+                    document.getElementById("msg").style.display = "block";
+                }
+                else{
+                    document.getElementById("msg").style.display = "none";
+                }
+            });
+
+            $("#lname").on('focusout', function(){
+                if ($("#lname").val() == ''){
+                    document.getElementById("msg1").style.display = "block";
+                }
+                else{
+                    document.getElementById("msg1").style.display = "none";
+                }
+            });
+
+            $("#email").on('focusout', function(){
+                if ($("#email").val() == ''){
+                    document.getElementById("msg2").style.display = "block";
+                }
+                else{
+                    document.getElementById("msg2").style.display = "none";
+                }
+            });
+
+            $("#phone").on('focusout', function(){
+                if ($("#phone").val() == ''){
+                    document.getElementById("msg3").style.display = "block";
+                }
+                else{
+                    document.getElementById("msg3").style.display = "none";
+                }
+            });
+
+            $("#date").on('focusout', function(){
+                if ($("#date").val() == ''){
+                    document.getElementById("msg4").style.display = "block";
+                }
+                else{
+                    document.getElementById("msg4").style.display = "none";
+                }
+            });
+
+            $("#gender").change(function(){
+                if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                    document.getElementById("msg5").style.display = "none";
+                }
+                else{
+                    document.getElementById("msg5").style.display = "block";
+                }
+            });
+            
+            $("#status").change(function(){
+                if ($("#status")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                    document.getElementById("msg6").style.display = "none";
+                }
+                else{
+                    document.getElementById("msg6").style.display = "block";
+                }
+            });
+            
+            $("#nationality").change(function(){
+                if ($("#nationality")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                    document.getElementById("msg7").style.display = "none";
+                }
+                else{
+                    document.getElementById("msg7").style.display = "block";
+                }
+            });
+
+            $("#time").change(function(){
+                if ($("#time")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                    document.getElementById("msg8").style.display = "none";
+                }
+                else{
+                    document.getElementById("msg8").style.display = "block";
+                }
+            });
+
+            $("#address").on('focusout', function(){
+                if ($("#address").val() == ''){
+                    document.getElementById("msg11").style.display = "block";
+                }
+                else{
+                    document.getElementById("msg11").style.display = "none";
+                }
+            });
+
+            $('#u1 input').on('click', function(){
+                const check_array = []
+                nodes = $("#u1")[0].childNodes
+                $('#s1')[0].innerText = ""
+                for (var i in nodes){
+                    
+                if(nodes[i].localName == 'label'){
+                        if(nodes[i].childNodes[1].checked == true){
+                            $('#s1')[0].innerText += " " + nodes[i].childNodes[1].defaultValue
+                        }
+                    }
+                }
+            });
+
+            $('#u2 input').on('click', function(){
+                const check_array = []
+                nodes = $("#u2")[0].childNodes
+                $('#s2')[0].innerText = ""
+                for (var i in nodes){
+                    
+                if(nodes[i].localName == 'label'){
+                        if(nodes[i].childNodes[1].checked == true){
+                            $('#s2')[0].innerText += " " + nodes[i].childNodes[1].defaultValue
+                        }
+                    }
+                }       
+            });
+        });  
+    </script>
+
+    <style>
+    .btn-design{
+        width: 100%;
+        height: 50px;
+        border-radius: 0;
+        -webkit-box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
+        box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
+        border: 1px solid #ebebeb;
+        padding-left: 20px px;
+        padding-right: 20px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    </style>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
 
 <script>
-    $('#timepicker').timepicker({
-        uiLibrary: 'bootstrap4'
-    });
 
-    $('#timepicker1').timepicker({
-        uiLibrary: 'bootstrap4'
-    });
+$(document).ready(function() {
+    debugger;
+    $('.js-example-basic-single').select2();
+});
 
-    function readURL(input) {
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-    a = $('#blah').attr('src', e.target.result).width(100).height(100);
-    };
-    reader.readAsDataURL(input.files[0]);
-    }
-    document.getElementById("img_tag").style.display = "none";
-    document.getElementById("fa").style.display = "none";
-    document.getElementById("blah").style.display = "block";
-    }
-
-    $(document).ready(function(){
-        $("#blah").click(function(){
-        $("#img_tag").click();
-        });
-    });
-
-    $(document).ready(function(){
-        $("#nationality").change(function(){
-            var country = $('#nationality option:selected').text();
-             $.ajax({
-             type: "GET", 
-             url: "/show/states",
-             data: {'country': country},
-             })
-         });
-
-        $("#current_location").change(function(){
-            var state = $('#current_location option:selected').text();
-            var country = $('#nationality option:selected').text();
-            $.ajax({
-            type: "GET", 
-            url: "/show/cities",
-            data: {'country': country, 'state': state},
-            })
-        });
-
-        $("#fname").on('focusout', function(){
-            if ($("#fname").val() == ''){
-                 document.getElementById("msg").style.display = "block";
-            }
-            else{
-                 document.getElementById("msg").style.display = "none";
-            }
-        });
-
-        $("#lname").on('focusout', function(){
-            if ($("#lname").val() == ''){
-                 document.getElementById("msg1").style.display = "block";
-            }
-            else{
-                 document.getElementById("msg1").style.display = "none";
-            }
-        });
-
-        $("#email").on('focusout', function(){
-            if ($("#email").val() == ''){
-                 document.getElementById("msg2").style.display = "block";
-            }
-            else{
-                 document.getElementById("msg2").style.display = "none";
-            }
-        });
-
-        $("#phone").on('focusout', function(){
-            if ($("#phone").val() == ''){
-                 document.getElementById("msg3").style.display = "block";
-            }
-            else{
-                 document.getElementById("msg3").style.display = "none";
-            }
-        });
-
-        $("#date").on('focusout', function(){
-            if ($("#date").val() == ''){
-                 document.getElementById("msg4").style.display = "block";
-            }
-            else{
-                 document.getElementById("msg4").style.display = "none";
-            }
-        });
-
-        $("#gender").change(function(){
-            if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-                 document.getElementById("msg5").style.display = "none";
-            }
-            else{
-                 document.getElementById("msg5").style.display = "block";
-            }
-        });
-        
-        $("#status").change(function(){
-            if ($("#status")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-                 document.getElementById("msg6").style.display = "none";
-            }
-            else{
-                 document.getElementById("msg6").style.display = "block";
-            }
-        });
-        
-        $("#nationality").change(function(){
-            if ($("#nationality")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-                 document.getElementById("msg7").style.display = "none";
-            }
-            else{
-                 document.getElementById("msg7").style.display = "block";
-            }
-        });
-
-        $("#time").change(function(){
-            if ($("#time")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-                 document.getElementById("msg8").style.display = "none";
-            }
-            else{
-                 document.getElementById("msg8").style.display = "block";
-            }
-        });
-
-        $("#address").on('focusout', function(){
-            if ($("#address").val() == ''){
-                 document.getElementById("msg11").style.display = "block";
-            }
-            else{
-                 document.getElementById("msg11").style.display = "none";
-            }
-        });
-
-        $('#u1 input').on('click', function(){
-            const check_array = []
-            nodes = $("#u1")[0].childNodes
-            $('#s1')[0].innerText = ""
-            for (var i in nodes){
-                
-              if(nodes[i].localName == 'label'){
-                    if(nodes[i].childNodes[1].checked == true){
-                        $('#s1')[0].innerText += " " + nodes[i].childNodes[1].defaultValue
-                    }
-                }
-            }
-        });
-
-        $('#u2 input').on('click', function(){
-            const check_array = []
-            nodes = $("#u2")[0].childNodes
-            $('#s2')[0].innerText = ""
-            for (var i in nodes){
-                
-              if(nodes[i].localName == 'label'){
-                    if(nodes[i].childNodes[1].checked == true){
-                        $('#s2')[0].innerText += " " + nodes[i].childNodes[1].defaultValue
-                    }
-                }
-            }       
-        });
-    });  
 </script>
-
-<style>
-.btn-design{
-    width: 100%;
-    height: 50px;
-    border-radius: 0;
-    -webkit-box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
-    box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
-    border: 1px solid #ebebeb;
-    padding-left: 20px px;
-    padding-right: 20px;
-    margin-bottom: 30px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-</style>

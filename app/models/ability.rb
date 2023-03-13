@@ -19,11 +19,13 @@ class Ability
       can :show, Candidate
       can :edit, Candidate
       can :create, Comment
+      can :filter, Candidate
 
     elsif user.has_role? :bde
       can :index, Candidate
       can :show, Candidate
       can :create, Comment
+      can :filter, Candidate
 
     elsif user.has_role? :admin
       can :manage, :all
@@ -31,3 +33,4 @@ class Ability
   end
   
 end
+  

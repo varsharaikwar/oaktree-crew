@@ -25,7 +25,7 @@ class Candidate < ActiveRecord::Base
     CANDIDATE_STATUS = ["Draft", "Active"]
     TIME_ZONE_LIST = ["AST", "EST", "CST", "IST", "MST", "PST", "AKST", "HST", "UTC-11", "UTC+10"]
     EXPERIENCE_LIST = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
-    validates :first_name,:last_name, :phone, :gender, :nationality, :current_location, :address, presence: true
+    validates :first_name,:last_name, :phone, :gender, :address, presence: true
     validates :email, presence: true, format: { with: Devise.email_regexp }
 
 end
