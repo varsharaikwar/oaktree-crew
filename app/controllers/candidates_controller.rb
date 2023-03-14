@@ -106,6 +106,9 @@ class CandidatesController < ApplicationController
       @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)  
       respond_to do |format|
         format.js
+        format.html do
+          render :index
+        end
       end
     end
     
