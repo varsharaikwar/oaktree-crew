@@ -107,7 +107,7 @@
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label class="required">Location</label>
+                                        <label>Location</label>
                                         <div id="current_location">
                                         <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control"%>
                                         </div>	
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label class="required">City</label>
+                                        <label>City</label>
                                         <div id="state_select">
                                             <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control" %>
                                         </div>	
@@ -267,7 +267,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <div class="col-lg-2 col-sm-6 col-md-3">nationa
+                                <div class="col-lg-2 col-sm-6 col-md-3">
                                     <label class="single-check">
                                         Part Time   
                                         <%= f.radio_button :job_nature, "part time" %>

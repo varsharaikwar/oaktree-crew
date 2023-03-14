@@ -41,6 +41,7 @@
 					</div>
 				</div>
 			</div>
+
 			<section class="candidates-details-area pt-2">
 				<div class="">
 					<div class="row">
@@ -73,6 +74,7 @@
 											<% end %>
 										</div>
 									</div>
+
 									<div class="col-lg-6">
 										<div class="candidates-cv-content">
 											<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
@@ -98,8 +100,9 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="candidates-details-content mb-4">
-								<div class="mt-5">
+								<div class="mt-1">
 									<h3>Primary Skills</h3>
 									<ul class="d-flex flex-wrap badge-list mb-0">
 										<% @candidate.primary_skill.each do |candidate| %>
@@ -161,9 +164,7 @@
 										<ul class="overview download nav align-items-center mb-3 mt-3">
 											<li class="nav-item d-flex align-items-center flex-fill">
 												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b>Resume.pdf</b><br /> <span
-														class="grey-text">1.26 MB</span><i
-														class="fi fi-ss-cloud-download-alt"></i>
+												<a href="#" class="nav-link"><b><%= link_to 'Resume.pdf', @candidate.file.url, download: @candidate.file.url, target: "_blank" %></b><br /> 
 												</a>
 											</li>
 											<li><i class='bx bxs-cloud-download'></i></li>
@@ -171,9 +172,7 @@
 										<ul class="overview download nav align-items-center mb-3">
 											<li class="nav-item d-flex align-items-center flex-fill">
 												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b>Cover letter.pdf</b><br /> <span
-														class="grey-text">1.26 MB</span><i
-														class="fi fi-ss-cloud-download-alt"></i>
+												<a href="#" class="nav-link"><b><%= link_to 'Cover letter.pdf', @candidate.updated_file.url, download: @candidate.updated_file.url, target: "_blank" %></b><br />
 												</a>
 											</li>
 											<li><i class='bx bxs-cloud-download'></i></li>
@@ -181,9 +180,7 @@
 										<ul class="overview download nav align-items-center">
 											<li class="nav-item d-flex align-items-center flex-fill">
 												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b>Bio.pdf</b><br /> <span
-														class="grey-text">1.26 MB</span><i
-														class="fi fi-ss-cloud-download-alt"></i>
+												<a href="#" class="nav-link"><b><%= link_to 'Bio.pdf', @candidate.updated_file.url, download: @candidate.updated_file.url, target: "_blank" %></b><br /> 
 												</a>
 											</li>
 											<li><i class='bx bxs-cloud-download'></i></li>
@@ -300,6 +297,7 @@
 											<span>
 												<a href="<%= @candidate.link %>" target="_blank">
 												<%= image_tag("linkedin.png")%>
+												<%= @candidate.link %>
 												</a>
 											</span>
 										</li>
@@ -310,7 +308,7 @@
 							<div class="candidates-widget widget-box h-auto mb-4">
 								<h3 class="mb-4">Experience</h3>
 								<div class="mb-4">
-									<p class="m-0 d-flex align-items-center"><i class="bx bxl-google-plus-circle mr-2" style="font-size: 30px;"></i><b><%= @candidate.company_name %></b></p>
+									<p class="m-0 d-flex align-items-center"><b><%= @candidate.company_name %></b></p>
 									<div class="">
 										<p class="grey-text"><%= @candidate.employment_period %> - Present<span class="float-right"><%= @candidate.company_location %></span></p>
 									</div>
