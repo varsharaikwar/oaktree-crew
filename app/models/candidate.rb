@@ -5,6 +5,7 @@ class Candidate < ActiveRecord::Base
     # extend FriendlyId
     # friendly_id :first_name
     # has_one_attached :image
+    default_scope { order(created_at: :desc) }
     has_many :comments
     has_many :users, through: :comments
     has_rich_text :content
@@ -17,7 +18,7 @@ class Candidate < ActiveRecord::Base
     LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
     NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]
     CATEGORY_LIST = ["Backend Developer", "Cloud Computing", "DevOps Engineer", "Desktop Developer", "Database Developer", "Frontend Developer", "Full-Stack Developer", "Mobile Developer", "Security Engineer", "SEO", "UX/UI Designer", "Web Developer"]
-    LEVEL_OF_EDUCATION_LIST = ["Primary Education", "Higher Secondary Education", "Under-Graduate", "Post-Graduate", "Doctoral studies", "Washington"]
+    LEVEL_OF_EDUCATION_LIST = ["Primary Education", "Higher Secondary Education", "Under-Graduate", "Post-Graduate", "Doctoral studies"]
     DEGREE_LIST = ["SEE", "M.A.", "Enginery of CSE", "Master", "Associate", "Graduate"]
     RESULT_LIST = ["First Class", "Second Class", "Third Class"]
     YEAR_OF_PASSING_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]

@@ -1,29 +1,54 @@
 <%=  render "layouts/header" %> 
-
 <div class="row">
-
     <div class="col-lg-2">
-		<div class="nav-side-menu sidebar">
-			<ul class="nav flex-column">
+	    <div class="nav-side-menu sidebar">
+            <div class="">
+                <p>
+                    <h3 class="pt-4">
+                    Filter
+                    </h3>
+                </p>
+                <p class="h4">
+                    <%= label_tag "Job Level" %>
+                </p>
+
+                <div class="jobs_level job_filter">
+                    <% ["entery level", "mid level", "top level"].each do |val|%>
+                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
+                    <% end %>
+                </div>
+
+                <br>
+                <p class="h4">
+                    <%= label_tag "Job Nature"%>
+                </p>
+
+                <div class="jobs_nature job_filter">
+                    <% ["full time", "part time", "contract", "internship", "freelance", "office"].each do |val|%>
+                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
+                    <% end %>
+                </div>
+                <br>
+                <div class="mb-3">
+                <p class="h4">
+                    <%= label_tag "Location"%>
+                </p>
+                <div>
+                    <%= select_tag :nationality, options_for_select(CS.countries.values.sort), prompt: "Select", id: "CountryFilter", class: "filter-radius"%><br>
+                </div>
+                </div>
                 
-                <li class="nav-item active">
-                    <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
-                </li>
-
-                <li class="nav-item">
-                    <%= link_to image_tag("gift.png") + 'Offers', candidates_path, class: "nav-link" %> 
-                </li>
-
-                <li class="nav-item">
-                    <%= link_to image_tag("link.png") + 'Link', candidates_path, class: "nav-link" %> 
-                </li>
-
-            </ul>
+                <p class="h4 mt-5">
+                    <%= label_tag "Category"%>
+                </p>
+                <div>
+                    <%= select_tag :category, options_for_select(Candidate::CATEGORY_LIST), prompt: "Select", id: "CategoryFilter", class: "filter-radius"%><br>
+                </div>
+            </div>
         </div>
 	</div>
 
     <div class="col-lg-10">
-    
         <div class="page-title-area ">
             <div class="container-fluid">
                 <div class="page-title-content">
@@ -33,7 +58,6 @@
                                 <div class="row">
                                     <div class="col-md-11 m-auto">
                                         <div class="row search-area">
-                                            
                                             <div class="col-md-4">
                                                 <div class="form-group has-search m-0 d-flex align-items-center">
                                                     <span class="fa fa-search form-control-feedback"></span>
@@ -83,84 +107,60 @@
             </div>
         </div>
 
-    <section id="candidate_sec">
-        <div class="container-fluid">
-            <div class="row">
-
-                <div class="col-lg-2">
-
-                    <p>
-                        <h3 class="pt-4">
-                        Filter
-                        </h3>
-                    </p>
-
-                    <p class="h4">
-                        <%= label_tag "Job Level" %>
-                    </p>
-
-                    <div class="jobs_level job_filter">
-                        <% ["entery level", "mid level", "top level"].each do |val|%>
-                            <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
-                        <% end %>
-                    </div>
-
-                    <br>
-
-                    <p class="h4">
-                        <%= label_tag "Job Nature"%>
-                    </p>
-
-                    <div class="jobs_nature job_filter">
-                        <% ["full time", "part time", "contract", "internship", "freelance", "office"].each do |val|%>
-                            <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
-                        <% end %>
-                    </div>
-
-                </div>
-
-                <div class="col-lg-10" id="candidate_ref">
-                    <%= render "candidates"%>
-                </div> 
-
-    </section>   
+        <section id="candidate_sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-10 m-auto" id="candidate_ref">
+                        <%= render "candidates"%>
+                    </div> 
+        </section>   
     </div>
-    
 </div>
 
 <script>
 
  $(document).ready(function(){
-    $(".job_filter input").on('click', function(e){
+    $("#CountryFilter").niceSelect();
+    $("#CategoryFilter").niceSelect();
+
+    $("#CountryFilter , #CategoryFilter, .job_filter input").on('change', function(e){
         
-    const arr = $(".job_filter").length
-    level_array = []
-    nature_array = []
+        const arr = $(".job_filter").length
+        level_array = []
+        nature_array = []
+        country_name = $("#CountryFilter")[0].value != '' ? $("#CountryFilter")[0].value : []
+        category_name = $("#CategoryFilter")[0].value != '' ? $("#CategoryFilter")[0].value : []
+        
+        for (  i=0; i < arr; i++) {
+            var inp = $(".job_filter")[i]
 
-    for (  i=0; i < arr; i++) {
-        var inp = $(".job_filter")[i]
+            for( j in inp.childNodes){
 
-        for( j in inp.childNodes){
-
-            if (inp.childNodes[j].nodeName == "INPUT" && inp.childNodes[j].checked){
-                switch (inp.classList[0]){
-                    case "jobs_level":
-                        level_array.push(inp.childNodes[j].defaultValue)
-                    break;
-                    case "jobs_nature":
-                        nature_array.push(inp.childNodes[j].defaultValue)
-                    break;
+                if (inp.childNodes[j].nodeName == "INPUT" && inp.childNodes[j].checked){
+                    switch (inp.classList[0]){
+                        case "jobs_level":
+                            level_array.push(inp.childNodes[j].defaultValue)
+                        break;
+                        case "jobs_nature":
+                            nature_array.push(inp.childNodes[j].defaultValue)
+                        break;
+                    }
                 }
-            }
-        }            
-    }
-
-    $.ajax({
-        type: "GET",
-        url: "/filter/candidates",
-        data: {"level_array": level_array, "nature_array": nature_array}
-    });       
+            }            
+        }
+        
+        $.ajax({
+            type: "GET",
+            url: "/filter/candidates",
+            data: {"level_array": level_array, "nature_array": nature_array, "country_name": country_name, "category_name": category_name}
+        });       
     });
+
 })
 </script>
-  
+  <style>
+  .filter-radius{
+    border-radius: 20px;
+    width: 100%;
+  }
+  </style>
