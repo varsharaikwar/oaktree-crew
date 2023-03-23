@@ -18159,6 +18159,7 @@ textarea.form-control {
 
 .sidebar {
   padding: 30px 20px;
+  margin-left: 29px;
 }
 
 .sidebar .nav-item {
@@ -20700,11 +20701,7 @@ Continuer Custom Width Area Style*/
         padding: 6px;
         background-color: rgb(255, 232, 224);
       img{
-        width: 100px;
-        height: 100px;
-        min-width: 100px;
-        min-height: 100px;
-        max-width: 100px;
+        max-width: 79px;
         max-height: 100px;
         border-radius: 50%;
         background-color: #dee1e1;
