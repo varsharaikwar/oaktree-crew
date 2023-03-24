@@ -15,7 +15,7 @@ class CandidatesController < ApplicationController
       @active_status = @active.where(status: "Active")
       @final_active_status = @active_status.count
       # authorize! :index, @candidates
-      @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)      
+      @candidates = @candidates.paginate(page: params[:page], per_page: 12)      
     end
     
     def show
@@ -24,10 +24,10 @@ class CandidatesController < ApplicationController
     end
 
     def new
-        @primary_skill = SkillSet.where(skill_type: "primary")
-        @secondary_skill = SkillSet.where(skill_type: "secondary")
-        @candidate = Candidate.new
-        # authorize! :new, @candidate
+      @primary_skill = SkillSet.where(skill_type: "primary")
+      @secondary_skill = SkillSet.where(skill_type: "secondary")
+      @candidate = Candidate.new
+      # authorize! :new, @candidate
     end
 
     def create
@@ -94,16 +94,30 @@ class CandidatesController < ApplicationController
     end
 
     def filter
-      if params[:level_array].present? && params[:nature_array].present?
-        @candidates = Candidate.all.where(job_level: params[:level_array], job_nature: params[:nature_array])
-      elsif params[:level_array].present?
-        @candidates = Candidate.all.where(job_level: params[:level_array])
-      elsif params[:nature_array].present?
-        @candidates = Candidate.all.where(job_nature: params[:nature_array])
+      filter_hash = Hash.new
+
+      if params[:country_name].present?
+        filter_hash[:nationality] = params[:country_name]
+      end
+      
+      if params[:category_name].present?
+        filter_hash[:category] = params[:category_name]
+      end
+
+      if params[:nature_array].present?
+        filter_hash[:job_nature] = params[:nature_array]
+      end
+
+      if params[:level_array].present?
+        filter_hash[:job_level] = params[:level_array]
+      end
+      
+      if filter_hash.present?
+        @candidates = Candidate.where(filter_hash)
       else
         @candidates = Candidate.all
       end
-      @candidates = @candidates.order("created_at ASC").paginate(page: params[:page], per_page: 12)  
+      @candidates = @candidates.paginate(page: params[:page], per_page: 12)  
       respond_to do |format|
         format.js
         format.html do
