@@ -12,6 +12,7 @@ class Ability
       can :show_states, Candidate
       can :create, Comment
       can :filter, Candidate
+      can :skill, Candidate
       
 
     elsif user.has_role? :senior_hr
@@ -20,12 +21,14 @@ class Ability
       can :edit, Candidate
       can :create, Comment
       can :filter, Candidate
+      can :skill, Candidate
 
     elsif user.has_role? :bde
       can :index, Candidate
       can :show, Candidate
       can :create, Comment
       can :filter, Candidate
+      can :skill, Candidate
 
     elsif user.has_role? :admin
       can :manage, :all

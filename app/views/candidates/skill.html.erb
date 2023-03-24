@@ -1,7 +1,7 @@
 <%=  render "layouts/header" %> 
 <div class="row">
-
 <%=  render "filters" %> 
+
 
     <div class="col-lg-10">
         <div class="page-title-area ">
@@ -19,7 +19,7 @@
                                                     <%= f.text_field :query, class: "form-control search-box-input border-0 h-auto", placeholder: "Search Candidates..." %>
                                                 </div>
                                             </div>
-                                            <% if current_user.has_role? :junior_hr %>
+											<% if current_user.has_role? :junior_hr %>
                                                 <div class="col-md-3">
                                                     <%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Candidate', new_candidate_path %> 
                                                 </div>
@@ -66,8 +66,75 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-10 m-auto" id="candidate_ref">
-                        <%= render "candidates"%>
-                    </div> 
+<div class="row">
+    <div class="col-lg-12 pt-4">
+        <h3><%= @candidate.count %> Candidates</h3><br>
+            <ul class="d-flex flex-wrap badge-list mb-0">
+                <% for i in Candidate::CATEGORY_LIST %> 
+                <%= link_to i, skill_candidates_path(i.split.join("-")), class: "sub-title",  target: '_blank' %> 
+                <% end %>
+            </ul>
+    </div>  
+    <% @candidate.each do |candidate| %>
+        <div class="col-lg-4 text-center card-box mb-4">
+            <div class="widget-box">
+                <div class="dropdown float-right">
+                    <a href="javascript:void" class="float-right" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-dots-vertical float-right"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <% if current_user.has_role? :bde %>
+                            <div class="d-flex">
+                            <i class="fa fa-eye ml-2"></i>
+                            <%= link_to 'View Candidate', candidate_path(candidate) , class: "dropdown-item"  %> 
+                            </div>
+                        <% else %>
+                        <div class="d-flex align-items-center">
+                        <i class="fa fa-eye ml-2"></i>
+                        <%= link_to 'View Candidate', candidate_path(candidate) , class: "dropdown-item"  %>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                        <i class="fa fa-edit ml-2"></i>
+                        <%= link_to 'Edit Candidate', edit_candidate_path(candidate), class: "dropdown-item" %> 
+                        </div>
+                            
+                        <% end %>                                
+                    </div>
+                </div>
+                <% if candidate.image.present? %>
+                    <span class="emoji-container emoji1">
+                        <%= image_tag candidate.image.url %>
+                    </span>
+                <% else %>
+                    <% if candidate.gender == "Male" %>
+                        <span class="emoji-container emoji3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
+                                alt="">
+                        </span>
+                    <% elsif candidate.gender == "Female" %>
+                        <span class="emoji-container emoji2">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
+                                alt="">
+                        </span>
+                    <% else %>
+                        <span class="emoji-container emoji1">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="">
+                        </span>
+                    <% end %>
+                <% end %>
+                <p class="m-0"><b><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.id) %></b></p>
+                <p><%= candidate.category %></p>
+                <p><%= candidate.status %></p> 
+            </div>
+        </div>
+    <% end %>
+
+</div>
+</div>
+</div>
+ </div> 
         </section>   
     </div>
 </div>

@@ -94,30 +94,17 @@ class CandidatesController < ApplicationController
     end
 
     def filter
-      filter_hash = Hash.new
-
-      if params[:country_name].present?
-        filter_hash[:nationality] = params[:country_name]
-      end
+      search_data = []
       
-      if params[:category_name].present?
-        filter_hash[:category] = params[:category_name]
-      end
-
-      if params[:nature_array].present?
-        filter_hash[:job_nature] = params[:nature_array]
-      end
-
-      if params[:level_array].present?
-        filter_hash[:job_level] = params[:level_array]
-      end
+      search_data << "nationality = '#{params[:country_name]}'" if params[:country_name].present?
+      search_data << "category = '#{params[:category_name]}'" if params[:category_name].present?
+      search_data << "cast(job_nature as varchar) ILIKE ANY (ARRAY['%#{params[:nature_array].join("%','%")}%'])" if params[:nature_array].present?
+      search_data << "cast(job_level as varchar) ILIKE ANY (ARRAY['%#{params[:level_array].join("%','%")}%'])" if params[:level_array].present?
+      search_data << "(cast(primary_skill as varchar) ILIKE ANY (ARRAY['%#{params[:skill_array].join("%','%")}%']) OR cast(secondary_skill as varchar) ILIKE ANY (ARRAY['%#{params[:skill_array].join("%','%")}%']))" if params[:skill_array].present?
+      search_data = search_data.join(" AND ") rescue ""
       
-      if filter_hash.present?
-        @candidates = Candidate.where(filter_hash)
-      else
-        @candidates = Candidate.all
-      end
-      @candidates = @candidates.paginate(page: params[:page], per_page: 12)  
+      candidates =  Candidate.where(search_data)
+      @candidates = candidates.paginate(page: params[:page], per_page: 12)  
       respond_to do |format|
         format.js
         format.html do
@@ -125,7 +112,11 @@ class CandidatesController < ApplicationController
         end
       end
     end
-    
+
+    def skill
+      @candidate = Candidate.where(category: params[:category_name].split("-").join(" "))
+    end
+      
 
     private
     def candidate_params

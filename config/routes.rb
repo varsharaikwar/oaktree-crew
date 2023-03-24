@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'show/cities', to: "candidates#show_cities", as: 'show_cities'
   get 'logout/candidates', to: 'candidates#logout'
   get 'filter/candidates', to: 'candidates#filter'
+  get ':category_name', to: 'candidates#skill', as: 'skill_candidates'
+
 
   resources :candidates do 
     member do 

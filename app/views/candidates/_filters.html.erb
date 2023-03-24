@@ -1,0 +1,56 @@
+    <div class="col-lg-2">
+        <div class="nav-side-menu sidebar">
+            <div class="">
+                <p>
+                    <h3 class="pt-4">
+                    Filter
+                    </h3>
+                </p>
+                <p class="h4">
+                    <%= label_tag "Job Level" %>
+                </p>
+
+                <div class="jobs_level check_filter">
+                    <% ["entery level", "mid level", "top level"].each do |val|%>
+                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
+                    <% end %>
+                </div>
+
+                <br>
+                <p class="h4">
+                    <%= label_tag "Job Nature"%>
+                </p>
+
+                <div class="jobs_nature check_filter">
+                    <% ["full time", "part time", "contract", "internship", "freelance", "office"].each do |val|%>
+                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
+                    <% end %>
+                </div>
+                <br>
+                <div class="mb-3">
+                <p class="h4">
+                    <%= label_tag "Location"%>
+                </p>
+                <div>
+                    <%= select_tag :nationality, options_for_select(CS.countries.values.sort), prompt: "Select", id: "CountryFilter", class: "filter-radius overflow-select"%><br>
+                </div>
+                </div>
+                
+                <p class="h4 mt-5">
+                    <%= label_tag "Category"%>
+                </p>
+                <div>
+                    <%= select_tag :category, options_for_select(Candidate::CATEGORY_LIST), prompt: "Select", id: "CategoryFilter", class: "filter-radius overflow-select"%><br>
+                </div>
+            
+                <p class="h4 mt-5">
+                    <%= label_tag "Skill"%>
+                </p>
+                <div class="skill_filter check_filter">
+                    <% ["ruby", "c", "java", "python", "c#", "swift"].each do |val|%>
+                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
