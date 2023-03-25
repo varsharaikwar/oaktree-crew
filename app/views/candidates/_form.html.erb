@@ -100,7 +100,7 @@
                                     <div class="form-group">
                                         <label>Nationality</label>
                                         <div id="nationality">
-                                         <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'}, class: "js-example-basic-single form-control" %>
+                                         <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1" %>
                                         </div>  
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                     <div class="form-group">
                                         <label>Location</label>
                                         <div id="current_location">
-                                        <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control"%>
+                                        <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1"%>
                                         </div>  
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                     <div class="form-group">
                                         <label>City</label>
                                         <div id="state_select">
-                                            <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control" %>
+                                            <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1" %>
                                         </div>  
                                     </div>
                                 </div>
