@@ -32,6 +32,9 @@ class Ability
 
     elsif user.has_role? :admin
       can :manage, :all
+
+    elsif user.has_role? :sales_person
+      can :manage, :Lead
     end
   end
   
