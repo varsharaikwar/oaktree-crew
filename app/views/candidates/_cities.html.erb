@@ -1,2 +1,17 @@
 <%= select_tag :city, options_for_select(CS.cities( CS.states(CS.countries.key(country)).key(state), CS.countries.key(country))), prompt: "Select something", class: "form-control select-city sel-search"%>
-<script> $('.select-city').niceSelect();</script>
+<script> 
+    $('.select-city').niceSelect();
+
+    // js for adding input tag inside select tags
+    $("#city_select ul li:first").before('<input type="text" class="search_filed" onclick="event.stopPropagation()"/>')
+
+    // js for adding search functionality inside select tags
+    $(".search_filed").on('keyup', function(e){
+        sear_val = $(this).val().toLocaleLowerCase().trim();
+        
+        id = e.currentTarget.parentElement.parentElement.parentElement.id;
+        $("#" + id + " ul li").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
+        });
+    })
+</script>

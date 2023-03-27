@@ -100,7 +100,8 @@
                                     <div class="form-group">
                                         <label>Nationality</label>
                                         <div id="nationality">
-                                         <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1" %>
+                                         <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search" %>
+                                         
                                         </div>  
                                     </div>
                                 </div>
@@ -109,15 +110,15 @@
                                     <div class="form-group">
                                         <label>Location</label>
                                         <div id="current_location">
-                                        <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1"%>
+                                        <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1 sel-search"%>
                                         </div>  
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>City</label>
-                                        <div id="state_select">
-                                            <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1" %>
+                                        <div id="city_select">
+                                            <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1 sel-search" %>
                                         </div>  
                                     </div>
                                 </div>
@@ -514,9 +515,7 @@
             $("#blah").click(function(){
             $("#img_tag").click();
             });
-        });
-
-        $(document).ready(function(){
+        
             $("#nationality").change(function(){
                 var country = $('#nationality option:selected').text();
                 $.ajax({
@@ -653,6 +652,24 @@
                     }
                 }       
             });
+
+            // js for adding input tag inside select tags
+            $("#nationality ul li:first , #current_location ul li:first, #city_select ul li:first, #time ul li:first, #category ul li:first, #degree ul li:first, #year ul li:first, #period ul li:first").before('<input type="text" class="search_filed" onclick="event.stopPropagation()"/>')
+
+            // js for adding search functionality inside select tags
+            $(".search_filed").on('keyup', function(e){
+                sear_val = $(this).val().toLocaleLowerCase().trim();
+                
+                id = e.currentTarget.parentElement.parentElement.parentElement.id;
+                $("#" + id + " ul li").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
+                });
+            })
+
+            // js for input tag and button inside ul tags
+
+            $("#u1 li:first")
+
         });  
     </script>
 
@@ -676,11 +693,3 @@
     
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
-
-<script>
-
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
-
-</script>
