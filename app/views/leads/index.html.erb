@@ -1,2 +1,41 @@
-<h1>Leads#index</h1>
-<p>Find me in app/views/leads/index.html.erb</p>
+<%= render "layouts/header"%>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<h1>Lead</h1>
+
+<table id="leadsTable" class="display" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Name</th>
+      <th>Profile</th>
+      <th>Assigned To</th>
+      <th>Status</th>
+      <th>additional Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @leads.each do |lead| %>
+      <tr>
+        <td><%= link_to lead.name, lead %></td>
+        <td><%= link_to lead.profile, lead %></td>
+        <td><%= link_to lead.assigned_to, lead %></td>
+        <td><%= link_to lead.status, lead %></td>
+        <td><%= link_to lead.additional_info, lead %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+$(document).ready(function(){
+  $("#leadsTable").DataTable({
+      responsive: true,
+      scrollX: '200px',
+      scrollY: true,
+      paging: false,
+      language: { search: "", searchPlaceholder: "Search..." },
+  })
+})
+</script>

@@ -13,7 +13,7 @@ class Ability
       can :create, Comment
       can :filter, Candidate
       can :skill, Candidate
-      
+      can :manage, Notification
 
     elsif user.has_role? :senior_hr
       can :index, Candidate
@@ -22,7 +22,8 @@ class Ability
       can :create, Comment
       can :filter, Candidate
       can :skill, Candidate
-
+      can :manage, Notification
+      
     elsif user.has_role? :bde
       can :index, Candidate
       can :show, Candidate
@@ -34,7 +35,8 @@ class Ability
       can :manage, :all
 
     elsif user.has_role? :sales_person
-      can :manage, :Lead
+      can :manage, Lead
+      can :manage, Notification
     end
   end
   

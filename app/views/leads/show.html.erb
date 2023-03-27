@@ -1,0 +1,10 @@
+<%= render "layouts/header"%>
+<div>
+Name: <%= @lead.name %><br>
+Profile: <%= @lead.profile %><br>
+Assigned To: <%= @lead.assigned_to %><br>
+Status: <%= @lead.status %><br>
+Additional Info: <%= @lead.additional_info %><br>
+</div>
+<%= button_to "Edit", edit_lead_path(@lead) %>
+<%= button_to "Delete", lead_path(@lead), method: :delete %>
