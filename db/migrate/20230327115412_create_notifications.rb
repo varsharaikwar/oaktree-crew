@@ -1,0 +1,13 @@
+class CreateNotifications < ActiveRecord::Migration[7.0]
+  def change
+    create_table :notifications do |t|
+      t.integer :sender_id
+      t.string :sender_type
+      t.integer :reciver_id
+      t.string :reciver_type
+      t.references :lead, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end

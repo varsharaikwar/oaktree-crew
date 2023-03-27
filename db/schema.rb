@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_120513) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_27_115412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -78,13 +92,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_120513) do
     t.date "date_of_birth"
     t.string "file"
     t.string "status"
+    t.integer "user_id"
     t.text "current_location"
+    t.string "available_time_zone"
+    t.string "industry"
+    t.string "start_time"
+    t.string "end_time"
     t.string "primary_skill", default: [], array: true
     t.string "secondary_skill", default: [], array: true
-    t.datetime "available_time_zone"
-    t.string "industry"
-    t.datetime "available_time"
+    t.string "image"
+    t.string "experience"
+    t.string "link"
+    t.string "language"
+    t.string "updated_file"
+    t.string "city"
     t.index ["slug"], name: "index_candidates_on_slug", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "candidate_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_comments_on_candidate_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -98,6 +129,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_120513) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "leads", force: :cascade do |t|
+    t.string "name"
+    t.string "profile"
+    t.string "assigned_to"
+    t.string "status"
+    t.text "additional_info"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_leads_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "sender_id"
+    t.string "sender_type"
+    t.integer "reciver_id"
+    t.string "reciver_type"
+    t.bigint "lead_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lead_id"], name: "index_notifications_on_lead_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -106,6 +160,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_120513) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "skill_sets", force: :cascade do |t|
+    t.string "name"
+    t.string "skill_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -130,4 +191,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_120513) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "candidates"
+  add_foreign_key "comments", "users"
+  add_foreign_key "leads", "users"
+  add_foreign_key "notifications", "leads"
 end
