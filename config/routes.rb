@@ -3,10 +3,16 @@ Rails.application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
   
-  root "homes#index"
+  authenticated :user, ->(u) { u.has_role?(:sales_person) } do
+    root to: "leads#index", as: :sales_person_root
+  end
 
-  resources :candidates 
+  root to: "candidates#index"
+
+  resources :candidates
+  resources :leads 
   resources :password_resets
+  resources :notifications
   
   get 'show/states', to: "candidates#show_states", as: 'show_states'
   get 'show/cities', to: "candidates#show_cities", as: 'show_cities'
