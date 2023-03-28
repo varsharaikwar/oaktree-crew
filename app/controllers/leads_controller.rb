@@ -14,6 +14,7 @@ class LeadsController < ApplicationController
   def create
       @lead = current_user.leads.new(lead_params)
       if @lead.save
+        @lead.assign_user(current_user, @lead)
           redirect_to @lead
       else
           render :new, status: :unprocessable_entity
