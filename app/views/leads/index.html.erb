@@ -3,8 +3,8 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<h1>Lead</h1>
-<%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Lead', new_lead_path %> 
+<h1>Leads</h1>
+<%= link_to 'Add New Lead', new_lead_path, class: "btn default-btn" %> 
 
 <table id="leadsTable" class="display" style="width:100%">
   <thead>

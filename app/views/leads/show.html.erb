@@ -1,10 +1,19 @@
 <%= render "layouts/header"%>
 <div>
-Name: <%= @lead.name %><br>
-Profile: <%= @lead.profile %><br>
-Assigned To: <%= @lead.assigned_to %><br>
-Status: <%= @lead.status %><br>
-Additional Info: <%= @lead.additional_info %><br>
+    <h6>Name</h6>
+    <%= @lead.name %><br>
+    <h6>Profile</h6>
+    <%= @lead.profile %><br>
+    <h6>Assigned To</h6>
+    <%= @lead.assigned_to %><br>
+    <h6>Status</h6> 
+    <%= @lead.status %><br>
+    <h6>Additional Info</h6> 
+    <%= @lead.additional_info %><br>
 </div>
 <%= link_to "Edit", edit_lead_path(@lead) %>
 <%= link_to "Delete", lead_path(@lead), method: :delete %>
+
+
+
+

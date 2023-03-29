@@ -8,5 +8,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         def unread_notifications_count
+          notifications.where(read: false).count
+        end
 end
 

@@ -14,6 +14,7 @@ class Ability
       can :filter, Candidate
       can :skill, Candidate
       can :manage, Notification
+      can :manage, SkillSet
 
     elsif user.has_role? :senior_hr
       can :index, Candidate
@@ -23,6 +24,7 @@ class Ability
       can :filter, Candidate
       can :skill, Candidate
       can :manage, Notification
+      can :manage, SkillSet
       
     elsif user.has_role? :bde
       can :index, Candidate
@@ -30,6 +32,7 @@ class Ability
       can :create, Comment
       can :filter, Candidate
       can :skill, Candidate
+      can :manage, SkillSet
 
     elsif user.has_role? :admin
       can :manage, :all

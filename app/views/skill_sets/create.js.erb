@@ -1,0 +1,8 @@
+$('#close_popup').click();
+$('#close_popup_second').click();
+$("#refresh_primary").load(window.location.href + " #refresh_primary" );
+$("#refresh_secondary").load(window.location.href + " #refresh_secondary" );
+
+<% if flash[:alert] %>
+  alert("<%= j flash[:alert] %>");
+<% end %>

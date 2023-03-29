@@ -1,10 +1,84 @@
-<h1>Notification</h1>
+<%= render "layouts/header"%>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<div class="container">
+  <div class="px-3 py-4">
+  <div class="bg-light p-3 mb-3">
+  <h4>All Notifications<i class="fa fa-bell ml-2 text-primary"></i></h4> 
+  </div>
 
-<ul>
-  <% @notifications.each do |article| %>
-    <li>
-        <%= article.reciver_type %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+    <div id="noticeTable" class="display" style="width:100%">
+      <div class="row">
+        <% @notifications.each do |notice|%>
+          <div class="col-lg-12 mb-3 notification-row">
+            <div class="row py-3">
+            <%@lead = notice.lead%>
+              <div class="col-lg-3">
+                <div class="d-flex">
+                <span class="profile-txt"><%= link_to @lead.name.split('')[0], notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <span class="txt-ellipsis"><%= link_to @lead.name, notice %></span>
+              </div>
+              <div class="col-lg-2">
+                <span class="txt-ellipsis"><%= link_to @lead.profile, notice, class: "badge badge-success" %></span>
+              </div>
+              <div class="col-lg-2">
+                <span class="txt-ellipsis"><%= link_to @lead.status, notice, class: "badge badge-primary" %></span> 
+              </div>
+              <div class="col-lg-3">
+                <span class="txt-ellipsis"><%= link_to @lead.additional_info, notice %></span>
+              </div>
+            </div>
+          </div>
+          <%= "Unread notifications: #{Notification.where(read: false).count}" %>
+          <%= "Read notifications: #{Notification.where(read: true).count}" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .txt-ellipsis{
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .notification-row:nth-child(odd){
+    background-color: rgb(255, 193, 7, 0.3);
+  }
+  .notification-row:nth-child(odd) .profile-txt{
+    background-color: rgb(255, 193, 7);
+  }
+  .notification-row span a{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .notification-row .profile-txt{
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .notification-row:nth-child(even) .profile-txt{
+    background-color: rgb(40, 167, 69);
+  }
+  
+  .notification-row:nth-child(even){
+    background-color: rgb(40, 167, 69, 0.3);
+  }
+</style>
+

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :leads 
   resources :password_resets
   resources :notifications
-  
+  resources :skill_sets
   get 'show/states', to: "candidates#show_states", as: 'show_states'
   get 'show/cities', to: "candidates#show_cities", as: 'show_cities'
   get 'logout/candidates', to: 'candidates#logout'

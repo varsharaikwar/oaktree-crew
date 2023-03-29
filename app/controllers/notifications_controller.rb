@@ -1,11 +1,12 @@
 class NotificationsController < ApplicationController
     before_action :authenticate_user!
     def index
-        @notifications = Notification.where(user_id: current_user.id)    
+        @notifications = Notification.all 
     end
 
     def show
         @notification = Notification.find(params[:id])
+        @notification.update(read: true)
     end
 
     private
