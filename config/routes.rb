@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   root to: "candidates#index"
 
-  resources :candidates
+  resources :candidates, except: [:create, :new]
+
+  post     'new_candidate' => 'candidates#create'
+  get      'new_candidate' => 'candidates#new'
   resources :leads 
   resources :password_resets
   resources :notifications
