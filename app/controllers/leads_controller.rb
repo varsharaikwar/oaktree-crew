@@ -1,19 +1,21 @@
 class LeadsController < ApplicationController
   before_action :authenticate_user!
-  def index
+    def index
       @leads = Lead.all
-  end
-  def show
+    end
+
+    def show
       @lead = current_user.leads.find(params[:id])
-  end
-  def new
+    end
+
+    def new
       @lead = Lead.new
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
       @category_list = Candidate::CATEGORY_LIST
-  end
-  
+    end
+
   def create
-      @lead = current_user.leads.new(lead_params)
+    @lead = current_user.leads.new(lead_params)
       if @lead.save
         @lead.assign_user(current_user, @lead)
           redirect_to @lead

@@ -64,7 +64,7 @@ class CandidatesController < ApplicationController
         @candidate.update(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))
         redirect_to @candidate
       elsif @candidate.update(candidate_params)
-      redirect_to @candidate
+        redirect_to @candidate
       else
         render :edit, status: :unprocessable_entity
       end

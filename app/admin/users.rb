@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params [:email, :password, :password_confirmation,  role_ids: []] 
+  permit_params [:name, :email, :password, :password_confirmation,  role_ids: []] 
 
   action_item :view, only: :show do
     link_to "New User", new_admin_user_path
@@ -7,6 +7,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs "User Details" do
+      f.input :name
       f.input :email
       f.input :password
       f.input :password_confirmation
