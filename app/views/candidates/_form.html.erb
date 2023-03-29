@@ -467,257 +467,196 @@
 <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
 <script>
-$('#timepicker').timepicker({
-    uiLibrary: 'bootstrap4'
-});
-
-$('#timepicker1').timepicker({
-    uiLibrary: 'bootstrap4'
-});
-
-function readURL(input) {
-if (input.files && input.files[0]) {
-var reader = new FileReader();
-reader.onload = function (e) {
-a = $('#blah').attr('src', e.target.result).width(100).height(100);
-};
-reader.readAsDataURL(input.files[0]);
-}
-document.getElementById("img_tag").style.display = "none";
-document.getElementById("fa").style.display = "none";
-document.getElementById("blah").style.display = "block";
-}
-
-$(document).ready(function(){
-    $("#blah").click(function(){
-    $("#img_tag").click();
+    $('#timepicker').timepicker({
+        uiLibrary: 'bootstrap4'
     });
 
-    $("#nationality").change(function(){
-        var country = $('#nationality option:selected').text();
-        $.ajax({
-        type: "GET", 
-        url: "/show/states",
-        data: {'country': country},
+    $('#timepicker1').timepicker({
+        uiLibrary: 'bootstrap4'
+    });
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+    a = $('#blah').attr('src', e.target.result).width(100).height(100);
+    };
+    reader.readAsDataURL(input.files[0]);
+    }
+    document.getElementById("img_tag").style.display = "none";
+    document.getElementById("fa").style.display = "none";
+    document.getElementById("blah").style.display = "block";
+    }
+
+    $(document).ready(function(){
+        $("#blah").click(function(){
+        $("#img_tag").click();
+        });
+
+        $("#nationality").change(function(){
+            var country = $('#nationality option:selected').text();
+            $.ajax({
+            type: "GET", 
+            url: "/show/states",
+            data: {'country': country},
+            })
+        });
+
+        $("#current_location").change(function(){
+            var state = $('#current_location option:selected').text();
+            var country = $('#nationality option:selected').text();
+            $.ajax({
+            type: "GET", 
+            url: "/show/cities",
+            data: {'country': country, 'state': state},
+            })
+        });
+        
+        // js for adding input tag inside select tags
+        $("#nationality ul li:first , #current_location ul li:first, #city_select ul li:first, #time ul li:first, #category ul li:first, #degree ul li:first, #year ul li:first, #period ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()"/>')
+
+        // js for adding search functionality inside select tags
+        $(".search_field").on('keyup', function(e){
+            sear_val = $(this).val().toLocaleLowerCase().trim();
+            
+            id = e.currentTarget.parentElement.parentElement.parentElement.id
+            
+            id = id != "" ? id : e.currentTarget.parentElement.parentElement.id
+            let checkids = ["primary_skill" , "secondary_skill"]
+            if(checkids.includes(id)){
+                console.log($("#" + id + " ul li")[0].id    , "filter");
+                $("#" + id + " ul li").filter(function() {
+                    console.log($(this)[0].id , "this" );
+                $(this).toggle($(this)[0].id.trim().toLowerCase().indexOf(sear_val.trim().toLowerCase()) > -1);
+                // $(this).parent().toggle();
+
+            });
+            }
+            else{
+                
+            $("#" + id + " ul li").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
+            });
+            }
         })
     });
 
-    $("#current_location").change(function(){
-        var state = $('#current_location option:selected').text();
-        var country = $('#nationality option:selected').text();
-        $.ajax({
-        type: "GET", 
-        url: "/show/cities",
-        data: {'country': country, 'state': state},
-        })// js for adding input tag inside select tags
-    $("#nationality ul li:first , #current_location ul li:first, #city_select ul li:first, #time ul li:first, #category ul li:first, #degree ul li:first, #year ul li:first, #period ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()"/>')
-
-    // js for adding search functionality inside select tags
-    $(".search_field").on('keyup', function(e){
-        sear_val = $(this).val().toLocaleLowerCase().trim();
-        
-        id = e.currentTarget.parentElement.parentElement.parentElement.id
-        
-        id = id != "" ? id : e.currentTarget.parentElement.parentElement.id
-        let checkids = ["primary_skill" , "secondary_skill"]
-        if(checkids.includes(id)){
-            console.log($("#" + id + " ul li")[0].id    , "filter");
-            $("#" + id + " ul li").filter(function() {
-                console.log($(this)[0].id , "this" );
-            $(this).toggle($(this)[0].id.trim().toLowerCase().indexOf(sear_val.trim().toLowerCase()) > -1);
-            // $(this).parent().toggle();
-
+        $("#fname").on('focusout', function(){
+            if ($("#fname").val() == ''){
+                document.getElementById("msg").style.display = "block";
+            }
+            else{
+                document.getElementById("msg").style.display = "none";
+            }
         });
-        }
-        else{
+
+        $("#lname").on('focusout', function(){
+            if ($("#lname").val() == ''){
+                document.getElementById("msg1").style.display = "block";
+            }
+            else{
+                document.getElementById("msg1").style.display = "none";
+            }
+        });
+
+        $("#email").on('focusout', function(){
+            if ($("#email").val() == ''){
+                document.getElementById("msg2").style.display = "block";
+            }
+            else{
+                document.getElementById("msg2").style.display = "none";
+            }
+        });
+
+        $("#phone").on('focusout', function(){
+            if ($("#phone").val() == ''){
+                document.getElementById("msg3").style.display = "block";
+            }
+            else{
+                document.getElementById("msg3").style.display = "none";
+            }
+        });
+
+
+        $("#gender").change(function(){
+            if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+                document.getElementById("msg5").style.display = "none";
+            }
+            else{
+                document.getElementById("msg5").style.display = "block";
+            }
+        });
+        
+        $("#address").on('focusout', function(){
+            if ($("#address").val() == ''){
+                document.getElementById("msg11").style.display = "block";
+            }
+            else{
+                document.getElementById("msg11").style.display = "none";
+            }
             
-        $("#" + id + " ul li").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
-        });
-        }
-    })
-});
     });
-
-    $("#fname").on('focusout', function(){
-        if ($("#fname").val() == ''){
-            document.getElementById("msg").style.display = "block";
-        }
-        else{
-            document.getElementById("msg").style.display = "none";
-        }
-    });
-
-    $("#lname").on('focusout', function(){
-        if ($("#lname").val() == ''){
-            document.getElementById("msg1").style.display = "block";
-        }
-        else{
-            document.getElementById("msg1").style.display = "none";
-        }
-    });
-
-    $("#email").on('focusout', function(){
-        if ($("#email").val() == ''){
-            document.getElementById("msg2").style.display = "block";
-        }
-        else{
-            document.getElementById("msg2").style.display = "none";
-        }
-    });
-
-    $("#phone").on('focusout', function(){
-        if ($("#phone").val() == ''){
-            document.getElementById("msg3").style.display = "block";
-        }
-        else{
-            document.getElementById("msg3").style.display = "none";
-        }
-    });
-
-    $("#date").on('focusout', function(){
-        if ($("#date").val() == ''){
-            document.getElementById("msg4").style.display = "block";
-        }
-        else{
-            document.getElementById("msg4").style.display = "none";
-        }
-    });
-
-    $("#gender").change(function(){
-        if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-            document.getElementById("msg5").style.display = "none";
-        }
-        else{
-            document.getElementById("msg5").style.display = "block";
-        }
-    });
-    
-    $("#status").change(function(){
-        if ($("#status")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-            document.getElementById("msg6").style.display = "none";
-        }
-        else{
-            document.getElementById("msg6").style.display = "block";
-        }
-    });
-    
-    $("#nationality").change(function(){
-        if ($("#nationality")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-            document.getElementById("msg7").style.display = "none";
-        }
-        else{
-            document.getElementById("msg7").style.display = "block";
-        }
-    });
-
-    $("#time").change(function(){
-        if ($("#time")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-            document.getElementById("msg8").style.display = "none";
-        }
-        else{
-            document.getElementById("msg8").style.display = "block";
-        }
-    });
-
-    $("#address").on('focusout', function(){
-        if ($("#address").val() == ''){
-            document.getElementById("msg11").style.display = "block";
-        }
-        else{
-            document.getElementById("msg11").style.display = "none";
-        }
-    });
-
-    // js for adding input tag inside select tags
-    $("#nationality ul li:first , #current_location ul li:first, #city_select ul li:first, #time ul li:first, #category ul li:first, #degree ul li:first, #year ul li:first, #period ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()"/>')
-
-    // js for adding search functionality inside select tags
-    $(".search_field").on('keyup', function(e){
-        sear_val = $(this).val().toLocaleLowerCase().trim();
-        
-        id = e.currentTarget.parentElement.parentElement.parentElement.id
-        
-        id = id != "" ? id : e.currentTarget.parentElement.parentElement.id
-        let checkids = ["primary_skill" , "secondary_skill"]
-        if(checkids.includes(id)){
-            console.log($("#" + id + " ul li")[0].id    , "filter");
-            $("#" + id + " ul li").filter(function() {
-                console.log($(this)[0].id , "this" );
-            $(this).toggle($(this)[0].id.trim().toLowerCase().indexOf(sear_val.trim().toLowerCase()) > -1);
-            // $(this).parent().toggle();
-
-        });
-        }
-        else{
-            
-        $("#" + id + " ul li").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
-        });
-        }
-    })
-});
 
 </script>
 
 <style>
-.btn-design{
-width: 100%;
-height: 50px;
-border-radius: 0;
--webkit-box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
-box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
-border: 1px solid #ebebeb;
-padding-left: 20px px;
-padding-right: 20px;
-margin-bottom: 30px;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
-}
+    .btn-design{
+    width: 100%;
+    height: 50px;
+    border-radius: 0;
+    -webkit-box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
+    box-shadow: 0px 5px 20px 3px rgb(230 233 249 / 90%);
+    border: 1px solid #ebebeb;
+    padding-left: 20px px;
+    padding-right: 20px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
 </style>
 
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
 
-<!-- Modal -->
-<div class="modal fade" id="addSkill" tabindex="-1" aria-labelledby="addSkillLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="addSkillLabel"> Add New Skill </h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-  <span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<%= render "skill_sets/new"%>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_popup">Close</button>
-</div>
-</div>
-</div>
-</div>
+    <!-- Modal For Primary Skill -->
+    <div class="modal fade" id="addSkill" tabindex="-1" aria-labelledby="addSkillLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSkillLabel"> Add New Skill </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 <%= render "skill_sets/new"%>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_popup">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="addSkillsecond" tabindex="-1" aria-labelledby="addSkillsecondLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="addSkillsecondLabel"> Add New Skill </h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-  <span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<%= render "skill_sets/create"%>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_popup_second">Close</button>
-</div>
-</div>
-</div>
-</div>
+<!-- Modal For Secondary Skill -->
+    <div class="modal fade" id="addSkillsecond" tabindex="-1" aria-labelledby="addSkillsecondLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSkillsecondLabel"> Add New Skill </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <%= render "skill_sets/create"%>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_popup_second">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

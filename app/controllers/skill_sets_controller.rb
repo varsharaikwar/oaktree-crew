@@ -10,13 +10,16 @@ class SkillSetsController < ApplicationController
         @secondary_skill = SkillSet.where(skill_type: 'secondary')
         @skill_set = SkillSet.new(skill_set_params)
         
-        respond_to do |format|
-            if @skill_set.save
-                format.js 
+        if SkillSet.exists?(name: @skill_set.name, skill_type: @skill_set.skill_type)
+            respond_to do |format|
+                format.js { render js: "alert('A skill with this name and type already exists.');" }
             end
+        else
+            @skill_set = SkillSet.create(skill_set_params)
         end
     end
 end
+
   
 private
 

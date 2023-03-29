@@ -4,11 +4,11 @@ class InitializeUserRoles < ActiveRecord::Migration[7.0]
       {name: 'junior_hr'},{name: 'senior_hr'}, {name: 'bde'},{name: 'management'},{name: 'sales_person'}])
 
     User.create([{email: 'admin@gmail.com',password: '123456789', name: "admin"},
-    {email: 'junior_hr@gmail.com',password: '123456789', name: "junior"},
-    {email: 'senior_hr@gmail.com',password: '123456789', name: "senior"},
+    {email: 'junior_hr@gmail.com',password: '123456789', name: "junior_hr"},
+    {email: 'senior_hr@gmail.com',password: '123456789', name: "senior_hr"},
     {email: 'bde@gmail.com',password: '123456789', name: "bde"},
     {email: 'management@gmail.com',password: '123456789', name: "management"},
-    {email: 'sales_person@gmail.com',password: '123456789', name: "sales"}])
+    {email: 'sales_person@gmail.com',password: '123456789', name: "sales_person"}])
 
     User.find_by(email: 'admin@gmail.com').add_role("admin")
     User.find_by(email: 'junior_hr@gmail.com').add_role("junior_hr")

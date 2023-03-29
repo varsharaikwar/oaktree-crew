@@ -9,6 +9,7 @@ class LeadsController < ApplicationController
   def new
       @lead = Lead.new
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
+      @category_list = Candidate::CATEGORY_LIST
   end
   
   def create
@@ -23,6 +24,7 @@ class LeadsController < ApplicationController
   def edit
       @lead = current_user.leads.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
+      @category_list = Candidate::CATEGORY_LIST
   end
   
   def update

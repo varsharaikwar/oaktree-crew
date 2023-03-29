@@ -7,9 +7,10 @@
      <%= f.hidden_field :skill_type , class: "form-control", placeholder: 'Enter Skill Type', value: 'primary'%>
    </div>
  
- <% if flash[:alert] %>
-   <div class="alert alert-danger"><%= flash[:alert] %></div>
- <% end %>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <% end %>
+  
    <div class="actions"><br>
      <%= f.submit "Create Skill" , class: "btn default-btn", id: "skillSets" %>
    </div>

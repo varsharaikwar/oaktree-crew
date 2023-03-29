@@ -34,8 +34,6 @@
               </div>
             </div>
           </div>
-          <%= "Unread notifications: #{Notification.where(read: false).count}" %>
-          <%= "Read notifications: #{Notification.where(read: true).count}" %>
         <% end %>
       </div>
     </div>

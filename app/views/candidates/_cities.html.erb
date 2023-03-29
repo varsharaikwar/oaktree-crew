@@ -3,10 +3,10 @@
     $('.select-city').niceSelect();
 
     // js for adding input tag inside select tags
-    $("#city_select ul li:first").before('<input type="text" class="search_filed" onclick="event.stopPropagation()"/>')
+    $("#city_select ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.."  onclick="event.stopPropagation()"/>')
 
     // js for adding search functionality inside select tags
-    $(".search_filed").on('keyup', function(e){
+    $(".search_field").on('keyup', function(e){
         sear_val = $(this).val().toLocaleLowerCase().trim();
         
         id = e.currentTarget.parentElement.parentElement.parentElement.id;

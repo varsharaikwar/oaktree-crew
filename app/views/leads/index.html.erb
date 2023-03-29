@@ -3,31 +3,76 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<h1>Leads</h1>
-<%= link_to 'Add New Lead', new_lead_path, class: "btn default-btn" %> 
 
-<table id="leadsTable" class="display" style="width:100%">
-  <thead>
-    <tr> 
-      <th>Name</th>
-      <th>Profile</th>
-      <th>Assigned To</th>
-      <th>Status</th>
-      <th>additional Info</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @leads.each do |lead| %>
-      <tr>
-        <td><%= link_to lead.name, lead %></td>
-        <td><%= link_to lead.profile, lead %></td>
-        <td><%= link_to lead.assigned_to, lead %></td>
-        <td><%= link_to lead.status, lead %></td>
-        <td><%= link_to lead.additional_info, lead %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="breadcrumb-lead">
+<div class="overlay"></div>
+  <div class="container position-relative">
+  <h1 class="text-white">Leads</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="p-3">
+  <div class="row mb-3">
+    <div class="col-lg-6 mt-3">
+    </div>
+    <div class="col-lg-6 text-right mb-5 mt-3">
+      <b>
+      <%= link_to '+ Add New Lead', new_lead_path, class: "btn default-btn" %> 
+      </b>
+    </div>
+  </div>
+    
+   
+
+    <table id="leadsTable" class="display" style="width:100%">
+      <thead>
+        <tr> 
+          <th>Name</th>
+          <th>Profile</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th>additional Info</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @leads.each do |lead| %>
+          <tr>
+            <td><%= link_to lead.name, lead %></td>
+            <td><%= link_to lead.profile, lead %></td>
+            <td><%= link_to User.find_by(email: lead.assigned_to).name, lead %></td>
+          
+            <td><%= link_to lead.status, lead %></td>
+            <td><%= link_to lead.additional_info, lead %></td>
+            <td><%= link_to edit_lead_path(lead.id),  class: "btn btn-primary" do %>
+              <i class="fa fa-pencil"></i>
+            <% end %> <%= link_to lead_path(lead.id), method: :delete, class: "btn btn-danger" do %>
+              <i class="fa fa-trash"></i><% end %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+    .breadcrumb-lead{
+      background-color: #4fb174;
+      padding: 12rem 0;
+      background-repeat: no-repeat;
+      background-image: url(https://cdn.pixabay.com/photo/2017/01/14/10/56/people-1979261_960_720.jpg);
+      background-size: 100%;
+      background-position: center;
+      position: relative;
+    }
+    .overlay{
+      background-color: rgb(79, 177, 116, 0.6);
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+    }
+</style>
 
 <script>
 $(document).ready(function(){
