@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_161457) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,8 +96,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_161457) do
     t.text "current_location"
     t.string "available_time_zone"
     t.string "industry"
-    t.string "start_time"
-    t.string "end_time"
     t.string "primary_skill", default: [], array: true
     t.string "secondary_skill", default: [], array: true
     t.string "image"
@@ -106,6 +104,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_161457) do
     t.string "language"
     t.string "updated_file"
     t.string "city"
+    t.string "start_time"
+    t.string "end_time"
     t.index ["slug"], name: "index_candidates_on_slug", unique: true
   end
 
@@ -127,6 +127,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_161457) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "lead_assignments", force: :cascade do |t|
+    t.bigint "candidate_id", null: false
+    t.bigint "lead_id", null: false
+    t.integer "hr_id"
+    t.integer "sales_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_lead_assignments_on_candidate_id"
+    t.index ["lead_id"], name: "index_lead_assignments_on_lead_id"
   end
 
   create_table "leads", force: :cascade do |t|
@@ -197,6 +208,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_161457) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "candidates"
   add_foreign_key "comments", "users"
+  add_foreign_key "lead_assignments", "candidates"
+  add_foreign_key "lead_assignments", "leads"
   add_foreign_key "leads", "users"
   add_foreign_key "notifications", "leads"
   add_foreign_key "notifications", "users"

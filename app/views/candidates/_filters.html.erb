@@ -1,56 +1,61 @@
-    <div class="col-lg-2">
-        <div class="nav-side-menu sidebar">
-            <div class="">
-                <p>
-                    <h3 class="pt-4">
-                    Filter
-                    </h3>
-                </p>
-                <p class="h4">
-                    <%= label_tag "Job Level" %>
-                </p>
-
-                <div class="jobs_level check_filter">
-                    <% ["entery level", "mid level", "top level"].each do |val|%>
-                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
-                    <% end %>
-                </div>
-
-                <br>
-                <p class="h4">
-                    <%= label_tag "Job Nature"%>
-                </p>
-
-                <div class="jobs_nature check_filter">
-                    <% ["full time", "part time", "contract", "internship", "freelance", "office"].each do |val|%>
-                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
-                    <% end %>
-                </div>
-                <br>
-                <div class="mb-3">
-                <p class="h4">
-                    <%= label_tag "Location"%>
-                </p>
-                <div>
-                    <%= select_tag :nationality, options_for_select(CS.countries.values.sort), prompt: "Select", id: "CountryFilter", class: "filter-radius overflow-select"%><br>
-                </div>
-                </div>
-                
-                <p class="h4 mt-5">
-                    <%= label_tag "Category"%>
-                </p>
-                <div>
-                    <%= select_tag :category, options_for_select(Candidate::CATEGORY_LIST), prompt: "Select", id: "CategoryFilter", class: "filter-radius overflow-select"%><br>
-                </div>
-            
-                <p class="h4 mt-5">
-                    <%= label_tag "Skill"%>
-                </p>
-                <div class="skill_filter check_filter">
-                    <% ["ruby", "c", "java", "python", "c#", "swift"].each do |val|%>
-                        <%= check_box_tag val + "_check" , val, false %> <%= label_tag val %><br>
-                    <% end %>
-                </div>
+<div class="col-lg-2">
+<div class="nav-side-menu sidebar">
+    <div class="">
+            <h3 class="pt-4">
+            Filter
+            </h3>
+        <div class="mb-3">
+        <p class="h4">
+                <%= label_tag "Location" %>
+        </p>
+        <div id='citySearch'>
+            <%= select_tag :city, options_for_select(CS.states(:IN).keys.flat_map { |state| CS.cities(state, :IN) }.sort), prompt: "Select", class: "filter-radius overflow-select select1 mb-3", id:"cityFilter"%>
+        </div> 
+        </div>
+        
+        <div class="mb-3">
+            <p class="h4 mt-5">
+            <%= label_tag "Category"%>
+            </p>
+            <div>
+                <%= select_tag :category, options_for_select(Candidate::CATEGORY_LIST), prompt: "Select", id: "CategoryFilter", class: "filter-radius overflow-select mb-3"%>
             </div>
         </div>
+    
+        <p class="h4 mt-5">
+            <%= label_tag "Skill"%>
+            <button type="button" class="btn text-primary float-right p-0" data-toggle="modal" data-target="#add_skill" href="/skill_sets/show_more" remote: true > Show All</button>
+        </p>
+        <div class="skill_filter check_filter" id="filterBox">
+            <% @primary_skill.limit(5).each do |val| %>
+                <div class="mb-2">
+                <%= check_box_tag val.name, val.name %> <span class="ml-1"><%= val.name %></span>
+                </div>
+            <% end %>
+        </div>
+        
     </div>
+</div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="add_skill" tabindex="-1" aria-labelledby="add_skilllLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="add_skillLabel"\> Skills </h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<%= render "skill_sets/show_more"%>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_pop">Close</button>
+</div>
+</div>
+</div>
+</div>

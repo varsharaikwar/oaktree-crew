@@ -1,4 +1,6 @@
 <%= render "layouts/header"%>
+<% @unread_notice.present?%>
+<%= javascript_tag "displayClock()" %>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
@@ -79,4 +81,3 @@
     background-color: rgb(40, 167, 69, 0.3);
   }
 </style>
-

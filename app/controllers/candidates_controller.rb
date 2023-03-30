@@ -3,6 +3,7 @@ class CandidatesController < ApplicationController
   load_and_authorize_resource :candidate, class: Candidate, except: [:show, :edit, :destroy, :update]
 
     def index
+      @primary_skill = SkillSet.where(skill_type: "primary")
       if params[:query].present?
         @candidates = Candidate.global_search(params[:query]) 
       else
@@ -20,6 +21,8 @@ class CandidatesController < ApplicationController
     
     def show
       @candidate = Candidate.find(params[:id])
+      @lead_assignment = LeadAssignment.new
+      @lead = Lead.where(assigned_to: current_user.email)
       authorize! :show, @candidate
     end
 
@@ -95,12 +98,10 @@ class CandidatesController < ApplicationController
 
     def filter
       search_data = []
-      
-      search_data << "nationality = '#{params[:country_name]}'" if params[:country_name].present?
+      search_data << "city = '#{params[:city_name]}'" if params[:city_name].present?
       search_data << "category = '#{params[:category_name]}'" if params[:category_name].present?
-      search_data << "cast(job_nature as varchar) ILIKE ANY (ARRAY['%#{params[:nature_array].join("%','%")}%'])" if params[:nature_array].present?
-      search_data << "cast(job_level as varchar) ILIKE ANY (ARRAY['%#{params[:level_array].join("%','%")}%'])" if params[:level_array].present?
       search_data << "(cast(primary_skill as varchar) ILIKE ANY (ARRAY['%#{params[:skill_array].join("%','%")}%']) OR cast(secondary_skill as varchar) ILIKE ANY (ARRAY['%#{params[:skill_array].join("%','%")}%']))" if params[:skill_array].present?
+
       search_data = search_data.join(" AND ") rescue ""
       
       candidates =  Candidate.where(search_data)
@@ -112,8 +113,8 @@ class CandidatesController < ApplicationController
         end
       end
     end
-
     def skill
+      @primary_skill = SkillSet.where(skill_type: "primary")
       @candidate = Candidate.where(category: params[:category_name].split("-").join(" "))
     end
       

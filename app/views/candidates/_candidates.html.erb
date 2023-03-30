@@ -4,7 +4,7 @@
         <h3><%= @candidates.count %> Candidates</h3><br>
             <ul class="d-flex flex-wrap badge-list mb-0">
                 <% for i in Candidate::CATEGORY_LIST %> 
-                <%= link_to i, skill_candidates_path(category_name:i.split.join("-")), class: "sub-title", :target => '_blank' %> 
+                    <%= link_to i, skill_candidates_path(category_name:i.split.join("-")), class: "sub-title", :target => '_blank' %> 
                 <% end %>
             </ul>
     </div>  
@@ -58,8 +58,8 @@
                     <% end %>
                 <% end %>
                 <p class="m-0"><b><%= link_to candidate.first_name+ " " +candidate.last_name,candidate_path(candidate.id) %></b></p>
-                <p><%= candidate.category %></p>
-                <p><%= candidate.status %></p> 
+                <p><%= link_to candidate.category,candidate_path(candidate.id) %></p>
+                <p><%= link_to candidate.status,candidate_path(candidate.id) %></p> 
             </div>
         </div>
     <% end %>

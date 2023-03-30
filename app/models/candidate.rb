@@ -6,6 +6,7 @@ class Candidate < ActiveRecord::Base
     # friendly_id :first_name
     # has_one_attached :image
     default_scope { order(created_at: :desc) }
+    has_many :lead_assignments
     has_many :comments
     has_many :users, through: :comments
     has_rich_text :content
@@ -17,7 +18,7 @@ class Candidate < ActiveRecord::Base
     MARITAL_LIST = ["Married", "Unmarried"]
     LOCATION_LIST = ["Maharshtra", "Madhya Pradesh", "Uttar Pradesh"]
     NATIONALITY_LIST = ["United Kingdom", "Austria", "Bahrain", "Canada", "Denmark", "Germany"]
-    CATEGORY_LIST = ["Backend Developer", "Cloud Computing", "DevOps Engineer", "Desktop Developer", "Database Developer", "Frontend Developer", "Full-Stack Developer", "Mobile Developer", "Security Engineer", "SEO", "UX/UI Designer", "Web Developer"]
+    CATEGORY_LIST = ["Backend Developer", "Cloud Computing", "DevOps Engineer", "Desktop Developer", "Database Developer", "Frontend Developer", "Full-Stack Developer", "Mobile Developer", "Security Engineer", "SEO", "UX/UI Designer", "Web Developer", "ROR Developer"]
     LEVEL_OF_EDUCATION_LIST = ["Primary Education", "Higher Secondary Education", "Under-Graduate", "Post-Graduate", "Doctoral studies"]
     DEGREE_LIST = ["SEE", "M.A.", "Enginery of CSE", "Master", "Associate", "Graduate"]
     RESULT_LIST = ["First Class", "Second Class", "Third Class"]

@@ -43,6 +43,7 @@
                                                         <%= link_to "SEO", candidates_path(query: "SEO"), class:"dropdown-item"%>
                                                         <%= link_to "UX/UI Designer", candidates_path(query: "UX/UI Designer"), class:"dropdown-item"%>
                                                         <%= link_to "Web Developer", candidates_path(query: "Web Developer"), class:"dropdown-item"%>
+                                                        <%= link_to "ROR Developer", candidates_path(query: "ROR Developer"), class:"dropdown-item"%>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -78,13 +79,11 @@
     $("#CountryFilter").niceSelect();
     $("#CategoryFilter").niceSelect();
 
-    $("#CountryFilter , #CategoryFilter, .check_filter input").on('change', function(e){
+    $("#cityFilter , #CategoryFilter, .check_filter input").on('change', function(e){
         
         const arr = $(".check_filter").length
-        level_array = []
-        nature_array = []
         skill_array = []
-        country_name = $("#CountryFilter")[0].value != '' ? $("#CountryFilter")[0].value : []
+        city_name = $("#cityFilter")[0].value != '' ? $("#cityFilter")[0].value : []
         category_name = $("#CategoryFilter")[0].value != '' ? $("#CategoryFilter")[0].value : []
         
         for (  i=0; i < arr; i++) {
@@ -93,12 +92,6 @@
             for( j in inp.childNodes){
                 if (inp.childNodes[j].nodeName == "INPUT" && inp.childNodes[j].checked){
                     switch (inp.classList[0]){
-                        case "jobs_level":
-                            level_array.push(inp.childNodes[j].defaultValue)
-                        break;
-                        case "jobs_nature":
-                            nature_array.push(inp.childNodes[j].defaultValue)
-                        break;
                         case "skill_filter":
                             skill_array.push(inp.childNodes[j].defaultValue)
                         break;
@@ -110,10 +103,24 @@
         $.ajax({
             type: "GET",
             url: "/filter/candidates",
-            data: {"level_array": level_array, "nature_array": nature_array, "country_name": country_name, "category_name": category_name, "skill_array": skill_array}
+            data: {"city_name": city_name, "category_name": category_name, "skill_array": skill_array}
         });       
     });
 
+    // js for search field inside city select tag
+        $("#citySearch div:last ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()"/>')
+
+        $(".search_field").on('keyup', function(e){
+        sear_val = $(this).val().toLocaleLowerCase().trim();
+        
+            $("#citySearch div:last ul li").filter(function() {
+                
+            $(this).toggle($(this).text().trim().toLowerCase().indexOf(sear_val.trim().toLowerCase()) > -1);
+            // $(this).parent().toggle();
+
+        });
+   
+    })
 })
 </script>
   <style>

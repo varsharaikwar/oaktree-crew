@@ -1,0 +1,5 @@
+ <div class="skill_filter check_filter" id="showMoreSkill">
+    <% @primary_skill.each do |val| %>
+        <%= check_box_tag val.name, val.name %> <%= val.name %>
+    <% end %>
+</div>
