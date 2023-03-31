@@ -6,8 +6,8 @@ class Candidate < ActiveRecord::Base
     # friendly_id :first_name
     # has_one_attached :image
     default_scope { order(created_at: :desc) }
-    has_many :lead_assignments
-    has_many :comments
+    has_many :lead_assignments, dependent: :destroy
+    has_many :comments, dependent: :destroy
     has_many :users, through: :comments
     has_rich_text :content
     mount_uploader :file, FileUploader
