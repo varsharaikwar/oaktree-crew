@@ -13,7 +13,10 @@
 <div class="container">
   <div class="p-3">
   <div class="row mb-3">
-    <div class="col-lg-6 mt-3">
+    <div class="col-lg-6 mt-3 h1">
+      <div class="welcome-message">
+        Welcome, <%= current_user.name %>
+      </div>
     </div>
     <div class="col-lg-6 text-right mb-5 mt-3">
       <b>
@@ -22,17 +25,17 @@
     </div>
   </div>
     
-   
+   <h3 class="position-absolute">All Leads</h3>
 
-    <table id="leadsTable" class="display" style="width:100%">
+    <table id="leadsTable" class="display primary-table" style="width:100%">
       <thead>
         <tr> 
-          <th>Name</th>
-          <th>Profile</th>
-          <th>Assigned To</th>
-          <th>Status</th>
-          <th>additional Info</th>
-          <th>Actions</th>
+          <th style="width: 5%;">Name</th>
+          <th style="width: 5%;">Profile</th>
+          <th style="width: 5%;">Assigned To</th>
+          <th style="width: 5%;">Status</th>
+          <th style="width: 10%;">Additional Info</th>
+          <th style="width: 2%;">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -46,7 +49,7 @@
             <td><%= link_to lead.additional_info, lead %></td>
             <td><%= link_to edit_lead_path(lead.id),  class: "btn btn-primary" do %>
               <i class="fa fa-pencil"></i>
-            <% end %> <%= link_to lead_path(lead.id), method: :delete, class: "btn btn-danger" do %>
+            <% end %> <%= link_to lead_path(lead.id), method: :delete,  data: { confirm: "Are you sure you want to delete this lead?" }, class: "btn btn-danger" do %>
               <i class="fa fa-trash"></i><% end %> </td>
           </tr>
         <% end %>
@@ -71,6 +74,27 @@
       top: 0;
       height: 100%;
       width: 100%;
+    }
+    .primary-table thead{
+      background-color: #4fb174;
+      color: #fff;
+      table-layout: fixed;
+    }
+    .dataTables_scrollHead th, .dataTables_scrollHead td{
+      padding: 20px 10px !important;
+      text-align: center !important;
+    }
+    .primary-table tbody td:nth-child(odd){
+      background-color: #f3f3f3;
+      text-align: center !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .primary-table tbody td:nth-child(even){
+      background-color: #ffffff;
+      text-align: center !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 </style>
 

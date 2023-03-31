@@ -6,7 +6,7 @@
     <br><button type="button" data-toggle="modal" data-target="#addSkillsecond" class="badge mx-2 p-2 btn-large default-btn" >Add Skill +</button>
     <% @secondary_skill.each do |item| %>
     <li id="<%= item.name %>" , onclick="checkbox_click_two()">
-        <label class="custom_checkbox_label d-block p-2">
+        <label class="custom_checkbox_label d-block px-2">
         <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
         <span> <%= item.name %></span>
         </label>

@@ -28,9 +28,7 @@
         </p>
         <div class="skill_filter check_filter" id="filterBox">
             <% @primary_skill.limit(5).each do |val| %>
-                <div class="mb-2">
-                <%= check_box_tag val.name, val.name %> <span class="ml-1"><%= val.name %></span>
-                </div>
+                    <div class="mb-2"><%= check_box_tag val.name, val.name %><span class="ml-1"><%= val.name %></span></div>
             <% end %>
         </div>
         

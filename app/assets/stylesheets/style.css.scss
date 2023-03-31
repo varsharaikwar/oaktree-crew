@@ -18161,6 +18161,16 @@ textarea.form-control {
   padding: 30px 20px;
 }
 
+.filter-radius{
+  border-radius: 20px;
+  width: 100%;
+}
+.overflow-select span{
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+}
+
 .sidebar .nav-item {
   margin-bottom: 15px;
 }

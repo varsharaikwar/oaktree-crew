@@ -384,8 +384,9 @@
                             </div>
                         </div>
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 d-flex justify-content-between">
                         <%= f.submit "Save", class: " btn default-btn" %>
+                        <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, :back, class: 'text-success' %>
                     </div>
                 <% end %>
             </div>

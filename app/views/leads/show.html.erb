@@ -3,7 +3,7 @@
 <div class="container">
     <div class="p-3 my-4 bg-light">
         <div>
-        
+
         <div class="row">
             <div class="col-lg-12 mb-3">
                 <div class="h4 mb-3 p-2">Name: <%= @lead.name %></div>
@@ -20,9 +20,17 @@
             <div class="col-lg-6 mb-3">
                 <div><b>Additional Info:</b> <%= @lead.additional_info %></div>
             </div>
+            <div class="col-lg-6">
+            <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
+            </div>
+            
+            <div class="col-lg-6 text-right">
+            <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, :back, class: 'text-success' %>
+            </div>
         </div>
         
         <hr>
+        
         </div>
     </div>
     
