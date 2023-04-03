@@ -28,7 +28,7 @@ class Ability
       
     elsif user.has_role? :bde
       can :index, Candidate
-      can :show, Candidate
+      can :show,  Candidate
       can :create, Comment
       can :filter, Candidate
       can :skill, Candidate
@@ -40,6 +40,11 @@ class Ability
     elsif user.has_role? :sales_person
       can :manage, Lead
       can :manage, Notification
+      can :show, Candidate
+      can :index, Candidate
+
+    elsif user.has_role? :pool_manager
+      can :index, InterviewSchedule
     end
   end
   

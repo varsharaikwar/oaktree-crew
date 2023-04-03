@@ -28,7 +28,11 @@
                             <div class="others-option ml-auto d-flex align-items-center">
                             <div class="mr-3">
                             <div class="dropdown">
-                            <button onclick="myFunction()" class="default-btn px-3"><a href="/notifications"><i class="fa fa-bell text-white"></i></a></button>
+                            <button onclick="myFunction()" class="default-btn px-3"><a href="/notifications"><i class="fa fa-bell text-white"></i></a>
+                            <span class="notification_tag">
+                              <%= Notification.where(read: false, reciver_id: current_user.id).count %>
+                            </span> 
+                          </button>                          
                           </div>
                         
                             </div>
@@ -100,6 +104,17 @@
   .dropdown a:hover {background-color: #ddd;}
   
   .show {display: block;}
+
+  .notification_tag{
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background-color: red;
+    padding: 2px 2px;
+    font-size: 11px;
+    border-radius: 50%;
+    min-width: 15px;
+  }
   </style>
 
     <script>

@@ -4,7 +4,7 @@ class CreateLeads < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :profile
       t.string :assigned_to
-      t.string :status
+      t.string :status, default: 'in-progress'
       t.text :additional_info
       t.references :user, null: false, foreign_key: true
 

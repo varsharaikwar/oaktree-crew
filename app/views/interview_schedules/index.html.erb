@@ -1,0 +1,70 @@
+<%= render 'layouts/header'%>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<div class="container">
+<div class="p-3">
+<h3 class="position-absolute">All Interview Schedules</h3>
+<table id="interviewTable" class="display primary-table" style="width:100%"> 
+    <thead>
+        <tr>
+            <th>Candidate</th>
+            <th>Lead</th>
+            <th>Sales Person</th>
+            <th>Hr</th>
+            <th>Date and Time</th>
+            <th>Status</th>
+            <th>Url</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @interview_schedules.each do |interview_schedule|%>
+            <tr>
+                <td><%= interview_schedule.candidate.first_name + " " + interview_schedule.candidate.last_name%></td>
+                <td><%= interview_schedule.lead.name %></td>
+                <td><%= interview_schedule.lead.user.name %></td>
+                <td><%= interview_schedule.lead.assigned_to %></td>
+                <td><%= interview_schedule.time %></td>
+                <td><%= interview_schedule.lead.status %></td>
+                <td><%= link_to 'Join Meeting', interview_schedule.url %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+</div>
+</div>
+<style>
+.primary-table thead{
+    background-color: #4fb174;
+    color: #fff;
+    table-layout: fixed;
+  }
+  .dataTables_scrollHead th, .dataTables_scrollHead td{
+    padding: 20px 10px !important;
+    text-align: center !important;
+  }
+  .primary-table tbody td:nth-child(odd){
+    background-color: #f3f3f3;
+    text-align: center !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .primary-table tbody td:nth-child(even){
+    background-color: #ffffff;
+    text-align: center !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>
+<script>
+$(document).ready(function(){
+  $("#interviewTable").DataTable({
+      responsive: true,
+      scrollX: '200px',
+      scrollY: true,
+      paging: false,
+      language: { search: "", searchPlaceholder: "Search..." },
+  })
+})
+</script>

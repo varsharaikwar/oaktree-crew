@@ -23,6 +23,7 @@ class CandidatesController < ApplicationController
       @candidate = Candidate.find(params[:id])
       @lead_assignment = LeadAssignment.new
       @lead = Lead.where(assigned_to: current_user.email)
+      @lead_assigned = LeadAssignment.where(candidate_id: @candidate.id, hr_id: current_user.id)
       authorize! :show, @candidate
     end
 
@@ -30,6 +31,7 @@ class CandidatesController < ApplicationController
       @primary_skill = SkillSet.where(skill_type: "primary")
       @secondary_skill = SkillSet.where(skill_type: "secondary")
       @candidate = Candidate.new
+      
       # authorize! :new, @candidate
     end
 
@@ -39,6 +41,7 @@ class CandidatesController < ApplicationController
       @candidate = current_user.candidates.create(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))    
       @candidate.status = "Draft"
         if @candidate.save
+          flash[:success] = "Candidate created successfully!"
           redirect_to @candidate
         else
           render :new, status: :unprocessable_entity
@@ -67,6 +70,7 @@ class CandidatesController < ApplicationController
         @candidate.update(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))
         redirect_to @candidate
       elsif @candidate.update(candidate_params)
+        flash[:success] = "Candidate Updated successfully!"
         redirect_to @candidate
       else
         render :edit, status: :unprocessable_entity

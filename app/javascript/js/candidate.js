@@ -2,9 +2,9 @@ $(document).ready(function(){
     $("#CountryFilter").niceSelect();
     $("#CategoryFilter").niceSelect();
 
-    let city_name = $("#cityFilter")[0].value != '' ? $("#cityFilter")[0].value : []
-    let category_name = $("#CategoryFilter")[0].value != '' ? $("#CategoryFilter")[0].value : []
-    let skill_array = []
+    var city_name = $("#cityFilter")[0].value != '' ? $("#cityFilter")[0].value : []
+    var category_name = $("#CategoryFilter")[0].value != '' ? $("#CategoryFilter")[0].value : []
+    var skill_array = []
 
     // js for filter by city and category.// js for filter by city and category
     $("#cityFilter , #CategoryFilter ").on('change', function(e){      
@@ -13,9 +13,25 @@ $(document).ready(function(){
         req_ajax(skill_array, city_name, category_name) 
     });
 
+    // js for clear filter
+    $("#clearCity").on('click', function(){
+        $('#citySearch div span')[0].innerText = 'Select'
+        $("#cityFilter")[0].value = ''
+        city_name = ''
+        req_ajax(skill_array, city_name, category_name)
+        $('#citySearch div ul input')[0].value = ''
+
+        $("#citySearch div ul input").trigger('keyup') 
+    })
+
+    $("#clearCategory").on('click', function(){
+        $('#categorySearch div span')[0].innerText = 'Select'
+        $("#CategoryFilter")[0].value = ''
+        category_name = ''
+        req_ajax(skill_array, city_name, category_name)
+    })
     // js for filter by skills.
     function skill_filter(){
-        debugger;
         skill_array = []
         var inp = $("#showMoreSkill").children()
         var inp_len = inp.length

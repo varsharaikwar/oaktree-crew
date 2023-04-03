@@ -1,0 +1,28 @@
+<%= form_for InterviewSchedule.new, as: :interview_schedule, url: interview_schedules_path(notification_id: @notification), method: :post , html: {}, remote: true do |f| %>
+      <div class="actions">
+        <%= f.label 'Select Date and Time'%>
+        <%= f.text_field :time, class: "form-control", id: 'dtField' %>
+      </div>
+
+      <div class="actions">
+        <%= f.label 'Meeting URL'%>
+        <%= f.text_field :url, class: "form-control" %>
+      </div>
+
+      <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+              <label class="required">Lead</label>
+                  <div id="lead">
+                    <%#debugger%>
+                      <%= f.select :lead_id, @lead_assigned.collect {|p| [ p.lead.name, p.lead.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search", id:"category-select" %>
+                  </div>  
+          </div>
+      </div> 
+      
+      <%= f.hidden_field :candidate_id, value: @lead_assigned.first.candidate_id, class: "form-control" %>
+      <%= f.hidden_field :hr_id, value: current_user.id, class: "form-control" %>
+
+      <div class="modal-footer">
+        <%= f.submit "Save", class: " btn default-btn" %>
+      </div>
+<% end %>

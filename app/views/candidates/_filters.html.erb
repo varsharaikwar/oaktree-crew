@@ -7,6 +7,8 @@
         <div class="mb-3">
         <p class="h4">
                 <%= label_tag "Location" %>
+                <button type="button" class="btn btn btn-outline-info float-right px-2 py-1 btn-sm" id="clearCity">Clear</button>
+
         </p>
         <div id='citySearch'>
             <%= select_tag :city, options_for_select(CS.states(:IN).keys.flat_map { |state| CS.cities(state, :IN) }.sort), prompt: "Select", class: "filter-radius overflow-select select1 mb-3", id:"cityFilter"%>
@@ -16,15 +18,16 @@
         <div class="mb-3">
             <p class="h4 mt-5">
             <%= label_tag "Category"%>
+            <button type="button" class="btn btn btn-outline-info float-right px-2 py-1 btn-sm"  id="clearCategory">Clear</button>
             </p>
-            <div>
+            <div id='categorySearch'>
                 <%= select_tag :category, options_for_select(Candidate::CATEGORY_LIST), prompt: "Select", id: "CategoryFilter", class: "filter-radius overflow-select mb-3"%>
             </div>
         </div>
     
         <p class="h4 mt-5">
             <%= label_tag "Skill"%>
-            <button type="button" class="btn text-primary float-right p-0" data-toggle="modal" data-target="#add_skill" href="/skill_sets/show_more" remote: true > Show All</button>
+            <button type="button" class="btn btn btn-outline-info float-right px-2 py-1 btn-sm" data-toggle="modal" data-target="#add_skill" href="/skill_sets/show_more" remote: true > View All</button>
         </p>
         <div class="skill_filter check_filter" id="filterBox">
             <% @primary_skill.limit(5).each do |val| %>
@@ -36,7 +39,6 @@
 </div>
 </div>
 <!-- Button trigger modal -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="add_skill" tabindex="-1" aria-labelledby="add_skilllLabel" aria-hidden="true">

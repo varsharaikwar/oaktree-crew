@@ -9,6 +9,7 @@ class Candidate < ActiveRecord::Base
     has_many :lead_assignments, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :users, through: :comments
+    has_many :interview_schedules, dependent: :destroy
     has_rich_text :content
     mount_uploader :file, FileUploader
     mount_uploader :updated_file, UpdatedFileUploader
@@ -27,7 +28,13 @@ class Candidate < ActiveRecord::Base
     CANDIDATE_STATUS = ["Draft", "Active"]
     TIME_ZONE_LIST = ["AST", "EST", "CST", "IST", "MST", "PST", "AKST", "HST", "UTC-11", "UTC+10"]
     EXPERIENCE_LIST = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
-    validates :first_name,:last_name, :phone, :gender, :address, presence: true
+    validates :first_name,:last_name, :phone, :gender, :start_time, :end_time,  :address, presence: true
     validates :email, presence: true, format: { with: Devise.email_regexp }
-
+    def formatted_start_time
+        Time.parse(start_time).strftime("%I:%M %p")
+    end
+    
+    def formatted_end_time
+        Time.parse(end_time).strftime("%I:%M %p")
+    end
 end

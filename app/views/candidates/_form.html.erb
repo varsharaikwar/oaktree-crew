@@ -123,17 +123,29 @@
                             </div>
                         </div>
 
+
+
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label>Availability From </label>
+                                <label class="required">Availability From </label>
+                                <div id="start_time">
                                 <%= f.text_field :start_time, class: "form-control", id: "timepicker" %>
+                                <% if error_helper(:start_time) != []%>
+                                <span class="error-message", id="msg8">start_time <%= error_helper(:start_time).first %></span>
+                            <% end %>
+                            </div>
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label>Availability To </label>
+                                <label class="required">Availability To </label>
+                                <div id="end_time">
                                 <%= f.text_field :end_time, class: "form-control", id:"timepicker1" %>
+                                <% if error_helper(:end_time) != []%>
+                                <span class="error-message", id="msg9">end_time <%= error_helper(:end_time).first %></span>
+                            <% end %>
+                            </div>
                             </div>
                         </div>
 
@@ -509,6 +521,23 @@
             }
         });
 
+        $("#start_time").on('focusout', function(){
+            if ($("#phone").val() == ''){
+                document.getElementById("msg8").style.display = "block";
+            }
+            else{
+                document.getElementById("msg8").style.display = "none";
+            }
+        });
+
+        $("#end_time").on('focusout', function(){
+            if ($("#phone").val() == ''){
+                document.getElementById("msg9").style.display = "block";
+            }
+            else{
+                document.getElementById("msg9").style.display = "none";
+            }
+        });
 
         $("#gender").change(function(){
             if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){

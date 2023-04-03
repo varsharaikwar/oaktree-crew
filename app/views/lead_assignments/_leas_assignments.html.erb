@@ -1,0 +1,9 @@
+<h1>Available List</h1>
+
+<div>
+    <% @lead_assigned.each do |lead_assigned| %>
+    <ul>
+        <li><%= link_to lead_assigned></li>
+    </ul>
+    <% end %>
+</div>

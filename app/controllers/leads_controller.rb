@@ -17,6 +17,7 @@ class LeadsController < ApplicationController
   def create
     @lead = current_user.leads.new(lead_params)
       if @lead.save
+        flash[:success] = "Lead created successfully!"
         @lead.assign_user(current_user, @lead)
           redirect_to @lead
       else
@@ -33,6 +34,7 @@ class LeadsController < ApplicationController
       @lead = current_user.leads.find(params[:id])
 
       if @lead.update(lead_params)
+        flash[:success] = "Lead has been updated"
           redirect_to @lead
       else
           render :edit, status: :unprocessable_entity
@@ -42,6 +44,7 @@ class LeadsController < ApplicationController
   def destroy
       @lead = current_user.leads.find(params[:id])
       @lead.destroy
+      flash[:success] = "Lead deleted successfully!"
      redirect_to root_path, status: :see_other
   end
   

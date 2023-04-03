@@ -1,5 +1,8 @@
 
 <%= render "layouts/header"%>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
 <div class="container">
     <div class="p-3 my-4 bg-light">
         <div>
@@ -25,7 +28,7 @@
             </div>
             
             <div class="col-lg-6 text-right">
-            <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, :back, class: 'text-success' %>
+            <%= link_to 'Back', leads_path, class: 'text-success' %>
             </div>
         </div>
         
