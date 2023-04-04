@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_055319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
     t.text "current_location"
     t.string "available_time_zone"
     t.string "industry"
+    t.string "start_time"
+    t.string "end_time"
     t.string "primary_skill", default: [], array: true
     t.string "secondary_skill", default: [], array: true
     t.string "image"
@@ -104,8 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
     t.string "language"
     t.string "updated_file"
     t.string "city"
-    t.string "start_time"
-    t.string "end_time"
     t.index ["slug"], name: "index_candidates_on_slug", unique: true
   end
 
@@ -129,6 +129,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "interview_schedules", force: :cascade do |t|
+    t.bigint "lead_id", null: false
+    t.bigint "candidate_id", null: false
+    t.string "url"
+    t.string "time"
+    t.integer "hr_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id", "lead_id"], name: "index_interview_schedules_on_candidate_id_and_lead_id", unique: true
+    t.index ["candidate_id"], name: "index_interview_schedules_on_candidate_id"
+    t.index ["lead_id"], name: "index_interview_schedules_on_lead_id"
+  end
+
   create_table "lead_assignments", force: :cascade do |t|
     t.bigint "candidate_id", null: false
     t.bigint "lead_id", null: false
@@ -144,7 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
     t.string "name"
     t.string "profile"
     t.string "assigned_to"
-    t.string "status"
+    t.string "status", default: "in-progress"
     t.text "additional_info"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -157,11 +170,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
     t.string "sender_type"
     t.integer "reciver_id"
     t.string "reciver_type"
+    t.integer "candidate_id"
     t.boolean "read", default: false, null: false
     t.bigint "lead_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "message"
     t.index ["lead_id"], name: "index_notifications_on_lead_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -208,6 +223,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_094801) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "candidates"
   add_foreign_key "comments", "users"
+  add_foreign_key "interview_schedules", "candidates"
+  add_foreign_key "interview_schedules", "leads"
   add_foreign_key "lead_assignments", "candidates"
   add_foreign_key "lead_assignments", "leads"
   add_foreign_key "leads", "users"
