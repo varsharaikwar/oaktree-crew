@@ -101,6 +101,7 @@ class CandidatesController < ApplicationController
     end
 
     def filter
+      @primary_skill = SkillSet.where(skill_type: "primary")
       search_data = []
       search_data << "city = '#{params[:city_name]}'" if params[:city_name].present?
       search_data << "category = '#{params[:category_name]}'" if params[:category_name].present?

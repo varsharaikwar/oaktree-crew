@@ -5,10 +5,10 @@ class LeadAssignmentsController < ApplicationController
         candidate = Candidate.find(params[:lead_assignment][:candidate_id])
         sales_id = lead.user_id
         @lead_assignment = LeadAssignment.new(lead: lead, candidate: candidate, hr_id: hr_id, sales_id: sales_id)
-
+        candidate = params[:candidate]
         if @lead_assignment.save
             @lead_assignment.lead.update(status: 'assigned')
-            @lead_assignment.assign_sales(current_user, @lead_assignment)
+            @lead_assignment.assign_lead(current_user, @lead_assignment, candidate)
             respond_to do |format|
                 format.js
             end

@@ -1,26 +1,2 @@
-<div class="container">
-    <div class="p-3 my-4 bg-light">
-        <div>
-        <div class="h4 mb-3 p-2">From: <%=  User.find(@notification.sender_id).email%></div>
-        <div class="row">
-        <%lead = @notification.lead%>
-            <div class="col-lg-6 mb-3">
-                <div><b>Name:</b> <%= lead.name %></div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div><b>Profile:</b> <%= lead.profile %></div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div><b>Status:</b> <%= lead.status %></div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div><b>Additional Info:</b> <%= lead.additional_info %></div>
-            </div>
-        </div>
-
-        <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, :back, class: 'text-success' %>
-
-        </div>
-    </div>
-    
-</div>
+<%= render 'layouts/header'%>
+<%= @notification.message.html_safe%>

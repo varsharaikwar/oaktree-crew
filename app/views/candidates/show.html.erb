@@ -173,16 +173,18 @@
 										<ul class="overview download nav align-items-center mb-4 mt-3">
 											<li class="nav-item d-flex align-items-center flex-fill">
 												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b><%= link_to 'Download Original Resume', @candidate.file.url, download: @candidate.file.url %></b><br /> 
-												</a>
+											<a href="" class="nav-link">
+												<%= @candidate.file.url.present? ? link_to('Download Original Resume', url_for(@candidate.file.url)) : 'Original Resume not available'%></b><br /> 
+											</a>
 											</li>
 										</ul>
 										
 										<ul class="overview download nav align-items-center mb-4">
 											<li class="nav-item d-flex align-items-center flex-fill">
 												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><b><%= link_to 'Download Updated Resume', @candidate.updated_file.url, download: @candidate.updated_file.url %></b><br />
-												</a>
+											<a href="" class="nav-link">
+												<%= @candidate.updated_file.url.present? ? link_to('Download Updated Resume', url_for(@candidate.updated_file.url)) : 'Updated Resume not available'%></b><br /> 
+											</a>
 											</li>
 										</ul>
 									</div>
@@ -318,13 +320,16 @@
 							</div>
 
 							<div class="candidates-details-sidebar">
-								<div class="candidates-widget">
+								<div class="candidates-widget" id="comment_refresh">
 									<h3> Comments </h3>
 									<ul class="overview">
 									<% @candidate.comments.each do |comment| %>
-											<h6><%= comment.user.email %></h6>
-										<%= comment.content.body %><br><hr>
-									<% end %>
+										<h6><%= comment.user.email %></h6>
+										<%= comment.content.body %>
+										<%= link_to comment_path(comment.id), method: :delete,  data: { confirm: "Are you sure you want to delete this comment ?" }, class: "btn btn-danger", remote: true do %>
+										<i class="fa fa-trash"></i><% end %>
+										<hr>
+								<% end %>
 								    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#commentModal">Add a comment</button>
 								</div>	
 							</div>		

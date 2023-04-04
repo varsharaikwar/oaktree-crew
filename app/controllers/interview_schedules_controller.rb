@@ -6,11 +6,12 @@ class InterviewSchedulesController < ApplicationController
 
     def create
         @interview_schedule = InterviewSchedule.new(interview_schedule_params)
-        notification = @interview_schedule.lead.notifications.first
+        candidate = params[:candidate]
+        lead = Lead.find(params[:interview_schedule][:lead_id])
         respond_to do |format|
             if @interview_schedule.save
-                @interview_schedule.interview_schedule(current_user, notification)
-                notification.lead.update(status: 'interview scheduled')
+                @interview_schedule.interview_schedule(current_user, lead, candidate)
+                lead.update(status: 'interview scheduled')
                 format.js
             end
         end

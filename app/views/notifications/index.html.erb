@@ -13,8 +13,8 @@
 
     <div id="noticeTable" class="display" style="width:100%">
       <div class="row">
-        <% @notifications.each do |notice|%>
-          <div class="col-lg-12 mb-3 notification-row">
+      <% @notifications.order('id DESC').each do |notice|%>          
+        <div class="col-lg-12 mb-3 notification-row">
             <div class="row py-3">
             <%@lead = notice.lead%>
               <div class="col-lg-3">

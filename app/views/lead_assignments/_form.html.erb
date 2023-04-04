@@ -1,5 +1,4 @@
-<%= form_for LeadAssignment.new, as: :lead_assignment, url: lead_assignments_path(), method: :post, html: { class: "edit_post", id: "edit_post_45" }, remote: true do |f|  %>
-    <div class="col-lg-6 col-md-6">
+<%= form_for LeadAssignment.new, as: :lead_assignment, url: lead_assignments_path(candidate: @candidate), method: :post, html: { class: "edit_post", id: "edit_post_45" }, remote: true do |f|  %>    <div class="col-lg-6 col-md-6">
         <div class="form-group">
             <label class="required">Lead</label>
                 <div id="lead">

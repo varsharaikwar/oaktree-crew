@@ -1,4 +1,4 @@
-<%= form_for InterviewSchedule.new, as: :interview_schedule, url: interview_schedules_path(notification_id: @notification), method: :post , html: {}, remote: true do |f| %>
+<%= form_for InterviewSchedule.new, as: :interview_schedule, url: interview_schedules_path(notification_id: @notification, candidate: @candidate), method: :post , html: {}, remote: true do |f| %>
       <div class="actions">
         <%= f.label 'Select Date and Time'%>
         <%= f.text_field :time, class: "form-control", id: 'dtField' %>
@@ -13,7 +13,6 @@
           <div class="form-group">
               <label class="required">Lead</label>
                   <div id="lead">
-                    <%#debugger%>
                       <%= f.select :lead_id, @lead_assigned.collect {|p| [ p.lead.name, p.lead.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search", id:"category-select" %>
                   </div>  
           </div>

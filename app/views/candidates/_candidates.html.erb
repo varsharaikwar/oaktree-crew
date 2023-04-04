@@ -1,7 +1,8 @@
 <% @candidates = @candidates.nil? ? candidates : @candidates %>            
 <div class="row">
-
-   
+<div class="col-lg-12 pt-4">
+<h3><%= @candidates.count %> Candidates</h3><br>
+</div>
     <% @candidates.each_with_index do |candidate, i| %>
         <div class="col-lg-4 text-center card-box mb-4">
         <%= link_to candidate_path(candidate), :action => 'show' do %>

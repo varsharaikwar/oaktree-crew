@@ -16,6 +16,13 @@ class CommentsController < ApplicationController
     def show
         
     end
+    def destroy
+      @comment = Comment.find(params[:id])
+      @comment.delete
+      respond_to do |format|
+        format.js
+      end
+    end
 
     private
     def find_candidate

@@ -41,7 +41,6 @@ class Ability
       can :manage, Lead
       can :manage, Notification
       can :show, Candidate
-      can :index, Candidate
 
     elsif user.has_role? :pool_manager
       can :index, InterviewSchedule
