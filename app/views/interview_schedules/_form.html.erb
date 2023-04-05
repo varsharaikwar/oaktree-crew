@@ -26,7 +26,7 @@
           <%= f.hidden_field :candidate_id, value: @lead_assigned.first.candidate_id, class: "form-control" %>
 
                   <% rescue ActiveRecord::RecordNotFound %>
-                    <p>"candidate not found"</p>
+                  <%= f.hidden_field :candidate_id, value: nil, class: "form-control" %>
                   <% end %>
       <%= f.hidden_field :hr_id, value: current_user.id, class: "form-control" %>
 
