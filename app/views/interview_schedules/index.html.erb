@@ -12,7 +12,7 @@
         <th style="width: 5%;">Candidate</th>
         <th style="width: 4%;">Lead</th>
         <th style="width: 5%;">Assigned By</th>
-        <th style="width: 8%;">Date and Time</th>
+        <th style="width: 12%;">Date and Time</th>
         <th style="width: 7%;">Status</th>
         <th style="width: 5%;">Meeting Link</th>
     </tr>
@@ -23,9 +23,11 @@
           <td class="text-capitalize"><%= interview_schedule.candidate.first_name + " " + interview_schedule.candidate.last_name%></td>
           <td class="text-capitalize"><%= interview_schedule.lead.name %></td>
           <td><%= interview_schedule.lead.assigned_to %></td>
-          <td class="text-uppercase"><% str = interview_schedule.time %>
-              <%= formatted_time = Time.strptime(str, '%H:%M %m/%d/%Y').strftime('%-d %B %Y %-l.%M %P') %>
-          </td>
+          <% if interview_schedule.time.present? %>
+            <td class="text-uppercase"><% str = interview_schedule.time %>
+                <%= formatted_time = Time.strptime(str, '%H:%M %m/%d/%Y').strftime('%-d %B %Y %-l.%M %P') %>
+            </td>
+          <% end %>
           <td class="text-capitalize"><%= interview_schedule.lead.status %></td>
           <td>
               <% truncated_url = truncate(interview_schedule.url, length: 30, separator: '.', omission: '...') %>
