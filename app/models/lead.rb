@@ -3,7 +3,7 @@ class Lead < ApplicationRecord
   belongs_to :user
   has_many :notifications, dependent: :destroy
   has_many :lead_assignments, dependent: :destroy
-  has_one :interview_schedules, dependent: :destroy
+  has_one :interview_schedule, dependent: :destroy
   default_scope { order(created_at: :desc) }
 
   def assign_user(current_user, lead)

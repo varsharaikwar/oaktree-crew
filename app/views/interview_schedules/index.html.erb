@@ -50,6 +50,8 @@
             <% if interview_schedule.url.present? %>
                 <% truncated_url = truncate(interview_schedule.url, length: 30, separator: '.', omission: '...') %>
                 <%= link_to truncated_url,interview_schedule.url, title: interview_schedule.url, target: '_blank' %>
+            <% else %>
+                <%= "Not Available" %>
             <% end %>
           </td>
       </tr>

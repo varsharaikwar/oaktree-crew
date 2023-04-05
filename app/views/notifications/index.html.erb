@@ -29,17 +29,29 @@
               <div class="col-lg-2 text-center">
                 <span class="txt-ellipsis"><%= link_to @lead.profile, notice, class: "badge badge-success" %></span>
               </div>
-                <div class="col-lg-3 text-center">
-                  <% if notice.status.present? %>
-                  <span class="txt-ellipsis"><%= link_to notice.status, notice, class: "badge badge-primary" %></span>
-                  <% end %>
-                </div>
-              
-              <% if notice.candidate_id.present? && (current_user.roles.first.name == 'sales_person' || current_user.roles.first.name == 'pool_manager')%>
-              <div class="col-lg-2 text-center">
-                <span class="txt-ellipsis"><%= link_to Candidate.find(notice.candidate_id).first_name+ ' ' + Candidate.find(notice.candidate_id).last_name, candidate_path(notice.candidate_id)%></span>
+              <div class="col-lg-3 text-center">
+                <% if notice.status.present? %>
+                <span class="txt-ellipsis"><%= link_to notice.status, notice, class: "badge badge-primary" %></span>
+                <% end %>
               </div>
-            <% end %>
+              <div class="col-lg-2 text-center">
+                <% if notice.candidate_id.present? && (current_user.roles.first.name == 'sales_person' || current_user.roles.first.name == 'pool_manager')%>
+                  <% begin %>
+                  <span class="txt-ellipsis">
+                    <%= link_to Candidate.find(notice.candidate_id).first_name+ ' ' + Candidate.find(notice.candidate_id).last_name, candidate_path(notice.candidate_id)%>
+                  </span>
+                  <% rescue ActiveRecord::RecordNotFound %>
+                    <p>"candidate not found"</p>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col-lg-2 text-center">
+                <% if notice.read == false%>
+                  <% button_to 'read', style: "background-color:red" %>
+                <% else %>
+                  <% button_to 'read' %>
+                <% end %>
+              </div>
             </div>
           </div>        
         <% end %>

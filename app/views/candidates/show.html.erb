@@ -97,11 +97,7 @@
 									Assign To Lead
 									</button>
 										<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2", target: "_blank" %>
-										<% if @lead_assigned.present? && (current_user.roles.first.name == 'senior_hr' || current_user.roles.first.name == 'junior_hr')%>
-										<button type="button" class="default-btn px-2 ml-2" data-toggle="modal" data-target="#afterNoticeModal">Schedule Interview</button>
-										
-									<%end%>
-										
+										<button type="button" class="default-btn px-2 ml-2" data-toggle="modal" data-target="#afterNoticeModal">Schedule Interview</button>										
 									</div>
 
 									
@@ -346,9 +342,7 @@
         </button>
       </div>
       <div class="modal-body">
-	  <% if @lead_assigned.present? && (current_user.roles.first.name == 'senior_hr' || current_user.roles.first.name == 'junior_hr')%>
         <%= render 'interview_schedules/form'%>
-		<%end%>
       </div>
     </div>
   </div>
@@ -405,6 +399,6 @@ $('#timepicker').timepicker({
 </script>
 <script>
   function showAlert() {
-    alert("We're sorry, the resume you requested is not available at this time.");
+    alert("Resume Not Available.");
   }
 </script>
