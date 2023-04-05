@@ -98,7 +98,7 @@
 
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label>Nationality</label>
+                                <label>Country</label>
                                 <div id="nationality">
                                  <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search" %>
                                  
@@ -108,7 +108,7 @@
 
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                <label>Location</label>
+                                <label>State</label>
                                 <div id="current_location">
                                 <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1 sel-search"%>
                                 </div>  

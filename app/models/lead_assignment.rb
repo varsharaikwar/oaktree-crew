@@ -9,7 +9,7 @@ class LeadAssignment < ApplicationRecord
     message = '<div class="container"> 
     <div class="p-3">
         <div class="alert alert-info">
-            <p><i class="fa fa-file mr-1"></i><b><a href="candidate/' + candidate.id.to_s + '">' + candidate.first_name + " " + candidate.last_name + '</a> lead has been assigned</b></p>
+            <p><i class="fa fa-file mr-1"></i><b><a href="/candidates/' + candidate.id.to_s + '">' + candidate.first_name + " " + candidate.last_name + '</a> has been assigned to Lead</b></p>
             <hr>
             <p>by:- <b class="ml-2">' + current_user.name + '</b></p>
             <p>Lead:- <b class="ml-2">' + lead.name + '</b></p>
@@ -19,6 +19,6 @@ class LeadAssignment < ApplicationRecord
     <a href="/notifications" class="text-success"><i class="fa fa-long-arrow-left"></i> Back </a>
     </div>
 </div>'
-    current_user.notifications.create(sender_id: current_user.id, sender_type: current_user.roles.first.name, reciver_id: reciver, reciver_type: reciver_type.name, lead: lead, candidate_id:  candidate.id, message:message)
+    current_user.notifications.create(sender_id: current_user.id, sender_type: current_user.roles.first.name, reciver_id: reciver, reciver_type: reciver_type.name, lead: lead, candidate_id:  candidate.id, message:message, status: lead.status)
   end
 end

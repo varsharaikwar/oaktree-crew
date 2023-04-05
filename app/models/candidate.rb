@@ -23,7 +23,7 @@ class Candidate < ActiveRecord::Base
     LEVEL_OF_EDUCATION_LIST = ["Primary Education", "Higher Secondary Education", "Under-Graduate", "Post-Graduate", "Doctoral studies"]
     DEGREE_LIST = ["SEE", "M.A.", "Enginery of CSE", "Master", "Associate", "Graduate"]
     RESULT_LIST = ["First Class", "Second Class", "Third Class"]
-    YEAR_OF_PASSING_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
+    YEAR_OF_PASSING_LIST = ["2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020", "2021", "2022", "2023", "2024", "2025"]
     EMPLOYMENT_PERIOD_LIST = ["2020", "2021", "2022", "2023", "2024", "2025"]
     CANDIDATE_STATUS = ["Draft", "Active"]
     TIME_ZONE_LIST = ["AST", "EST", "CST", "IST", "MST", "PST", "AKST", "HST", "UTC-11", "UTC+10"]

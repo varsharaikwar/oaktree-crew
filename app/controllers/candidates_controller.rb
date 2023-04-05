@@ -20,6 +20,7 @@ class CandidatesController < ApplicationController
     end
     
     def show
+      @pool_managers = Role.find_by(name: :pool_manager).users
       @candidate = Candidate.find(params[:id])
       @lead_assignment = LeadAssignment.new
       @lead = Lead.where(assigned_to: current_user.email)

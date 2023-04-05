@@ -1,7 +1,7 @@
 <%=  render "layouts/header" %>
 <% flash.each do |key, value| %>
 	<div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
+<% end %>
 <div class="row">
 	<div class="col-lg-2">
 		<div class="nav-side-menu sidebar">
@@ -98,8 +98,7 @@
 									</button>
 										<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2", target: "_blank" %>
 										<% if @lead_assigned.present? && (current_user.roles.first.name == 'senior_hr' || current_user.roles.first.name == 'junior_hr')%>
-								
-										<button type="button" class="default-btn px-2 ml-2" data-toggle="modal" data-target="#afterNoticeModal">Interview Schedule</button>
+										<button type="button" class="default-btn px-2 ml-2" data-toggle="modal" data-target="#afterNoticeModal">Schedule Interview</button>
 										
 									<%end%>
 										
@@ -130,151 +129,60 @@
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-lg-6 mb-4">
-									<div class="candidates-widget widget-box avatar-list">
-										<h3>Recommendations</h3>
-											<ul class="overview download nav align-items-center mb-3 mt-3">
-												<li class="nav-item d-flex align-items-center flex-fill">
-													<span class="emoji-container">
-														<img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
-															alt="">
-													</span>
-													<a href="#" class="nav-link"><b>Leon, Ward, CEO</b><br /> <span
-														class="grey-text">Lorem Ipsum is simply dummy text of the
-														printing and typesetting industry. </span><i
-														class="fi fi-ss-cloud-download-alt"></i>
-													</a>
-												</li>
-											</ul>
-											<ul class="overview download nav align-items-center mb-3">
-												<li class="nav-item d-flex align-items-center flex-fill">
-													<span class="emoji-container">
-														<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
-															alt="">
-													</span>
-													<a href="#" class="nav-link"><b>Keith Scott, Project
-															Manager</b><br /> <span class="grey-text">Lorem Ipsum is
-															simply dummy text of the printing and typesetting industry.
-														</span><i class="fi fi-ss-cloud-download-alt"></i>
-													</a>
-												</li>
-											</ul>
-											<div>
-												<a href="#" class="float-right link"
-													style="font-size: 18px;color: #00b074;font-weight: 600;">View all<i
-														class="bx bx-arrow-to-right" style="margin-left: 5px;"></i></a>
-											</div>
-									</div>
-								</div>
-								<div class="col-lg-6 mb-4">
-									<div class="candidates-widget widget-box">
-										<h3>Documents</h3>
-										<ul class="overview download nav align-items-center mb-4 mt-3">
+							<div class="candidates-details-content mb-4">
+								<div class="widget-box">
+									<h3>Documents</h3>
+									<ul class="overview download nav align-items-center mb-4 mt-3">
 											<li class="nav-item d-flex align-items-center flex-fill">
 												<i class="bx bxs-file-pdf"></i>
 											<a href="" class="nav-link">
-												<%= @candidate.file.url.present? ? link_to('Download Original Resume', url_for(@candidate.file.url)) : 'Original Resume not available'%></b><br /> 
-											</a>
+											<% if @candidate.file.url.present? %>
+											<p>
+												<%= button_to 'Download Original Resume', url_for(@candidate.file.url), method: :get %>
+											</p>
+										  	<% else %>
+											<p>
+												<button onclick="showAlert()">Download Original Resume</button>
+											</p>
+										  <% end %>											
+										  </a>
 											</li>
 										</ul>
-										
 										<ul class="overview download nav align-items-center mb-4">
 											<li class="nav-item d-flex align-items-center flex-fill">
 												<i class="bx bxs-file-pdf"></i>
 											<a href="" class="nav-link">
-												<%= @candidate.updated_file.url.present? ? link_to('Download Updated Resume', url_for(@candidate.updated_file.url)) : 'Updated Resume not available'%></b><br /> 
-											</a>
+											<% if @candidate.updated_file.url.present? %>
+											<p>
+												<%= button_to 'Download Updated Resume', url_for(@candidate.updated_file.url), method: :get %>
+
+											</p>
+											  <% else %>
+											<p>
+												<button onclick="showAlert()">Download Updated Resume</button>
+											</p>
+										  <% end %>	
+				
+										</a>
 											</li>
 										</ul>
-									</div>
 								</div>
 							</div>
+
+
 
 							<div class="candidates-details-content">
 								<h3>About Me</h3>
 								<p><%= @candidate.notes %></p>
-								<h3>Education</h3>
-								<h6><%= @candidate.institute_name %></h6>
-								<span> Passout Year - <%= @candidate.year_of_passing%></span>
-								<ul>
-									<li class="university"><%= @candidate.degree %>(<%= @candidate.duration%> yrs)</li>
-								</ul>
-								<h3>Work Experience</h3>
-								<ul>
-									<li class="arts"><%= @candidate.designation %></li>
-									<li><%= @candidate.company_name %></li>
-									<li><%= @candidate.employment_period %>-<%= @candidate.experience %> yrs</li>
-									<li><%= @candidate.company_location %></li>
-								</ul>
+								<h3>Education Details</h3>
+								<h6>Institute Name : </h6>
+								<%= @candidate.institute_name %><br>
+								<h6> Passout Year : </h6>
+								<%= @candidate.year_of_passing%><br>
+								<h6>Degree: </h6><%= @candidate.degree %><br><%= @candidate.duration%> <% if @candidate.duration.present? %> yrs <% end %>
+								
 
-								<h4>Personal Skills</h4>
-
-								<div class="all-skill-bar">
-									<div class="skill-bar" data-percentage="100%">
-										<h4 class="progress-title-holder">
-											<span class="progress-title">Photoshop</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 100%;">
-													<span class="percent">100%</span>
-													<span class="down-arrow"></span>
-												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 100%;"></div>
-										</div>
-									</div>
-			
-									<div class="skill-bar" data-percentage="90%">
-										<h4 class="progress-title-holder clearfix">
-											<span class="progress-title">After Effects</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 90%;">
-													<span class="percent">90%</span>
-													<span class="down-arrow"></span>
-												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 90%;"></div>
-										</div>
-									</div>
-			
-									<div class="skill-bar" data-percentage="85%">
-										<h4 class="progress-title-holder clearfix">
-											<span class="progress-title">Indesign</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 85%;">
-													<span class="percent">85%</span>
-													<span class="down-arrow"></span>
-												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 85%;"></div>
-										</div>
-									</div> 
-			
-									<div class="skill-bar mb-0" data-percentage="60%">
-										<h4 class="progress-title-holder clearfix">
-											<span class="progress-title">HTML &amp; CSS</span>
-											<span class="progress-number-wrapper">
-												<span class="progress-number-mark" style="left: 60%;">
-													<span class="percent">60%</span>
-													<span class="down-arrow"></span>
-												</span>
-											</span>
-										</h4>
-			
-										<div class="progress-content-outter">
-											<div class="progress-content" style="width: 60%;"></div>
-										</div>
-									</div> 
-								</div> 
+								
 							</div>
 						</div>
 
@@ -299,7 +207,6 @@
 											<span>
 												<a href="<%= @candidate.link %>" target="_blank">
 												<%= image_tag("linkedin.png")%>
-												<%= @candidate.link %>
 												</a>
 											</span>
 										</li>
@@ -312,7 +219,7 @@
 								<div class="mb-4">
 									<p class="m-0 d-flex align-items-center"><b><%= @candidate.company_name %></b></p>
 									<div class="">
-										<p class="grey-text"><%= @candidate.employment_period %> - Present<span class="float-right"><%= @candidate.company_location %></span></p>
+										<p class="grey-text"><%= @candidate.employment_period %><% if @candidate.employment_period.present? %> -Present<% end %><span class="float-right"><%= @candidate.company_location %></span></p>
 									</div>
 									<p class="pt-3 mb-0"><b><%= @candidate.designation %></b></p>
 									<p class="text-muted"><%= @candidate.responsiblities %></p>
@@ -324,10 +231,11 @@
 									<h3> Comments </h3>
 									<ul class="overview">
 									<% @candidate.comments.each do |comment| %>
+										<% if comment.present? %>
 										<h6><%= comment.user.email %></h6>
-										<%= comment.content.body %>
+										<%#= comment.content.body %>
 										<%= link_to comment_path(comment.id), method: :delete,  data: { confirm: "Are you sure you want to delete this comment ?" }, class: "btn btn-danger", remote: true do %>
-										<i class="fa fa-trash"></i><% end %>
+										<i class="fa fa-trash"></i><% end %><% end %>
 										<hr>
 								<% end %>
 								    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#commentModal">Add a comment</button>
@@ -397,7 +305,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       	<div class="modal-header">
-			<h5 class="modal-title" id="avabilitymodelLabel">Edit Availabile</h5>
+			<h5 class="modal-title" id="avabilitymodelLabel">Edit Availability</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="lead_close">
 			<span aria-hidden="true">&times;</span>
 			</button>
@@ -432,7 +340,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="afterNoticeModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="afterNoticeModalLabel">Schedule Interview</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeinterview">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -494,4 +402,9 @@ $('#timepicker').timepicker({
 		uiLibrary: 'bootstrap4',
 		format: 'h:mm A'
 	});
+</script>
+<script>
+  function showAlert() {
+    alert("We're sorry, the resume you requested is not available at this time.");
+  }
 </script>

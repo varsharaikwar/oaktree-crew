@@ -44,6 +44,7 @@ class Ability
 
     elsif user.has_role? :pool_manager
       can :index, InterviewSchedule
+      can :manage, Notification
     end
   end
   

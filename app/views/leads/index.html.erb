@@ -44,13 +44,13 @@
       <tbody>
         <% @leads.each do |lead| %>
           <tr>
-            <td><%= link_to lead.name, lead %></td>
-            <td><%= link_to lead.profile, lead %></td>
-            <td><%= link_to User.find_by(email: lead.assigned_to).name, lead %></td>
+            <td class="text-capitalize"><%= link_to lead.name, lead %></td>
+            <td class="text-capitalize"><%= link_to lead.profile, lead %></td>
+            <td class="text-capitalize"><%= link_to User.find_by(email: lead.assigned_to).name, lead %></td>
           
-            <td><%= link_to lead.status, lead %></td>
-            <td><%= link_to lead.additional_info, lead %></td>
-            <td><%= link_to edit_lead_path(lead.id),  class: "btn btn-primary" do %>
+            <td class="text-capitalize"><%= link_to lead.status, lead %></td>
+            <td class="text-capitalize"><%= link_to lead.additional_info, lead %></td>
+            <td class="text-capitalize"><%= link_to edit_lead_path(lead.id),  class: "btn btn-primary" do %>
               <i class="fa fa-pencil"></i>
             <% end %> <%= link_to lead_path(lead.id), method: :delete,  data: { confirm: "Are you sure you want to delete this lead?" }, class: "btn btn-danger" do %>
               <i class="fa fa-trash"></i><% end %> </td>

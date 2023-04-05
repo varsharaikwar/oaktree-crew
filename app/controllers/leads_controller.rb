@@ -35,6 +35,7 @@ class LeadsController < ApplicationController
 
       if @lead.update(lead_params)
         flash[:success] = "Lead has been updated"
+        @lead.assign_user(current_user, @lead)
           redirect_to @lead
       else
           render :edit, status: :unprocessable_entity

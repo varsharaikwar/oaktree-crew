@@ -1,11 +1,12 @@
 <%= form_for LeadAssignment.new, as: :lead_assignment, url: lead_assignments_path(candidate: @candidate), method: :post, html: { class: "edit_post", id: "edit_post_45" }, remote: true do |f|  %>    <div class="col-lg-6 col-md-6">
         <div class="form-group">
-            <label class="required">Lead</label>
+            <label class="">Lead</label>
                 <div id="lead">
                     <%= f.select :lead, @lead.collect {|p| [ p.name, p.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search", id:"category-select" %>
                 </div>  
         </div>
     </div> 
+    <br>
     <%= f.hidden_field :candidate_id, :value => @candidate.id, class: "form-control"%><br>
     <div class="modal-body">
     <%= f.submit "Save", class: " btn default-btn" %>

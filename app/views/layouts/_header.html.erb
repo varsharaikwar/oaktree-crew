@@ -28,11 +28,13 @@
                             <div class="others-option ml-auto d-flex align-items-center">
                             <div class="mr-3">
                             <div class="dropdown">
-                            <button onclick="myFunction()" class="default-btn px-3"><a href="/notifications"><i class="fa fa-bell text-white"></i></a>
-                            <span class="notification_tag">
-                              <%= Notification.where(read: false, reciver_id: current_user.id).count %>
-                            </span> 
-                          </button>                          
+                            <a href="/notifications">
+                            <button onclick="myFunction()" class="default-btn px-3"><i class="fa fa-bell text-white"></i>
+                              <span class="notification_tag">
+                                <%= Notification.where(read: false, reciver_id: current_user.id).count %>
+                              </span> 
+                            </button>
+                          </a>                                
                           </div>
                         
                             </div>
