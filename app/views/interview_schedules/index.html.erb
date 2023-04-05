@@ -20,18 +20,37 @@
     <tbody>
         <% @interview_schedules.each do |interview_schedule|%>
           <tr>
-          <td class="text-capitalize"><%= interview_schedule.candidate.first_name + " " + interview_schedule.candidate.last_name%></td>
-          <td class="text-capitalize"><%= interview_schedule.lead.name %></td>
-          <td><%= interview_schedule.lead.assigned_to %></td>
-          <% if interview_schedule.time.present? %>
-            <td class="text-uppercase"><% str = interview_schedule.time %>
-                <%= formatted_time = Time.strptime(str, '%H:%M %m/%d/%Y').strftime('%-d %B %Y %-l.%M %P') %>
-            </td>
-          <% end %>
-          <td class="text-capitalize"><%= interview_schedule.lead.status %></td>
+          <td class="text-capitalize">
+            <% if interview_schedule.candidate.first_name.present? && interview_schedule.candidate.last_name.present? %>
+              <%= interview_schedule.candidate.first_name + " " + interview_schedule.candidate.last_name%>
+            <% end %>
+          </td>
+          <td class="text-capitalize">
+            <% if interview_schedule.lead.name.present? %>
+              <%= interview_schedule.lead.name %>
+              <% end %>
+          </td>
           <td>
-              <% truncated_url = truncate(interview_schedule.url, length: 30, separator: '.', omission: '...') %>
-              <%= link_to truncated_url,interview_schedule.url, title: interview_schedule.url, target: '_blank' %>
+            <% if interview_schedule.lead.assigned_to.present? %>
+              <%= interview_schedule.lead.assigned_to %>
+            <% end %>
+          </td>
+            <td class="text-uppercase">          
+            <% if interview_schedule.time.present? %>
+                <% str = interview_schedule.time %>
+                <%= formatted_time = Time.strptime(str, '%H:%M %m/%d/%Y').strftime('%-d %B %Y %-l.%M %P') %>
+            <% end %>
+            </td>
+          <td class="text-capitalize">
+            <% if interview_schedule.lead.status.present? %> 
+              <%= interview_schedule.lead.status %>
+            <% end %>
+          </td>
+          <td>
+            <% if interview_schedule.url.present? %>
+                <% truncated_url = truncate(interview_schedule.url, length: 30, separator: '.', omission: '...') %>
+                <%= link_to truncated_url,interview_schedule.url, title: interview_schedule.url, target: '_blank' %>
+            <% end %>
           </td>
       </tr>
         <% end %>
