@@ -20,9 +20,14 @@
               <label class="">Manager</label>
                       <%= f.select :pool_manager_id , @pool_managers.collect {|u| [ u.name, u.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3" %>
           </div>
-      </div> 
+      </div>
 
-      <%= f.hidden_field :candidate_id, value: @lead_assigned.first.candidate_id, class: "form-control" %>
+       <% begin %>
+          <%= f.hidden_field :candidate_id, value: @lead_assigned.first.candidate_id, class: "form-control" %>
+
+                  <% rescue ActiveRecord::RecordNotFound %>
+                    <p>"candidate not found"</p>
+                  <% end %>
       <%= f.hidden_field :hr_id, value: current_user.id, class: "form-control" %>
 
       <div class="modal-footer border-0">
