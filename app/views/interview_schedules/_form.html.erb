@@ -20,16 +20,16 @@
               <label class="">Manager</label>
                       <%= f.select :pool_manager_id , @pool_managers.collect {|u| [ u.name, u.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3" %>
           </div>
-      </div>
+      </div> 
+      <% if @lead_assigned.present? %>
 
-       <% begin %>
-          <%= f.hidden_field :candidate_id, value: @lead_assigned.first.candidate_id, class: "form-control" %>
 
-                  <% rescue ActiveRecord::RecordNotFound %>
-                  <%= f.hidden_field :candidate_id, value: nil, class: "form-control" %>
-                  <% end %>
+      <%= f.hidden_field :candidate_id, value: @lead_assigned.first.candidate_id, class: "form-control" %>
+      <% end %>
+      <% if @lead_assigned.present? %>
+
       <%= f.hidden_field :hr_id, value: current_user.id, class: "form-control" %>
-
+<% end %>
       <div class="modal-footer border-0">
         <%= f.submit "Save", class: " btn default-btn" %>
       </div>
