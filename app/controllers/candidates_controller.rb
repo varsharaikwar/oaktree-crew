@@ -39,8 +39,7 @@ class CandidatesController < ApplicationController
     def create
       @primary_skill = SkillSet.where(skill_type: "primary")
       @secondary_skill = SkillSet.where(skill_type: "secondary")
-      @candidate = current_user.candidates.create(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))    
-      @candidate.status = "Draft"
+      @candidate = current_user.candidates.create(candidate_params)
         if @candidate.save
           flash[:success] = "Candidate created successfully!"
           redirect_to @candidate
@@ -68,7 +67,7 @@ class CandidatesController < ApplicationController
             end
           end
       elsif params[:current_location].present? 
-        @candidate.update(candidate_params.merge(current_location: params[:current_location].to_s, city: params[:city].to_s))
+        @candidate.update(candidate_params)
         redirect_to @candidate
       elsif @candidate.update(candidate_params)
         flash[:success] = "Candidate Updated successfully!"
@@ -127,6 +126,6 @@ class CandidatesController < ApplicationController
 
     private
     def candidate_params
-      params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :city, :employment_period, :image, :file, :updated_file, :link, :current_location, :experience, :available_time_zone, :language, :start_time, :end_time, :primary_skill => [], :secondary_skill => [])
+      params.require(:candidate).permit(:first_name, :last_name, :email, :phone, :date_of_birth, :gender, :marital_status, :nationality, :address, :notes, :present_salary, :expected_salary, :category, :job_level, :job_nature, :level_of_education, :degree, :group, :institute_name, :result, :marks, :year_of_passing, :duration, :company_name, :company_business, :designation, :department, :responsiblities, :company_location, :city, :employment_period, :image, :file, :updated_file, :link, :current_location, :experience, :available_time_zone, :language, :start_time, :end_time, :primary_skill => [], :secondary_skill => []).merge(current_location: params[:current_location].to_s, city: params[:city].to_s, status: "Draft")
     end
 end

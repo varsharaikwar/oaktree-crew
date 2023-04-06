@@ -1,2 +1,8 @@
 <%= render 'layouts/header'%>
-<%= @notification.message.html_safe%>
+<% if (current_user.roles.first.name == "junior_hr" || current_user.roles.first.name == 'senior_hr' )  && @notification.status == 'in progress'%>
+    <%= render 'lead'%>
+<% elsif current_user.roles.first.name == 'sales_person'  && @notification.status == 'assigned'%>
+    <%= render 'lead_assignment'%>
+<% elsif (current_user.roles.first.name == 'sales_person' || current_user.roles.first.name == 'pool_manager')  && @notification.status == 'interview scheduled'%>
+    <%= render 'interview_schedule'%>
+<% end %>

@@ -1,0 +1,11 @@
+  <% candidate = Candidate.find(@notification.candidate_id)%>
+ <div class="container"> 
+    <div class="p-3">
+        <div class="alert alert-info">
+        <p><b><a href="<%= candidate_path(candidate)%>"><%= candidate.first_name + " " + candidate.last_name  %></a> interview has been scheduled</b><span class="float-right ml-2">Time<b class="ml-2"><i class="fa fa-clock mr-1"></i><%=  @notification.lead.interview_schedule.time%></b></span></p>            
+        <hr>
+            <p>Scheduled by:- <b class="ml-2"><%= @notification.user.name %></b></p>
+            <p>Lead:- <b class="ml-2"><%= @notification.lead.name %></b></p>
+        </div>
+    </div>
+</div>

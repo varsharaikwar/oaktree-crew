@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :find_candidate ,only: [:create]
     def new
       @comment = Comment.new
     end
   
     def create
+      @candidate = Candidate.find(params[:candidate_id])
       @comment = @candidate.comments.new(content: params[:content], user_id: current_user.id)
       if @comment.save
           redirect_to @candidate
@@ -22,10 +22,5 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.js
       end
-    end
-
-    private
-    def find_candidate
-        @candidate = Candidate.find(params[:id])
     end
 end

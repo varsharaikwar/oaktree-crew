@@ -11,7 +11,6 @@
                                     <%= f.text_field :name, class: "form-control"%>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-2">
                                 <div class="form-group">
                                     <label>Profile</label>
@@ -25,7 +24,10 @@
                                 <div class="form-group">
                                     <label>Assigned To</label>
                                     <div id="assigned_to">
-                                        <%= f.select :assigned_to, @hr_list.collect {|p| [ p.name, p.email ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search" %>     
+                                        <%= f.select :assigned_to, @hr_list.collect {|p| [ p.name, p.email ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search" %>
+                                        <% if lead_error_helper(:assigned_to) != []%>
+                                            <span class="error-message", id="msg1">Last Name <%= error_helper(:assigned_to).first %></span>
+                                        <% end %>     
                                     </div>  
                                 </div>
                             </div>

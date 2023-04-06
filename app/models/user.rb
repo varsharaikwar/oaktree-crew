@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   rolify
+  has_many :candidates
   has_many :comments
-  has_many :candidates, through: :comments
   has_many :leads
   has_many :notifications
   has_many :lead_assignments

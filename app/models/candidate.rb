@@ -7,8 +7,8 @@ class Candidate < ActiveRecord::Base
     # has_one_attached :image
     default_scope { order(created_at: :desc) }
     has_many :lead_assignments, dependent: :destroy
+    has_many :users
     has_many :comments, dependent: :destroy
-    has_many :users, through: :comments
     has_many :interview_schedules, dependent: :destroy
     has_rich_text :content
     mount_uploader :file, FileUploader
@@ -30,6 +30,7 @@ class Candidate < ActiveRecord::Base
     EXPERIENCE_LIST = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
     validates :first_name,:last_name, :phone, :gender, :start_time, :end_time,  :address, presence: true
     validates :email, presence: true, format: { with: Devise.email_regexp }
+    
     def formatted_start_time
         Time.parse(start_time).strftime("%I:%M %p")
     end

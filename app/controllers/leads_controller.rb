@@ -18,7 +18,7 @@ class LeadsController < ApplicationController
       @lead = current_user.leads.new(lead_params)
         if @lead.save
           flash[:success] = "Lead created successfully!"
-          @lead.assign_user(current_user, @lead)
+          @lead.assign_user(current_user)
             redirect_to @lead
         else
             render :new, status: :unprocessable_entity
@@ -32,10 +32,12 @@ class LeadsController < ApplicationController
   
   def update
       @lead = current_user.leads.find(params[:id])
-
+      @hr_list = User.with_any_role('junior_hr', 'senior_hr')
+      @category_list = Candidate::CATEGORY_LIST
+      
       if @lead.update(lead_params)
         flash[:success] = "Lead has been updated"
-        @lead.assign_user(current_user, @lead)
+        @lead.assign_user(current_user)
           redirect_to @lead
       else
           render :edit, status: :unprocessable_entity
