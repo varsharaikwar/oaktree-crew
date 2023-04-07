@@ -1,7 +1,7 @@
 <%= form_for InterviewSchedule.new, as: :interview_schedule, url: interview_schedules_path(notification_id: @notification, candidate: @candidate), method: :post , html: {}, remote: true do |f| %>
       <div class="actions mb-3">
       <%= f.label "Select Date Time", style: "text-transform: capitalize;" %>
-        <%= f.text_field :time, class: "form-control", id: 'dtField' %>
+        <%= f.text_field :time, autocomplete: "off", class: "form-control", id: 'dtField' %>
       </div>
 
       <div class="actions mb-3">

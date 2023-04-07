@@ -370,21 +370,23 @@
 			footer: true
 		});	
 
-		$('#timepicker').timepicker({
-				twelvehour: true,
-				uiLibrary: 'bootstrap4',
-				format: 'h:mm A'
-				
-		});
+	});
+	
+	function showAlert() {
+		alert("Resume Not Available.");
+	}	
+</script>
+<script>
+	$('#timepicker').timepicker({
+					twelvehour: true,
+					uiLibrary: 'bootstrap4',
+					format: 'h:mm A'
+					
+			});
 
-		$('#timepicker1').timepicker({
-			twelvehour: true,
-			uiLibrary: 'bootstrap4',
-			format: 'h:mm A'
-		});
-
-		function showAlert() {
-			alert("Resume Not Available.");
-		}
-	});	
+	$('#timepicker1').timepicker({
+		twelvehour: true,
+		uiLibrary: 'bootstrap4',
+		format: 'h:mm A'
+	});
 </script>
