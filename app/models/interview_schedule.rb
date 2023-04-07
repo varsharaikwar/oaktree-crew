@@ -16,7 +16,7 @@ class InterviewSchedule < ApplicationRecord
       lead = nil
       reciver_id = 6
       reciver_type = "sales_person"
-      status = "disassociate"
+      status = "interview scheduled"
     end
     
     current_user.notifications.create(sender_id: current_user.id , sender_type: current_user.roles.first.name, reciver_id: self.pool_manager_id, reciver_type: 'pool_manager', lead: lead, candidate_id: candidate.id, status: status )

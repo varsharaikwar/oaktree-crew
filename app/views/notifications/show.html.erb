@@ -1,10 +1,12 @@
 <%= render 'layouts/header'%>
 <% if current_user.roles.first.name == 'sales_person'  && @notification.status == 'assigned'%>
     <%= render 'lead_assignment'%>
-<% elsif  current_user.roles.first.name == 'pool_manager' && @notification.status == 'disassociate'%>
-    <%= render 'disassociate'%>
 <% elsif (current_user.roles.first.name == 'sales_person' || current_user.roles.first.name == 'pool_manager')  && @notification.status == 'interview scheduled'%>
-    <%= render 'interview_schedule'%>
+    <% if @notification.lead.present? %>
+        <%= render 'interview_schedule'%>
+    <% else %>
+        <%= render 'disassociate'%>
+    <% end %>
 <% elsif current_user.roles.first.name == "junior_hr" || current_user.roles.first.name == 'senior_hr' %>
     <%= render 'lead'%>
 <% end %>
