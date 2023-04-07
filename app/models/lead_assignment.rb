@@ -1,4 +1,6 @@
 class LeadAssignment < ApplicationRecord
+  validates :candidate, uniqueness: { scope: :lead }
+
   belongs_to :candidate
   belongs_to :lead
 

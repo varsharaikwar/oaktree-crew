@@ -19,14 +19,22 @@
           <div class="col-lg-3">
             <div class="d-flex">
               <h1 class="<%= notice.id %>"></h1>
-              <span class="profile-txt"><%= link_to @lead.name.split('')[0], notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
+               <% if @lead.present? %>
+                <span class="profile-txt"><%= link_to @lead.name.split('')[0], notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
+              <%else%>
+                 <span class="profile-txt"><%= link_to 'E', notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
+              <% end %>
             </div>
           </div>
           <div class="col-lg-2 text-center">
-            <span class="txt-ellipsis"><%= link_to @lead.name, notice %></span>
+            <% if @lead.present? %>
+              <span class="txt-ellipsis"><%= link_to @lead.name, notice %></span>
+            <%end%>
           </div>
           <div class="col-lg-2 text-center">
+          <% if @lead.present? %>
             <span class="txt-ellipsis"><%= link_to @lead.profile, notice, class: "badge badge-success" %></span>
+          <% end %>
           </div>
           <div class="col-lg-3 text-center">
             <% if notice.status.present? %>

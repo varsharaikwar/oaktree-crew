@@ -7,10 +7,9 @@ class InterviewSchedulesController < ApplicationController
     def create
         candidate = params[:candidate]
         @interview_schedule = InterviewSchedule.new(interview_schedule_params.merge(hr_id: current_user.id, candidate_id: candidate))
-        lead = Lead.find(params[:interview_schedule][:lead_id])
         respond_to do |format|
             if @interview_schedule.save
-                @interview_schedule.lead.update(status: 'interview scheduled')
+                Lead.find(@interview_schedule.lead_id).update(status: 'interview scheduled') if @interview_schedule.lead_id.present?
                 @interview_schedule.interview_schedule(current_user)
                 format.js
             end

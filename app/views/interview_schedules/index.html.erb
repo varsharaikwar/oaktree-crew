@@ -8,14 +8,14 @@
 <h3 class="position-absolute">Scheduled Interview</h3>
 <table id="interviewTable" class="display primary-table" style="width:100%"> 
     <thead>
-    <tr>
-        <th style="width: 5%;">Candidate</th>
-        <th style="width: 4%;">Lead</th>
-        <th style="width: 5%;">Assigned By</th>
-        <th style="width: 12%;">Date and Time</th>
-        <th style="width: 7%;">Status</th>
-        <th style="width: 5%;">Meeting Link</th>
-    </tr>
+      <tr>
+          <th style="width: 5%;">Candidate</th>
+          <th style="width: 4%;">Lead</th>
+          <th style="width: 5%;">Assigned By</th>
+          <th style="width: 12%;">Date and Time</th>
+          <th style="width: 7%;">Status</th>
+          <th style="width: 5%;">Meeting Link</th>
+      </tr>
     </thead>
     <tbody>
         <% @interview_schedules.each do |interview_schedule|%>
@@ -26,13 +26,15 @@
             <% end %>
           </td>
           <td class="text-capitalize">
-            <% if interview_schedule.lead.name.present? %>
+            <% if interview_schedule.lead.present? %>
               <%= interview_schedule.lead.name %>
               <% end %>
           </td>
           <td>
-            <% if interview_schedule.lead.assigned_to.present? %>
+            <% if interview_schedule.lead.present? %>
               <%= interview_schedule.lead.assigned_to %>
+            <% else %>
+              <%=  User.find(InterviewSchedule.last.hr_id).email %>
             <% end %>
           </td>
             <td class="text-uppercase">          
@@ -42,7 +44,7 @@
             <% end %>
             </td>
           <td class="text-capitalize">
-            <% if interview_schedule.lead.status.present? %> 
+            <% if interview_schedule.lead.present? %> 
               <%= interview_schedule.lead.status %>
             <% end %>
           </td>
