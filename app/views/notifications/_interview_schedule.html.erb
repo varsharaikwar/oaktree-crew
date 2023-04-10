@@ -2,8 +2,8 @@
  <div class="container"> 
     <div class="p-3">
         <div class="alert alert-info">
-<p><i class="fa fa-file mr-1"></i>Interview has been scheduled for <a href="<%= candidate_path(candidate)%>"><b><%= candidate.first_name + " " + candidate.last_name  %></b></a><span class="float-right ml-2">Time<b class="ml-2"><i class="fa fa-clock mr-1"></i><%=  @notification.lead.interview_schedule.formatted_time%></b></span>
-        <span class="float-right ml-2">Date<b class="ml-2"><i class="fa fa-calendar mr-1"></i><%=  @notification.lead.interview_schedule.formatted_date%></b></span></p> <hr>     
+<p><i class="fa fa-file mr-1"></i>Interview has been scheduled for <a href="<%= candidate_path(candidate)%>"><b><%= candidate.first_name + " " + candidate.last_name  %></b></a><span class="float-right ml-2">Time and Date<b class="ml-2"><i class="fa fa-clock mr-1"></i><%=  @notification.lead.interview_schedule.time %></b></span>
+        <hr>     
             <p>Scheduled by:- <b class="ml-2"><%= @notification.user.name %></b></p>
             <p>Lead:- <b class="ml-2"><%= @notification.lead.name %></b></p>
         </div>

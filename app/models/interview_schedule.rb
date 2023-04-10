@@ -24,11 +24,21 @@ class InterviewSchedule < ApplicationRecord
   end
 
   def formatted_time
-    Time.parse(time).strftime("%I:%M %p")
+    begin
+      parsed_time = Time.parse(time)
+      formatted_time = parsed_time.strftime("%I:%M %p")
+    rescue ArgumentError
+      formatted_time = "Not Available"
+    end  
   end
 
   def formatted_date
-    Time.parse(time).strftime("%d-%m-%Y")
+    begin
+      parsed_time = Time.parse(time)
+      formatted_time = parsed_time.strftime("%d-%m-%Y")
+    rescue ArgumentError
+      formatted_time = "Not Available"
+    end
   end
 
 end
