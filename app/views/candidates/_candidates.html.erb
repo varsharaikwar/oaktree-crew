@@ -1,57 +1,65 @@
-<% @candidates = @candidates.nil? ? candidates : @candidates %>            
+<% @candidates = @candidates.nil? ? candidates : @candidates %>     
+       
 <div class="row">
-<div class="col-lg-12 pt-4">
-<h3><%= @candidates.count %> Candidates</h3><br>
-</div>
-    <% @candidates.each_with_index do |candidate, i| %>
-        <div class="col-lg-4 text-center card-box mb-4">
-        <%= link_to candidate_path(candidate), :action => 'show' do %>
-            <div class="widget-box">
-                <div class="dropdown float-right">
-                 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                        <div class="d-flex align-items-center">
-                         <%#= link_to 'Edit Candidate', edit_candidate_path(candidate), class: "dropdown-item" %> 
-                        </div>
-                            
-                    </div>
+    <div class="col-lg-12 pt-4">
+        <h3><%= @candidates.count %> Candidates</h3><br>
+    </div>
 
-                </div>
-                
-                <% if candidate.image.present? %>
-                    <span class="emoji-container emoji1">
-                        <%= image_tag candidate.image.url %>
-                    </span>
-                <% else %>
-                    <% if candidate.gender == "Male" %>
-                        <span class="emoji-container emoji3">
-                            <img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
-                                alt="">
-                        </span>
-                    <% elsif candidate.gender == "Female" %>
-                        <span class="emoji-container emoji2">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
-                                alt="">
+         <% @candidates.each_with_index do |candidate, i| %>
+            <div class="col-lg-4 text-center card-box mb-4">
+            <%= link_to candidate_path(candidate), :action => 'show' do %>
+                <div class="widget-box">
+                    
+                    <% if candidate.image.present? %>
+                        <span class="emoji-container emoji1">
+                            <%= image_tag candidate.image.url %>
                         </span>
                     <% else %>
-                        <span class="emoji-container emoji1">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="">
-                        </span>
+                        <% if candidate.gender == "Male" %>
+                            <span class="emoji-container emoji3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/921/921097.png"
+                                    alt="">
+                            </span>
+                        <% elsif candidate.gender == "Female" %>
+                            <span class="emoji-container emoji2">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2922/2922566.png"
+                                    alt="">
+                            </span>
+                        <% else %>
+                            <span class="emoji-container emoji1">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="">
+                            </span>
+                        <% end %>
                     <% end %>
-                <% end %>
-                 <p class="m-0"><b><%= candidate.first_name+ " " +candidate.last_name %></b></p>
-                <p><%= candidate.category %></p>
-                <p><%= candidate.status %></p>
-                
-            </div>
+
+                    <p class="m-0"><b><%= candidate.first_name+ " " +candidate.last_name %></b></p>
+                        <% if candidate.category.present? %>
+                    <p><%= candidate.category %></p>
+                        <% else %>
+                    <p class="invisible">Category not added</p>
+                        <% end  %>
+                    <p class="gradient-success-btn"><%= candidate.status %></p>     
+                </div>
+            <% end %>
+           </div>
         <% end %>
-        </div>
-    <% end %>
+
     <div class="col-lg-12 mb-4">
         <%= will_paginate @candidates, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>        
     </div>
+
 </div>
 </div>
 </div>
 
+<style>
+    .gradient-success-btn{
+        background: linear-gradient( 45deg , #42e695, #3bb2b8)!important;
+        color: #fff;
+        border-radius: 10px;
+    }
+    #candidate_ref .widget-box{
+        border-top: 4px solid #00b074;
+    }
+</style>

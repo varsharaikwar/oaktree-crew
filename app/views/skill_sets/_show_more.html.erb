@@ -1,5 +1,5 @@
 <div class="check_filter" >
-    <div class="skill_filter row" id="showMoreSkill">
+    <div class="skill_filter row scroll-section" id="showMoreSkill">
         <% @primary_skill.each do |val| %>
             <div class="col-lg-3 mb-2">
                 <%= check_box_tag val.name, val.name %> <%= val.name %>
@@ -7,3 +7,4 @@
         <% end %>
     </div>
 </div>
+
