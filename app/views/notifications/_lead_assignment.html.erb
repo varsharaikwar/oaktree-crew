@@ -4,8 +4,10 @@
             <% candidate = Candidate.find(@notification.candidate_id)%>
             <p><i class="fa fa-file mr-1"></i><b><a href="<%= candidate_path(candidate)%>"><%= candidate.first_name + " " + candidate.last_name  %></a> has been assigned to Lead</b></p>
             <hr>
-            <p>by:- <b class="ml-2"><%= @notification.user.name %></b></p>
-            <p>Lead:- <b class="ml-2"><%= @notification.lead.name %></b></p>
+                <% notification = @notification.user.name.present? ? @notification.user.name : nil %>
+                    <p>by:- <b class="ml-2"><%= notification %></b></p>
+                <% lead = @notification.lead.present? ? @notification.lead.name : nil %>
+                    <p>Lead:- <b class="ml-2"><%= lead %></b></p>
         </div>
     </div>
     <div class="text-right">

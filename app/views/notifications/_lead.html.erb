@@ -5,8 +5,10 @@
             <hr>
             <div class="row">
                 <div class="col-lg-6">
-                    <p>Name:- <b class="ml-2"><%= @notification.lead.name %></b></p>
-                    <p>Profile:- <b class="ml-2"><%= @notification.lead.profile %></b></p>
+                <% notification = @notification.lead.name.present? ? @notification.lead.name : nil %>
+                    <p>Name:- <b class="ml-2"><%= notification %></b></p>
+                    <% lead = @notification.lead.profile.present? ? @notification.lead.profile : nil %>
+                    <p>Profile:- <b class="ml-2"><%= lead %></b></p>
                 </div>
                 <div class="col-lg-6">
                     <p>Status:- <b class="ml-2"><%= @notification.status %></b></p>
