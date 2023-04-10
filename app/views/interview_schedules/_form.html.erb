@@ -1,4 +1,7 @@
-<%= form_for InterviewSchedule.new, as: :interview_schedule, url: interview_schedules_path(notification_id: @notification, candidate: @candidate), method: :post , html: {}, remote: true do |f| %>
+<% method = params[:method]%>
+<% data = Hash[notification_id: @notification, candidate: params[:candidate], id: params[:id] ]%>
+<% path = method == "post" ? interview_schedules_path(data) : interview_schedule_path(data)%>
+<%= form_for @interview_schedule, as: :interview_schedule, url: path, method: method , html: {}, remote: true do |f| %>
       <div class="actions mb-3">
       <%= f.label "Select Date Time", style: "text-transform: capitalize;" %>
         <%= f.text_field :time, autocomplete: "off", class: "form-control", id: 'dtField' %>
@@ -6,19 +9,19 @@
 
       <div class="actions mb-3">
         <%= f.label 'Meeting Link', style: "text-transform: capitalize;"%>
-        <%= f.text_field :url, class: "form-control" %>
+        <%= f.text_field :url, class: "form-control", required: true, id: 'interview-schedule-form'%>
       </div>
 
       <div class="actions mb-3">
           <div class="form-group">
               <label>Lead</label>
-                      <%= f.select :lead_id, @lead_assigned.collect {|p| [ p.lead.name, p.lead.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3", id:"category-select" %>
+                      <%= f.select :lead_id, lead_assigned.collect {|p| [ p.lead.name, p.lead.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3", id:"category-select" %>
           </div>
       </div> 
       <div class="actions mb-3">
           <div class="form-group">
               <label class="">Manager</label>
-                      <%= f.select :pool_manager_id , @pool_managers.collect {|u| [ u.name, u.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3" %>
+                      <%= f.select :pool_manager_id , pool_managers.collect {|u| [ u.name, u.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3" %>
           </div>
       </div> 
 
@@ -26,3 +29,19 @@
         <%= f.submit "Save", class: " btn default-btn" %>
       </div>
 <% end %>
+<script> 
+  $('#dtField').datetimepicker({
+    uiLibrary: 'bootstrap4',
+    modal: true,
+    footer: true
+  });	
+const form = document.getElementById("interview-schedule-form");
+form.addEventListener("submit", (event) => {
+  const urlField = form.elements.namedItem("url");
+  if (!urlField.value.trim()) {
+    // If URL field is empty or contains only whitespace, prevent form submission
+    event.preventDefault();
+    alert("Please enter a URL");
+  }
+});
+</script>

@@ -92,7 +92,7 @@
 										<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2", target: "_blank" %>
 										<% unless ['admin', 'pool_manager', 'sales_person'].include?(current_user.roles.first.name) %>
 											<button type="button" class="default-btn px-2 ml-2" data-toggle="modal" data-target="#assignmentmodel">Assign To Lead</button>
-											<button type="button" class="default-btn px-2 ml-2" data-toggle="modal" data-target="#afterNoticeModal">Schedule Interview</button>				
+											<%= link_to 'Schedule Interview', new_interview_schedule_path(candidate: @candidate.id, method: :post), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2"%>
 										<% end %>						
 									</div>
 								</div>
@@ -115,42 +115,63 @@
 									</ul>
 								</div>
 							</div>
-							<div class="candidates-details-content mb-4">
-								<div class="widget-box">
-									<h3>Documents</h3>
-									<ul class="overview download nav align-items-center mb-4 mt-3">
-										<li class="nav-item d-flex align-items-center flex-fill">
-											<i class="bx bxs-file-pdf"></i>
-											<a href="" class="nav-link">
-												<% if @candidate.file.url.present? %>
-													<p>
-														<%= button_to 'Download Original Resume', url_for(@candidate.file.url), method: :get %>
-													</p>
-												<% else %>
-													<p>
-														<button onclick="showAlert()">Download Original Resume</button>
-													</p>
-												<% end %>											
-											</a>
-										</li>
-									</ul>
-									<ul class="overview download nav align-items-center mb-4">
-										<li class="nav-item d-flex align-items-center flex-fill">
-											<i class="bx bxs-file-pdf"></i>
-											<a href="" class="nav-link">
-												<% if @candidate.updated_file.url.present? %>
-													<p>
-														<%= button_to 'Download Updated Resume', url_for(@candidate.updated_file.url), method: :get %>
-													</p>
-												<% else %>
-													<p>
-														<button onclick="showAlert()">Download Updated Resume</button>
-													</p>
-												<% end %>	
-			
-											</a>
-										</li>
-									</ul>
+							<div class="row">
+								<div class="col-lg-6 mb-4">
+									<div class="candidates-widget widget-box avatar-list">
+										<h3>Schedule Interview</h3>
+										<% if @candidate.interview_schedules.present? %>
+											<% @candidate.interview_schedules.each do |interview_schedule| %>
+												<%= interview_schedule.url %>
+												<%= interview_schedule.time %>
+
+												<%= link_to 'Edit Interview', edit_interview_schedule_path(interview_schedule.id, candidate: @candidate.id, method: :patch), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2" %>
+											<% end %>
+										<% else %>
+											<p>Interview Not Scheduled</p>
+										<% end %>
+									</div>
+								</div>
+								<div class="col-lg-6 mb-4">
+									<div class="candidates-widget widget-box">
+										<h3>Documents</h3>
+										<ul class="overview download nav align-items-center mb-3 mt-3">
+											<li class="nav-item d-flex align-items-center flex-fill">
+												<i class="bx bxs-file-pdf"></i>
+												<a href="#" class="nav-link"><% if @candidate.file.url.present? %>
+												<p>
+													<%= button_to 'Download Original Resume', url_for(@candidate.file.url), method: :get %>
+													const form = document.getElementById("interview-schedule-form");
+													form.addEventListener("submit", (event) => {
+													  const urlField = form.elements.namedItem("url");
+													  if (!urlField.value.trim()) {
+														// If URL field is empty or contains only whitespace, prevent form submission
+														event.preventDefault();
+														alert("Please enter a URL");
+													  }
+													});		<button onclick="showAlert()">Download Original Resume</button>
+												</p>
+											<% end %>
+												</a>
+											</li>
+											<li><i class='bx bxs-cloud-download'></i></li>
+										</ul>
+										<ul class="overview download nav align-items-center mb-3">
+											<li class="nav-item d-flex align-items-center flex-fill">
+												<i class="bx bxs-file-pdf"></i>
+												<a href="#" class="nav-link"><% if @candidate.updated_file.url.present? %>
+												<p>
+													<%= button_to 'Download Updated Resume', url_for(@candidate.updated_file.url), method: :get %>
+												</p>
+											<% else %>
+												<p>
+													<button onclick="showAlert()">Download Updated Resume</button>
+												</p>
+											<% end %>	
+												</a>
+											</li>
+											<li><i class='bx bxs-cloud-download'></i></li>
+										</ul>
+									</div>
 								</div>
 							</div>
 							<div class="candidates-details-content">
@@ -192,7 +213,7 @@
 							<div class="candidates-widget widget-box h-auto mb-4">
 								<h3 class="mb-4">Experience</h3>
 								<div class="mb-4">
-									<p clas0000000000000000000000000000000000000000s="m-0 d-flex align-items-center"><b><%= @candidate.company_name %></b></p>
+									<p class="m-0 d-flex align-items-center"><b><%= @candidate.company_name %></b></p>
 									<div class="">
 										<p class="grey-text"><%= @candidate.employment_period %><% if @candidate.employment_period.present? %> -Present<% end %><span class="float-right"><%= @candidate.company_location %></span></p>
 									</div>
@@ -319,17 +340,16 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="afterNoticeModal" tabindex="-1" aria-labelledby="afterNoticeModalLabel" aria-hidden="true">
+<div class="modal fade" id="InterviewModal" tabindex="-1" aria-labelledby="InterviewModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="afterNoticeModalLabel">Schedule Interview</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeinterview">
-          <span aria-hidden="true">&times;</span>
+        <h5 class="modal-title" id="InterviewModalLabel">Schedule Interview</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeinterview">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <%= render 'interview_schedules/form'%>
+        
       </div>
     </div>
   </div>
@@ -363,13 +383,6 @@
 				data: {"status": code}
 			});
 		});
-
-		$('#dtField').datetimepicker({
-			uiLibrary: 'bootstrap4',
-			modal: true,
-			footer: true
-		});	
-
 	});
 	
 	function showAlert() {

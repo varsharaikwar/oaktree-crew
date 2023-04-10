@@ -1,4 +1,5 @@
 class InterviewSchedule < ApplicationRecord
+  validates :url, presence: true
   belongs_to :lead, optional: true
   belongs_to :candidate
   default_scope { order(created_at: :desc) }
