@@ -115,65 +115,30 @@
 									</ul>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-lg-6 mb-4">
-									<div class="candidates-widget widget-box avatar-list">
-										<h3>Schedule Interview</h3>
+
+								<div class="candidates-details-content mb-4">
+
+									<h3>Scheduled Interview </h3>
+
 										<% if @candidate.interview_schedules.present? %>
 											<% @candidate.interview_schedules.each do |interview_schedule| %>
-												<%= interview_schedule.url %>
-												<%= interview_schedule.time %>
 
-												<%= link_to 'Edit Interview', edit_interview_schedule_path(interview_schedule.id, candidate: @candidate.id, method: :patch), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2" %>
+											<div class="position-relative">
+												<div><b>URL:</b> <i class="fa fa-link"></i><%=link_to interview_schedule.url,interview_schedule.url %></div>
+												<div><b>Time:</b> <i class="fa fa-clock"></i> <%= interview_schedule.time %></div>
+
+												<%= link_to  content_tag(:i, "", class: "fa fa-pencil"), edit_interview_schedule_path(interview_schedule.id, candidate: @candidate.id, method: :patch), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2 py-2 option-icon" %><br><br>
+											</div>	
+
 											<% end %>
+
 										<% else %>
 											<p>Interview Not Scheduled</p>
 										<% end %>
-									</div>
+
 								</div>
-								<div class="col-lg-6 mb-4">
-									<div class="candidates-widget widget-box">
-										<h3>Documents</h3>
-										<ul class="overview download nav align-items-center mb-3 mt-3">
-											<li class="nav-item d-flex align-items-center flex-fill">
-												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><% if @candidate.file.url.present? %>
-												<p>
-													<%= button_to 'Download Original Resume', url_for(@candidate.file.url), method: :get %>
-													const form = document.getElementById("interview-schedule-form");
-													form.addEventListener("submit", (event) => {
-													  const urlField = form.elements.namedItem("url");
-													  if (!urlField.value.trim()) {
-														// If URL field is empty or contains only whitespace, prevent form submission
-														event.preventDefault();
-														alert("Please enter a URL");
-													  }
-													});		<button onclick="showAlert()">Download Original Resume</button>
-												</p>
-											<% end %>
-												</a>
-											</li>
-											<li><i class='bx bxs-cloud-download'></i></li>
-										</ul>
-										<ul class="overview download nav align-items-center mb-3">
-											<li class="nav-item d-flex align-items-center flex-fill">
-												<i class="bx bxs-file-pdf"></i>
-												<a href="#" class="nav-link"><% if @candidate.updated_file.url.present? %>
-												<p>
-													<%= button_to 'Download Updated Resume', url_for(@candidate.updated_file.url), method: :get %>
-												</p>
-											<% else %>
-												<p>
-													<button onclick="showAlert()">Download Updated Resume</button>
-												</p>
-											<% end %>	
-												</a>
-											</li>
-											<li><i class='bx bxs-cloud-download'></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
+
+							
 							<div class="candidates-details-content">
 								<h3>About Me</h3>
 								<p><%= @candidate.notes %></p>
@@ -210,6 +175,9 @@
 									</ul>
 								</div>
 							</div>
+
+							
+
 							<div class="candidates-widget widget-box h-auto mb-4">
 								<h3 class="mb-4">Experience</h3>
 								<div class="mb-4">
@@ -221,6 +189,60 @@
 									<p class="text-muted"><%= @candidate.responsiblities %></p>
 								</div>
 							</div>
+
+							<div class="candidates-widget widget-box h-auto mb-4">
+								<h3 class="mb-4"> Documents </h3>
+								<div class="mb-4">
+<ul class="overview download nav align-items-center mb-3">
+											<li class="nav-item d-flex align-items-center flex-fill">
+												<i class="bx bxs-file-pdf"></i>
+												<a href="" class="nav-link"><% if @candidate.file.url.present? %>
+												<p>
+													<%= button_to 'Download Original Resume', url_for(@candidate.file.url), method: :get %>
+												</p>
+											<% else %>
+												<p>
+													<button onclick="showAlert()">Download Original Resume</button>
+												</p>
+											<% end %>	
+												</a>
+											</li>
+											<li><i class='bx bxs-cloud-download'></i></li>
+									</ul>
+
+
+								
+
+									<ul class="overview download nav align-items-center mb-3">
+											<li class="nav-item d-flex align-items-center flex-fill">
+												<i class="bx bxs-file-pdf"></i>
+												<a href="" class="nav-link"><% if @candidate.updated_file.url.present? %>
+												<p>
+													<%= button_to 'Download Updated Resume', url_for(@candidate.updated_file.url), method: :get %>
+												</p>
+											<% else %>
+												<p>
+													<button onclick="showAlert()">Download Updated Resume</button>
+												</p>
+											<% end %>	
+												</a>
+											</li>
+											<li><i class='bx bxs-cloud-download'></i></li>
+									</ul>
+									
+								</div>
+							</div>
+
+							<div class="candidates-widget widget-box h-auto mb-4">
+								<h3 class="mb-4">Availability</h3>
+								<div class="mb-4">
+									<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+									<i class="fa fa-pencil"></i></button></p>
+									<p class="pt-3 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+									<i class="fa fa-pencil"></i></button></p>
+								</div>
+							</div>
+
 							<div class="candidates-details-sidebar">
 								<div class="candidates-widget" id="comment_refresh">
 									<h3>Comments</h3>
@@ -245,15 +267,7 @@
 									</ul>
 								</div>	
 							</div>
-							<div class="candidates-widget widget-box h-auto mb-4">
-								<h3 class="mb-4">Availability</h3>
-								<div class="mb-4">
-									<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-									<i class="fa fa-pencil"></i></button></p>
-									<p class="pt-3 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-									<i class="fa fa-pencil"></i></button></p>
-								</div>
-							</div>
+
 							<div class="candidates-details-sidebar">				
 							</div>
 						</div>
@@ -266,55 +280,55 @@
 
 <!-- Comment Modal -->
 <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="commentModalLabel">Notes</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-	 	 <%= form_with url: candidate_comments_path(@candidate) do |f| %>
+<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h5 class="modal-title" id="commentModalLabel">Notes</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<%= form_with url: candidate_comments_path(@candidate) do |f| %>
 			<%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
 			<%= tinymce %>	
 			<%= f.submit "Submit" , class: "tiny-mice", class: 'btn btn-success' %>
 		<% end %>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
+	</div>
+	<div class="modal-footer">
+	</div>
+	</div>
+</div>
 </div>	
 
 <!--Lead Assignment Modal -->
 <div class="modal fade" id="assignmentmodel" tabindex="-1" aria-labelledby="assignmentmodelLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="assignmentmodelLabel">Lead Assigned To...</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="lead_close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-	  	<%= render 'lead_assignments/form'%>
+<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h5 class="modal-title" id="assignmentmodelLabel">Lead Assigned To...</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="lead_close">
+		<span aria-hidden="true">&times;</span>
+		</button>
 	</div>
-    </div>
-  </div>
+	<div class="modal-body">
+		<%= render 'lead_assignments/form'%>
+	</div>
+	</div>
+</div>
 </div>
 
 <!-- Avaibility Modal -->
 <div class="modal fade" id="avabilitymodel" tabindex="-1" aria-labelledby="avabilitymodelLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      	<div class="modal-header">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
 			<h5 class="modal-title" id="avabilitymodelLabel">Edit Availability</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="lead_close">
 			<span aria-hidden="true">&times;</span>
 			</button>
-     	</div>
-      	<div class="modal-body">
+		</div>
+		<div class="modal-body">
 			<%= form_with model: @candidate,  :html => {:multipart => true}, class: "resume-info" do |f| %>
 				<div class="col-lg-6 col-md-6">
 					<div class="form-group">
@@ -335,24 +349,24 @@
 				</div>
 			<% end %>
 		</div>
-    </div>
-  </div>
+	</div>
+</div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="InterviewModal" tabindex="-1" aria-labelledby="InterviewModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="InterviewModalLabel">Schedule Interview</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeinterview">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-    </div>
-  </div>
+<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h5 class="modal-title" id="InterviewModalLabel">Schedule Interview</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeinterview">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		
+	</div>
+	</div>
+</div>
 </div>
 
 
@@ -361,6 +375,11 @@
 		position: absolute;
 		top: 0;
 		right: 0;
+	}
+	.option-icon{
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 </style>
 
