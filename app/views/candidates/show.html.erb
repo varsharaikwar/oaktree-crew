@@ -166,7 +166,7 @@
                       </div>
 
 											<% else %>
-												<p>Interview Not Scheduled Yet</p>
+												<p> interview not scheduled yet</p>
 											<% end %>
 
 									</div>
@@ -236,30 +236,30 @@
 										<div class="overview download align-items-center mb-3">
 											<div class="">
 												<a href="" class="nav-link d-flex align-items-center"><% if @candidate.file.url.present? %>
-												<div> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@candidate.file.url), method: :get, class: "p-2 mr-1 text-white default-btn ", target: '_blank' %> 
-												 </div> <b>Download Original Resume</b>
+												<div> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@candidate.file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %> 
+												 </div>
+												<div>  <%= button_to 'Download Original Resume' , url_for(@candidate.file.url), method: :get , target: '_blank' %>  </div>
 												
 												<% else %>
-													<div> <button onclick="showAlert()" class="p-2 mr-1 text-white default-btn"><i class="fa fa-download mr-1"></i></button> <b>Download Original Resume</b></div>
+													<div> <i class="fa fa-download p-2 mr-1 default-btn text-white"> </i><button onclick="showAlert()">Download Original Resume</button> </div>
 												<% end %>	
 											   </a>
 											</div>
 										</div>
-										<hr>
 
-										<div class="overview download align-items-center mb-3">
+
+										<div class="overview download nav align-items-center mb-3">
 											<div class="">
 												<a href="" class="nav-link d-flex align-items-center"><% if @candidate.updated_file.url.present? %>
-												<div> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@candidate.updated_file.url), method: :get, class: "p-2 mr-1 text-white default-btn btn-default", target: '_blank' %> 
-												 </div> <b>Download Updated Resume</b>
-												
+													<div> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@candidate.updated_file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %> 
+												 </div>
+												<div>  <%= button_to 'Download Updated Resume' , url_for(@candidate.updated_file.url), method: :get , target: '_blank' %>  </div>
 												<% else %>
-													<div> <button onclick="showAlert()" class="p-2 mr-1 text-white default-btn"><i class="fa fa-download mr-1"></i></button><b>Download Updated Resume</b> </div>
+													<div> <i class="fa fa-download p-2 mr-1 default-btn text-white"> </i><button onclick="showAlert()">Download Updated Resume</button> </div>
 												<% end %>	
-											   </a>
+												</a>
 											</div>
 										</div>
-										<hr>
 									</div>
 								</div>
 
