@@ -40,6 +40,7 @@ class InterviewSchedulesController < ApplicationController
     @interview_schedule = InterviewSchedule.find(params[:id])
     respond_to do |format|
         if @interview_schedule.update(interview_schedule_params)
+            @interview_schedule.interview_schedule(current_user)
             format.js
         end
     end
