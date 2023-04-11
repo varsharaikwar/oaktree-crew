@@ -109,7 +109,7 @@
 													<span class="sub-title"><%= candidate %></span>
 												<% end %>
 										<% else %>
-										    <span> Primary skills not found </span>
+										    <span> no primary skills </span>
 										<% end %>
 										</ul>
 									</div>
@@ -122,7 +122,7 @@
 													<span class="sub-title"><%= candidate %></span>
 												<% end %>
 										<% else %>
-										    <span> Secondary skills not found </span>
+										    <span> no secondary skills </span>
 										<% end %>
 										</ul>
 									</div>
@@ -142,13 +142,13 @@
 													<div class="card-body position-relative">
 														<div class="mb-2 d-flex align-items-center">
 																<b><i class="fa fa-link mr-1"></i></b> 
-																<%=link_to interview_schedule.url,interview_schedule.url, class: "text-success" %>
+																<%=link_to interview_schedule.url,interview_schedule.url, class: "text-success", target: '_blank' %>
 														</div>
 													<div>
 
 														<div class="mb-2 d-flex align-items-center">
 															<b><i class="fa fa-clock mr-1"></i> </b>
-															<%= Time.strptime(interview_schedule.time, '%H:%M %m/%d/%Y').strftime('%-l.%M %P').upcase %>
+															<%= Time.strptime(interview_schedule.time, '%H:%M %m/%d/%Y').strftime('%-l:%M %P').upcase %>
 														</div>
 
 														<div class="mb-2 d-flex align-items-center">
@@ -230,36 +230,33 @@
 								</div>
 
 								<div class="candidates-widget widget-box h-auto mb-4">
-									<h3 class="mb-4"> Documents </h3>
+								   <h3 class="mb-4"> Documents </h3>
 									<div class="mb-4">
 
-											<ul class="overview download nav align-items-center mb-3">
-												<li class="nav-item d-flex align-items-center flex-fill">
-													<i class="bx bxs-file-pdf"></i>
-												<a href="" class="nav-link"><% if @candidate.file.url.present? %>
-													<p> <%= button_to 'Download Original Resume', url_for(@candidate.file.url), method: :get, class: "p-2" %> </p>
+										<div class="overview download align-items-center mb-3">
+											<div class="">
+												<a href="" class="nav-link d-flex align-items-center"><% if @candidate.file.url.present? %>
+												<div> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@candidate.file.url), method: :get, class: "p-2 mr-1 bg-primary text-white", target: '_blank' %> 
+												 </div> <b>Download Original Resume</b>
+												
 												<% else %>
-													<p> <button onclick="showAlert()">Download Original Resume</button> </p>
+													<div> <button onclick="showAlert()">Download Original Resume</button> </div>
 												<% end %>	
 											   </a>
-												</li>
-												<li><i class='bx bxs-cloud-download'></i></li>
-										</ul>
+											</div>
+										</div>
+										<hr>
 
-
-										<ul class="overview download nav align-items-center mb-3">
-												<li class="nav-item d-flex align-items-center flex-fill">
-													<i class="bx bxs-file-pdf"></i>
-												<a href="" class="nav-link"><% if @candidate.updated_file.url.present? %>
-													<p> <%= button_to 'Download Updated Resume', url_for(@candidate.updated_file.url), method: :get, class: "p-2" %> </p>
+										<div class="overview download nav align-items-center mb-3">
+											<div class="">
+												<a href="" class="nav-link d-flex align-items-center"><% if @candidate.updated_file.url.present? %>
+													<div> <%= button_to content_tag(:i, "", class: "fa fa-download"), url_for(@candidate.updated_file.url), method: :get, class: "p-2 mr-1 bg-primary text-white", target: "_blank" %> </div> <b>Download Updated Resume</b>
 												<% else %>
-													<p> <button onclick="showAlert()">Download Updated Resume</button> </p>
+													<div> <button onclick="showAlert()">Download Updated Resume</button> </div>
 												<% end %>	
 												</a>
-												</li>
-												<li><i class='bx bxs-cloud-download'></i></li>
-										</ul>
-										
+											</div>
+										</div>
 									</div>
 								</div>
 
@@ -267,22 +264,25 @@
 									<h3 class="mb-4">Availability</h3>
 									<div class="mb-4">
 										<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-										<i class="fa fa-pencil"></i></button></p>
+										<i class="fa fa-pencil change-color"></i></button></p>
 										<hr>
 										<p class="pt-0 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-										<i class="fa fa-pencil"></i></button></p>
+										<i class="fa fa-pencil change-color"></i></button></p>
 									</div>
 								</div>
 
 								<div class="candidates-details-sidebar">
 									<div class="candidates-widget" id="comment_refresh">
 										<h3>Comments</h3>
-										<ul class="overview">
+										<ul class="overview scroll-sec">
 											<div>
 												<% @candidate.comments.each do |comment| %>
 													<div class="position-relative">
-														<span class=""><%= comment.user.email %></span>
+														<span class=""><b><%= comment.user.email %></b></span>
 														<span><%= comment.content.body %></span>
+														<span> <%= time_ago_in_words(comment.created_at) %></span>
+
+
 															<span class="delete-button-position">
 																<%  if comment.user == current_user %>
 																	<%= link_to candidate_comment_path(candidate_id: @candidate.id, id: comment.id), method: :delete,  data: { confirm: "Are you sure you want to delete this comment ?" }, class: "btn btn-danger", remote: true do %>
@@ -445,6 +445,9 @@
 		.progress{
 			height: 6px;
 		}
+		.change-color{
+			color: #00b074;
+		}
 	</style>
 
 	<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
@@ -474,15 +477,10 @@
 	</script>
 	<script>
 		$('#timepicker').timepicker({
-						twelvehour: true,
-						uiLibrary: 'bootstrap4',
-						format: 'h:mm A'
-						
+						uiLibrary: 'bootstrap4',						
 				});
 
 		$('#timepicker1').timepicker({
-			twelvehour: true,
 			uiLibrary: 'bootstrap4',
-			format: 'h:mm A'
 		});
 	</script>

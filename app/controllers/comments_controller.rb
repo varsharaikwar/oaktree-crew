@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include ActionView::Helpers::DateHelper
+
     def new
       @comment = Comment.new
     end

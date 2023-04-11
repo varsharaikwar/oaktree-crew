@@ -70,7 +70,7 @@ class CandidatesController < ApplicationController
         @candidate.update(candidate_params)
         redirect_to @candidate
       elsif @candidate.update(candidate_params)
-        flash[:success] = "Candidate Updated successfully!"
+        flash[:success] = "Profile Updated successfully!"
         redirect_to @candidate
       else
         render :edit, status: :unprocessable_entity
