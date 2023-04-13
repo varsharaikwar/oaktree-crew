@@ -243,6 +243,9 @@ GEM
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    paper_trail (14.0.0)
+      activerecord (>= 6.0)
+      request_store (~> 1.4)
     pg (1.4.5)
     pg_search (2.3.6)
       activerecord (>= 5.2)
@@ -291,6 +294,8 @@ GEM
     regexp_parser (2.7.0)
     reline (0.3.2)
       io-console (~> 0.5)
+    request_store (1.5.1)
+      rack (>= 1.4)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -382,11 +387,13 @@ DEPENDENCIES
   devise
   fog-aws
   friendly_id (~> 5.4.0)
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   jquery-rails
   jquery-validation-rails
   mini_magick
+  paper_trail
   pg
   pg_search
   puma (~> 5.0)
