@@ -35,9 +35,9 @@ class Candidate < ActiveRecord::Base
     def formatted_start_time
         begin
             Time.parse(start_time).strftime("%I:%M %p")
-        rescue ArgumentError
+          rescue ArgumentError
             formatted_time = "Not Available"
-        end  
+          end  
     end
 
 
