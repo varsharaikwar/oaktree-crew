@@ -32,10 +32,19 @@ class Candidate < ActiveRecord::Base
     validates :email, presence: true, format: { with: Devise.email_regexp }
     
     def formatted_start_time
-        Time.parse(start_time).strftime("%I:%M %p")
+        begin
+            Time.parse(start_time).strftime("%I:%M %p")
+          rescue ArgumentError
+            formatted_time = "Not Available"
+          end  
     end
-    
+
+
     def formatted_end_time
-        Time.parse(end_time).strftime("%I:%M %p")
+        begin
+            Time.parse(end_time).strftime("%I:%M %p")
+        rescue ArgumentError
+            formatted_time = "Not Available"
+        end  
     end
 end
