@@ -21,6 +21,7 @@ class InterviewSchedulesController < ApplicationController
             if @interview_schedule.save
                 Lead.find(@interview_schedule.lead_id).update(status: 'interview scheduled') if @interview_schedule.lead_id.present?
                 @interview_schedule.interview_schedule(current_user)
+                flash[:success] = "Interview has been Scheduled Successfully !!"
                 format.js
             end
         end
@@ -41,6 +42,7 @@ class InterviewSchedulesController < ApplicationController
     respond_to do |format|
         if @interview_schedule.update(interview_schedule_params)
             @interview_schedule.interview_schedule(current_user)
+            flash[:success] = "Interview has been Updated Successfully !!"
             format.js
         end
     end

@@ -6,6 +6,7 @@ class Lead < ApplicationRecord
   has_one :interview_schedule, dependent: :destroy
   default_scope { order(created_at: :desc) }
   validates :assigned_to , presence: true
+  mount_uploader :file, LeadAttachmentUploader
 
 
   def assign_user(current_user)

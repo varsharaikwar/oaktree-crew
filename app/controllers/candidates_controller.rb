@@ -1,5 +1,6 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_paper_trail_whodunnit
   load_and_authorize_resource :candidate, class: Candidate, except: [:show, :edit, :destroy, :update]
 
     def index

@@ -5,17 +5,21 @@
                 <div class="candidates-resume-content">
                     <%= form_with model: @lead do |f| %>
                         <div class="row">
+
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Name</label>
                                     <%= f.text_field :name, class: "form-control"%>
                                 </div>
                             </div>
+                           
                             <div class="col-lg-6 col-md-2">
                                 <div class="form-group">
-                                    <label>Profile</label>
+                                    <label>Skill</label>
                                     <div id="profile">
-                                        <%= f.select :profile, @category_list, {include_blank: 'Select'}, class: "form-control select1" %>
+                                         <div class="custom_checkbox mt-15" id="refresh_primary">
+                                           <%= render 'layouts/skill_type', f: f%>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -32,6 +36,7 @@
                                 </div>
                             </div>
 
+
                             <div class="col-lg-6 col-md-2">
                                 <div class="form-group">
                                     <label>Additional Info</label>
@@ -39,12 +44,20 @@
                                 </div>
                             </div>
 
+                            <div>
+                                <div class="form-group">
+                                    <%= f.file_field :file, id: "img" %>
+                                </div>
+                            </div>
+
                             <div class="col-lg-12">
                                 <%= f.submit "Save", class: " btn default-btn" %>
                             </div>
+
                         </div>
                     <% end %>  
                 </div>
             </div>
         </div>
+    </div>
 </section>

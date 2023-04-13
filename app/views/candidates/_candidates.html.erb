@@ -34,12 +34,19 @@
                     <% end %>
 
                     <p class="m-0"><b><%= candidate.first_name+ " " +candidate.last_name %></b></p>
-                        <% if candidate.category.present? %>
-                    <p><%= candidate.category %></p>
-                        <% else %>
+                        <% if candidate.primary_skill.present? %>
+                    <p>
+                     <% if candidate.category.present? %>    
+                     <p class="sub-title"> <%= candidate.category %></p>
+                     <% else %>
                     <p class="invisible">Category not added</p>
                         <% end  %>
-                    <p class="gradient-success-btn"><%= candidate.status %></p>     
+                    <% @primary_skill.limit(3).each do |val| %>
+                       <span class="sub-title"><%= val.name %></span>
+                    <% end %><%= link_to '....' , candidate_path(candidate) %>
+                    <% end %>
+                    </p>
+                    <p class="gradient-success-btn"><%= candidate.status %></p> 
                 </div>
             <% end %>
            </div>

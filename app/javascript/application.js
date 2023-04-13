@@ -5,3 +5,5 @@ import "controllers"
 import "js"
 import "controllers"
 
+import "trix"
+import "@rails/actiontext"

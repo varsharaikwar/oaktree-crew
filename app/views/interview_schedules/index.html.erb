@@ -3,65 +3,86 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<div class="container">
-<div class="p-3">
-<h3 class="position-absolute">Scheduled Interview</h3>
-<table id="interviewTable" class="display primary-table" style="width:100%"> 
-    <thead>
-      <tr>
-          <th style="width: 5%;">Candidate</th>
-          <th style="width: 4%;">Lead</th>
-          <th style="width: 5%;">Assigned By</th>
-          <th style="width: 12%;">Date and Time</th>
-          <th style="width: 7%;">Status</th>
-          <th style="width: 5%;">Meeting Link</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% @interview_schedules.each do |interview_schedule|%>
-          <tr>
-          <td class="text-capitalize">
-            <% if interview_schedule.candidate.first_name.present? && interview_schedule.candidate.last_name.present? %>
-              <%= interview_schedule.candidate.first_name + " " + interview_schedule.candidate.last_name%>
-            <% end %>
-          </td>
-          <td class="text-capitalize">
-            <% if interview_schedule.lead.present? %>
-              <%= interview_schedule.lead.name %>
-              <% end %>
-          </td>
-          <td>
-            <% if interview_schedule.lead.present? %>
-              <%= interview_schedule.lead.assigned_to %>
-            <% else %>
-              <%=  User.find(InterviewSchedule.last.hr_id).email %>
-            <% end %>
-          </td>
-            <td class="text-uppercase">          
-            <% if interview_schedule.time.present? %>
-                <% str = interview_schedule.time %>
-                <%= formatted_time = Time.strptime(str, '%H:%M %m/%d/%Y').strftime('%-d %B %Y %-l.%M %P') %>
-            <% end %>
-            </td>
-          <td class="text-capitalize">
-            <% if interview_schedule.lead.present? %> 
-              <%= interview_schedule.lead.status %>
-            <% end %>
-          </td>
-          <td>
-            <% if interview_schedule.url.present? %>
-                <% truncated_url = truncate(interview_schedule.url, length: 30, separator: '.', omission: '...') %>
-                <%= link_to truncated_url,interview_schedule.url, title: interview_schedule.url, target: '_blank' %>
-            <% else %>
-                <%= "Not Available" %>
-            <% end %>
-          </td>
-      </tr>
-        <% end %>
-    </tbody>
-</table>
-</div>
-</div>
+
+    <div class="container">
+
+      <div class="p-3">
+
+        <h3 class="position-absolute">Scheduled Interview</h3>
+
+          <table id="interviewTable" class="display primary-table" style="width:100%"> 
+
+              <thead>
+
+                  <tr>
+                      <th style="width: 5%;">Candidate</th>
+                      <th style="width: 4%;">Lead</th>
+                      <th style="width: 5%;">Assigned By</th>
+                      <th style="width: 12%;">Date and Time</th>
+                      <th style="width: 7%;">Status</th>
+                      <th style="width: 5%;">Meeting Link</th>
+                  </tr>
+
+              </thead>
+
+              <tbody>
+                <% @interview_schedules.each do |interview_schedule|%>
+
+                    <tr>
+
+                        <td class="text-capitalize">
+                          <% if interview_schedule.candidate.first_name.present? && interview_schedule.candidate.last_name.present? %>
+                            <%= interview_schedule.candidate.first_name + " " + interview_schedule.candidate.last_name%>
+                          <% end %>
+                        </td>
+
+                        <td class="text-capitalize">
+                          <% if interview_schedule.lead.present? %>
+                            <%= interview_schedule.lead.name %>
+                            <% end %>
+                        </td>
+
+                        <td>
+                          <% if interview_schedule.lead.present? %>
+                            <%= interview_schedule.lead.assigned_to %>
+                          <% else %>
+                            <%=  User.find(InterviewSchedule.last.hr_id).email %>
+                          <% end %>
+                        </td>
+
+                        <td class="text-uppercase">          
+                          <% if interview_schedule.time.present? %>
+                              <% str = interview_schedule.time %>
+                              <%= formatted_time = Time.strptime(str, '%H:%M %m/%d/%Y').strftime('%-d %B %Y %-l.%M %P') %>
+                          <% end %>
+                        </td>
+
+                        <td class="text-capitalize">
+                          <% if interview_schedule.lead.present? %> 
+                            <%= interview_schedule.lead.status %>
+                          <% end %>
+                        </td>
+
+                        <td>
+                          <% if interview_schedule.url.present? %>
+                              <% truncated_url = truncate(interview_schedule.url, length: 30, separator: '.', omission: '...') %>
+                              <%= link_to truncated_url,interview_schedule.url, title: interview_schedule.url, target: '_blank' %>
+                          <% else %>
+                              <%= "Not Available" %>
+                          <% end %>
+                        </td>
+
+                    </tr>
+
+                  <% end %>
+              </tbody>
+              
+          </table>
+
+      </div>
+
+    </div>
+
 <style>
 .primary-table thead{
     background-color: #4fb174;

@@ -48,7 +48,7 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 gem 'will_paginate', '~> 3.0'
 gem 'devise'
 gem "rolify"
@@ -66,6 +66,7 @@ gem 'fog-aws'
 gem 'city-state'
 gem 'will_paginate-bootstrap4'
 gem 'tinymce-rails'
+  gem 'paper_trail'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

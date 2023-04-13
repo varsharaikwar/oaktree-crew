@@ -5,68 +5,96 @@
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
-<div class="container">
-  <div class="px-3 py-4">
-  <div class="bg-light p-3 mb-3">
-  <h4>All Notifications<i class="fa fa-bell ml-2 text-primary"></i></h4> 
-</div>
-<div id="noticeTable" class="display" style="width:100%">
-  <div class="row">
-    <% @notifications.order('id DESC').each do |notice|%>   
-      <div class="col-lg-12 border notification-row">
-        <div class="row py-3">
-          <%@lead = notice.lead%>
-          <div class="col-lg-3">
-            <div class="d-flex">
-              <h1 class="<%= notice.id %>"></h1>
-               <% if @lead.present? %>
-                <span class="profile-txt"><%= link_to @lead.name.split('')[0], notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
-              <%else%>
-                 <span class="profile-txt"><%= link_to 'E', notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
-              <% end %>
+    <div class="container">
+
+      <div class="px-3 py-4">
+
+         <div class="bg-light p-3 mb-3">
+            <h4>All Notifications<i class="fa fa-bell ml-2 text-primary"></i></h4> 
+          </div>
+
+          <div id="noticeTable" class="display" style="width:100%">
+
+            <div class="row">
+
+                <% @notifications.order('id DESC').each do |notice|%>  
+
+                  <div class="col-lg-12 border notification-row">
+
+                      <div class="row py-3">
+                          <%@lead = notice.lead%>
+
+                          <div class="col-lg-3">
+                            <div class="d-flex">
+                              <h1 class="<%= notice.id %>"></h1>
+                              <% if @lead.present? %>
+                                <span class="profile-txt"><%= link_to @lead.name.split('')[0], notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
+                              <%else%>
+                                <span class="profile-txt"><%= link_to 'E', notice %></span><span class="txt-ellipsis"><%= User.find(notice.sender_id).email%></span>
+                              <% end %>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-2 text-center">
+                            <% if @lead.present? %>
+                              <span class="txt-ellipsis"><%= link_to @lead.name, notice %></span>
+                            <%end%>
+                          </div>
+
+                          <div class="col-lg-2 text-center">
+
+                              <% if @lead.present? %>
+                                <% @lead.profile_array.each do |profile| %>
+                                        <span><%= profile %></span>
+                                <% end %>
+                              <% end %>
+                              
+                          </div>
+
+                          <div class="col-lg-3 text-center">
+                              <% if notice.status.present? %>
+                                <span class="txt-ellipsis"><%= link_to notice.status, notice, class: "badge badge-primary" %></span>
+                              <% end %>
+                          </div>
+
+                          <div class="col-lg-2 text-center">
+
+                                <% if notice.candidate_id.present? && (current_user.roles.first.name == 'sales_person' || current_user.roles.first.name == 'pool_manager')%>
+                                    <% begin %>
+                                        <span class="txt-ellipsis">
+                                          <%= link_to Candidate.find(notice.candidate_id).first_name+ ' ' + Candidate.find(notice.candidate_id).last_name, candidate_path(notice.candidate_id)%>
+                                        </span>
+                                    <% rescue ActiveRecord::RecordNotFound %>
+                                          <p>"candidate not found"</p>
+                                      <% end %>
+                                <% end %>
+
+                          </div>
+
+                          <div class="col-lg-2 text-center">
+                              <% if notice.read == false%>
+                                <span class="unread">  </span>
+                              <% else %>
+                                  <span class="read">  </span>
+                              <% end %>
+                          </div>
+
+                      </div>
+
+                  </div>        
+
+                <% end %>
+
+                <div class="col-lg-12 text-right">
+                  <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, :back, class: 'text-success' %>
+                </div> 
+
             </div>
+
           </div>
-          <div class="col-lg-2 text-center">
-            <% if @lead.present? %>
-              <span class="txt-ellipsis"><%= link_to @lead.name, notice %></span>
-            <%end%>
-          </div>
-          <div class="col-lg-2 text-center">
-          <% if @lead.present? %>
-            <span class="txt-ellipsis"><%= link_to @lead.profile, notice, class: "badge badge-success" %></span>
-          <% end %>
-          </div>
-          <div class="col-lg-3 text-center">
-            <% if notice.status.present? %>
-            <span class="txt-ellipsis"><%= link_to notice.status, notice, class: "badge badge-primary" %></span>
-            <% end %>
-          </div>
-          <div class="col-lg-2 text-center">
-            <% if notice.candidate_id.present? && (current_user.roles.first.name == 'sales_person' || current_user.roles.first.name == 'pool_manager')%>
-              <% begin %>
-              <span class="txt-ellipsis">
-                <%= link_to Candidate.find(notice.candidate_id).first_name+ ' ' + Candidate.find(notice.candidate_id).last_name, candidate_path(notice.candidate_id)%>
-              </span>
-              <% rescue ActiveRecord::RecordNotFound %>
-                <p>"candidate not found"</p>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="col-lg-2 text-center">
-            <% if notice.read == false%>
-              <span class="unread">  </span>
-            <% else %>
-                <span class="read">  </span>
-            <% end %>
-          </div>
-        </div>
-      </div>        
-    <% end %>
-    <div class="col-lg-12 text-right">
-      <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, :back, class: 'text-success' %>
-    </div> 
-  </div>
-</div>
+      </div>
+
+    </div>
 
 <style>
   .txt-ellipsis{

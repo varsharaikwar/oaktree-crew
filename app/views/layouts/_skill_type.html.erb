@@ -1,26 +1,23 @@
    
-    <div class="dropdown w-100", id="secondary_skill">
-        <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left" id="s2" type="button" data-toggle="dropdown">Select
-        </button>
+    <div class="dropdown w-100", id="primary_skill">
+        <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left " id="s1" type="button" data-toggle="dropdown">Select
+        </button>                                   
+        <ul class="dropdown-menu w-100 custom-scroller" id="u1" >
+            <input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()" onkeyup="myfunction()"/>
 
-        <ul class="dropdown-menu w-100 custom-scroller" id="u2">
-            <input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()" onkeyup="second_skill()"/>
-            <br><button type="button" data-toggle="modal" data-target="#addSkillsecond" class="badge mx-2 p-2 btn-large default-btn" >Add Skill +</button>
-
-                <% @secondary_skill.each do |item| %>
-                    <li id="<%= item.name %>" , onclick="checkbox_click_two()">
-                        <label class="custom_checkbox_label d-block px-2">
-                            <%= f.check_box :secondary_skill, { multiple: true }, item.name, nil%>
+                <% @skill_list.each do |item| %>
+                    <li id="<%= item.name %>", onclick="checkbox_click()">
+                        <label  class="custom_checkbox_label d-block px-2">
+                            <%= f.check_box :profile_array, { multiple: true }, item.name, nil %>
                             <span> <%= item.name %></span>
                         </label>
                     </li>
                 <% end %>
         </ul>
-
     </div>
 
     <script>
-    function second_skill(){
+        function myfunction(){
         $(".search_field").on('keyup', function(e){
             sear_val = $(this).val().toLocaleLowerCase().trim();
             
@@ -33,6 +30,7 @@
                 $("#" + id + " ul li").filter(function() {
                     console.log($(this)[0].id , "this" );
                 $(this).toggle($(this)[0].id.trim().toLowerCase().indexOf(sear_val.trim().toLowerCase()) > -1);
+
             });
             }
             else{
@@ -42,13 +40,13 @@
             });
             }
         })
-    }
+        }
 
 
-    function checkbox_click_two(){   
+        function checkbox_click(){   
         const check_array = []
-        nodes = $("#u2 li")
-        $('#s2')[0].innerText = ""
+        nodes = $("#u1 li")
+        $('#s1')[0].innerText = ""
         for (var i in nodes){
         if(nodes[i].localName == 'li'){
                 if(nodes[i].childNodes[1].childNodes[1].checked == true){
@@ -56,7 +54,7 @@
                 }
             }
         }
-        $('#s2')[0].innerText = check_array.join(" , ")
-
-    }
-    </script>
+        $('#s1')[0].innerText = check_array.join(" , ")
+    
+        }
+</script>

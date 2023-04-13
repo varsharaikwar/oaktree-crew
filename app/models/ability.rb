@@ -15,6 +15,7 @@ class Ability
       can :skill, Candidate
       can :manage, Notification
       can :manage, SkillSet
+      can :index, InterviewSchedule
 
     elsif user.has_role? :senior_hr
       can :index, Candidate
@@ -25,6 +26,7 @@ class Ability
       can :skill, Candidate
       can :manage, Notification
       can :manage, SkillSet
+      can :index, InterviewSchedule
       
     elsif user.has_role? :bde
       can :index, Candidate
@@ -33,6 +35,7 @@ class Ability
       can :filter, Candidate
       can :skill, Candidate
       can :manage, SkillSet
+      can :index, InterviewSchedule
 
     elsif user.has_role? :admin
       can :manage, :all
@@ -41,6 +44,7 @@ class Ability
       can :manage, Lead
       can :manage, Notification
       can :show, Candidate
+      can :index, InterviewSchedule
 
     elsif user.has_role? :pool_manager
       can :index, InterviewSchedule

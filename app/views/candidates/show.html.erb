@@ -1,8 +1,14 @@
 	<%=  render "layouts/header" %>
 
+   <!-- Success messages starts-->
 	<% flash.each do |key, value| %>
-		<div class="alert alert-<%= key %>"><%= value %></div>
+		<div class="alert alert-<%= key %> alert-success alert-dismissible fade show" role="alert"><strong><%= value %></strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 	<% end %>
+   <!-- Success messages ends-->
 
 	<div class="row">
 
@@ -11,6 +17,9 @@
 				<ul class="nav flex-column">	
 					<li class="nav-item active">
 						<%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
+					</li>
+					<li class="nav-item active">
+						<%= link_to image_tag("notepad.png") + 'All Interviews', interview_schedules_path, class: "nav-link active" %> 
 					</li>
 				</ul>
 			</div>
@@ -172,7 +181,7 @@
 									</div>
 
 								
-								<div class="candidates-details-content">
+								<div class="candidates-details-content mb-4">
 										<h3>About Me</h3>
 										<p><%= @candidate.notes %></p>
 										<h3>Education Details</h3>
@@ -184,6 +193,23 @@
 										<hr>
 										<p><b>Duration:</b> <span class="float-right"><span><%= @candidate.duration%> <% if @candidate.duration.present? %> yrs <% end %></span></span></p> <hr>
 								</div>
+
+								<div class="candidates-details-content mb-4">
+									<div><h3> Details </h3> </div>
+									<div class="scroll-sec">
+										<p> <b> <%= @candidate.first_name %> </b> is Created by <b> <%= @candidate.user.name %> at <%= @candidate.created_at.strftime('%H:%M %P').upcase %> on  <%= @candidate.created_at.strftime('%d-%m-%Y').upcase %>  </b> <p>
+										<hr>
+                                         <% @versions = @candidate.versions %>
+										<% @versions.each do |version| %>
+											<span> <b> <%= @candidate.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version.whodunnit)&.name || "Unknown User" %></b> at <b> <%= version.created_at.in_time_zone('Kolkata').strftime("%H:%M:%P").upcase %> </b> on <b> <%= version.created_at.strftime("%d-%m-%Y") %> </b>
+										</p> <hr>
+										<% end %>
+										</span> </b>
+
+										</p> <hr>
+									</div>
+								</div>
+								
 
 							</div>
 
@@ -211,6 +237,34 @@
 											</li>
 										</ul>
 									</div>
+								</div>
+
+								<div class="candidates-details-sidebar">
+									<div class="candidates-widget" id="comment_refresh">
+										<h3>Comments</h3>
+										<ul class="overview scroll-sec">
+											<div>
+												<% @candidate.comments.each do |comment| %>
+													<div class="position-relative">
+														<span class=""><b><%= comment.user.email %></b></span>
+														<span><%= comment.content.body %></span>
+														<span> <%= time_ago_in_words(comment.created_at) %></span>
+
+
+															<span class="delete-button-position">
+																<%  if comment.user == current_user %>
+																	<%= link_to candidate_comment_path(candidate_id: @candidate.id, id: comment.id), method: :delete,  data: { confirm: "Are you sure you want to delete this comment ?" }, class: "btn btn-danger", remote: true do %>
+																	<i class="fa fa-trash"></i>
+																	<% end %>
+																<% end %>
+															</span>
+															<hr>
+													</div>
+												<% end %>
+											</div>
+											<button type="button" class="btn btn-success" data-toggle="modal" data-target="#commentModal">Add Comment</button>
+										</ul>
+									</div>	
 								</div>
 
 								<div class="candidates-widget widget-box h-auto mb-4">
@@ -274,33 +328,7 @@
 									</div>
 								</div>
 
-								<div class="candidates-details-sidebar">
-									<div class="candidates-widget" id="comment_refresh">
-										<h3>Comments</h3>
-										<ul class="overview scroll-sec">
-											<div>
-												<% @candidate.comments.each do |comment| %>
-													<div class="position-relative">
-														<span class=""><b><%= comment.user.email %></b></span>
-														<span><%= comment.content.body %></span>
-														<span> <%= time_ago_in_words(comment.created_at) %></span>
-
-
-															<span class="delete-button-position">
-																<%  if comment.user == current_user %>
-																	<%= link_to candidate_comment_path(candidate_id: @candidate.id, id: comment.id), method: :delete,  data: { confirm: "Are you sure you want to delete this comment ?" }, class: "btn btn-danger", remote: true do %>
-																	<i class="fa fa-trash"></i>
-																	<% end %>
-																<% end %>
-															</span>
-															<hr>
-													</div>
-												<% end %>
-											</div>
-											<button type="button" class="btn btn-success" data-toggle="modal" data-target="#commentModal">Add Comment</button>
-										</ul>
-									</div>	
-								</div>
+								
 
 								<div class="candidates-details-sidebar">				
 								</div>
@@ -450,6 +478,9 @@
 		}
 		.change-color{
 			color: #00b074;
+		}
+		.alert-notice{
+			display: none;
 		}
 	</style>
 

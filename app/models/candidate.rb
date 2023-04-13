@@ -1,13 +1,14 @@
 class Candidate < ActiveRecord::Base
     paginates_per 2
+    has_paper_trail
     include PgSearch::Model
     pg_search_scope :global_search, against: [:first_name, :last_name, :category, :current_location, :address, :primary_skill, :secondary_skill], using: { tsearch: { prefix: true } }
     # extend FriendlyId
     # friendly_id :first_name
     # has_one_attached :image
     default_scope { order(created_at: :desc) }
+    belongs_to :user
     has_many :lead_assignments, dependent: :destroy
-    has_many :users
     has_many :comments, dependent: :destroy
     has_many :interview_schedules, dependent: :destroy
     has_rich_text :content
@@ -32,10 +33,20 @@ class Candidate < ActiveRecord::Base
     validates :email, presence: true, format: { with: Devise.email_regexp }
     
     def formatted_start_time
-        Time.parse(start_time).strftime("%I:%M %p")
+        begin
+            Time.parse(start_time).strftime("%I:%M %p")
+        rescue ArgumentError
+            formatted_time = "Not Available"
+        end  
+    end
+
+
+    def formatted_end_time
+        begin
+            Time.parse(end_time).strftime("%I:%M %p")
+        rescue ArgumentError
+            formatted_time = "Not Available"
+        end  
     end
     
-    def formatted_end_time
-        Time.parse(end_time).strftime("%I:%M %p")
-    end
 end

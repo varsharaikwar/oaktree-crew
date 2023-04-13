@@ -11,7 +11,7 @@ class LeadsController < ApplicationController
     def new
       @lead = Lead.new
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
-      @category_list = Candidate::CATEGORY_LIST
+      @skill_list = SkillSet.where(skill_type: 'primary')
     end
 
     def create
@@ -27,13 +27,13 @@ class LeadsController < ApplicationController
   def edit
       @lead = current_user.leads.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
-      @category_list = Candidate::CATEGORY_LIST
+      @skill_list = SkillSet.where(skill_type: 'primary')
   end
   
   def update
       @lead = current_user.leads.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
-      @category_list = Candidate::CATEGORY_LIST
+      @skill_list = SkillSet.where(skill_type: 'primary')
       
       if @lead.update(lead_params)
         flash[:success] = "Lead has been updated"
@@ -53,6 +53,6 @@ class LeadsController < ApplicationController
   
   private
   def lead_params
-    params.require(:lead).permit(:name, :profile, :assigned_to, :status, :additional_info)
+    params.require(:lead).permit(:name, :assigned_to, :status, :additional_info, :file, :profile_array => [])
   end
 end

@@ -1,19 +1,20 @@
 <%= form_for SkillSet.new, as: :skill_set, url: skill_sets_path(@skill_set), method: :post, html: { class: "edit_post", id: "edit_post_45" }, remote: true do |f|  %>  
+
     <div class="actions">
-     <%= f.text_field :name , class: "form-control", placeholder: 'Enter Name' %><br>
-   </div>
+       <%= f.text_field :name , class: "form-control", placeholder: 'Enter Name' %><br>
+    </div>
  
-   <div class="actions">
-     <%= f.hidden_field :skill_type , class: "form-control", placeholder: 'Enter Skill Type', value: 'primary'%>
-   </div>
+    <div class="actions">
+       <%= f.hidden_field :skill_type , class: "form-control", placeholder: 'Enter Skill Type', value: 'primary'%>
+    </div>
  
-  <% if flash[:alert] %>
-    <div class="alert alert-danger"><%= flash[:alert] %></div>
-  <% end %>
+    <% if flash[:alert] %>
+       <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
   
-   <div class="actions"><br>
-     <%= f.submit "Create Skill" , class: "btn default-btn", id: "skillSets" %>
-   </div>
+    <div class="actions"><br>
+      <%= f.submit "Create Skill" , class: "btn default-btn", id: "skillSets" %>
+    </div>
  
  <% end %>
  

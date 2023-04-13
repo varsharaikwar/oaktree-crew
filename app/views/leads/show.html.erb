@@ -1,40 +1,73 @@
 
 <%= render "layouts/header"%>
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
-<div class="container">
-    <div class="p-3 my-4 bg-light">
-        <div>
+   <!-- Success messages starts-->
+	<% flash.each do |key, value| %>
+		<div class="alert alert-<%= key %> alert-success alert-dismissible fade show" role="alert"><strong><%= value %></strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	<% end %>
+   <!-- Success messages ends-->
 
-        <div class="row">
-            <div class="col-lg-12 mb-3">
-                <div class="h4 mb-3 p-2">Name: <%= @lead.name %></div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div><b>Profile:</b> <%= @lead.profile %></div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div><b>Assigned To:</b> <%= User.find_by(email: @lead.assigned_to).name%></div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div><b>Status:</b> <%= @lead.status %></div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div><b>Additional Info:</b> <%= @lead.additional_info %></div>
-            </div>
-            <div class="col-lg-6">
-            <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
-            </div>
+    <div class="container">
+        <div class="p-3 my-4 bg-light">
+
+            <div>
+
+                <div class="row">
+
+                    <div class="col-lg-12 mb-3">
+                        <div class="h4 mb-3 p-2">Name: <%= @lead.name %></div>
+                    </div>
+
+                    <div class="col-lg-6 mb-3">
+                        <div><b>Skills:</b>
+                            <% @lead.profile_array.each do |profile| %>
+                                <span><%= profile %></span>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-3">
+                        <div><b>Assigned To:</b> <%= User.find_by(email: @lead.assigned_to).name%></div>
+                    </div>
+
+                    <div class="col-lg-6 mb-3">
+                        <div><b>Status:</b> <%= @lead.status %></div>
+                    </div>
+
+                    <div class="col-lg-6 mb-3">
+                        <div><b>Additional Info:</b> <%= @lead.additional_info %></div>
+                    </div>
+
+                    <div class="col-lg-6 mb-3">
+                        <div><b>File:</b> <%= link_to @lead.file.url,  @lead.file.url, target: '_blank' %></div>
+                    </div>
+
+                    <div class="col-lg-6 mb-3">
+                        <div></div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
+                    </div>
+                    
+                    <div class="col-lg-6 text-right">
+                        <%= link_to 'Back', leads_path, class: 'text-success' %>
+                    </div>
+
+                </div><hr>
             
-            <div class="col-lg-6 text-right">
-            <%= link_to 'Back', leads_path, class: 'text-success' %>
             </div>
         </div>
         
-        <hr>
-        
-        </div>
     </div>
-    
-</div>
+
+<style>
+
+.alert-notice{
+    display: none;
+}
+
+</style>

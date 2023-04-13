@@ -9,11 +9,12 @@
                 <div class="page-title-content">
                     <div class="row">
                         <div class="col-md-12">
+                        
                             <%= form_with(url: candidates_url, method: :get, class: "search-form") do |f| %>
                                 <div class="row">
                                     <div class="col-md-11 m-auto">
                                         <div class="row search-area">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group has-search m-0 d-flex align-items-center">
                                                     <span class="fa fa-search form-control-feedback"></span>
                                                     <%= f.text_field :query, class: "form-control search-box-input border-0 h-auto", placeholder: "Search Candidates..." %>
@@ -24,29 +25,6 @@
                                                     <%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Candidate', new_candidate_path %> 
                                                 </div>
                                             <% end %>
-
-                                            <div class="col-md-3">
-                                                <div class="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true">
-                                                        Position
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                        <%= link_to "Backend Developer", candidates_path(query: "Backend Developer"), class:"dropdown-item"%>
-                                                        <%= link_to "Cloud Computing", candidates_path(query: "Cloud Computing"), class:"dropdown-item"%>
-                                                        <%= link_to "DevOps Engineer", candidates_path(query: "DevOps Engineer"), class:"dropdown-item"%>
-                                                        <%= link_to "Desktop Developer", candidates_path(query: "Desktop Developer"), class:"dropdown-item"%>
-                                                        <%= link_to "Database Developer", candidates_path(query: "Database Developer"), class:"dropdown-item"%>
-                                                        <%= link_to "Frontend Developer", candidates_path(query: "Frontend Developer"), class:"dropdown-item"%>
-                                                        <%= link_to "Full-Stack Developer", candidates_path(query: "Full-Stack Developer"), class:"dropdown-item"%>
-                                                        <%= link_to "Mobile Developer", candidates_path(query: "Mobile Developer"), class:"dropdown-item"%>
-                                                        <%= link_to "Security Engineer", candidates_path(query: "Security Engineer"), class:"dropdown-item"%>
-                                                        <%= link_to "SEO", candidates_path(query: "SEO"), class:"dropdown-item"%>
-                                                        <%= link_to "UX/UI Designer", candidates_path(query: "UX/UI Designer"), class:"dropdown-item"%>
-                                                        <%= link_to "Web Developer", candidates_path(query: "Web Developer"), class:"dropdown-item"%>
-                                                        <%= link_to "ROR Developer", candidates_path(query: "ROR Developer"), class:"dropdown-item"%>
-                                                    </div>
-                                                </div> 
-                                            </div>
                                            
                                             <div class="col-md-2 text-center">
                                                 <%= link_to 'Clear', candidates_path, class: "btn clear-btn" %> 

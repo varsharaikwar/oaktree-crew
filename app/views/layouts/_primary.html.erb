@@ -1,48 +1,52 @@
-<div class="dropdown w-100", id="primary_skill">
-<button class="form-control dropdown-toggle dropdown-list-after btn-design text-left " id="s1" type="button" data-toggle="dropdown">Select
-</button>                                   
-<ul class="dropdown-menu w-100 custom-scroller" id="u1" >
-<input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()" onkeyup="myfunction()"/>
-<br><button type="button" data-toggle="modal" data-target="#addSkill" class="badge mx-2 p-2 btn-large default-btn" >Add Skill +</button>
-    <% @primary_skill.each do |item| %>
-        <li id="<%= item.name %>", onclick="checkbox_click()">
-        <label  class="custom_checkbox_label d-block px-2">
-        <%= f.check_box :primary_skill, { multiple: true }, item.name, nil %>
-        <span> <%= item.name %></span>
-        </label>
-        </li>
-    <% end %>
-</ul>
-</div>
-<script>
-function myfunction(){
-$(".search_field").on('keyup', function(e){
-            sear_val = $(this).val().toLocaleLowerCase().trim();
-            
-            id = e.currentTarget.parentElement.parentElement.parentElement.id
-            
-            id = id != "" ? id : e.currentTarget.parentElement.parentElement.id
-            let checkids = ["primary_skill" , "secondary_skill"]
-            if(checkids.includes(id)){
-                console.log($("#" + id + " ul li")[0].id    , "filter");
-                $("#" + id + " ul li").filter(function() {
-                    console.log($(this)[0].id , "this" );
-                $(this).toggle($(this)[0].id.trim().toLowerCase().indexOf(sear_val.trim().toLowerCase()) > -1);
-                // $(this).parent().toggle();
+    
+    <div class="dropdown w-100", id="primary_skill">
 
-            });
-            }
-            else{
-                
+        <button class="form-control dropdown-toggle dropdown-list-after btn-design text-left " id="s1" type="button" data-toggle="dropdown">Select
+        </button>  
+
+        <ul class="dropdown-menu w-100 custom-scroller" id="u1" >
+            <input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()" onkeyup="myfunction()"/>
+            <br><button type="button" data-toggle="modal" data-target="#addSkill" class="badge mx-2 p-2 btn-large default-btn" >Add Skill +</button>
+
+            <% @primary_skill.each do |item| %>
+                <li id="<%= item.name %>", onclick="checkbox_click()">
+                    <label  class="custom_checkbox_label d-block px-2">
+                        <%= f.check_box :primary_skill, { multiple: true }, item.name, nil %>
+                        <span> <%= item.name %></span>
+                    </label>
+                </li>
+            <% end %>
+
+        </ul>
+
+    </div>
+
+    <script>
+    function myfunction(){
+    $(".search_field").on('keyup', function(e){
+        sear_val = $(this).val().toLocaleLowerCase().trim();
+        
+        id = e.currentTarget.parentElement.parentElement.parentElement.id
+        id = id != "" ? id : e.currentTarget.parentElement.parentElement.id
+
+        let checkids = ["primary_skill" , "secondary_skill"]
+        if(checkids.includes(id)){
+            console.log($("#" + id + " ul li")[0].id    , "filter");
             $("#" + id + " ul li").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
+                console.log($(this)[0].id , "this" );
+            $(this).toggle($(this)[0].id.trim().toLowerCase().indexOf(sear_val.trim().toLowerCase()) > -1);
             });
-            }
+        }
+        else{
+            
+        $("#" + id + " ul li").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
+        });
+        }
         })
-}
+        }
 
-
-           function checkbox_click(){   
+        function checkbox_click(){   
             const check_array = []
             nodes = $("#u1 li")
             $('#s1')[0].innerText = ""
@@ -54,6 +58,6 @@ $(".search_field").on('keyup', function(e){
                 }
             }
             $('#s1')[0].innerText = check_array.join(" , ")
-      
-           }
-</script>
+
+        }
+    </script>
