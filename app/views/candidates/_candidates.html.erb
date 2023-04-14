@@ -33,23 +33,29 @@
                         <% end %>
                     <% end %>
 
-                    <p class="m-0"><b><%= candidate.first_name+ " " +candidate.last_name %></b></p>
-                    <p>
-                     <% if candidate.category.present? %>    
-                     <p class="sub-title"> <%= candidate.category %></p>
-                     <% else %>
-                    <p class="invisible">Category not added</p>
-                        <% end  %>
-                    <% if candidate.primary_skill.present? %>
-                        <% candidate.primary_skill.take(3).each do |val| %>
-                        <span class="sub-title"><%= val %></span>
-                        <% end %><%= link_to '....' , candidate_path(candidate) %>
-                    <% else %>
-                        <p class="invisible">Skills not added</p>
-                    <% end %>
+                        <p class="m-0"><b><%= candidate.first_name+ " " +candidate.last_name %></b></p>
 
-                    </p>
-                    <p class="gradient-success-btn"><%= candidate.status %></p> 
+                        <p>
+
+                        <% if candidate.category.present? %>    
+                            <p> <%= candidate.category %></p>
+                        <% else %>
+                            <p>Category not added</p>
+                        <% end  %>
+
+                        <% if candidate.primary_skill.present? %>
+
+                            <% candidate.primary_skill.take(3).each do |val| %>
+                            <span class="sub-title"><%= val %></span>
+                            <% end %>
+
+                            <% if candidate.primary_skill.count > 3 %>
+                                <%= link_to '....' , candidate_path(candidate) %>
+                            <% end %>
+                        <% else %>
+                            <p>Skills not added</p>
+                        <% end %> </p>
+                        <p class="gradient-success-btn"><%= candidate.status %></p> 
                 </div>
             <% end %>
            </div>

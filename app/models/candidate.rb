@@ -1,6 +1,6 @@
 class Candidate < ActiveRecord::Base
     paginates_per 2
-    has_paper_trail
+    has_paper_trail on: [:update]
     include PgSearch::Model
     pg_search_scope :global_search, against: [:first_name, :last_name, :category, :current_location, :address, :primary_skill, :secondary_skill], using: { tsearch: { prefix: true } }
     # extend FriendlyId

@@ -195,23 +195,21 @@
 								</div>
 
 								<div class="candidates-details-content mb-4">
-									<div><h3> Details </h3> </div>
+								    <div> <h3> Details </h3> </div>
 									<div class="scroll-sec">
-										<p> <b> <%= @candidate.first_name %> </b> is Created by <b> <%= @candidate.user.name %> at <%= @candidate.created_at.strftime('%H:%M %P').upcase %> on  <%= @candidate.created_at.strftime('%d-%m-%Y').upcase %>  </b> <p>
-										<hr>
-                                         <% @versions = @candidate.versions %>
-										<% @versions.each do |version| %>
-											<span> <b> <%= @candidate.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version.whodunnit)&.name || "Unknown User" %></b> at <b> <%= version.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= version.created_at.strftime("%d-%m-%Y") %> </b>
-										</p> <hr>
-										<% end %>
-										</span> </b>
 
-										</p> <hr>
-									</div>
-								</div>
-								
+										<p> <b> <%= @candidate.first_name %> </b> is Created by <b> <%= @candidate.user.name %> </b> at <b> <%=  @candidate.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= @candidate.created_at.strftime("%d-%m %Y") %>  </b> <p> <hr>
 
-							</div>
+										<% @versions = @candidate.versions %>
+											<% @versions.each do |version| %>
+											<span> 
+												<b> <%= @candidate.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version.whodunnit)&.name || "Unknown User" %></b> at <b> <%= version.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= version.created_at.strftime("%d-%m-%Y") %> </b> <p> <hr>										
+										    <% end %>
+										   </b> </span> 
+								    </div>
+								    </div>
+
+						     	</div>
 
 							<div class="col-lg-4">
 								<div class="candidates-details-sidebar">
