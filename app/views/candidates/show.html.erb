@@ -201,7 +201,7 @@
 										<hr>
                                          <% @versions = @candidate.versions %>
 										<% @versions.each do |version| %>
-											<span> <b> <%= @candidate.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version.whodunnit)&.name || "Unknown User" %></b> at <b> <%= version.created_at.in_time_zone('Kolkata').strftime("%H:%M:%P").upcase %> </b> on <b> <%= version.created_at.strftime("%d-%m-%Y") %> </b>
+											<span> <b> <%= @candidate.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version.whodunnit)&.name || "Unknown User" %></b> at <b> <%= version.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= version.created_at.strftime("%d-%m-%Y") %> </b>
 										</p> <hr>
 										<% end %>
 										</span> </b>
