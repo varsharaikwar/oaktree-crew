@@ -1,17 +1,15 @@
-	<%=  render "layouts/header" %>
-
-   <!-- Success messages starts-->
-	<% flash.each do |key, value| %>
-		<div class="alert alert-<%= key %> alert-success alert-dismissible fade show" role="alert"><strong><%= value %></strong>
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-	<% end %>
-   <!-- Success messages ends-->
+<%=  render "layouts/header" %>
+	<!-- Success messages starts-->
+		<% flash.each do |key, value| %>
+			<div class="alert alert-<%= key %> alert-success alert-dismissible fade show" role="alert"><strong><%= value %></strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		<% end %>
+	<!-- Success messages ends-->
 
 	<div class="row">
-
 		<div class="col-lg-2">
 			<div class="nav-side-menu sidebar">
 				<ul class="nav flex-column">	
@@ -27,11 +25,10 @@
 
 		<div class="col-lg-10">
 			<div class="content-area">
-
 				<div class="page-title-area">
 					<div class="col-lg-8">
 						<div class="page-title-content">
-							<h2>Candidate Details<span>
+							<h2>Candidate Details</h2>
 							<ul>
 								<% if current_user.has_role? :bde %>
 									<li> <%= link_to 'Home', candidates_path %> </li>
@@ -81,23 +78,25 @@
 										<div class="col-lg-3">
 											<div class="candidates-cv-content">
 												<h3><%= @candidate.first_name+ " " +@candidate.last_name %></h3>
-												<% if @candidate.category.present? %>
-													<span class="sub-title"><%= @candidate.category %></span>
-												<% end %>
-												<% if current_user.has_role? :senior_hr %>
-													<td id="check<%=@candidate.id%>">
-														<div class="custom-control custom-switch", id="check<%=@candidate.id%>">
-															<%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>   
-															<label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
-														</div>
-													</td> 
-												<% else %>
-													Status <span class=" <%=  @candidate.status == 'Draft'? 'badge badge-secondary': 'badge badge-success'  %>"> <%= @candidate.status %></span>  											<% end %>
+													<% if @candidate.category.present? %>
+														<span class="sub-title"><%= @candidate.category %></span>
+													<% end %>
+													<% if current_user.has_role? :senior_hr %>
+														<td id="check<%=@candidate.id%>">
+															<div class="custom-control custom-switch", id="check<%=@candidate.id%>">
+																<%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>   
+																<label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
+															</div>
+														</td> 
+													<% else %>
+															Status <span class=" <%=  @candidate.status == 'Draft'? 'badge badge-secondary': 'badge badge-success'  %>"> <%= @candidate.status %></span>  											
+													<% end %>
 													<ul>
 														<li><span>Location: </span><%= @candidate.current_location+ " , " +@candidate.nationality %></li>	
 													</ul>
 											</div>
 										</div>
+
 										<div class="col-lg-7">
 											<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2", target: "_blank" %>
 											<% unless ['admin', 'pool_manager', 'sales_person'].include?(current_user.roles.first.name) %>
@@ -109,51 +108,45 @@
 								</div>
 
 								<div class="candidates-details-content mb-4">
-									
 									<div class="mt-1">
 										<h3>Primary Skills</h3>
 										<ul class="d-flex flex-wrap badge-list mb-0">
-										<% if @candidate.primary_skill.present? %>
+											<% if @candidate.primary_skill.present? %>
 												<% @candidate.primary_skill.each do |candidate| %>
 													<span class="sub-title"><%= candidate %></span>
 												<% end %>
-										<% else %>
-										    <span> no primary skills </span>
-										<% end %>
+											<% else %>
+										    	<span> no primary skills </span>
+											<% end %>
 										</ul>
 									</div>
 
 									<div class="mt-5">
 										<h3>Secondary Skills</h3>
 										<ul class="d-flex flex-wrap badge-list mb-0">
-										<% if @candidate.secondary_skill.present? %>
+											<% if @candidate.secondary_skill.present? %>
 												<% @candidate.secondary_skill.each do |candidate| %>
 													<span class="sub-title"><%= candidate %></span>
 												<% end %>
-										<% else %>
-										    <span> no secondary skills </span>
-										<% end %>
+											<% else %>
+										    	<span> no secondary skills </span>
+											<% end %>
 										</ul>
 									</div>
-
 								</div>
 
-									<div class="candidates-details-content mb-4">
-
-										<h3>Scheduled Interview </h3>
-											<% if @candidate.interview_schedules.present? %>
-
+								<div class="candidates-details-content mb-4">
+									<h3>Scheduled Interview </h3>
+										<% if @candidate.interview_schedules.present? %>
 											<div class="scroll-sec">
 												<% @candidate.interview_schedules.each do |interview_schedule| %>
-
-												<div class="card mb-4">
-
-													<div class="card-body position-relative">
-														<div class="mb-2 d-flex align-items-center">
+													<div class="card mb-4">
+														<div class="card-body position-relative">
+															<div class="mb-2 d-flex align-items-center">
 																<b><i class="fa fa-link mr-1"></i></b> 
 																<%=link_to interview_schedule.url,interview_schedule.url, class: "text-success", target: '_blank' %>
-														</div>
-													<div>
+															</div>
+														<div>
 
 														<div class="mb-2 d-flex align-items-center">
 															<b><i class="fa fa-clock mr-1"></i> </b>
@@ -164,55 +157,48 @@
 															<b><i class="fa fa-calendar mr-1"></i> </b>
 														  <%=  Time.strptime(interview_schedule.time, '%H:%M %m/%d/%Y').strftime('%-d %B %Y')%>
 														</div>
-
-												</div>
-
+													</div>
 														<%= link_to  content_tag(:i, "", class: "fa fa-pencil"), edit_interview_schedule_path(interview_schedule.id, candidate: @candidate.id, method: :patch), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2 py-2 option-icon" %>
 													</div>
-												</div>	
-                                            
-												<% end %>
-                      </div>
-
-											<% else %>
-												<p> interview not scheduled yet</p>
-											<% end %>
-
-									</div>
+													</div>	
+                                            	<% end %>
+                      						</div>
+										<% else %>
+											<p> interview not scheduled yet</p>
+										<% end %>
+								</div>
 
 								
 								<div class="candidates-details-content mb-4">
-										<h3>About Me</h3>
-										<p><%= @candidate.notes %></p>
-										<h3>Education Details</h3>
-										<p><b>Institute Name :</b> <span class="float-right"><%= @candidate.institute_name %></span></p>
-										<hr>
-										<p> <b>Passout Year :</b> <span class="float-right"><%= @candidate.year_of_passing%></span></p>
-										<hr>
-										<p><b>Degree:</b> <span class="float-right"><span><%= @candidate.degree %></span></span></p>
-										<hr>
-										<p><b>Duration:</b> <span class="float-right"><span><%= @candidate.duration%> <% if @candidate.duration.present? %> yrs <% end %></span></span></p> <hr>
+									<h3>About Me</h3>
+									<p><%= @candidate.notes %></p>
+									<h3>Education Details</h3>
+									<p><b>Institute Name :</b> <span class="float-right"><%= @candidate.institute_name %></span></p>
+									<hr>
+									<p> <b>Passout Year :</b> <span class="float-right"><%= @candidate.year_of_passing%></span></p>
+									<hr>
+									<p><b>Degree:</b> <span class="float-right"><span><%= @candidate.degree %></span></span></p>
+									<hr>
+									<p><b>Duration:</b> <span class="float-right"><span><%= @candidate.duration%> <% if @candidate.duration.present? %> yrs <% end %></span></span></p> <hr>
 								</div>
 
 								<div class="candidates-details-content mb-4">
-								    <div> <h3> Details </h3> </div>
-									<div class="scroll-sec">
-										<p> <b> <%= @candidate&.first_name %> </b> is Created by <b> <%= @candidate&.user&.name %> </b> at <b> <%=  @candidate&.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= @candidate&.created_at.strftime("%d-%m %Y") %>  </b> <p> <hr>
-
-										<% @versions = @candidate&.versions %>
+									<div> <h3> Details </h3> </div>
+										<div class="scroll-sec">
+											<p> <b> <%= @candidate&.first_name %> </b> is Created by <b> <%= @candidate&.user&.name %> </b> at <b> <%=  @candidate&.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= @candidate&.created_at.strftime("%d-%m %Y") %>  </b> <p> <hr>
+											<% @versions = @candidate&.versions %>
 											<% @versions.each do |version| %>
 											<span> 
 												<b> <%= @candidate&.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version&.whodunnit)&.name || "Unknown User" %></b> at <b> <%= version&.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= version&.created_at.strftime("%d-%m-%Y") %> </b> <p> <hr>										
 										    <% end %>
 										   </b> </span> 
+								    	</div>
 								    </div>
-								    </div>
+								</div>
 
-						     	</div>
-
-							<div class="col-lg-4">
-								<div class="candidates-details-sidebar">
-									<div class="candidates-widget">
+								<div class="col-lg-4">
+									<div class="candidates-details-sidebar">
+										<div class="candidates-widget">
 										<h3>Contact Information</h3>
 										<ul class="overview">
 											<li>

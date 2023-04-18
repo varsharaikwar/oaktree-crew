@@ -1,6 +1,7 @@
 <div class="check_filter" >
     <div class="skill_filter row scroll-section" id="showMoreSkill">
-        <% @primary_skill.each do |val| %>
+    <% skill_section_filter = SkillSet.where(skill_type: "primary", section: section) %>
+        <% skill_section_filter.each do |val| %>
             <div class="col-lg-3 mb-2">
                 <%= check_box_tag val.name, val.name %> <%= val.name %>
             </div>

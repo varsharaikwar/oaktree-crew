@@ -51,7 +51,20 @@
 </button>
 </div>
 <div class="modal-body">
-<%= render "skill_sets/show_more"%>
+    <p>Salesforce</p>
+        <%= render "skill_sets/show_more", section: "salesforce"%>
+    <p>Frontend</p>
+
+     <%= render "skill_sets/show_more", section: "frontend"%>
+    <p>Back-end</p>
+
+    <%= render "skill_sets/show_more", section: "backend"%>
+    <p>Mobile</p>
+
+    <%= render "skill_sets/show_more", section: "mobile"%>
+    <p>Full-Stack</p>
+
+    <%= render "skill_sets/show_more", section: "fullstack"%>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_pop">Close</button>
