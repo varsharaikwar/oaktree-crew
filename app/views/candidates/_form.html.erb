@@ -101,7 +101,6 @@
                                 <label>Country</label>
                                 <div id="nationality">
                                  <%= f.select :nationality, CS.countries.values.sort, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search" %>
-                                 
                                 </div>  
                             </div>
                         </div>
@@ -438,7 +437,6 @@
         $("#blah").click(function(){
         $("#img_tag").click();
         });
-
         $("#nationality").change(function(){
             var country = $('#nationality option:selected').text();
             $.ajax({

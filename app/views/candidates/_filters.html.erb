@@ -11,7 +11,7 @@
 
         </p>
         <div id='citySearch'>
-            <%= select_tag :city, options_for_select(CS.states(:IN).keys.flat_map { |state| CS.cities(state, :IN) }.sort), prompt: "Select", class: "filter-radius overflow-select select1 mb-3", id:"cityFilter"%>
+            <%= select_tag :city, options_for_select(["Indore", "Bhopal", "Hydearabad", "Bengaluru", "Chennai", "Nagpur"]), prompt: "Select", class: "filter-radius overflow-select select1 mb-3", id:"cityFilter"%>
         </div> 
         </div>
         
@@ -51,23 +51,49 @@
 </button>
 </div>
 <div class="modal-body">
-    <p>Salesforce</p>
-        <%= render "skill_sets/show_more", section: "salesforce"%>
-    <p>Frontend</p>
+        <div class="check_filter" >
+            <div class="skill_filter scroll-section" id="showMoreSkill">
+            <div>
+                <p>Salesforce</p>
+                <div class="row">
+                <%= render "skill_sets/show_more", section: "salesforce"%>
+                </div>
+            </div>
 
-     <%= render "skill_sets/show_more", section: "frontend"%>
-    <p>Back-end</p>
+            <div>
+                <p>Frontend</p>
+                <div class="row">
+                    <%= render "skill_sets/show_more", section: "frontend"%>
+                </div>
+            </div>
 
-    <%= render "skill_sets/show_more", section: "backend"%>
-    <p>Mobile</p>
+            <div>
+                <p>Back-end</p>
+                <div class="row">
+                     <%= render "skill_sets/show_more", section: "backend"%>
+                </div>
+            </div>    
 
-    <%= render "skill_sets/show_more", section: "mobile"%>
-    <p>Full-Stack</p>
+           <div>
+                <p>Mobile</p>
+                <div class="row">
+                     <%= render "skill_sets/show_more", section: "mobile"%>
+                </div>
+            </div>
 
-    <%= render "skill_sets/show_more", section: "fullstack"%>
+            <div>
+                <p>Full-Stack</p>
+                <div class="row">
+                     <%= render "skill_sets/show_more", section: "fullstack"%>
+                </div>
+            </div>
+            
+         </div>
+    </div>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_pop">Close</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal" id="filter">Filter</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal" id="clear_skill">Clear</button>
 </div>
 </div>
 </div>

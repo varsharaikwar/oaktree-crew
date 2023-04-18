@@ -33,11 +33,11 @@ $(document).ready(function(){
     // js for filter by skills.
     function skill_filter(){
         skill_array = []
-        var inp = $("#showMoreSkill").children()
-        var inp_len = inp.length
+        var inp = $("#showMoreSkill input")
+        var inp_len = $("#showMoreSkill input").length
         for( let j=0; j< inp_len; j++){
-            if (inp[j].children[0].nodeName == "INPUT" && inp[j].children[0].checked){
-                skill_array.push(inp[j].children[0].defaultValue)
+            if (inp[j].type == "checkbox" && inp[j].checked){
+                skill_array.push(inp[j].defaultValue)
             }
         }   
         req_ajax(skill_array, city_name, category_name)                
@@ -69,35 +69,26 @@ $(document).ready(function(){
 
     // js for checkbox input tag checked
     $('#filterBox input').on('change', function(e){
-        var len = $('#showMoreSkill input').length
-
-        for( let i=0; i<5; i++)
-        {
-            if ($('#filterBox input')[i].checked ==true)
-            {
-            $('#showMoreSkill input')[i].checked = true;
-            }
-            else{
-            $('#showMoreSkill input')[i].checked = false;
-            }
-        }
+        var val =  e.currentTarget.value;
+        var bool = e.currentTarget.checked;
+        $('#showMoreSkill').find("input[value='" + val + "']")[0].checked = bool;
         skill_filter()
+
     })
 
     // js for checkbox input tag checked
     $('#showMoreSkill input').on('change', function(e){
-       var len = $('#filterBox input').length
+        var val =  e.currentTarget.value;
+        var bool = e.currentTarget.checked;
+        $('#filterBox').find("input[value='" + val + "']")[0].checked = bool;
+        skill_filter()
 
-        for(let i=0; i<len; i++)
-        {
-            if ($('#showMoreSkill input')[i].checked ==true)
-            {
-                $('#filterBox input')[i].checked = true;
-            }
-            else{
-                $('#filterBox input')[i].checked = false;
-            }
-        }
+    })
+
+    // js clearing filter from skills checkbox.
+    $("#clear_skill").on('click', function(){
+        $("#showMoreSkill").find("input").filter(":checkbox:checked").prop("checked", false);
+        $("#filterBox").find("input").filter(":checkbox:checked").prop("checked", false);
         skill_filter()
     })
 })

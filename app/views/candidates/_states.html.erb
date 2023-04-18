@@ -1,4 +1,4 @@
-<%= select_tag :current_location, options_for_select(CS.states(CS.countries.key(country)).values.sort), prompt: "Select something", class: "form-control select-state sel-search"%>
+<%= select_tag :current_location, options_for_select(CS.states(CS.countries.key(country)).values.sort), prompt: "Select State", class: "form-control select-state sel-search"%>
 <script> 
     $('.select-state').niceSelect();
 
