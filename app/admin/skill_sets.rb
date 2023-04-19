@@ -19,9 +19,24 @@ ActiveAdmin.register SkillSet do
     def create
       skill_set = params[:skill_set][:skill_type].compact.reject(&:blank?)
       skill_set.each do |skill|
-        a =  SkillSet.create!(name: params[:skill_set][:name], skill_type: skill, section: params[:skill_set][:section].compact.reject(&:blank?))
+        SkillSet.create!(name: params[:skill_set][:name], skill_type: skill, section: params[:skill_set][:section].compact.reject(&:blank?))
       end
       redirect_to admin_skill_sets_path
     end
+
+    def update
+      skill_set = SkillSet.find(params[:id])
+      data =  params[:skill_set][:skill_type].compact.reject(&:blank?)
+      data.each do |update_value|
+        if skill_set.update(name: params[:skill_set][:name], skill_type: update_value, section: params[:skill_set][:section].compact.reject(&:blank?))
+          redirect_to admin_skill_sets_path
+        else
+          render :edit
+        end
+      end
+    end
+
   end
 end
+
+  

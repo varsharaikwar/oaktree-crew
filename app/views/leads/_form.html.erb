@@ -28,10 +28,12 @@
                                 <div class="form-group">
                                     <label>Assigned To</label>
                                     <div id="assigned_to">
+                                    <% if @hr_list.present?%>
                                         <%= f.select :assigned_to, @hr_list.collect {|p| [ p.name, p.email ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search" %>
                                         <% if lead_error_helper(:assigned_to) != []%>
                                             <span class="error-message", id="msg1">Last Name <%= error_helper(:assigned_to).first %></span>
-                                        <% end %>     
+                                        <% end %>   
+                                    <% end %>  
                                     </div>  
                                 </div>
                             </div>

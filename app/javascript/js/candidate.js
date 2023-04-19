@@ -71,18 +71,22 @@ $(document).ready(function(){
     $('#filterBox input').on('change', function(e){
         var val =  e.currentTarget.value;
         var bool = e.currentTarget.checked;
-        $('#showMoreSkill').find("input[value='" + val + "']")[0].checked = bool;
+        let target = $('#showMoreSkill').find("input[value='" + val + "']")
+        if (target.length){
+            target[0].checked = bool;
+        }
         skill_filter()
-
     })
 
     // js for checkbox input tag checked
     $('#showMoreSkill input').on('change', function(e){
         var val =  e.currentTarget.value;
         var bool = e.currentTarget.checked;
-        $('#filterBox').find("input[value='" + val + "']")[0].checked = bool;
+        let  target = $('#filterBox').find("input[value='" + val + "']") 
+        if (target.length){
+            target[0].checked = bool;
+        }
         skill_filter()
-
     })
 
     // js clearing filter from skills checkbox.

@@ -5,5 +5,7 @@ $(document).ready(function(){
         $("#nationality div ul").find("li[data-value='India']")[0].classList += " selected focus"
     $("#nationality")[0].childNodes[2].childNodes[0].innerText = 'India'
     $('select[name="candidate[nationality]"]')[0].value = "India"
+    $("#nationality div ul").find("li[data-value='India']")[0].click()
+    $("#nationality select").click()
 })
 </script>

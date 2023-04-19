@@ -42,7 +42,11 @@
                     </div>
 
                     <div class="col-lg-6 mb-3">
-                        <div><b>File:</b> <%= link_to @lead.file.url,  @lead.file.url, target: '_blank' %></div>
+                        <% if @lead.file.url.present? %>
+                            <div><b>File: </b> <%= link_to @lead.file.url,  @lead.file.url, target: '_blank' %></div>
+                            <% else %>
+                            <div><b>File: </b><%= "File not found" %></div>
+                        <% end %>
                     </div>
 
                     <div class="col-lg-6 mb-3">
