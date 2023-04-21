@@ -30,7 +30,7 @@ end
 private
 
 def skill_set_params
-    params.require(:skill_set).permit(:name, :skill_type, :section => [])
+    params.require(:skill_set).permit(:name, :skill_type, :section => []).merge(section: [params[:skill_set][:section]])
 end
 
 
