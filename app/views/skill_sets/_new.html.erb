@@ -3,7 +3,11 @@
     <div class="actions">
        <%= f.text_field :name , class: "form-control", placeholder: 'Enter Name' %><br>
     </div>
- 
+
+   <div class="actions">
+      <%= f.select :section, SkillSet::Section_LIST, {include_blank: 'Select'}, class: "form-control" %>
+   </div>
+   
     <div class="actions">
        <%= f.hidden_field :skill_type , class: "form-control", placeholder: 'Enter Skill Type', value: 'primary'%>
     </div>

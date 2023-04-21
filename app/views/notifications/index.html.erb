@@ -4,7 +4,6 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.jqueryui.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-
     <div class="container">
 
       <div class="px-3 py-4">
@@ -54,6 +53,13 @@
                                 <span class="txt-ellipsis"><%= link_to notice.status, notice, class: "badge badge-primary" %></span>
                               <% end %>
                           </div>
+                          
+                          <% if notice.lead.file.url.present? %>
+                            <% truncated_url = truncate(notice.lead.file.url, length: 30, separator: '.', omission: '...') %>
+                              <div><b>File: </b> <%= link_to truncated_url,notice.lead.file.url,  title: notice.lead.file.url, target: '_blank' %></div>
+                            <% else %>
+                              <div><b>File: </b><%= "File not found" %></div>
+                          <% end %>
 
                           <div class="col-lg-2 text-center">
 
@@ -77,10 +83,12 @@
                               <% end %>
                           </div>
 
+                            
+
                       </div>
 
                   </div>        
-
+                             
                 <% end %>
 
                 <div class="col-lg-12 text-right">
@@ -93,6 +101,7 @@
       </div>
 
     </div>
+ 
 
 <style>
   .txt-ellipsis{
