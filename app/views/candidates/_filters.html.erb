@@ -31,7 +31,7 @@
         </p>
         <div class="skill_filter check_filter" id="filterBox">
             <% ["Salesforce LWC", "CRM", "Snowflake", "Vuex", "Commerce Cloud"].each do |val| %>
-                    <div class="mb-2"><%= check_box_tag val.name, val.name %><span class="ml-1"><%= val.name %></span></div>
+                    <div class="mb-2"><%= check_box_tag val, val%><span class="ml-1"><%= val %></span></div>
             <% end %>
         </div>
         
