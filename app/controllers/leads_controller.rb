@@ -15,6 +15,8 @@ class LeadsController < ApplicationController
     end
 
     def create
+      @hr_list = User.with_any_role('junior_hr', 'senior_hr')
+      @skill_list = SkillSet.where(skill_type: 'primary')
       @lead = current_user.leads.new(lead_params)
         if @lead.save
           flash[:success] = "Lead created successfully!"

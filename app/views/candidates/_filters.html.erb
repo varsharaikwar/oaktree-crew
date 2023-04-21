@@ -30,7 +30,7 @@
             <button type="button" class="btn btn btn-outline-info float-right px-2 py-1 btn-sm" data-toggle="modal" data-target="#add_skill" href="/skill_sets/show_more" remote: true > View All</button>
         </p>
         <div class="skill_filter check_filter" id="filterBox">
-            <% @primary_skill.last(5).each do |val| %>
+            <% ["Salesforce LWC", "CRM", "Snowflake", "Vuex", "Commerce Cloud"].each do |val| %>
                     <div class="mb-2"><%= check_box_tag val.name, val.name %><span class="ml-1"><%= val.name %></span></div>
             <% end %>
         </div>

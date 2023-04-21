@@ -54,13 +54,6 @@
                               <% end %>
                           </div>
                           
-                          <% if notice.lead.file.url.present? %>
-                          <% debugger %>
-                            <% truncated_url = truncate(notice.lead.file.url, length: 30, separator: '.', omission: '...') %>
-                              <div><%= link_to truncated_url,notice.lead.file.url,  title: notice.lead.file.url, target: '_blank' %></div>
-                            <% else %>
-                              <div><b>File: </b><%= "File not found" %></div>
-                          <% end %>
 
                           <div class="col-lg-2 text-center">
 
