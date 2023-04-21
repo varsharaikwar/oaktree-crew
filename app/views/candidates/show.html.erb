@@ -225,7 +225,7 @@
 								<div class="candidates-details-sidebar">
 									<div class="candidates-widget" id="comment_refresh">
 										<h3>Comments</h3>
-										<ul class="overview scroll-sec">
+										<ul class="overview scroll-sec" id="scroll">
 											<div>
 												<% @candidate.comments.each do |comment| %>
 													<div class="position-relative">
@@ -500,4 +500,6 @@
 		$('#timepicker1').timepicker({
 			uiLibrary: 'bootstrap4',
 		});
+		var element = document.getElementById("scroll");
+		element.scrollTop = element.scrollHeight;
 	</script>
