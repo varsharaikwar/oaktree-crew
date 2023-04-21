@@ -119,11 +119,18 @@ class CandidatesController < ApplicationController
         end
       end
     end
+
     def skill
       @primary_skill = SkillSet.where(skill_type: "primary")
       @candidate = Candidate.where(category: params[:category_name].split("-").join(" "))
     end
       
+    def list
+      @candidates = Candidate.where(user_id: params[:id])
+      respond_to do |format|
+        format.js
+      end
+    end
 
     private
     def candidate_params

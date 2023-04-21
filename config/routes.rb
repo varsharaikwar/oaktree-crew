@@ -10,6 +10,14 @@ Rails.application.routes.draw do
   authenticated :user, ->(u) { u.has_role?(:pool_manager) } do
     root to: "interview_schedules#index", as: :pool_manager_root
   end
+  
+  authenticated :user, ->(u) { u.has_role?(:manager) } do
+    root to: "interview_schedules#manager_dashboard", as: :manager_root
+  end
+
+  # authenticated :user, ->(u) { u.has_role?(:junior_hr, :senior_hr, :bde) } do
+  #   root to: "candidates#index", as: :hr_root
+  # end
 
   root to: "candidates#index"
 
@@ -20,6 +28,16 @@ Rails.application.routes.draw do
   resources :notifications
   resources :skill_sets
   resources :interview_schedules
+
+
+  resources :candidates do
+    get :list, on: :member
+  end
+
+  resources :interview_schedules do
+    get :manager_dashboard, on: :collection
+  end
+
   get 'show/states', to: "candidates#show_states", as: 'show_states'
   get 'show/cities', to: "candidates#show_cities", as: 'show_cities'
   get 'logout/candidates', to: 'candidates#logout'

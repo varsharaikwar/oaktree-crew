@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="p-3">
+    <h3 class="">Sales Reports</h3>
+        <table id="candidateTable" class="display primary-table" style="width:100%"> 
+            <thead>
+                <tr>
+                    <th style="width: 5%;">Name</th>
+                    <th style="width: 4%;">Primary Skills</th>
+                    <th style="width: 5%;">Secondary Skills</th>
+                    <th style="width: 5%;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% candidates.each do |candidate|%>
+                <tr>
+                    <td class="text-capitalize">
+                        <% if candidate.first_name.present? && candidate.last_name.present? %>
+                            <%= link_to candidate.first_name + " " + candidate.last_name, candidate_path(candidate.id) %>
+                        <% end %>
+                    </td>
+                    <td class="text-capitalize">
+                        <%= candidate.primary_skill.join(" ")%>
+                    </td>
+                    <td class="text-capitalize">
+                        <%= candidate.secondary_skill.join(" ")%>
+                    </td>
+                    <td class="text-capitalize">
+                        <% unless candidate.lead_assignments.empty?%>
+                            <%= candidate.secondary_skill.join(" ")%>
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#candidateTable").DataTable({
+      responsive: true,
+      scrollX: '200px',
+      scrollY: true,
+      paging: false,
+      language: { search: "", searchPlaceholder: "Search..." },
+  })
+})
+</script>
+<style>
+    .dataTables_scrollHeadInner, .primary-table {
+        width: 100%;
+    }
+</style>
