@@ -1,7 +1,6 @@
-
-    <% skill_section_filter = SkillSet.where("? = ANY(section) AND skill_type = ?", section, "primary") %>
-        <% skill_section_filter.each do |val| %>
-            <div class="col-lg-3 mb-2">
-                <%= check_box_tag val.name, val.name %> <%= val.name %>
-            </div>
-        <% end %>
+<% skill_section_filter = SkillSet.where("? = ANY(section) AND skill_type = ?", section, "primary") %>
+<% skill_section_filter.each do |val| %>
+    <div class="col-lg-3 mb-2">
+        <%= check_box_tag val.name, val.name %> <%= val.name %>
+    </div>
+<% end %>

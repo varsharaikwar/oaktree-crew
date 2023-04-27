@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   resources :password_resets
   resources :notifications
   resources :skill_sets
-  resources :interview_schedules
+  resources :interview_schedules, except: [:show]
 
 
   resources :candidates do

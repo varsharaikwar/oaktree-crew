@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
         admin_root_path
       elsif current_user.has_role? :sales_person
         leads_path
+      elsif current_user.has_role? :manager
+        manager_dashboard_interview_schedules_path
       else
         candidates_path
       end

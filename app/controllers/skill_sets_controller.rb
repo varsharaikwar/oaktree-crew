@@ -19,13 +19,13 @@ class SkillSetsController < ApplicationController
         end
     end
 end
-def show_more
-    if @primary_skill = SkillSet.where(skill_type: 'primary')
-        respond_to do |format|
-        format.js
+    def show_more
+        if @primary_skill = SkillSet.where(skill_type: 'primary')
+            respond_to do |format|
+                format.js
+            end
         end
     end
-end
   
 private
 

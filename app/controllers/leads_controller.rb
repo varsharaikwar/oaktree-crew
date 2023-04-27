@@ -1,7 +1,7 @@
 class LeadsController < ApplicationController
   before_action :authenticate_user!
     def index
-      @leads = Lead.all
+       @leads = Lead.order(created_at: :desc)
     end
 
     def show
@@ -26,35 +26,36 @@ class LeadsController < ApplicationController
             render :new, status: :unprocessable_entity
         end
     end
-  def edit
+
+    def edit
       @lead = current_user.leads.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
       @skill_list = SkillSet.where(skill_type: 'primary')
-  end
+    end
   
-  def update
+    def update
       @lead = current_user.leads.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
       @skill_list = SkillSet.where(skill_type: 'primary')
-      
-      if @lead.update(lead_params)
-        flash[:success] = "Lead has been updated"
-        @lead.assign_user(current_user)
-          redirect_to @lead
-      else
-          render :edit, status: :unprocessable_entity
-      end
-  end
+        
+        if @lead.update(lead_params)
+          flash[:success] = "Lead has been updated"
+          @lead.assign_user(current_user)
+            redirect_to @lead
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
   
-  def destroy
-      @lead = current_user.leads.find(params[:id])
-      @lead.destroy
-      flash[:success] = "Lead deleted successfully!"
-     redirect_to root_path, status: :see_other
-  end
+    def destroy
+        @lead = current_user.leads.find(params[:id])
+        @lead.destroy
+        flash[:success] = "Lead deleted successfully!"
+      redirect_to root_path, status: :see_other
+    end
   
   private
-  def lead_params
-    params.require(:lead).permit(:name, :assigned_to, :status, :additional_info, :file, :profile_array => [])
-  end
+    def lead_params
+      params.require(:lead).permit(:name, :assigned_to, :status, :additional_info, :file, :profile_array => [])
+    end
 end

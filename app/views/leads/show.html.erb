@@ -22,10 +22,9 @@
                     </div>
 
                     <div class="col-lg-6 mb-3">
-                        <div><b>Skills:</b>
-                            <% @lead.profile_array.each do |profile| %>
-                                <span><%= profile %></span>
-                            <% end %>
+                        <div class="text-truncate"><b>Skills:</b>
+                            
+                                <span><%= @lead.profile_array.join(",") %></span>
                         </div>
                     </div>
 
@@ -43,9 +42,9 @@
 
                     <div class="col-lg-6 mb-3">
                         <% if @lead.file.url.present? %>
-                            <div><b>File: </b> <%= link_to @lead.file.url,  @lead.file.url, target: '_blank' %></div>
-                            <% else %>
-                            <div><b>File: </b><%= "File not found" %></div>
+                            <div class="d-flex align-items-center"><b class="mr-2">File: </b> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@lead.file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %><%= button_to 'Attachment' , url_for(@lead.file.url), method: :get , target: '_blank' %> </div>												
+                        <% else %>
+                            <div><b>File Attachment: </b><%= "File not found" %></div>
                         <% end %>
                     </div>
 
@@ -56,11 +55,16 @@
                     <div class="col-lg-6">
                         <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
                     </div>
-                    
+                    <% if current_user.has_role? :manager %>
                     <div class="col-lg-6 text-right">
-                        <%= link_to 'Back', leads_path, class: 'text-success' %>
-                    </div>
-
+                            <%= link_to 'Back', manager_dashboard_interview_schedules_path, class: 'text-success' %>
+                        </div>  
+                         
+                    <% else %>
+                        <div class="col-lg-6 text-right">
+                            <%= link_to 'Back', leads_path, class: 'text-success' %>
+                        </div>  
+                    <% end %>
                 </div><hr>
             
             </div>

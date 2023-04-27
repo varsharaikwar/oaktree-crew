@@ -37,21 +37,21 @@ class InterviewSchedulesController < ApplicationController
         end
     end
 
-  def update
-    @interview_schedule = InterviewSchedule.find(params[:id])
-    respond_to do |format|
-        if @interview_schedule.update(interview_schedule_params)
-            @interview_schedule.interview_schedule(current_user)
-            flash[:success] = "Interview has been Updated Successfully !!"
-            format.js
+    def update
+        @interview_schedule = InterviewSchedule.find(params[:id])
+        respond_to do |format|
+            if @interview_schedule.update(interview_schedule_params)
+                @interview_schedule.interview_schedule(current_user)
+                flash[:success] = "Interview has been Updated Successfully !!"
+                format.js
+            end
         end
     end
-  end
     
-  def manager_dashboard
-    @hr_list = User.with_any_role("junior_hr", "senior_hr")
-    @sales_person_list = User.with_role(:sales_person)
-  end
+    def manager_dashboard
+        @hr_list = User.with_any_role("junior_hr", "senior_hr")
+        @sales_person_list = User.with_role(:sales_person)
+    end
 
     private
 

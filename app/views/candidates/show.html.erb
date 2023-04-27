@@ -10,20 +10,9 @@
 	<!-- Success messages ends-->
 
 	<div class="row">
-		<div class="col-lg-2">
-			<div class="nav-side-menu sidebar">
-				<ul class="nav flex-column">	
-					<li class="nav-item active">
-						<%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
-					</li>
-					<li class="nav-item active">
-						<%= link_to image_tag("notepad.png") + 'All Interviews', interview_schedules_path, class: "nav-link active" %> 
-					</li>
-				</ul>
-			</div>
-		</div>
 
-		<div class="col-lg-10">
+
+		<div class="col-lg-12">
 			<div class="content-area">
 				<div class="page-title-area">
 					<div class="col-lg-8">
@@ -31,6 +20,9 @@
 							<h2>Candidate Details</h2>
 							<ul>
 								<% if current_user.has_role? :bde %>
+									<li> <%= link_to 'Home', candidates_path %> </li>
+									<li class="active">Candidate Details</li>
+								<% elsif current_user.has_role? :sales_person %>
 									<li> <%= link_to 'Home', candidates_path %> </li>
 									<li class="active">Candidate Details</li>
 								<% else %>
@@ -81,27 +73,30 @@
 													<% if @candidate.category.present? %>
 														<span class="sub-title"><%= @candidate.category %></span>
 													<% end %>
+
 													<% if current_user.has_role? :senior_hr %>
 														<td id="check<%=@candidate.id%>">
 															<div class="custom-control custom-switch", id="check<%=@candidate.id%>">
-																<%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>   
+																<%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>  
 																<label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
 															</div>
 														</td> 
 													<% else %>
 															Status <span class=" <%=  @candidate.status == 'Draft'? 'badge badge-secondary': 'badge badge-success'  %>"> <%= @candidate.status %></span>  											
 													<% end %>
+
+
 													<ul>
-														<li><span>Location: </span><%= @candidate.current_location+ " , " +@candidate.nationality %></li>	
+														<li><span>Location: </span><%= @candidate.current_location+ "  " +@candidate.nationality %></li>	
 													</ul>
 											</div>
 										</div>
 
 										<div class="col-lg-7">
-											<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2", target: "_blank" %>
+											<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2 mb-1", target: "_blank" %>
 											<% unless ['admin', 'pool_manager', 'sales_person'].include?(current_user.roles.first.name) %>
-												<button type="button" class="default-btn px-2 ml-2" data-toggle="modal" data-target="#assignmentmodel">Assign To Lead</button>
-												<%= link_to 'Schedule Interview', new_interview_schedule_path(candidate: @candidate.id, method: :post), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2"%>
+												<button type="button" class="default-btn px-2 ml-2 mb-1" data-toggle="modal" data-target="#assignmentmodel">Assign To Lead</button>
+												<%= link_to 'Schedule Interview', new_interview_schedule_path(candidate: @candidate.id, method: :post), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2 mb-1"%>
 											<% end %>						
 										</div>
 									</div>
@@ -185,11 +180,11 @@
 								<div class="candidates-details-content mb-4">
 									<div> <h3> Details </h3> </div>
 										<div class="scroll-sec">
-											<p> <b> <%= @candidate&.first_name %> </b> is Created by <b> <%= @candidate&.user&.name %> </b> at <b> <%=  @candidate&.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= @candidate&.created_at.strftime("%d-%m %Y") %>  </b> <p> <hr>
+											<p> <b> <%= @candidate&.first_name %> </b> is Created by <b> <%= @candidate&.user&.name %> </b><b> <%=  @candidate&.created_at.in_time_zone('New Delhi').strftime('%B %d, %Y at %I:%M %p').upcase %> </b>   <p> <hr>
 											<% @versions = @candidate&.versions %>
 											<% @versions.each do |version| %>
 											<span> 
-												<b> <%= @candidate&.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version&.whodunnit)&.name || "Unknown User" %></b> at <b> <%= version&.created_at.localtime.strftime("%I:%M %P").upcase %> </b> on <b> <%= version&.created_at.strftime("%d-%m-%Y") %> </b> <p> <hr>										
+												<b> <%= @candidate&.first_name %> </b> is Updated by <b><%= user_name = User.find_by(id: version&.whodunnit)&.name || "Unknown User" %></b><b> <%= version&.created_at.in_time_zone('New Delhi').strftime('%B %d, %Y at %I:%M %p').upcase %> </b>  <p> <hr>										
 										    <% end %>
 										   </b> </span> 
 								    	</div>
@@ -231,7 +226,7 @@
 													<div class="position-relative">
 														<span class=""><b><%= comment.user.email %></b></span>
 														<span><%= comment.content.body %></span>
-														<span> <%= time_ago_in_words(comment.created_at) %></span>
+														<span> <%= comment.created_at.in_time_zone('New Delhi').strftime('%B %d, %Y at %I:%M %p') %></span>
 
 
 															<span class="delete-button-position">
@@ -299,18 +294,29 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="candidates-widget widget-box h-auto mb-4">
-									<h3 class="mb-4">Availability</h3>
-									<div class="mb-4">
-										<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-										<i class="fa fa-pencil change-color"></i></button></p>
-										<hr>
-										<p class="pt-0 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-										<i class="fa fa-pencil change-color"></i></button></p>
+								<% if current_user.has_role? :sales_person %>	
+									<div class="candidates-widget widget-box h-auto mb-4">
+										<h3 class="mb-4">Availability</h3>
+										<div class="mb-4">
+											<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+												</button></p>
+											<hr>
+											<p class="pt-0 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+											</button></p>
+										</div>
 									</div>
-								</div>
-
+								<% else %>							
+									<div class="candidates-widget widget-box h-auto mb-4">
+										<h3 class="mb-4">Availability</h3>
+										<div class="mb-4">
+											<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+												<i class="fa fa-pencil change-color"></i></button></p>
+											<hr>
+											<p class="pt-0 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+											<i class="fa fa-pencil change-color"></i></button></p>
+										</div>
+									</div>
+								<% end %>
 								
 
 								<div class="candidates-details-sidebar">				
@@ -473,7 +479,6 @@
 	<script>
 		$(document).ready(function(){
 			$(".candidate-check").click(function(){});
-
 			$(":checkbox").click(function(e){
 				var code = "";
 				if (e.delegateTarget.checked == true){
@@ -487,6 +492,8 @@
 				});
 			});
 		});
+
+		
 		
 		function showAlert() {
 			alert("Resume Not Available.");

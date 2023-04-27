@@ -1,6 +1,6 @@
 <div class="container">
     <div class="p-3">
-    <h3 class="">Sales Reports</h3>
+    <h3 class="sales-text">Sales Reports</h3>
         <table id="candidateTable" class="display primary-table" style="width:100%"> 
             <thead>
                 <tr>
@@ -26,7 +26,7 @@
                     </td>
                     <td class="text-capitalize">
                         <% unless candidate.lead_assignments.empty?%>
-                            <%= candidate.secondary_skill.join(" ")%>
+                            <%= candidate.status%>
                         <% end %>
                     </td>
                 </tr>

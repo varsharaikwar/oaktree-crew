@@ -6,8 +6,17 @@
 
 <div class="container">
     <div class="p-3 position-relative">
-    <h3 class="position-absolute">HR Reports</h3>
+    <div class="row">
+        <div class="col-lg-6 text-right mb-5 mt-3">
+            <h3 class="position-absolute">HR Reports</h3>
+        </div>
+        <div class="col-lg-6 text-right mb-5 mt-3">
+            <b> <%= link_to '+ Add New Lead', new_lead_path, class: "btn default-btn" %>  </b>
+            <b> <%= link_to 'All Leads' , leads_path, class: "btn default-btn" %>  </b>
+        </div>
+    </div>
         <table id="hrTable" class="display primary-table" style="width:100%"> 
+       
             <thead>
                 <tr>
                     <th style="width: 5%;">Name</th>
@@ -38,9 +47,10 @@
             </tbody>
         </table>
     </div>
+    
 
     <div class="p-3 position-relative">
-    <h3 class="position-absolute">Sales Reports</h3>
+    <h3>Sales Reports</h3>
         <table id="salesTable" class="display primary-table" style="width:100%"> 
             <thead>
                 <tr>
@@ -83,7 +93,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="CandidateModalLabel">Schedule Interview</h5>
+            <h5 class="modal-title" id="CandidateModalLabel">Candidates List</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeinterview">&times;</span>
             </button>
         </div>
@@ -120,23 +130,31 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .sales-text{
+    display: none;
+  }
+  
+  .fg-button{
+    padding: 2px 8px;
+    background-color: #e5dfdf;
+    cursor: pointer;
+  }
 </style>
 <script>
 $(document).ready(function(){
-  $("#hrTable").DataTable({
-      responsive: true,
-      scrollX: '200px',
-      scrollY: true,
-      paging: false,
-      language: { search: "", searchPlaceholder: "Search..." },
-  })
+    $("#hrTable").DataTable({
+        responsive: true,
+        language: { search: "", searchPlaceholder: "Search..." },
+        pagingType: 'numbers',
+    })
 
   $("#salesTable").DataTable({
-    responsive: true,
-    scrollX: '200px',
-    scrollY: true,
-    paging: false,
-    language: { search: "", searchPlaceholder: "Search..." },
+        responsive: true,
+        scrollX: '200px',
+        scrollY: true,
+        language: { search: "", searchPlaceholder: "Search..." },
+        pagingType: 'numbers',
     })
 })
 </script>

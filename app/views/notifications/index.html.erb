@@ -40,7 +40,7 @@
                             <%end%>
                           </div>
 
-                          <div class="col-lg-2 text-center">
+                          <div class="col-lg-2 text-center text-truncate">
 
                               <% if @lead.present? %>
                                 <span><%= @lead.profile_array.join(",") %></span>
@@ -48,13 +48,18 @@
                               
                           </div>
 
-                          <div class="col-lg-3 text-center">
+                          <div class="col-lg-3 text-center text-truncate">
                               <% if notice.status.present? %>
                                 <span class="txt-ellipsis"><%= link_to notice.status, notice, class: "badge badge-primary" %></span>
                               <% end %>
                           </div>
                           
-
+                            <% if notice&.lead&.file&.url&.present? %>
+                              <div class="d-flex align-items-center col-lg-2"><%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(notice.lead.file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %><%= button_to 'Attachment' , url_for(notice.lead.file.url), method: :get , target: '_blank' %> </div>												
+                            <% else %>
+                              <div class="d-flex align-items-center col-lg-2"><%= "File not found" %></div>
+                            <% end %>
+                          
                           <div class="col-lg-2 text-center">
 
                                 <% if notice.candidate_id.present? && (current_user.roles.first.name == 'sales_person' || current_user.roles.first.name == 'pool_manager')%>

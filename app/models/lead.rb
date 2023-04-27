@@ -5,7 +5,7 @@ class Lead < ApplicationRecord
   has_many :lead_assignments, dependent: :destroy
   has_one :interview_schedule, dependent: :destroy
   default_scope { order(created_at: :desc) }
-  validates :name, presence: true  
+  validates :name, :assigned_to, presence: true  
   mount_uploader :file, LeadAttachmentUploader
 
 
