@@ -93,7 +93,11 @@
 										</div>
 
 										<div class="col-lg-7">
-											<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2 mb-1", target: "_blank" %>
+											<% begin %>
+												<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2 mb-1", target: "_blank" %>
+         									 <% rescue ArgumentError %>
+            									<%= Not Available %>
+          									<% end  %>
 											<% unless ['admin', 'pool_manager', 'sales_person'].include?(current_user.roles.first.name) %>
 												<button type="button" class="default-btn px-2 ml-2 mb-1" data-toggle="modal" data-target="#assignmentmodel">Assign To Lead</button>
 												<%= link_to 'Schedule Interview', new_interview_schedule_path(candidate: @candidate.id, method: :post), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2 mb-1"%>
