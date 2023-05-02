@@ -93,11 +93,11 @@
 										</div>
 
 										<div class="col-lg-7">
-											<% begin %>
-												<%= link_to 'View Resume', @candidate.file.url, download: @candidate.file.url,  class: "default-btn px-2 ml-2 mb-1", target: "_blank" %>
-         									 <% rescue ArgumentError %>
-            									<%= Not Available %>
-          									<% end  %>
+											<% if @candidate.updated_file.url.present? %>
+												<%= link_to 'View Resume', @candidate.updated_file.url, download: @candidate.updated_file.url,  class: "default-btn px-2 ml-2 mb-1", target: "_blank" %>
+											<% else %>
+												<button class="default-btn px-2 ml-2 mb-1" onclick="showAlert()">View Resume</button>          									
+											<% end  %>
 											<% unless ['admin', 'pool_manager', 'sales_person'].include?(current_user.roles.first.name) %>
 												<button type="button" class="default-btn px-2 ml-2 mb-1" data-toggle="modal" data-target="#assignmentmodel">Assign To Lead</button>
 												<%= link_to 'Schedule Interview', new_interview_schedule_path(candidate: @candidate.id, method: :post), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2 mb-1"%>
@@ -209,14 +209,23 @@
 											<li>
 												Location :<span><%= @candidate.city %></span>
 											</li>
-											<li>
-												Linkedin Profile :
-												<span>
-													<a href="<%= @candidate.link %>" target="_blank">
-														<%= image_tag("linkedin.png")%>
-													</a>
-												</span>
-											</li>
+											<% if @candidate.link.present? %>
+												<li>
+													Linkedin Profile :
+													<span>
+														<a href="<%= @candidate.link %>" target="_blank">
+															<%= image_tag("linkedin.png")%>
+														</a>
+													</span>
+												</li>
+											<% else %>
+												<li>
+													Linkedin Profile :
+															<span>
+																	<%= image_tag("linkedin.png", onclick: "showAlertLinkdin()") %>
+															</span>
+												</li>
+											<% end %>
 										</ul>
 									</div>
 								</div>
@@ -501,6 +510,9 @@
 		
 		function showAlert() {
 			alert("Resume Not Available.");
+		}	
+		function showAlertLinkdin() {
+			alert("Linkdin Profile Not Avaliable");
 		}	
 	</script>
 	<script>
