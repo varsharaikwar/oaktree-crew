@@ -1,7 +1,7 @@
 class InterviewSchedule < ApplicationRecord
   validates :url, presence: true
-  belongs_to :lead, optional: true
-  belongs_to :candidate
+  belongs_to :lead, optional: true, dependent: :destroy
+  belongs_to :candidate, dependent: :destroy
   default_scope { order(created_at: :desc) }
 
   def interview_schedule(current_user)
