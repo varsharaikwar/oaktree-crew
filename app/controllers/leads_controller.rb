@@ -51,7 +51,7 @@ class LeadsController < ApplicationController
         @lead = Lead.find(params[:id])
         @lead.destroy
         flash[:success] = "Lead deleted successfully!"
-      redirect_to root_path, status: :see_other
+        redirect_to leads_path, status: :see_other
     end
   
   private
