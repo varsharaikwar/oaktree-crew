@@ -32,6 +32,11 @@
                               <li class="nav-item active">
                                 <%= link_to image_tag("notepad.png") + 'All Interviews', interview_schedules_path, class: "nav-link" %> 
                               </li>
+                              <% if current_user.has_role? :manager %>
+                                <li class="nav-item active">
+                                  <%= link_to image_tag("notepad.png") + 'Reports', manager_dashboard_interview_schedules_path, class: "nav-link" %> 
+                                </li>
+                              <% end %>
                             </ul>
                             <div class="mr-3">
                             <div class="dropdown">

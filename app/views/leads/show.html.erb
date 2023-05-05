@@ -21,10 +21,11 @@
                         <div class="h4 mb-3 p-2">Name: <%= @lead.name %></div>
                     </div>
 
-                    <div class="col-lg-6 mb-3">
-                        <div class="text-truncate"><b>Skills:</b>
+                    
+                    <div class="col-lg-6 mb-3 skills-container">
+                        <div class="d-flex"><b>Skills:</b>
                             
-                                <span><%= @lead.profile_array.join(",") %></span>
+                                <span class="ml-1"><%= @lead.profile_array.join(",") %></span>
                         </div>
                     </div>
 
@@ -42,30 +43,38 @@
 
                     <div class="col-lg-6 mb-3">
                         <% if @lead.file.url.present? %>
-                            <div class="d-flex align-items-center"><b class="mr-2">File: </b> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@lead.file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %><%= button_to 'Attachment' , url_for(@lead.file.url), method: :get , target: '_blank' %> </div>												
+                            <div class="d-flex align-items-center"><b class="mr-2">File: </b> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@lead.file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %><%= button_to url_for(@lead.file.identifier) , url_for(@lead.file.url), method: :get , target: '_blank' %> </div>												
                         <% else %>
                             <div><b>File Attachment: </b><%= "File not found" %></div>
                         <% end %>
                     </div>
-
                     <div class="col-lg-6 mb-3">
-                        <div></div>
+                        <% if  @lead.lead_assignments.present? %>
+                            <% @lead.lead_assignments.each do |assign| %>                        
+                                <div class="d-flex align-items-center"><b class="mr-2">Candidate assign to: </b> <%= link_to assign.candidate.first_name+ ' ' + assign.candidate.last_name, candidate_path(assign.candidate_id)%></div>
+                            <% end %>
+                        <% else %>
+                            <div><b>Candidate assign to: </b><%= "Candidate Not Found For This Lead" %></div>
+                        <% end %>
                     </div>
+                   
 
                     <div class="col-lg-6">
                         <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
                     </div>
                     <% if current_user.has_role? :manager %>
                     <div class="col-lg-6 text-right">
-                            <%= link_to 'Back', manager_dashboard_interview_schedules_path, class: 'text-success' %>
+                            <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, manager_dashboard_interview_schedules_path, class: 'text-success' %>
+
                         </div>  
                          
                     <% else %>
                         <div class="col-lg-6 text-right">
-                            <%= link_to 'Back', leads_path, class: 'text-success' %>
+                        <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, leads_path, class: 'text-success' %>
                         </div>  
                     <% end %>
                 </div><hr>
+                
             
             </div>
         </div>

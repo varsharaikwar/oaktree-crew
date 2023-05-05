@@ -28,13 +28,13 @@ class LeadsController < ApplicationController
     end
 
     def edit
-      @lead = current_user.leads.find(params[:id])
+      @lead = Lead.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
       @skill_list = SkillSet.where(skill_type: 'primary')
     end
   
     def update
-      @lead = current_user.leads.find(params[:id])
+      @lead = Lead.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
       @skill_list = SkillSet.where(skill_type: 'primary')
         
@@ -48,7 +48,7 @@ class LeadsController < ApplicationController
     end
   
     def destroy
-        @lead = current_user.leads.find(params[:id])
+        @lead = Lead.find(params[:id])
         @lead.destroy
         flash[:success] = "Lead deleted successfully!"
       redirect_to root_path, status: :see_other
