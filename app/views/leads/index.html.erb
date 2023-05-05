@@ -112,7 +112,11 @@
                 </tbody>
 
             </table>
-
+            <div class="text-right">
+            <% if current_user.has_role? :manager %>
+              <a href="/interview_schedules/manager_dashboard" class="text-success"><i class="fa fa-long-arrow-left"></i> Back </a>
+            <% end %>
+        </div>
           </div>
       </div>
 

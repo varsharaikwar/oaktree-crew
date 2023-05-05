@@ -94,7 +94,7 @@
 
 										<div class="col-lg-7">
 											<% if @candidate.updated_file.url.present? %>
-												<%= link_to 'View Resume', @candidate.updated_file.url, download: @candidate.updated_file.url,  class: "default-btn px-2 ml-2 mb-1", target: "_blank" %>
+												<%= link_to 'View Resume', @candidate.updated_file.url, download: @candidate.updated_file.url, class: "default-btn px-2 ml-2 mb-1", onclick: "window.open(this.href,'_blank'); return false;", target: '_blank' %>
 											<% else %>
 												<button class="default-btn px-2 ml-2 mb-1" onclick="showAlert()">View Resume</button>          									
 											<% end  %>
@@ -133,7 +133,13 @@
 										</ul>
 									</div>
 								</div>
-
+								<div class="candidates-details-content mb-4">
+									<h3>Assigned Leads</h3>
+									<% @candidate.lead_assignments.each do |l| %>
+										<p><b><%= l.lead.name %></b></p><hr>
+									<% end %>
+								</div>
+								
 								<div class="candidates-details-content mb-4">
 									<h3>Scheduled Interview </h3>
 										<% if @candidate.interview_schedules.present? %>
@@ -181,6 +187,8 @@
 									<p><b>Duration:</b> <span class="float-right"><span><%= @candidate.duration%> <% if @candidate.duration.present? %> yrs <% end %></span></span></p> <hr>
 								</div>
 
+								
+
 								<div class="candidates-details-content mb-4">
 									<div> <h3> Details </h3> </div>
 										<div class="scroll-sec">
@@ -194,6 +202,7 @@
 								    	</div>
 								    </div>
 								</div>
+								
 
 								<div class="col-lg-4">
 									<div class="candidates-details-sidebar">

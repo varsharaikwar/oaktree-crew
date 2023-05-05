@@ -9,7 +9,9 @@
                     <div class="row">
 
                         <div class="col-lg-6">
-                            <% notification = @notification.lead.name.present? ? @notification.lead.name : nil %>
+                            <% if @notification.lead.name.present? %>
+                                <% notification = @notification.lead.name.present? ? @notification.lead.name : nil %>
+                            <% end %>
                                 <p>Name:- <b class="ml-2"><%= notification %></b></p>
 
                                 <% lead = @notification.lead.profile_array.present? ? @notification.lead.profile_array.join(" , ") : nil %>
