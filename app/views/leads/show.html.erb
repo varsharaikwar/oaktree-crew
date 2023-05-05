@@ -48,14 +48,18 @@
                             <div><b>File Attachment: </b><%= "File not found" %></div>
                         <% end %>
                     </div>
+
                     <div class="col-lg-6 mb-3">
                         <% if  @lead.lead_assignments.present? %>
-                            <% @lead.lead_assignments.each do |assign| %>                        
-                                <div class="d-flex align-items-center"><b class="mr-2">Candidate assign to: </b> <%= link_to assign.candidate.first_name+ ' ' + assign.candidate.last_name, candidate_path(assign.candidate_id)%></div>
+                        <div class="d-flex align-items-center"><b class="mr-2">Candidate assign to: </b> 
+                            <% @lead.lead_assignments.each do |assign| %>  
+                     
+                                <%= link_to "#{assign.candidate.first_name} #{assign.candidate.last_name} , ", candidate_path(assign.candidate_id)%>
                             <% end %>
                         <% else %>
                             <div><b>Candidate assign to: </b><%= "Candidate Not Found For This Lead" %></div>
                         <% end %>
+                        </div>
                     </div>
                    
 
@@ -63,14 +67,14 @@
                         <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
                     </div>
                     <% if current_user.has_role? :manager %>
-                    <div class="col-lg-6 text-right">
+                        <div class="col-lg-6 text-right">
                             <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, manager_dashboard_interview_schedules_path, class: 'text-success' %>
 
                         </div>  
                          
                     <% else %>
                         <div class="col-lg-6 text-right">
-                        <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, leads_path, class: 'text-success' %>
+                            <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, leads_path, class: 'text-success' %>
                         </div>  
                     <% end %>
                 </div><hr>
