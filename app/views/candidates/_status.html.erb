@@ -1,23 +1,21 @@
-<%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id), class: "custom-control-input", id: "customSwitch#{candidate.id}"%>   
-<label class="custom-control-label" for="customSwitch<%=candidate.id%>" ><%= candidate.status %></label>
+<%= check_box_tag "status#{candidate.id}", candidate.id, checked = check(candidate.id), class: "custom-control-input", id: "swapStatus"%>   
+<label class="custom-control-label" for="swapStatus" ><%= candidate.status %></label>
 
 <script type="text/javascript"> 
     $(document).ready(function(){
-    $(".candidate-check").click(function(){
+        $("#swapStatus").click(function(e){
+                var code = "";
+            if (e.delegateTarget.checked == true){
 
-    });
-    $(":checkbox").click(function(e){
-            var code = "";
-        if (e.delegateTarget.checked == true){
-
-            code = "Active";
-        }else if (e.delegateTarget.checked == false){
-            code = "Draft";}
-        $.ajax({
-            url: '/candidates/' + this.value + '/',
-            type: 'PUT',
-            data: {"status": code}
+                code = "Active";
+            }else if (e.delegateTarget.checked == false){
+                code = "Draft";
+            }
+            $.ajax({
+                url: '/candidates/' + this.value + '/',
+                type: 'PUT',
+                data: {"status": code}
             });
-    });
+        });
     });
 </script>

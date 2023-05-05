@@ -67,6 +67,12 @@ class CandidatesController < ApplicationController
               format.js
             end
           end
+      elsif params[:premium_status]
+          if @candidate.update(premium_status: params[:premium_status])
+            respond_to do |format|
+              format.js
+            end
+          end
       elsif params[:current_location].present? 
         @candidate.update(candidate_params)
         redirect_to @candidate

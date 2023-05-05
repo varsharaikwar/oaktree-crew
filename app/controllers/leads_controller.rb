@@ -54,6 +54,17 @@ class LeadsController < ApplicationController
         redirect_to leads_path, status: :see_other
     end
   
+    def duration_filter
+      from_date = Date.parse(params[:from])
+      to_date = Date.parse(params[:to])
+      from_datetime = DateTime.new(from_date.year, from_date.month, from_date.day)
+      to_datetime = DateTime.new(to_date.year, to_date.month, to_date.day, 23, 59, 00, '+00:00')
+      @leads = Lead.where(created_at: from_datetime..to_datetime)
+      respond_to do |format|
+        format.js
+      end
+    end
+
   private
     def lead_params
       params.require(:lead).permit(:name, :assigned_to, :status, :additional_info, :file, :profile_array => [])

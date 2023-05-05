@@ -73,19 +73,18 @@
 													<% if @candidate.category.present? %>
 														<span class="sub-title"><%= @candidate.category %></span>
 													<% end %>
-
 													<% if current_user.has_role? :senior_hr %>
-														<td id="check<%=@candidate.id%>">
-															<div class="custom-control custom-switch", id="check<%=@candidate.id%>">
-																<%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "customSwitch#{@candidate.id}"%>  
-																<label class="custom-control-label" for="customSwitch<%=@candidate.id%>" ><%= @candidate.status %></label>
-															</div>
-														</td> 
+														<div class="custom-control custom-switch", id="swapDiv1">
+															<%= check_box_tag "status#{@candidate.id}", @candidate.id, checked = check(@candidate.id), class: "custom-control-input", id: "swapStatus"%>   
+															<label class="custom-control-label" for="swapStatus" ><%= @candidate.status %></label>
+														</div>
 													<% else %>
 															Status <span class=" <%=  @candidate.status == 'Draft'? 'badge badge-secondary': 'badge badge-success'  %>"> <%= @candidate.status %></span>  											
 													<% end %>
-
-
+													<div class="custom-control custom-switch", id="swapDiv2">
+														<%= check_box_tag "premium_status#{@candidate.id}", @candidate.id, checked = check_premium(@candidate.id), class: "custom-control-input", id: "swapPremium"%>  
+														<label class="custom-control-label" for="swapPremium" ><%=  @candidate.premium_status == 'Standard' ? "Mark as Premium" : @candidate.premium_status   %></label>
+													</div>
 													<ul>
 														<li><span>Location: </span><%= @candidate.current_location+ "  " +@candidate.nationality %></li>	
 													</ul>
@@ -443,95 +442,111 @@
 	</div>
 
 
-	<style>
-		.card:nth-child(odd){
-			border-left: 5px solid #00b074;
-		}
-		.card:nth-child(even){
-			border-left: 5px solid #000000;
-		}
-		.card-body i{
-			width: 30px;
-			height: 30px;
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		.card-body .fa-link{
-			background-color: #28a745;
-			color: #ffffff;
-		}
-		.card-body .fa-clock{
-			background-color: blue;
-			color: #ffffff;
-		}
-		.card-body .fa-calendar{
-			background-color: #0dcaf0;
-			color: #ffffff;
-		}
-		.delete-button-position{
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		.option-icon{
-			position: absolute;
-			right: 15px;
-			top: 15px;
-		}
-		.scroll-sec{
-			height: 350px;
-    		overflow: auto;
-		}
-		.progress{
-			height: 6px;
-		}
-		.change-color{
-			color: #00b074;
-		}
-		.alert-notice{
-			display: none;
-		}
-	</style>
+<style>
+	.card:nth-child(odd){
+		border-left: 5px solid #00b074;
+	}
+	.card:nth-child(even){
+		border-left: 5px solid #000000;
+	}
+	.card-body i{
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.card-body .fa-link{
+		background-color: #28a745;
+		color: #ffffff;
+	}
+	.card-body .fa-clock{
+		background-color: blue;
+		color: #ffffff;
+	}
+	.card-body .fa-calendar{
+		background-color: #0dcaf0;
+		color: #ffffff;
+	}
+	.delete-button-position{
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	.option-icon{
+		position: absolute;
+		right: 15px;
+		top: 15px;
+	}
+	.scroll-sec{
+		height: 350px;
+		overflow: auto;
+	}
+	.progress{
+		height: 6px;
+	}
+	.change-color{
+		color: #00b074;
+	}
+	.alert-notice{
+		display: none;
+	}
+</style>
 
-	<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-	<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
-	<script>
-		$(document).ready(function(){
-			$(".candidate-check").click(function(){});
-			$(":checkbox").click(function(e){
-				var code = "";
-				if (e.delegateTarget.checked == true){
-					code = "Active";
-				}else if (e.delegateTarget.checked == false){
-					code = "Draft";}
-				$.ajax({
-					url: '/candidates/' + this.value + '/',
-					type: 'PUT',
-					data: {"status": code}
-				});
+<script>
+	$(document).ready(function(){
+		let target = ""
+		$("#swapStatus").click(function(e){
+			let code = "";
+			if (e.delegateTarget.checked == true){
+				code = "Active";
+			}else if (e.delegateTarget.checked == false){
+				code = "Draft"}
+			ajax_request(code, "status")
+		});
+
+		$("#swapPremium").click(function(e){
+			let code = "";
+			if (e.delegateTarget.checked == true){
+				code = "Premium";
+			}else if (e.delegateTarget.checked == false){
+				code = "Standard"}
+			ajax_request(code, "premium_status")
+		});
+
+		function ajax_request(code, target){
+			if(target == "premium_status"){
+				values = {"premium_status" : code}
+			}
+			else if(target = 'status'){
+				values = {"status" : code}
+			}
+			$.ajax({
+				url: '/candidates/' + <%= @candidate.id %>+ '/',
+				type: 'PUT',
+				data: values
 			});
-		});
+		}
+	});
+	function showAlert() {
+		alert("Resume Not Available.");
+	}	
+	function showAlertLinkdin() {
+		alert("LinkedIn Profile Not Avaliable");
+	}	
+</script>
+<script>
+	$('#timepicker').timepicker({
+					uiLibrary: 'bootstrap4',						
+			});
 
-		
-		
-		function showAlert() {
-			alert("Resume Not Available.");
-		}	
-		function showAlertLinkdin() {
-			alert("LinkedIn Profile Not Avaliable");
-		}	
-	</script>
-	<script>
-		$('#timepicker').timepicker({
-						uiLibrary: 'bootstrap4',						
-				});
-
-		$('#timepicker1').timepicker({
-			uiLibrary: 'bootstrap4',
-		});
-		var element = document.getElementById("scroll");
-		element.scrollTop = element.scrollHeight;
-	</script>
+	$('#timepicker1').timepicker({
+		uiLibrary: 'bootstrap4',
+	});
+	var element = document.getElementById("scroll");
+	element.scrollTop = element.scrollHeight;
+</script>

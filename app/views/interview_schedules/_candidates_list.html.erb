@@ -25,9 +25,7 @@
                         <%= candidate.secondary_skill.join(" ")%>
                     </td>
                     <td class="text-capitalize">
-                        <% unless candidate.lead_assignments.empty?%>
-                            <%= candidate.status%>
-                        <% end %>
+                            <%= candidate.premium_status%>
                     </td>
                 </tr>
                 <% end %>

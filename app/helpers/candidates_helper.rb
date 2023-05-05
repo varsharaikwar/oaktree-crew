@@ -13,4 +13,13 @@ module CandidatesHelper
             return false
         end
     end
+
+    def check_premium(id)
+        candidate = Candidate.find(id)
+        if candidate.premium_status == "Premium"
+            return true 
+        elsif candidate.premium_status == "Mark as Premium"
+            return false
+        end
+    end
 end

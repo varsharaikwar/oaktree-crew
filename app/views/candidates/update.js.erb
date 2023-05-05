@@ -1,1 +1,5 @@
-$("#check<%=params[:id]%>").html("<%= escape_javascript render('status', candidate: Candidate.find(params[:id]))%>");
+<% if params[:status].present?%>
+    $("#swapDiv1").html("<%= escape_javascript render('status', candidate: Candidate.find(params[:id]))%>");
+<% elsif params[:premium_status].present? %>
+    $("#swapDiv2").html("<%= escape_javascript render('premium_status', candidate: Candidate.find(params[:id]))%>");
+<% end %>

@@ -1,0 +1,20 @@
+<%= check_box_tag "premium_status#{@candidate.id}", @candidate.id, checked = check_premium(@candidate.id), class: "custom-control-input", id: "swapPremium"%>  
+<label class="custom-control-label" for="swapPremium" ><%= @candidate.premium_status == 'Standard' ? "Mark as Premium" : @candidate.premium_status  %></label>
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+    $("#swapPremium").click(function(e){
+            var code = "";
+        if (e.delegateTarget.checked == true){
+            code = "Premium";
+        }else if (e.delegateTarget.checked == false){
+            code = "Standard";
+        }
+        $.ajax({
+            url: '/candidates/' + this.value + '/',
+            type: 'PUT',
+            data: {"premium_status": code}
+        });
+    });
+});
+</script>
