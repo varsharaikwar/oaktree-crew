@@ -32,10 +32,22 @@ Rails.application.routes.draw do
 
   resources :candidates do
     get :list, on: :member
+    get :duration_filter, on: :member
   end
 
   resources :interview_schedules do
     get :manager_dashboard, on: :collection
+  end
+
+  resource :leads do 
+    collection do
+      get 'duration/filter', to: 'leads#duration_filter'
+    end
+  end
+  
+
+  resources :candidates do 
+    resources :comments
   end
 
   get 'show/states', to: "candidates#show_states", as: 'show_states'
@@ -44,9 +56,5 @@ Rails.application.routes.draw do
   get 'filter/candidates', to: 'candidates#filter'
   get ':category_name', to: 'candidates#skill', as: 'skill_candidates'
 
-
-  resources :candidates do 
-      resources :comments
-  end
 end
 
