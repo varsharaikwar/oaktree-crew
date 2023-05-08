@@ -10,12 +10,12 @@ class LeadsController < ApplicationController
 
     def new
       @lead = Lead.new
-      @hr_list = User.with_any_role('junior_hr', 'senior_hr')
+      @hr_list = User.with_any_role('junior_hr', 'senior_hr', 'manager')
       @skill_list = SkillSet.where(skill_type: 'primary')
     end
 
     def create
-      @hr_list = User.with_any_role('junior_hr', 'senior_hr')
+      @hr_list = User.with_any_role('junior_hr', 'senior_hr', 'manager')
       @skill_list = SkillSet.where(skill_type: 'primary')
       @lead = current_user.leads.new(lead_params)
         if @lead.save
