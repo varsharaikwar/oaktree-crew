@@ -104,12 +104,11 @@
                                 </div>  
                             </div>
                         </div>
-
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <label>State</label>
                                 <div id="current_location">
-                                <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1 sel-search"%>
+                                <%= render partial: "states", locals: {f: f}%>
                                 </div>  
                             </div>
                         </div>
@@ -117,13 +116,10 @@
                             <div class="form-group">
                                 <label>City</label>
                                 <div id="city_select">
-                                    <%= select_tag :city, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1 sel-search" %>
+                                    <%= render partial: "cities", locals: {f: f}%>
                                 </div>  
                             </div>
                         </div>
-
-
-
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <label class="required">Availability From </label>
@@ -135,7 +131,6 @@
                             </div>
                             </div>
                         </div>
-
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <label class="required">Availability To </label>
@@ -242,7 +237,7 @@
                         </div>
 
         
-                        <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>Language</label>
                             <div id="language">
@@ -457,7 +452,7 @@
         });
         
         // js for adding input tag inside select tags
-        $("#nationality ul li:first , #current_location ul li:first, #city_select ul li:first, #time ul li:first, #category ul li:first, #degree ul li:first, #year ul li:first, #period ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()"/>')
+        $("#nationality ul li:first, #time ul li:first, #category ul li:first, #degree ul li:first, #year ul li:first, #period ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.." onclick="event.stopPropagation()"/>')
 
         // js for adding search functionality inside select tags
         $(".search_field").on('keyup', function(e){
@@ -485,79 +480,76 @@
         })
     });
 
-        $("#fname").on('focusout', function(){
-            if ($("#fname").val() == ''){
-                document.getElementById("msg").style.display = "block";
-            }
-            else{
-                document.getElementById("msg").style.display = "none";
-            }
-        });
+    $("#fname").on('focusout', function(){
+        if ($("#fname").val() == ''){
+            document.getElementById("msg").style.display = "block";
+        }
+        else{
+            document.getElementById("msg").style.display = "none";
+        }
+    });
 
-        $("#lname").on('focusout', function(){
-            if ($("#lname").val() == ''){
-                document.getElementById("msg1").style.display = "block";
-            }
-            else{
-                document.getElementById("msg1").style.display = "none";
-            }
-        });
+    $("#lname").on('focusout', function(){
+        if ($("#lname").val() == ''){
+            document.getElementById("msg1").style.display = "block";
+        }
+        else{
+            document.getElementById("msg1").style.display = "none";
+        }
+    });
 
-        $("#email").on('focusout', function(){
-            if ($("#email").val() == ''){
-                document.getElementById("msg2").style.display = "block";
-            }
-            else{
-                document.getElementById("msg2").style.display = "none";
-            }
-        });
+    $("#email").on('focusout', function(){
+        if ($("#email").val() == ''){
+            document.getElementById("msg2").style.display = "block";
+        }
+        else{
+            document.getElementById("msg2").style.display = "none";
+        }
+    });
 
-        $("#phone").on('focusout', function(){
-            if ($("#phone").val() == ''){
-                document.getElementById("msg3").style.display = "block";
-            }
-            else{
-                document.getElementById("msg3").style.display = "none";
-            }
-        });
+    $("#phone").on('focusout', function(){
+        if ($("#phone").val() == ''){
+            document.getElementById("msg3").style.display = "block";
+        }
+        else{
+            document.getElementById("msg3").style.display = "none";
+        }
+    });
 
-        $("#start_time").on('focusout', function(){
-            if ($("#phone").val() == ''){
-                document.getElementById("msg8").style.display = "block";
-            }
-            else{
-                document.getElementById("msg8").style.display = "none";
-            }
-        });
+    $("#start_time").on('focusout', function(){
+        if ($("#phone").val() == ''){
+            document.getElementById("msg8").style.display = "block";
+        }
+        else{
+            document.getElementById("msg8").style.display = "none";
+        }
+    });
 
-        $("#end_time").on('focusout', function(){
-            if ($("#phone").val() == ''){
-                document.getElementById("msg9").style.display = "block";
-            }
-            else{
-                document.getElementById("msg9").style.display = "none";
-            }
-        });
+    $("#end_time").on('focusout', function(){
+        if ($("#phone").val() == ''){
+            document.getElementById("msg9").style.display = "block";
+        }
+        else{
+            document.getElementById("msg9").style.display = "none";
+        }
+    });
 
-        $("#gender").change(function(){
-            if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
-                document.getElementById("msg5").style.display = "none";
-            }
-            else{
-                document.getElementById("msg5").style.display = "block";
-            }
-        });
-        
-        $("#address").on('focusout', function(){
-            if ($("#address").val() == ''){
-                document.getElementById("msg11").style.display = "block";
-            }
-            else{
-                document.getElementById("msg11").style.display = "none";
-            }
-
-       
-        
+    $("#gender").change(function(){
+        if ($("#gender")[0].childNodes[1].childNodes[1].childNodes[0].innerText != 'Select'){
+            document.getElementById("msg5").style.display = "none";
+        }
+        else{
+            document.getElementById("msg5").style.display = "block";
+        }
+    });
+    
+    $("#address").on('focusout', function(){
+        if ($("#address").val() == ''){
+            document.getElementById("msg11").style.display = "block";
+        }
+        else{
+            document.getElementById("msg11").style.display = "none";
+        } 
     });
 
 </script>

@@ -1,7 +1,15 @@
-<%= select_tag :current_location, options_for_select(CS.states(CS.countries.key(country)).values.sort), prompt: "Select", class: "form-control select-state sel-search"%>
+<% country = country.present? ? country : nil%>
+<% @country = @candidate&.nationality.present? ? @candidate&.nationality : country%>
+<% if @candidate&.current_location.present? && @country.present? %>
+    <%= select_tag :current_location, options_for_select(CS.states(CS.countries.key(@country)).values.sort, @candidate.current_location), prompt: "Select", class: "js-example-basic-single form-control sel-search select-state "%>
+<% elsif @country.present? %>
+    <%= select_tag :current_location, options_for_select(CS.states(CS.countries.key(@country)).values.sort), prompt: "Select", class: "js-example-basic-single form-control sel-search select-state "%>
+<% else %>
+    <%= select_tag :current_location, options_for_select("select"), prompt: "Select", class: "js-example-basic-single form-control select1 sel-search"%>
+<% end %>
 <script> 
+$(document).ready(function(){
     $('.select-state').niceSelect();
-
     // js for adding input tag inside select tags
     $("#current_location ul li:first").before('<input type="text" class="search_field form-control" placeholder="Search.."  onclick="event.stopPropagation()"/>')
 
@@ -14,4 +22,5 @@
             $(this).toggle($(this).text().toLowerCase().indexOf(sear_val) > -1);
         });
     })
+})
 </script>
