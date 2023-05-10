@@ -5,36 +5,31 @@
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
 <div class="breadcrumb-lead">
-  <div class="overlay"></div>
-    <div class="container position-relative">
-      <h1 class="text-white">Leads</h1>
-    </div>
-  </div>
-  <div class="container">
-    <div class="p-3">
-      <div class="row mb-3">
-          <div class="col-lg-5 mt-3 h3">
-            <div class="welcome-message">
-                Welcome, <%= current_user.name %>
-            </div>
-          </div>
-          <div class="col-lg-7 text-right mb-5 mt-3">
-            <div class="d-flex align-items-center justify-content-end">
-              <label class="mr-2"><b>From:</b></label>
-              <%= date_field("from_date", "durantion", max: Date.today, min:  Date.new(2023, 1, 1), class: "duration-filter-ajax form-control d-block w-auto")%>
-              <label class="mr-2 ml-2"><b>To:</b></label>
-              <%= date_field("to_date", "durantion", max: Date.today, min:  Date.new(2023, 1, 1), value: Date.today, class: "duration-filter-ajax form-control d-block w-auto")%>
-              <b> <%= link_to '+ Add New Lead', new_lead_path, class: "btn default-btn" %></b>
-            </div>
-          </div>
+    <div class="overlay"></div>
+        <div class="container position-relative">
+            <h1 class="text-white">My Leads</h1>
         </div>
-        <h3 class="position-absolute">Leads</h3><br>
-        <div id="durationFilter">
-          <%= render partial: 'lead_table', locals: {leads: @leads, actions_required: false}%>
-        </div>
-      </div>
     </div>
-
+    <div class="container">
+        <div class="p-3">
+            <div class="row mb-3">
+                <div class="col-lg-5 mt-3 h3">
+                    <div class="welcome-message">
+                        Welcome, <%= current_user.name %>
+                    </div>
+                </div>
+                <div class="col-lg-7 text-right mb-5 mt-3">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <b><%= link_to '+ Add New Lead', new_lead_path, class: "btn default-btn" %></b>
+                    </div>
+                </div>
+            </div>
+            <h3 class="position-absolute">Leads</h3>
+            <div id="durationFilter">
+                <%= render partial: 'lead_table', locals: {leads: @leads, actions_required: true}%>
+            </div>
+        </div>
+    </div>
 <style>
     .breadcrumb-lead{
       background-color: #4fb174;

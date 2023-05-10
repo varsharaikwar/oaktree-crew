@@ -30,18 +30,10 @@
                                 <div class="mb-2"><%= check_box_tag val, val%><span class="ml-1"><%= val %></span></div>
                         <% end %>
                     </div>
-                    <p class="h4 mt-5">
-                        <%= label_tag "Filter by Status"%>
-                    </p>
+
                     <div id="premiumFilter">
-                        <div>
-                            <%= label_tag "Premium" %>
-                            <%= check_box_tag( "premium", "Premium") %>
-                        </div>
-                        <div>
-                            <%= label_tag "Standard" %>
-                            <%= check_box_tag( "standard", "Standard") %>
-                        </div>
+                        <%= label_tag "Premium Candidates" %>
+                        <%= check_box_tag( "premium", "Premium") %>
                     </div>
                 </div>
             </div>

@@ -44,10 +44,10 @@ Rails.application.routes.draw do
   resource :leads do 
     collection do
       get 'duration/filter', to: 'leads#duration_filter'
+      get 'my/created', to: 'leads#user_leads'
     end
   end
   
-
   resources :candidates do 
     resources :comments
   end

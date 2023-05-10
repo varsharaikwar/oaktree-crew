@@ -65,6 +65,10 @@ class LeadsController < ApplicationController
       end
     end
 
+    def user_leads
+      @leads = current_user.leads.order(created_at: :desc)
+    end
+
   private
     def lead_params
       params.require(:lead).permit(:name, :assigned_to, :status, :additional_info, :file, :profile_array => [])

@@ -5,22 +5,24 @@ $(document).ready(function(){
     let city_name = ''
     let category_name = ''
     let skill_array = []
-    let premium_filter_array = []
+    let premium_filter_data = ''
     
     // js for filter by city and category
     $("#cityFilter , #CategoryFilter ").on('change', function(e){      
         city_name = $("#cityFilter")[0].value
         category_name = $("#CategoryFilter")[0].value
-        req_ajax(skill_array, city_name, category_name, premium_filter_array) 
+        req_ajax(skill_array, city_name, category_name, premium_filter_data) 
     });
 
     // js for filter by premium status
-    $("#premiumFilter input[type=checkbox]").on('click', function(){
-        premium_filter_array = []
-        $("#premiumFilter input[type=checkbox]:checked").each(function(){
-            premium_filter_array.push(this.value)
-        })
-        req_ajax(skill_array, city_name, category_name, premium_filter_array)
+    $("#premiumFilter input[type=checkbox]").on('click', function(e){
+        let target = e.currentTarget
+
+        if (target.checked == true)
+            premium_filter_data = "Premium"
+        else 
+            premium_filter_data = ''
+        req_ajax(skill_array, city_name, category_name, premium_filter_data)
     })
 
     // js for clear filter
@@ -28,7 +30,7 @@ $(document).ready(function(){
         $('#citySearch div span')[0].innerText = 'Select'
         $("#cityFilter")[0].value = ''
         city_name = ''
-        req_ajax(skill_array, city_name, category_name, premium_filter_array)
+        req_ajax(skill_array, city_name, category_name, premium_filter_data)
         $('#citySearch div ul input')[0].value = ''
         $("#citySearch div ul input").trigger('keyup') 
     })
@@ -37,7 +39,7 @@ $(document).ready(function(){
         $('#categorySearch div span')[0].innerText = 'Select'
         $("#CategoryFilter")[0].value = ''
         category_name = ''
-        req_ajax(skill_array, city_name, category_name, premium_filter_array)
+        req_ajax(skill_array, city_name, category_name, premium_filter_data)
     })
 
     // js for filter by skills.
@@ -50,15 +52,15 @@ $(document).ready(function(){
                 skill_array.push(inp[j].defaultValue)
             }
         }   
-        req_ajax(skill_array, city_name, category_name, premium_filter_array)                
+        req_ajax(skill_array, city_name, category_name, premium_filter_data)                
     }
 
     // js for ajax request.
-    function req_ajax(skill_array, city_name, category_name, premium_filter_array){
+    function req_ajax(skill_array, city_name, category_name, premium_filter_data){
         $.ajax({
             type: "GET",
             url: "/filter/candidates",
-            data: {"city_name": city_name, "category_name": category_name, "skill_array": skill_array, "premium_filter_array": premium_filter_array}
+            data: {"city_name": city_name, "category_name": category_name, "skill_array": skill_array, "premium_filter_data": premium_filter_data}
         });
     }
 
