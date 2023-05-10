@@ -24,7 +24,8 @@ class CandidatesController < ApplicationController
       @pool_managers = Role.find_by(name: :pool_manager).users
       @candidate = Candidate.find(params[:id])
       @lead_assignment = LeadAssignment.new
-      @lead = Lead.where(assigned_to: current_user.email)
+      leads = Lead.where(assigned_to: current_user.email)
+      @lead = leads.where.not(id: leads.joins(:lead_assignments).pluck(:lead_id))
       @lead_assigned = LeadAssignment.where(candidate_id: @candidate.id, hr_id: current_user.id)
       authorize! :show, @candidate
     end
