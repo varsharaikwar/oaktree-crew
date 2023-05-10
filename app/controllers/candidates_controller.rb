@@ -112,6 +112,7 @@ class CandidatesController < ApplicationController
       search_data = []
       search_data << "city = '#{params[:city_name]}'" if params[:city_name].present?
       search_data << "category = '#{params[:category_name]}'" if params[:category_name].present?
+      search_data << "(cast(premium_status as varchar) ILIKE ANY (ARRAY['%#{params[:premium_filter_array].join("%','%")}%']) OR cast(premium_status as varchar) ILIKE ANY (ARRAY['%#{params[:premium_filter_array].join("%','%")}%']))" if params[:premium_filter_array].present?
       search_data << "(cast(primary_skill as varchar) ILIKE ANY (ARRAY['%#{params[:skill_array].join("%','%")}%']) OR cast(secondary_skill as varchar) ILIKE ANY (ARRAY['%#{params[:skill_array].join("%','%")}%']))" if params[:skill_array].present?
 
       search_data = search_data.join(" AND ") rescue ""

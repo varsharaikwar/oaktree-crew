@@ -10,7 +10,11 @@
             <div class="col-lg-4 text-center card-box mb-4">
             <%= link_to candidate_path(candidate), :action => 'show' do %>
                 <div class="widget-box">
-                    
+                    <% if candidate.premium_status == 'Premium'%>
+                        <span>
+                            <%= image_tag("star.png", class: 'premium-icon')%>
+                        </span>
+                    <% end %>
                     <% if candidate.image.present? %>
                         <span class="emoji-container emoji1">
                             <%= image_tag candidate.image.url %>
@@ -77,5 +81,12 @@
     }
     #candidate_ref .widget-box{
         border-top: 4px solid #00b074;
+    }
+    .premium-icon{
+        position: absolute;
+        top: 11px;
+        width: 20px;
+        right: 20px;
+        background-color: blueviolet;
     }
 </style>

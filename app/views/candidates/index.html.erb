@@ -1,7 +1,7 @@
 <%=  render "layouts/header" %> 
 <div class="row">
 
-<%=  render "filters" %> 
+    <%=  render "filters" %> 
 
     <div class="col-lg-10">
         <div class="page-title-area ">
@@ -9,7 +9,6 @@
                 <div class="page-title-content">
                     <div class="row">
                         <div class="col-md-12">
-                        
                             <%= form_with(url: candidates_url, method: :get, class: "search-form") do |f| %>
                                 <div class="row">
                                     <div class="col-md-11 m-auto">
@@ -20,17 +19,13 @@
                                                     <%= f.text_field :query, class: "form-control search-box-input border-0 h-auto", placeholder: "Search Candidates..." %>
                                                 </div>
                                             </div>
-                                            <% if current_user.has_role? :junior_hr %>
-                                                <div class="col-md-3">
-                                                    <%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Candidate', new_candidate_path %> 
-                                                </div>
-                                            <% end %>
-                                           
+                                            <div class="col-md-3">
+                                                <%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Candidate', new_candidate_path %> 
+                                            </div>
                                             <div class="col-md-2 text-center">
                                                 <%= link_to 'Clear', candidates_path, class: "btn clear-btn" %> 
                                                 <%= submit_tag("Search", class: "btn search-btn btn-success") %>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -40,7 +35,6 @@
                 </div>
             </div>
         </div>
-
         <section id="candidate_sec">
             <div class="container-fluid">
                 <div class="row">
