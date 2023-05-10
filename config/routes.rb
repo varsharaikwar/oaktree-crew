@@ -31,8 +31,10 @@ Rails.application.routes.draw do
 
 
   resources :candidates do
-    get :list, on: :member
-    get :duration_filter, on: :member
+    member do
+      get 'filterd/list', to: 'candidates#list'
+      get :duration_filter
+    end
   end
 
   resources :interview_schedules do

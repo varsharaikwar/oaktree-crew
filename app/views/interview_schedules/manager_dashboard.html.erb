@@ -34,7 +34,7 @@
                             <% end %>
                         </td>
                         <td class="text-capitalize">
-                            <%= link_to hr.candidates.count, list_candidate_path(id: hr.id) , remote: true , data: {toggle: "modal", target: "#CandidateModal"}%>
+                            <%= link_to hr.candidates.count, filterd_list_candidate_path(id: hr.id) , remote: true , data: {toggle: "modal", target: "#CandidateModal"}%>
                         </td>
                         <td class="text-capitalize">
                             <%= Lead.where(assigned_to: hr.email).count %>
