@@ -83,7 +83,7 @@
 													<% end %>
 													<div class="custom-control custom-switch", id="swapDiv2">
 														<%= check_box_tag "premium_status#{@candidate.id}", @candidate.id, checked = check_premium(@candidate.id), class: "custom-control-input", id: "swapPremium"%>  
-														<label class="custom-control-label" for="swapPremium" ><%=  @candidate.premium_status == 'Standard' ? "Mark as Premium" : @candidate.premium_status   %></label>
+														<label class="custom-control-label" for="swapPremium" ><%=  @candidate.premium_status == 'Standard' || @candidate.premium_status == nil ? "Mark as Premium" : @candidate.premium_status   %></label>
 													</div>
 													<ul>
 														<li><span>Location: </span><%= @candidate.current_location+ "  " +@candidate.nationality %></li>	
