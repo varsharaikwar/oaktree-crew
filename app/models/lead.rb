@@ -7,6 +7,7 @@ class Lead < ApplicationRecord
   default_scope { order(created_at: :desc) }
   validates :name, :assigned_to, presence: true  
   mount_uploader :file, LeadAttachmentUploader
+  STATUS_LIST = ["Won", "Lost"]
 
 
   def assign_user(current_user)

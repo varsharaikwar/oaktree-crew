@@ -18,11 +18,13 @@
                         Welcome, <%= current_user.name %>
                     </div>
                 </div>
-                <div class="col-lg-7 text-right mb-5 mt-3">
-                    <div class="d-flex align-items-center justify-content-end">
-                        <b><%= link_to '+ Add New Lead', new_lead_path, class: "btn default-btn" %></b>
-                    </div>
-                </div>
+                <% if current_user.has_any_role?(:manager, :sales_person) %>
+                  <div class="col-lg-7 text-right mb-5 mt-3">
+                      <div class="d-flex align-items-center justify-content-end">
+                          <b><%= link_to '+ Add New Lead', new_lead_path, class: "btn default-btn" %></b>
+                      </div>
+                  </div>
+                <% end %>
             </div>
             <h3 class="position-absolute">Leads</h3>
             <div id="durationFilter">

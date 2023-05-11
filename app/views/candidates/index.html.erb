@@ -19,12 +19,19 @@
                                                     <%= f.text_field :query, class: "form-control search-box-input border-0 h-auto", placeholder: "Search Candidates..." %>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <%= link_to image_tag("icons8-plus-50.png", class: "plush-icon mr-3") + 'Add New Candidate', new_candidate_path %> 
                                             </div>
                                             <div class="col-md-2 text-center">
                                                 <%= link_to 'Clear', candidates_path, class: "btn clear-btn" %> 
                                                 <%= submit_tag("Search", class: "btn search-btn btn-success") %>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-end">
+                                            
+                                            <div id="premiumFilter" class="test">
+                                                <%= check_box_tag( "premium", "Premium") %>
+                                                <b><%= label_tag "Premium Candidates" %></b>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>

@@ -16,6 +16,7 @@ class Ability
       can :manage, Notification
       can :manage, SkillSet
       can :index, InterviewSchedule
+      can :user_leads, Lead
 
     elsif user.has_role? :senior_hr
       can :index, Candidate
@@ -49,10 +50,11 @@ class Ability
     elsif user.has_role? :pool_manager
       can :index, InterviewSchedule
       can :manage, Notification
+
     elsif user.has_role? :manager
       can :manage, :all
+      
     end
   end
-  
 end
   

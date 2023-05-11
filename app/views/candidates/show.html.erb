@@ -161,6 +161,12 @@
 															<b><i class="fa fa-calendar mr-1"></i> </b>
 														  <%=  Time.strptime(interview_schedule.time, '%H:%M %m/%d/%Y').strftime('%-d %B %Y')%>
 														</div>
+														<div class="mb-2 d-flex align-items-center">
+															<b><i class="fa-solid fa-bars mr-1"></i></b> 
+															<% if interview_schedule&.lead&.name.present? %>
+																<%=  interview_schedule&.lead&.name %>
+															<% end %>
+														</div>
 													</div>
 														<%= link_to  content_tag(:i, "", class: "fa fa-pencil"), edit_interview_schedule_path(interview_schedule.id, candidate: @candidate.id, method: :patch), remote: true, data: { toggle: 'modal', target: '#InterviewModal' }, class: "default-btn px-2 ml-2 py-2 option-icon" %>
 													</div>
@@ -271,21 +277,16 @@
 									 <div class="mb-4">
 											<p class="m-0 d-flex align-items-center">
 											<b><%= @candidate.company_name %></b></p>
-
 										<div class="">
 											<p class="grey-text"><%= @candidate.employment_period %><% if @candidate.employment_period.present? %> -Present<% end %><span class="float-right"><%= @candidate.company_location %></span></p>
 										</div>
-
 										<p class="pt-3 mb-0"><b><%= @candidate.designation %></b></p>
 										<p class="text-muted"><%= @candidate.responsiblities %></p>
-
 									</div>
 								</div>
-
 								<div class="candidates-widget widget-box h-auto mb-4">
 								   <h3 class="mb-4"> Documents </h3>
 									<div class="mb-4">
-
 										<div class="overview download align-items-center mb-3">
 											<div class="">
 												<a href="" class="nav-link d-flex align-items-center"><% if @candidate.file.url.present? %>
@@ -299,8 +300,6 @@
 											   </a>
 											</div>
 										</div>
-
-
 										<div class="overview download nav align-items-center mb-3">
 											<div class="">
 												<a href="" class="nav-link d-flex align-items-center"><% if @candidate.updated_file.url.present? %>
@@ -315,31 +314,16 @@
 										</div>
 									</div>
 								</div>
-								<% if current_user.has_role? :sales_person %>	
-									<div class="candidates-widget widget-box h-auto mb-4">
-										<h3 class="mb-4">Availability</h3>
-										<div class="mb-4">
-											<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-												</button></p>
-											<hr>
-											<p class="pt-0 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-											</button></p>
-										</div>
-									</div>
-								<% else %>							
-									<div class="candidates-widget widget-box h-auto mb-4">
-										<h3 class="mb-4">Availability</h3>
-										<div class="mb-4">
-											<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
-												<i class="fa fa-pencil change-color"></i></button></p>
-											<hr>
-											<p class="pt-0 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+								<div class="candidates-widget widget-box h-auto mb-4">
+									<h3 class="mb-4">Availability</h3>
+									<div class="mb-4">
+										<p class="m-0 d-flex align-items-center"><b>Availabile From: <%= @candidate.formatted_start_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
 											<i class="fa fa-pencil change-color"></i></button></p>
-										</div>
+										<hr>
+										<p class="pt-0 mb-0"><b>Availabile To: <%= @candidate.formatted_end_time %></b><button type="button" class="btn text-primary" data-toggle="modal" data-target="#avabilitymodel">
+										<i class="fa fa-pencil change-color"></i></button></p>
 									</div>
-								<% end %>
-								
-
+								</div>
 								<div class="candidates-details-sidebar">				
 								</div>
 							</div>
@@ -491,6 +475,10 @@
 	}
 	.alert-notice{
 		display: none;
+	}
+	.card-body .fa-bars{
+		background-color: #28a745;
+		color: #ffffff;
 	}
 </style>
 

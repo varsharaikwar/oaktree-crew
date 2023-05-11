@@ -1,5 +1,7 @@
 class LeadsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource :lead, class: Lead
+
     def index
        @leads = Lead.order(created_at: :desc)
     end
@@ -51,7 +53,7 @@ class LeadsController < ApplicationController
         @lead = Lead.find(params[:id])
         @lead.destroy
         flash[:success] = "Lead deleted successfully!"
-        redirect_to leads_path, status: :see_other
+        redirect_to my_created_leads_path, status: :see_other
     end
   
     def duration_filter
@@ -66,11 +68,15 @@ class LeadsController < ApplicationController
     end
 
     def user_leads
-      @leads = current_user.leads.order(created_at: :desc)
+      if current_user.has_any_role?("manager", "sales_person")
+        @leads = Lead.where(assigned_to: current_user.email)
+      elsif current_user.has_any_role?("junior_hr", "senior_hr")
+        @leads = Lead.order(created_at: :desc)
+      end
     end
 
   private
     def lead_params
-      params.require(:lead).permit(:name, :assigned_to, :status, :additional_info, :file, :profile_array => [])
+      params.require(:lead).permit(:name, :assigned_to, :status, :lead_status, :additional_info, :file, :profile_array => [])
     end
 end

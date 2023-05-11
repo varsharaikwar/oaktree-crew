@@ -4,11 +4,13 @@
     <tr> 
         <th style="width: 5%;">Name</th>
         <th style="width: 10%;">Skills</th>
-        <th style="width: 5%;">Assigned To</th>
+        <% if current_user.has_any_role?(:manger, :sales_person)%>
+          <th style="width: 5%;">Assigned To</th>
+        <% end %>
         <th style="width: 5%;">Status</th>
         <th style="width: 10%;">Additional Info</th>
         <th style="width: 2%;">Created_by</th>
-        <% if actions_required == true %>
+        <% if actions_required == true && current_user.has_any_role?(:manager, :sales_person) %>
           <th style="width: 12%;">Actions</th>
         <% end %>
     </tr>
@@ -32,13 +34,15 @@
               <p>Not Available</p>
           <% end %>
         </td>
-        <td class="text-capitalize">
-            <% if lead.assigned_to.present? %> 
-              <%= link_to User.find_by(email: lead.assigned_to).name, lead %>
-            <% else %>
-                <p>Not Available</p>
-            <% end %>
-        </td>
+        <% if current_user.has_any_role?(:manger, :sales_person)%>
+          <td class="text-capitalize">
+              <% if lead.assigned_to.present? %> 
+                <%= link_to User.find_by(email: lead.assigned_to).name, lead %>
+              <% else %>
+                  <p>Not Available</p>
+              <% end %>
+          </td>
+        <% end %>
         <td class="text-capitalize">
             <% if lead.status.present? %>
               <%= link_to lead.status, lead %>
@@ -56,7 +60,7 @@
         <td class="text-capitalize">
             <%= lead.user.name %>
         </td>  
-        <% if actions_required == true %>        
+        <% if actions_required == true && current_user.has_any_role?(:manager, :sales_person) %>        
           <td class="text-capitalize">
               <%= link_to edit_lead_path(lead.id),  class: "btn btn-primary" do %>
               <i class="fa fa-pencil"></i>
@@ -75,6 +79,7 @@
       scrollX: '200px',
       scrollY: true,
       paging: false,
+      order: false,
       language: { search: "", searchPlaceholder: "Search..." }
   })
 })
