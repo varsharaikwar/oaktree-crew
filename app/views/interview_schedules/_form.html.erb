@@ -18,12 +18,6 @@
                       <%= f.select :lead_id, lead_assigned.collect {|p| [ p.lead.name, p.lead.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3", id:"category-select" %>
           </div>
       </div> 
-      <div class="actions mb-3">
-          <div class="form-group">
-              <label class="">Manager</label>
-                      <%= f.select :pool_manager_id , pool_managers.collect {|u| [ u.name, u.id ] }, {include_blank: 'Select'}, class: "js-example-basic-single form-control select1 sel-search mb-3" %>
-          </div>
-      </div> 
 
       <div class="modal-footer border-0">
         <%= f.submit "Save", class: " btn default-btn" %>
