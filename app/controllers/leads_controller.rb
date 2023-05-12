@@ -69,7 +69,7 @@ class LeadsController < ApplicationController
 
     def user_leads
       if current_user.has_any_role?("manager", "sales_person")
-        @leads = Lead.order(created_at: :desc)
+        @leads = current_user.leads.order(created_at: :desc)
       elsif current_user.has_any_role?("junior_hr", "senior_hr")
         @leads = Lead.where(assigned_to: current_user.email)
       end

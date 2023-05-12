@@ -23,11 +23,15 @@
                         <div class="collapse navbar-collapse mean-menu" style="display: block;">
                             <div class="others-option ml-auto d-flex align-items-center">
                               <ul class="nav flex-row header-nav">
-                              
+                              <% if current_user.has_role? :junior_hr %>
+                                <li class="nav-item active">
+                                  <%= link_to image_tag("my_leads.svg") + 'Assign leads',  my_created_leads_path , method: :get, class: "nav-link active" %> 
+                                </li>
+                              <% else %>
                                 <li class="nav-item active">
                                   <%= link_to image_tag("my_leads.svg") + 'My leads',  my_created_leads_path , method: :get, class: "nav-link active" %> 
                                 </li>
-
+                              <% end %>
                                 <li class="nav-item active">
                                   <%= link_to image_tag("dashboard.png") + 'Dashboard', candidates_path, class: "nav-link active" %> 
                                 </li>
