@@ -26,12 +26,11 @@
                                                 <%= link_to 'Clear', candidates_path, class: "btn clear-btn" %> 
                                                 <%= submit_tag("Search", class: "btn search-btn btn-success") %>
                                             </div>
-                                            <div class="col-12 d-flex justify-content-end">
-                                            
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
                                             <div id="premiumFilter" class="test">
                                                 <%= check_box_tag( "premium", "Premium") %>
                                                 <b><%= label_tag "Premium Candidates" %></b>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -53,4 +52,8 @@
 </div>
 
  <%= javascript_import_module_tag "js/candidate" %>
-  
+<style>
+  .test{
+    margin-top: 20px;
+  }
+</style>
