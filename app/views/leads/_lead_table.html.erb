@@ -27,9 +27,7 @@
         </td>
         <td class="text-capitalize">
           <% if lead.profile_array.present? %> 
-              <% lead.profile_array.each do |profile| %>
-                <span><%= profile %></span>
-              <% end %>
+              <%= lead.profile_array.join(",") %>
           <% else %>
               <p>Not Available</p>
           <% end %>

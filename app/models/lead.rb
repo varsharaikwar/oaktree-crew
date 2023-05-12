@@ -1,7 +1,7 @@
 class Lead < ApplicationRecord
   after_initialize :set_default_status
   belongs_to :user
-  has_many :notifications, dependent: :destroy, dependent: :nullify
+  has_many :notifications, dependent: :destroy
   has_many :lead_assignments, dependent: :destroy
   has_many :interview_schedules, dependent: :destroy
   default_scope { order(created_at: :desc) }

@@ -28,6 +28,7 @@ class Ability
       can :manage, Notification
       can :manage, SkillSet
       can :index, InterviewSchedule
+      can :user_leads, Lead
       
     elsif user.has_role? :bde
       can :index, Candidate
