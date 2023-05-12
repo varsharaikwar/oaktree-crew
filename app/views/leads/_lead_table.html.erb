@@ -19,8 +19,10 @@
     <% @leads.each do |lead| %>
       <tr>
         <td class="text-capitalize">
-            <% if lead.name.present? %> 
-                <%= link_to lead.name, lead %>
+            <% if current_user.has_any_role?(:junior_hr, :senior_hr) %> 
+              <%= lead.name %>
+            <% elsif lead.name.present?  %>
+              <%= link_to lead.name, lead %>
             <% else %>
                 <p>Not Available</p>
             <% end %>

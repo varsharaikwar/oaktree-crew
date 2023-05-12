@@ -9,18 +9,18 @@
                     <div class="row">
 
                         <div class="col-lg-6">
-                            <% if @notification.lead.name.present? %>
-                                <% notification = @notification.lead.name.present? ? @notification.lead.name : nil %>
+                            <% if @notification&.lead&.name.present? %>
+                                <% notification = @notification&.lead&.name&.present? ? @notification&.lead&.name : nil %>
                             <% end %>
                                 <p>Name:- <b class="ml-2"><%= notification %></b></p>
 
-                                <% lead = @notification.lead.profile_array.present? ? @notification.lead.profile_array.join(" , ") : nil %>
+                                <% lead = @notification.lead&.profile_array.present? ? @notification.lead&.profile_array.join(" , ") : nil %>
                                 <p>Skills:- <b class="ml-2"><%= lead %></b></p>
                         </div>
 
                         <div class="col-lg-6">
-                            <p>Status:- <b class="ml-2"><%= @notification.status %></b></p>
-                            <p>Additional Info:- <b class="ml-2"><%= @notification.lead.additional_info%></b></p>
+                            <p>Status:- <b class="ml-2"><%= @notification&.status %></b></p>
+                            <p>Additional Info:- <b class="ml-2"><%= @notification.lead&.additional_info%></b></p>
                         </div>   
 
                     </div>

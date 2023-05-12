@@ -7,6 +7,6 @@
         <% else %>
             <%= render 'disassociate'%>
         <% end %>
-    <% elsif current_user.roles.first.name == "junior_hr" || current_user.roles.first.name == 'senior_hr' %>
+    <% elsif current_user.roles.first.name == "junior_hr" || current_user.roles.first.name == 'senior_hr' || current_user.roles.first.name == 'manager' %>
         <%= render 'lead'%>
     <% end %>
