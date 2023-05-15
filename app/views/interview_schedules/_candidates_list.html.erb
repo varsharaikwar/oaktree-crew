@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-            <% candidates.each do |candidate|%>
+            <% candidates&.each do |candidate|%>
                 <tr>
                     <td class="text-capitalize">
                         <% if candidate.first_name.present? && candidate.last_name.present? %>
@@ -19,13 +19,19 @@
                         <% end %>
                     </td>
                     <td class="text-capitalize">
-                        <%= candidate.primary_skill.join(" ")%>
+                        <% if candidate.primary_skill.present? %>
+                            <%= candidate.primary_skill.join(" ")%>
+                        <% end %>
                     </td>
                     <td class="text-capitalize">
-                        <%= candidate.secondary_skill.join(" ")%>
+                        <% if candidate.secondary_skill.present? %>
+                            <%= candidate.secondary_skill.join(" ")%>
+                        <% end %>
                     </td>
                     <td class="text-capitalize">
+                        <% if candidate.premium_status.present? %>
                             <%= candidate.premium_status%>
+                        <% end %>
                     </td>
                 </tr>
                 <% end %>
