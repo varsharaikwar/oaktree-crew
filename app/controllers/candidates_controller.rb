@@ -1,7 +1,7 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_paper_trail_whodunnit
-  load_and_authorize_resource :candidate, class: Candidate, except: [:show, :edit, :destroy, :update]
+  load_and_authorize_resource :candidate, class: Candidate, except: [:show, :edit, :destroy, :update, :list]
 
     def index
       @primary_skill = SkillSet.where(skill_type: "primary")

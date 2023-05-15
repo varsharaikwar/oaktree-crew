@@ -49,7 +49,7 @@ class InterviewSchedulesController < ApplicationController
     end
     
     def manager_dashboard
-        @hr_list = User.with_any_role("junior_hr", "senior_hr")
+        @hr_list = User.with_any_role("junior_hr", "senior_hr", "manager", "admin")
         @sales_person_list = User.with_any_role(:sales_person, :manager)
     end
 
