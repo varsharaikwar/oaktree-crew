@@ -4,8 +4,8 @@ class Ability
   def initialize(user)
     if user.has_role? :junior_hr
       can :create, Candidate
-      can :show, Candidate
       can :index, Candidate
+      can :show, Candidate
       can :edit, Candidate
       can :show_cities, Candidate
       can :create, Comment
@@ -19,10 +19,13 @@ class Ability
       can :user_leads, Lead
 
     elsif user.has_role? :senior_hr
+      can :create, Candidate
       can :index, Candidate
       can :show, Candidate
       can :edit, Candidate
+      can :show_cities, Candidate
       can :create, Comment
+      can :show_states, Candidate
       can :filter, Candidate
       can :skill, Candidate
       can :manage, Notification
