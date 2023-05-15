@@ -39,13 +39,20 @@ class LeadsController < ApplicationController
       @lead = Lead.find(params[:id])
       @hr_list = User.with_any_role('junior_hr', 'senior_hr')
       @skill_list = SkillSet.where(skill_type: 'primary')
-        
-        if @lead.update(lead_params)
-          flash[:success] = "Lead has been updated"
-          @lead.assign_user(current_user)
-            redirect_to @lead
+        if params[:status].present?
+          if @lead.update(status: params[:status])
+            respond_to do |format|
+              format.js
+            end
+          end
         else
-            render :edit, status: :unprocessable_entity
+          if @lead.update(lead_params)
+            flash[:success] = "Lead has been updated"
+            @lead.assign_user(current_user)
+              redirect_to @lead
+          else
+              render :edit, status: :unprocessable_entity
+          end
         end
     end
   

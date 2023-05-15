@@ -32,7 +32,7 @@
                         <div><b>Additional Info:</b> <%= @lead.additional_info %></div>
                     </div>
                      <div class="col-lg-6 mb-3">
-                        <div><b>Lead Status:</b> <%= @lead.lead_status %></div>
+                        <div><b>Lead Status:</b> <%= @lead.status %></div>
                     </div>
                     <div class="col-lg-6 mb-3">
                         <% if @lead.file.url.present? %>
@@ -55,10 +55,19 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-lg-2">
+                        <label><b>Status</b></label>
+                        <div id="assigned_to">
+                            <%= select_tag :status, options_for_select(Lead::STATUS_LIST), prompt: 'Select Status', id: 'lead-status-select',  class: "form-control select1" %>
+
+                        </div>  
+                    </div>
+
 
                     <div class="col-lg-6">
-                        <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
+                        <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn button-shift" %> 
                     </div>
+
                     <% if current_user.has_role? :manager %>
                         <div class="text-right">
                             <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, manager_dashboard_interview_schedules_path, class: 'text-success' %>
@@ -83,5 +92,30 @@
 .alert-notice{
     display: none;
 }
+.button-shift{
+    margin-top: 57px;
+    margin-left: -168px;
+}
 
 </style>
+<script>
+    $(document).ready(function() {
+    $('#lead-status-select').on('change', function() {
+        var selectedStatus = $(this).val();
+        var leadId = '<%= @lead.id %>';
+
+        $.ajax({
+        url: '/leads/' + leadId,
+        method: 'PATCH',
+        data: { status: selectedStatus },
+        success: function(response) {
+            alert('Lead status updated successfully.');
+            window.location.href = '/leads';
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error: ' + error);
+        }
+        });
+    });
+    });
+</script>
