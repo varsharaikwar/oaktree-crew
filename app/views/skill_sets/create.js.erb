@@ -1,8 +1,34 @@
-$('#close_popup').click();
-$('#close_popup_second').click();
-$("#refresh_primary").load(window.location.href + " #refresh_primary" );
-$("#refresh_secondary").load(window.location.href + " #refresh_secondary" );
+modal = $(".modal.fade.show")
+response = "<%= @response%>"
 
-<% if flash[:alert] %>
-  alert("<%= j flash[:alert] %>");
-<% end %>
+if(response === "present")
+  {
+    toggle_errors()
+    $(".modal.fade.show").find("span#topSpan")[0].innerHTML = "Skill is already present!"
+    $(".modal.fade.show").find("span#topSpan").css("display", "block")
+  }
+else if(response === "saved")
+  {
+    $('#close_popup').click();
+    $('#close_popup_second').click();
+    alert("Skill created successfully!");
+  }
+else if(response === "error")
+  {
+    toggle_errors()
+  }
+
+function toggle_errors(){
+    span1 = $($(".modal.fade.show input#skill_set_name")[0].parentElement).find("span")
+    span2 = $($(".modal.fade.show").find("#skill_set_section")[0].parentElement).find("span")
+    if($(".modal.fade.show").find("input#skill_set_name")[0].value.trim() == ""){
+      span1.css("display", "block")
+    }else{
+       span1.css("display", "none")
+    }
+    if($(".modal.fade.show").find("#skill_set_section")[0].value.trim() == "select" || $(".modal.fade.show").find("#skill_set_section")[0].value.trim() == ""){
+      span2.css("display", "block")
+    }else{
+      span2.css("display", "none")
+    }
+}

@@ -1,17 +1,19 @@
 <%= form_for SkillSet.new, as: :skill_set, url: skill_sets_path(@skill_set), method: :post, html: { class: "edit_post", id: "edit_post_45" }, remote: true do |f|  %>  
-    
+    <span class="error-message" style="display:none;" id="topSpan"></span>
     <div class="actions">
       <label><b>Skill</b></label>
-      <%= f.text_field :name , class: "form-control", placeholder: 'Enter Name' %><br>
+      <%= f.text_field :name , class: "form-control", placeholder: 'Enter Name' %>
+      <span class='error-message' style="display:none; margin-bottom:20px;">Please Enter a Skill<span>
     </div>
 
     <div class="actions">
       <label><b>Technology</b></label>
       <%= f.select :section, SkillSet::Section_LIST, {include_blank: 'Select'}, class: "form-control" %>
+      <span class='error-message' style="display:none;">Please Select a Technology.<span>
     </div>
     
    <div class="actions">
-     <%= f.hidden_field :skill_type , class: "form-control", placeholder: 'Enter Skill Type', value: 'secondary'%>
+     <%= f.hidden_field :skill_type , class: "form-control", placeholder: 'Enter Skill Type', value: skill_type%>
    </div>
  
    <div class="actions"><br>

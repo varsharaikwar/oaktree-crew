@@ -586,7 +586,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                 <%= render "skill_sets/new"%>
+                 <%= render partial: "skill_sets/add_skill", locals: {skill_type: "primary"}%>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_popup">Close</button>
@@ -607,7 +607,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <%= render "skill_sets/create"%>
+                    <%= render partial: "skill_sets/add_skill", locals: {skill_type: "secondary"}%>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_popup_second">Close</button>

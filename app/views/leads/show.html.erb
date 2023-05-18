@@ -1,121 +1,111 @@
-
 <%= render "layouts/header"%>
-   <!-- Success messages starts-->
-	<% flash.each do |key, value| %>
-		<div class="alert alert-<%= key %> alert-success alert-dismissible fade show" role="alert"><strong><%= value %></strong>
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-	<% end %>
-   <!-- Success messages ends-->
-
-    <div class="container">
-        <div class="p-3 my-4 bg-light">
-            <div>
-                <div class="row">
-                    <div class="col-lg-12 mb-3">
-                        <div class="h4 mb-3 p-2">Name: <%= @lead.name %></div>
-                    </div>
-                    <div class="col-lg-6 mb-3 skills-container">
-                        <div class="d-flex"><b>Skills:</b>
-                                <span class="ml-1"><%= @lead.profile_array.join(",") %></span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <div><b>Assigned To:</b> <%= User.find_by(email: @lead.assigned_to).name%></div>
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <div><b>Status:</b> <%= @lead.status %></div>
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <div><b>Additional Info:</b> <%= @lead.additional_info %></div>
-                    </div>
-                     <div class="col-lg-6 mb-3">
-                        <div><b>Lead Status:</b> <%= @lead.status %></div>
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <% if @lead.file.url.present? %>
-                            <div class="d-flex align-items-center"><b class="mr-2">File: </b> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@lead.file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %><%= button_to url_for(@lead.file.identifier) , url_for(@lead.file.url), method: :get , target: '_blank' %> </div>												
-                        <% else %>
-                            <div><b>File Attachment: </b><%= "File not found" %></div>
-                        <% end %>
-                    </div>
-
-                    <div class="col-lg-6 mb-3">
-                        <% if  @lead.lead_assignments.present? %>
-                        <div class="d-flex align-items-center"><b class="mr-2">Candidate assign to: </b> 
-                            <% @lead.lead_assignments.each do |assign| %>  
-                     
-                                <%= link_to "#{assign.candidate.first_name} #{assign.candidate.last_name} , ", candidate_path(assign.candidate_id)%>
-                            <% end %>
-                        <% else %>
-                            <div><b>Candidate assign to: </b><%= "Candidate Not Found For This Lead" %></div>
-                        <% end %>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-lg-2">
-                        <label><b>Status</b></label>
-                        <div id="assigned_to">
-                            <%= select_tag :status, options_for_select(Lead::STATUS_LIST), prompt: 'Select Status', id: 'lead-status-select',  class: "form-control select1" %>
-
-                        </div>  
-                    </div>
-
-
-                    <div class="col-lg-6">
-                        <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn button-shift" %> 
-                    </div>
-
-                    <% if current_user.has_role? :manager %>
-                        <div class="text-right">
-                            <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, manager_dashboard_interview_schedules_path, class: 'text-success' %>
-
-                        </div>  
-                         
-                    <% else %>
-                        <div class="text-right">
-                            <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, leads_path, class: 'text-success' %>
-                        </div>  
-                    <% end %>
-                </div><hr>
-                
-            
-            </div>
-        </div>
-        
+<!-- Success messages starts-->
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %> alert-success alert-dismissible fade show" role="alert"><strong><%= value %></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+<% end %>
+
+<!-- Success messages ends-->
+<div class="container">
+    <div class="p-3 my-4 bg-light">
+        <div>
+            <div class="row">
+                <div class="col-lg-12 mb-3">
+                    <div class="h4 mb-3 p-2">Name: <%= @lead.name %></div>
+                </div>
+                <div class="col-lg-6 mb-3 skills-container">
+                    <div class="d-flex"><b>Skills:</b>
+                            <span class="ml-1"><%= @lead.profile_array.join(",") %></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <div><b>Assigned To:</b> <%= User.find_by(email: @lead.assigned_to).name%></div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <div><b>Status:</b> <%= @lead.status %></div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <div><b>Additional Info:</b> <%= @lead.additional_info %></div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <% if @lead.file.url.present? %>
+                        <div class="d-flex align-items-center"><b class="mr-2">File: </b> <%= button_to content_tag(:i, "", class: "fa fa-download") , url_for(@lead.file.url), method: :get, class: "p-2 mr-1 default-btn text-white", target: '_blank' %><%= button_to url_for(@lead.file.identifier) , url_for(@lead.file.url), method: :get , target: '_blank' %> </div>												
+                    <% else %>
+                        <div><b>File Attachment: </b><%= "File not found" %></div>
+                    <% end %>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <% if  @lead.lead_assignments.present? %>
+                    <div class="d-flex align-items-center"><b class="mr-2">Candidate assign to: </b> 
+                        <% @lead.lead_assignments.each do |assign| %>  
+                            <%= link_to "#{assign.candidate.first_name} #{assign.candidate.last_name} , ", candidate_path(assign.candidate_id)%>
+                        <% end %>
+                    <% else %>
+                        <div><b>Candidate assign to: </b><%= "Candidate Not Found For This Lead" %></div>
+                    <% end %>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <%= link_to 'Edit Lead', edit_lead_path(@lead), class: " btn default-btn" %> 
+                </div>
+                <% if current_user.has_role? :manager %>
+                    <div class="text-right col-lg-6">
+                        <div class="form-group text-left">
+                        <div id="assigned_to">
+                            <b>Status:</b> 
+
+                            <%= select_tag :status, options_for_select(Lead::STATUS_LIST), prompt: 'Select Status', id: 'lead-status-select',  class: "form-control select1 w-auto" %>
+                        </div>  
+                    </div>
+                        <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, manager_dashboard_interview_schedules_path, class: 'text-success' %>
+                    </div>  
+                <% elsif %>
+                    <div class="text-right col-lg-6">
+                        <div class="form-group text-left">
+                        <div id="assigned_to">
+                            <b>Status:</b> 
+                                <%= select_tag :status, options_for_select(Lead::STATUS_LIST), prompt: 'Select Status', id: 'lead-status-select',  class: "form-control select1 w-auto" %>
+                        </div>  
+                    </div>
+                        <%= link_to '<i class="fa fa-long-arrow-left"></i> Back'.html_safe, leads_path, class: 'text-success' %>
+                    </div>  
+                <% end %>
+            </div><hr>
+        </div>
+    </div>
+</div>
 
 <style>
-
-.alert-notice{
-    display: none;
-}
-.button-shift{
-    margin-top: 57px;
-    margin-left: -168px;
-}
-
+    .alert-notice{
+        display: none;
+    }
+    .button-shift{
+        margin-top: 57px;
+        margin-left: -168px;
+    }
 </style>
+
 <script>
     $(document).ready(function() {
-    $('#lead-status-select').on('change', function() {
-        var selectedStatus = $(this).val();
-        var leadId = '<%= @lead.id %>';
+        $('#lead-status-select').on('change', function() {
+            var selectedStatus = $(this).val();
+            var leadId = '<%= @lead.id %>';
 
-        $.ajax({
-        url: '/leads/' + leadId,
-        method: 'PATCH',
-        data: { status: selectedStatus },
-        success: function(response) {
-            alert('Lead status updated successfully.');
-            window.location.href = '/leads';
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error: ' + error);
-        }
+            $.ajax({
+            url: '/leads/' + leadId,
+            method: 'PATCH',
+            data: { status: selectedStatus },
+            success: function(response) {
+                alert('Lead status updated successfully.');
+                window.location.href = '/leads';
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error: ' + error);
+            }
+            });
         });
-    });
     });
 </script>
