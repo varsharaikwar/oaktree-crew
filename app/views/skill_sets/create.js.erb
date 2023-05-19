@@ -9,9 +9,13 @@ if(response === "present")
   }
 else if(response === "saved")
   {
+    $($(".modal.fade.show").find("span#topSpan")[0]).css("display", "none")
+    $($(".modal.fade.show .error-message")[1]).css("display", "none")
+    $($(".modal.fade.show .error-message")[2]).css("display", "none")
+    $(".modal.fade.show").find("#skill_set_name")[0].value = ""
+    $(".modal.fade.show").find("#skill_set_section")[0].value = ""
     $('#close_popup').click();
     $('#close_popup_second').click();
-    alert("Skill created successfully!");
   }
 else if(response === "error")
   {
